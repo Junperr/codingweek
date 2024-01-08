@@ -10,11 +10,11 @@ public class DataBase {
     private static DataBase instance;
 
     private DataBase() {
+        this.dbName = "pixou.db";
         File dbFile = new File("pixou.db");
         if (!dbFile.exists()) {
             this.createDatabaseFile();
         }
-        this.dbName = "pixou.db";
     }
 
     public static synchronized DataBase getInstance() {
@@ -81,23 +81,24 @@ public class DataBase {
         try {
             File dbFile = new File(dbName);
             if (!dbFile.exists()) {
-                exec("CREATE TABLE IF NOT EXISTS table1 (id INTEGER PRIMARY KEY, name TEXT, age INTEGER)");
-                exec("CREATE TABLE IF NOT EXISTS table2 (id INTEGER PRIMARY KEY, title TEXT, author TEXT)");
+                exec("CREATE TABLE IF NOT EXISTS Users (firstName TEXT, lastName TEXT, userName TEXT PRIMARY KEY, email TEXT, password TEXT, coins INTEGER)");
+                exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, FOREIGN KEY(user) REFERENCES Users(id))");
 
                 // Insert data into table1
-                exec("INSERT INTO table1 (name, age) VALUES ('John Doe', 25)");
+                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('user1', 'firstName1', 'lastName1', 'email1', 'password1', 100)");
+                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('user2', 'firstName2', 'lastName2', 'email2', 'password2', 50)");
 
                 // Insert data into table2
-                exec("INSERT INTO table2 (title, author) VALUES ('Book Title', 'Author Name')");
+                exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('1', 'title1', 'description1', 'imagePath1', 10, 'user1')");
 
                 // Fetch data from table1
-                List<List<Object>> dataTable1 = fetchAll("SELECT * FROM table1");
-                System.out.println("Data from table1:");
+                List<List<Object>> dataTable1 = fetchAll("SELECT * FROM Users");
+                System.out.println("Data from Users:");
                 printData(dataTable1);
 
                 // Fetch data from table2
-                List<List<Object>> dataTable2 = fetchAll("SELECT * FROM table2");
-                System.out.println("Data from table2:");
+                List<List<Object>> dataTable2 = fetchAll("SELECT * FROM Offers");
+                System.out.println("Data from Offers:");
                 printData(dataTable2);
             }
         } catch (Exception e) {
@@ -106,7 +107,6 @@ public class DataBase {
     }
 
     public void printData(List<List<Object>> data) {
-        System.out.println("Data:");
         for (List<Object> row : data) {
             System.out.println(row);
         }
