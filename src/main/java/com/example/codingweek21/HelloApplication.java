@@ -1,11 +1,13 @@
 package com.example.codingweek21;
 
+import com.example.codingweek21.database.DataBase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class HelloApplication extends Application {
     @Override
@@ -15,6 +17,8 @@ public class HelloApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+        DataBase dataBase = DataBase.getInstance();
+        dataBase.printData(dataBase.fetchAll("SELECT * FROM table1"));
     }
 
     public static void main(String[] args) {
