@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="36.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek21.LayoutController">
+   <children>
+      <MenuBar fx:id="menuBar" prefHeight="36.0" prefWidth="502.0">
+        <menus>
+          <Menu mnemonicParsing="false">
+               <graphic>
+                  <Label onMouseClicked="#goToMyProfilePage" text="My profile" />
+               </graphic></Menu>
+          <Menu mnemonicParsing="false">
+               <graphic>
+                  <Label fx:id="offers" onMouseClicked="#goToOffers" text="Offers" />
+               </graphic></Menu>
+          <Menu mnemonicParsing="false">
+               <graphic>
+                  <Label fx:id="logout" onMouseClicked="#logout" text="Logout" />
+               </graphic></Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>

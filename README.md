@@ -44,7 +44,7 @@ And propose or request services. In exchange of a virtual money called Florain.
 ## How to use :
 
 ## Author : 
-- Anna Galgowski
+- Anna Galkowski
 - Julie Zhen
 - Aristide Duhem
 - Gosso Ugo 
