@@ -17,7 +17,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
         DataBase dataBase = DataBase.getInstance();
-        dataBase.printData(dataBase.fetchAll("SELECT * FROM table1"));
+//        dataBase.printData(dataBase.fetchAll("SELECT * FROM Users"));
     }
 
     public static void main(String[] args) {
