@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class Main extends Application {
@@ -17,6 +18,8 @@ public class Main extends Application {
         scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.show();
+        DataBase dataBase = DataBase.getInstance();
+        dataBase.printData(dataBase.fetchAll("SELECT * FROM table1"));
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,7 @@
-module com.example.codingweek21 {
+module com.example.codingweek {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.example.codingweek21 to javafx.fxml;
