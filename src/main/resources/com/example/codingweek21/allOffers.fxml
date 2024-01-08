@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek21.AllOffersController">
+    <fx:include fx:id="menuBar" source="layout.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+   <VBox layoutY="54.0" prefHeight="26.0" prefWidth="602.0">
+      <children>
+         <MenuBar>
+           <menus>
+             <Menu mnemonicParsing="false">
+                  <graphic>
+                     <Label text="Offer type :" />
+                  </graphic></Menu>
+             <Menu mnemonicParsing="false">
+                  <graphic>
+                     <ChoiceBox fx:id="type" prefHeight="25.0" prefWidth="60.0" />
+                  </graphic>
+             </Menu>
+               <Menu mnemonicParsing="false">
+                  <graphic>
+                     <Label text="Category :" />
+                  </graphic>
+               </Menu>
+               <Menu mnemonicParsing="false">
+                  <graphic>
+                     <ChoiceBox fx:id="category" prefHeight="25.0" prefWidth="60.0" />
+                  </graphic>
+               </Menu>
+               <Menu mnemonicParsing="false">
+                  <graphic>
+                     <Label text="Location :" />
+                  </graphic>
+               </Menu>
+               <Menu mnemonicParsing="false">
+                  <graphic>
+                     <ChoiceBox fx:id="RadiusOrPostcode" prefHeight="25.0" prefWidth="60.0" />
+                  </graphic>
+               </Menu>
+               <Menu mnemonicParsing="false">
+                  <graphic>
+                     <TextField prefHeight="25.0" prefWidth="81.0" promptText="54510, 30, ..." />
+                  </graphic>
+               </Menu>
+           </menus>
+            <VBox.margin>
+               <Insets left="15.0" right="15.0" />
+            </VBox.margin>
+         </MenuBar>
+      </children>
+   </VBox>
+   <VBox layoutX="500.0" layoutY="88.0" prefHeight="26.0" prefWidth="88.0">
+      <children>
+         <Button fx:id="saveFilters" mnemonicParsing="false" prefHeight="26.0" prefWidth="91.0" text="Save filters" />
+      </children>
+   </VBox>
+   <VBox layoutY="135.0" prefHeight="251.0" prefWidth="602.0">
+      <children>
+         <ScrollPane fx:id="scrollPane" prefHeight="252.0" prefWidth="602.0" />
+      </children>
+   </VBox>
+
+
+</AnchorPane>
