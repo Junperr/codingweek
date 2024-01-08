@@ -3,9 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="36.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek21.LayoutController">
+<HBox prefHeight="36.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek21.LayoutController">
    <children>
-      <MenuBar fx:id="menuBar" prefHeight="36.0" prefWidth="502.0">
+      <MenuBar fx:id="menuBar" prefHeight="36.0" prefWidth="625.0">
         <menus>
           <Menu mnemonicParsing="false">
                <graphic>
@@ -22,4 +22,4 @@
         </menus>
       </MenuBar>
    </children>
-</AnchorPane>
+</HBox>
