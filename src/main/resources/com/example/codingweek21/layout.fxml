@@ -6,21 +6,12 @@
 <HBox prefHeight="36.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek21.LayoutController">
 
     <children>
-      <MenuBar fx:id="menuBar" prefHeight="36.0" prefWidth="625.0">
-        <menus>
-          <Menu mnemonicParsing="false">
-               <graphic>
-                  <Label fx:id="myProfile" onMouseClicked="#goToMyProfilePage" text="My profile" />
-               </graphic></Menu>
-          <Menu mnemonicParsing="false">
-               <graphic>
-                  <Label fx:id="offers" onMouseClicked="#goToOffers" text="Offers" />
-               </graphic></Menu>
-          <Menu mnemonicParsing="false">
-               <graphic>
-                  <Label fx:id="logout" onMouseClicked="#logout" text="Logout" />
-               </graphic></Menu>
-        </menus>
-      </MenuBar>
+      <ToolBar prefHeight="36.0" prefWidth="607.0">
+        <items>
+            <Label fx:id="myProfile" onMouseClicked="#goToMyProfilePage" text="My profile" />
+            <Label fx:id="offers" onMouseClicked="#goToOffers" text="Offers" />
+            <Label fx:id="logout" alignment="CENTER_RIGHT" contentDisplay="RIGHT" onMouseClicked="#logout" text="Logout" />
+        </items>
+      </ToolBar>
    </children>
 </HBox>

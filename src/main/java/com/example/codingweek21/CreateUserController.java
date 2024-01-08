@@ -1,4 +1,4 @@
-package controller;
+package com.example.codingweek21;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -1,4 +1,4 @@
-package auth;
+package com.example.codingweek21.auth;
 
 import java.util.UUID;
 
