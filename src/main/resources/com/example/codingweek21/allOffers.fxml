@@ -53,7 +53,7 @@
    </VBox>
    <VBox layoutX="500.0" layoutY="88.0" prefHeight="26.0" prefWidth="88.0">
       <children>
-         <Button fx:id="saveFilters" mnemonicParsing="false" prefHeight="26.0" prefWidth="91.0" text="Save filters" />
+         <Button mnemonicParsing="false" onMouseClicked="#saveFilters" prefHeight="26.0" prefWidth="91.0" text="Save filters" />
       </children>
    </VBox>
    <VBox layoutY="135.0" prefHeight="251.0" prefWidth="602.0">

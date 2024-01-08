@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek21.MyProfileController">
+    <fx:include fx:id="menuBar" source="layout.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+   <VBox layoutY="37.0" prefHeight="30.0" prefWidth="602.0">
+      <children>
+         <Label text="My Profil" />
+      </children>
+   </VBox>
+
+</AnchorPane>
