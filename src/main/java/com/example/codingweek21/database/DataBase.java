@@ -110,12 +110,10 @@ public class DataBase {
                 exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, FOREIGN KEY(user) REFERENCES Users(id))");
 
                 // Insert data into Users
-                exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES ('user1', 'firstName1', 'lastName1', 'email1', 'address1', '75000', 'city1', 'password1', '100')");
-                exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES ('user2', 'firstName2', 'lastName2', 'address2', '01000', 'city2', 'email2', 'password2', 50)");
-                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('annaG', 'Anna', 'Galkowski', 'anna.galkowski@telecomnancy.net', '1234', 1000)");
-                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('joelD', 'Joel', 'Duhem', 'joel.duhem@telecomnancy.net', '2704', 10)");
-                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('ugoG', 'Ugo', 'Gosso', 'ugo.gosso@telecomnancy.net', '0000', 50)");
-                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('julieZ', 'Julie', 'Zhen', 'julie.zhen@telecomnancy.net', '8888', 5000)");
+                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('annaG', 'Anna', 'Galkowski', 'anna.galkowski@telecomnancy.net', 'address1', '33000', 'city1', '12345678', '1000')");
+                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('joelD', 'Joel', 'Duhem', 'joel.duhem@telecomnancy.net', 'address2', '59000', 'city1', '27042704', '10')");
+                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('ugoG', 'Ugo', 'Gosso', 'ugo.gosso@telecomnancy.net', 'address3', '25000', 'city1', '00000000', '50')");
+                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('julieZ', 'Julie', 'Zhen', 'julie.zhen@telecomnancy.net', 'address4', '75000', 'city1', '88888888', '5000')");
 
                 // Insert data into Offers
                 exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('1', 'Pelle à prêter', 'Une belle pelle à prêter', '/pelle.jpg', 10, 'joelD')");
