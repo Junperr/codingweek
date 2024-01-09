@@ -34,12 +34,19 @@ public class DataBase {
         }
     }
 
-    public Object fetchOne(String query, Object... args) {
+    public List<Object> fetchOne(String query, Object... args) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             setParameters(preparedStatement, args);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next() ? resultSet.getObject(1) : null;
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            List<Object> row = new ArrayList<>();
+            for (int i = 1; i <= columnCount; i++) {
+                row.add(resultSet.getObject(i));
+            }
+            return row;
+
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
