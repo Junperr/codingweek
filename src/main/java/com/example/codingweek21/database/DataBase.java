@@ -110,10 +110,10 @@ public class DataBase {
                 exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, FOREIGN KEY(user) REFERENCES Users(id))");
 
                 // Insert data into Users
-                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('annaG', 'Anna', 'Galkowski', 'anna.galkowski@telecomnancy.net', 'address1', '33000', 'city1', '12345678', '1000')");
-                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('joelD', 'Joel', 'Duhem', 'joel.duhem@telecomnancy.net', 'address2', '59000', 'city1', '27042704', '10')");
-                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('ugoG', 'Ugo', 'Gosso', 'ugo.gosso@telecomnancy.net', 'address3', '25000', 'city1', '00000000', '50')");
-                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('julieZ', 'Julie', 'Zhen', 'julie.zhen@telecomnancy.net', 'address4', '75000', 'city1', '88888888', '5000')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Anna', 'Galkowski', 'annaG', 'anna.galkowski@telecomnancy.net', 'address1', '33000', 'city1', '12345678', '1000')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Joel', 'Duhem', 'joelD', 'joel.duhem@telecomnancy.net', 'address2', '59000', 'city1', '27042704', '10')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Ugo', 'Gosso', 'ugoG', 'ugo.gosso@telecomnancy.net', 'address3', '25000', 'city1', '00000000', '9000')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Julie', 'Zhen', 'julieZ', 'julie.zhen@telecomnancy.net', 'address4', '75000', 'city1', '88888888', '5000')");
 
                 // Insert data into Offers
                 exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('1', 'Pelle à prêter', 'Une belle pelle à prêter', '/pelle.jpg', 10, 'joelD')");
