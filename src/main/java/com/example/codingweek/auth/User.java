@@ -1,4 +1,4 @@
-package com.example.codingweek21.auth;
+package com.example.codingweek.auth;
 
 public class User {
     public String firstName, lastName, userName, email, passWord, address, city, zipCode;

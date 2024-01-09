@@ -1,6 +1,6 @@
-package com.example.codingweek21;
+package com.example.codingweek;
 
-import com.example.codingweek21.database.DataBase;
+import com.example.codingweek.database.DataBase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

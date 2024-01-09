@@ -1,6 +1,6 @@
-package com.example.codingweek21.javafxComponent;
+package com.example.codingweek.javafxComponent;
 
-import com.example.codingweek21.database.DataBase;
+import com.example.codingweek.database.DataBase;
 
 
 import javafx.application.Platform;
@@ -10,10 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class FullCombo extends ComboBox<String> implements ChangeListener<String> {
     public FullCombo() {
@@ -24,9 +22,10 @@ public class FullCombo extends ComboBox<String> implements ChangeListener<String
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
         DataBase db = DataBase.getInstance();
-        List<List<Object>> objectList = db.fetchAll("Select category from Categories where category like ?", newValue + "%");
+        ArrayList<ArrayList<Object>> objectList = db.fetchAll("Select category from Categories where category like ?", newValue + "%");
 //        DataBase.getInstance().printData(objectList);
         ObservableList<String> categories = FXCollections.observableArrayList();
         for (List<Object> object : objectList) {

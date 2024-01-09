@@ -1,7 +1,7 @@
-package com.example.codingweek21.controller;
+package com.example.codingweek.controller;
 
-import com.example.codingweek21.Main;
-import com.example.codingweek21.database.DataBase;
+import com.example.codingweek.Main;
+import com.example.codingweek.database.DataBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,9 +26,9 @@ public class CreateUserController {
 
     @FXML
     private void submit() throws IOException {
-        Pattern EmailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+        Pattern emailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
 
-        String firstName = (firstNameTextField.getText() != null && !firstNameTextField.getText().isEmpty()) ? firstNameTextField.getText(): handleEmptyField("firstName");
+        String firstName = (firstNameTextField.getText() != null && !firstNameTextField.getText().isEmpty()) ? firstNameTextField.getText() : handleEmptyField("firstName");
         String lastName = (lastNameTextField.getText() != null && !lastNameTextField.getText().isEmpty()) ? lastNameTextField.getText() : handleEmptyField("lastName");
         String userName = (userNameTextField.getText() != null && !userNameTextField.getText().isEmpty()) ? userNameTextField.getText() : handleEmptyField("userName");
         String email = (emailTextField.getText() != null && !emailTextField.getText().isEmpty()) ? emailTextField.getText() : handleEmptyField("email");
@@ -37,8 +37,8 @@ public class CreateUserController {
         String city = (cityTextField.getText() != null && !cityTextField.getText().isEmpty()) ? cityTextField.getText() : handleEmptyField("city");
         String zipCode = (zipCodeTextField.getText() != null && !zipCodeTextField.getText().isEmpty()) ? zipCodeTextField.getText() : handleEmptyField("zipCode");
 
-        if (!errorLabel.getText().isEmpty()){
-            return ;
+        if (!errorLabel.getText().isEmpty()) {
+            return;
         }
 
         if (firstName.length() < 3 || firstName.length() > 30) {
@@ -53,7 +53,7 @@ public class CreateUserController {
             errorLabel.setText("Your user name must contain between 3 and 30 letters");
             return;
         }
-        if (!EmailPattern.matcher(email).find()) {
+        if (!emailPattern.matcher(email).find()) {
             errorLabel.setText("You must enter a valid e-mail address");
             return;
         }
@@ -93,19 +93,19 @@ public class CreateUserController {
     }
 
     private <T> T handleEmptyField(String fieldName) {
-        return handleEmptyField(fieldName,"String");
+        return handleEmptyField(fieldName, "String");
     }
 
     private <T> T handleEmptyField(String fieldName, String type) {
-        if (errorLabel.getText().isEmpty()){
+        if (errorLabel.getText().isEmpty()) {
             errorLabel.setText("Please fill all the fields, empty fields: " + fieldName);
-        }else{
+        } else {
             errorLabel.setText(errorLabel.getText() + ", " + fieldName);
         }
-        if (type.equals("String")){
+        if (type.equals("String")) {
             return (T) "";
-        }else if (type.equals("int")){
-            return (T)(Integer) 0;
+        } else if (type.equals("int")) {
+            return (T) (Integer) 0;
         }
         return null;
     }

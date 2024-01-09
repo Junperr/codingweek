@@ -1,7 +1,8 @@
-package com.example.codingweek21.javafxComponent;
+package com.example.codingweek.javafxComponent;
 
 import javafx.application.Platform;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
@@ -34,6 +35,14 @@ public class ComboPanel extends StackPane {
         });
     }
 
+    public String getSelectedTheme() {
+        return comboBox.getSelectionModel().getSelectedItem();
+    }
+
+    public void resetComboPanel() {
+        resetComboBox();
+    }
+
     private void resetComboBox() {
         comboBox.getEditor().clear();
         comboBox.getSelectionModel().clearSelection();
@@ -44,7 +53,7 @@ public class ComboPanel extends StackPane {
         selectedOptionsListView = new ListView<>();
         selectedOptionsListView.setPrefHeight(50);
         selectedOptionsListView.setCellFactory(param -> new ListCell<String>() {
-            private final Button deleteButton = new Button("✖");
+            private final Label deleteLabel = new Label("✖");
 
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -54,13 +63,18 @@ public class ComboPanel extends StackPane {
                     setGraphic(null);
                     setText(null);
                 } else {
-                    HBox hbox = new HBox(new Label(item), deleteButton);
+                    HBox hbox = new HBox(new Label(item), deleteLabel);
                     setGraphic(hbox);
 
-                    deleteButton.setOnAction(event -> {
-                        getListView().getItems().remove(item);
-                        resetComboBox();
-                    });
+                    deleteLabel.setOnMouseClicked(this::handleDeleteLabelClick);
+                }
+            }
+
+            private void handleDeleteLabelClick(MouseEvent event) {
+                String item = getItem();
+                if (item != null) {
+                    getListView().getItems().remove(item);
+                    resetComboBox();
                 }
             }
         });
