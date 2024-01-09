@@ -1,4 +1,4 @@
-module com.example.codingweek {
+module com.codingweek {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;

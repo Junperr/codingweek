@@ -1,5 +1,6 @@
 package com.example.codingweek21.controller;
 
+import com.example.codingweek21.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,7 +22,7 @@ public class LayoutController {
 
     public void goToMyProfilePage(MouseEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getResource("myProfile.fxml");
+        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/myProfile.fxml");
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
         Stage modification = (Stage) myProfile.getScene().getWindow();

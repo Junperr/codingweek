@@ -1,5 +1,6 @@
 package com.example.codingweek21.controller;
 
+import com.example.codingweek21.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -72,7 +73,7 @@ public class CreateUserController {
         // write in the db
 
         FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getResource("form-login.fxml");
+        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-login.fxml");
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
         Stage modification = (Stage) newAccountButton.getScene().getWindow();

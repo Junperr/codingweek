@@ -1,5 +1,6 @@
 package com.example.codingweek21.controller;
 
+import com.example.codingweek21.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,7 +18,7 @@ public class LogInController {
 
     public void login(MouseEvent mouseEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getResource("allOffers.fxml");
+        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/allOffers.fxml");
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
         Stage modification = (Stage) loginButton.getScene().getWindow();
@@ -26,7 +27,8 @@ public class LogInController {
 
     public void register(MouseEvent mouseEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getResource("form-new-account.fxml");
+        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-new-account.fxml");
+        System.out.println(xmlUrl);
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
         Stage modification = (Stage) registerButton.getScene().getWindow();
