@@ -14,21 +14,15 @@ public class AllOffersController implements Initializable {
     @FXML
     public HBox menuBar;
     @FXML
-    public ChoiceBox<String> type;
+    public ChoiceBox<String> type, radiusOrPostcode;
     @FXML
     public ComboBox<String> category;
-    @FXML
-    public ChoiceBox<String> radiusOrPostcode;
     @FXML
     public ScrollPane scrollPane;
     @FXML
     public TextField location;
     public VBox offerToAdd;
-    public Label offerType;
-    public Label offerCategory;
-    public Label offerDescription;
-    public Label offerPrice;
-    public Label offerTitle;
+    public Label offerType, offerCategory, offerDescription, offerPrice, offerTitle;
     public VBox offer;
 
     @FXML

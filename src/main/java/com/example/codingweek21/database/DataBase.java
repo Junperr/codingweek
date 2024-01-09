@@ -90,13 +90,19 @@ public class DataBase {
             if (!dbFile.exists()) {
                 exec("CREATE TABLE IF NOT EXISTS Users (firstName TEXT, lastName TEXT, userName TEXT PRIMARY KEY, email TEXT, password TEXT, coins INTEGER)");
                 exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, FOREIGN KEY(user) REFERENCES Users(id))");
+                exec("CREATE TABLE IF NOT EXISTS Categories (offer UUID, category TEXT, FOREIGN KEY(offer) REFERENCES Offers(id),UNIQUE(offer, category))");
 
-                // Insert data into table1
+                // Insert data into Users
                 exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('user1', 'firstName1', 'lastName1', 'email1', 'password1', 100)");
                 exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('user2', 'firstName2', 'lastName2', 'email2', 'password2', 50)");
 
-                // Insert data into table2
+                // Insert data into Offers
                 exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('1', 'title1', 'description1', 'imagePath1', 10, 'user1')");
+
+                // Insert data into Categories
+                exec("INSERT INTO Categories (offer, category) VALUES ('1', 'category1')");
+                exec("INSERT INTO Categories (offer, category) VALUES ('1', 'category2')");
+                exec("INSERT INTO Categories (offer, category) VALUES ('1', 'category3')");
 
                 // Fetch data from table1
                 List<List<Object>> dataTable1 = fetchAll("SELECT * FROM Users");
