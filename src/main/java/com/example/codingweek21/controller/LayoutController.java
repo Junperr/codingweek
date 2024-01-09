@@ -17,7 +17,7 @@ import java.net.URL;
 
 public class LayoutController {
     @FXML
-    private Button goToProfile, goToOffers, logOut;
+    private Label goToProfile, goToOffers, logOut;
 
 
     public void goToProfile() throws IOException {
