@@ -34,8 +34,12 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
-                        <PasswordField fx:id="passwordTextField" promptText="Password" />
-                        <ImageView fx:id="eyeImageView" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
+                        <HBox fx:id="passwordContainer" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <PasswordField fx:id="passwordTextField" promptText="Password" />
+                           </children>
+                        </HBox>
+                        <ImageView fx:id="eyeImageView" fitHeight="15.0" fitWidth="15.0" onMouseClicked="#togglePasswordVisibility" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
                   <Label fx:id="errorLabel" />
