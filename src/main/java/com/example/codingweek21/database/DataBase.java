@@ -113,6 +113,7 @@ public class DataBase {
                 exec("CREATE TABLE IF NOT EXISTS Categories (offer UUID, category TEXT, FOREIGN KEY(offer) REFERENCES Offers(id),UNIQUE(offer, category))");
 
                 // Insert data into Users
+                exec("INSERT INTO Users (userName, password) VALUES ('admin', '')");
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Anna', 'Galkowski', 'annaG', 'anna.galkowski@telecomnancy.net', 'address1', '33000', 'city1', '12345678', '1000')");
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Joel', 'Duhem', 'joelD', 'joel.duhem@telecomnancy.net', 'address2', '59000', 'city1', '27042704', '10')");
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Ugo', 'Gosso', 'ugoG', 'ugo.gosso@telecomnancy.net', 'address3', '25000', 'city1', '00000000', '9000')");

@@ -60,8 +60,11 @@ public class AllOffersController implements Initializable {
             userOffer.setText(user);
 
             ImageView imageView = (ImageView) offer.lookup("#imageOffer");
-            imagePath = Main.class.getClassLoader().getResource("static/images/" + imagePath).toExternalForm();
-            Image image = new Image(imagePath);
+            URL imageUrl = Main.class.getClassLoader().getResource("static/images/" + imagePath);
+            if (imageUrl == null) {
+                imageUrl = Main.class.getClassLoader().getResource("static/images/default.png");
+            }
+            Image image = new Image(imageUrl.toExternalForm());
             imageView.setImage(image);
 
             offers.getChildren().add(offer);
