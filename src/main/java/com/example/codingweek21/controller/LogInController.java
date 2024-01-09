@@ -9,7 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -21,9 +23,19 @@ public class LogInController {
     @FXML
     private Button loginButton, registerButton;
     @FXML
-    private TextField userNameTextField, passwordTextField;
+    private TextField userNameTextField;
+    @FXML
+    private PasswordField passwordTextField;
     @FXML
     private Label errorLabel;
+    @FXML
+    private ImageView eyeImageView;
+
+    private void initialize() {
+        String imagePath = getClass().getResource("static/images/eye.png").toExternalForm();
+        javafx.scene.image.Image image = new javafx.scene.image.Image(imagePath);
+        eyeImageView.setImage(new javafx.scene.image.Image(imagePath, 15, 15, true, true));
+    }
 
     public void login() throws IOException {
         String userName = userNameTextField.getText();

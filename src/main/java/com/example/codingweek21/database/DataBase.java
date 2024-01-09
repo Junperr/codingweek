@@ -3,7 +3,6 @@ package com.example.codingweek21.database;
 import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DataBase {
     private String dbName;
@@ -72,8 +71,8 @@ public class DataBase {
         }
     }
 
-    public List<List<Object>> fetchAll(String query, Object... args) {
-        List<List<Object>> result = new ArrayList<>();
+    public ArrayList<ArrayList<Object>> fetchAll(String query, Object... args) {
+        ArrayList<ArrayList<Object>> result = new ArrayList<>();
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -84,7 +83,7 @@ public class DataBase {
             int columnCount = metaData.getColumnCount();
 
             while (resultSet.next()) {
-                List<Object> row = new ArrayList<>();
+                ArrayList<Object> row = new ArrayList<>();
                 for (int i = 1; i <= columnCount; i++) {
                     row.add(resultSet.getObject(i));
                 }
@@ -110,20 +109,26 @@ public class DataBase {
                 exec("CREATE TABLE IF NOT EXISTS Users (firstName TEXT, lastName TEXT, userName TEXT PRIMARY KEY, email TEXT, address TEXT, zipCode TEXT, city TEXT, password TEXT, coins TEXT)");
                 exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, FOREIGN KEY(user) REFERENCES Users(id))");
 
-                // Insert data into table1
+                // Insert data into Users
                 exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES ('user1', 'firstName1', 'lastName1', 'email1', 'address1', '75000', 'city1', 'password1', '100')");
                 exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES ('user2', 'firstName2', 'lastName2', 'address2', '01000', 'city2', 'email2', 'password2', 50)");
+                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('annaG', 'Anna', 'Galkowski', 'anna.galkowski@telecomnancy.net', '1234', 1000)");
+                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('joelD', 'Joel', 'Duhem', 'joel.duhem@telecomnancy.net', '2704', 10)");
+                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('ugoG', 'Ugo', 'Gosso', 'ugo.gosso@telecomnancy.net', '0000', 50)");
+                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('julieZ', 'Julie', 'Zhen', 'julie.zhen@telecomnancy.net', '8888', 5000)");
 
-                // Insert data into table2
-                exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('1', 'title1', 'description1', 'imagePath1', 10, 'user1')");
+                // Insert data into Offers
+                exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('1', 'Pelle à prêter', 'Une belle pelle à prêter', '/pelle.jpg', 10, 'joelD')");
+                exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('2', 'Machine à café à prêter', 'Une belle machine à café à prêter', '/pelle.jpg', 10, 'joelD')");
+                exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('2', 'Machine à thé à prêter', 'Une belle machine à thé à prêter', '/pelle.jpg', 10, 'joelD')");
 
                 // Fetch data from table1
-                List<List<Object>> dataTable1 = fetchAll("SELECT * FROM Users");
+                ArrayList<ArrayList<Object>> dataTable1 = fetchAll("SELECT * FROM Users");
                 System.out.println("Data from Users:");
                 printData(dataTable1);
 
                 // Fetch data from table2
-                List<List<Object>> dataTable2 = fetchAll("SELECT * FROM Offers");
+                ArrayList<ArrayList<Object>> dataTable2 = fetchAll("SELECT * FROM Offers");
                 System.out.println("Data from Offers:");
                 printData(dataTable2);
             }
@@ -132,8 +137,8 @@ public class DataBase {
         }
     }
 
-    public void printData(List<List<Object>> data) {
-        for (List<Object> row : data) {
+    public void printData(ArrayList<ArrayList<Object>> data) {
+        for (ArrayList<Object> row : data) {
             System.out.println(row);
         }
     }
