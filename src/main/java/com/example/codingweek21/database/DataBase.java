@@ -116,9 +116,9 @@ public class DataBase {
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Julie', 'Zhen', 'julieZ', 'julie.zhen@telecomnancy.net', 'address4', '75000', 'city1', '88888888', '5000')");
 
                 // Insert data into Offers
-                exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('1', 'Pelle à prêter', 'Une belle pelle à prêter', '/pelle.jpg', 10, 'joelD')");
-                exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('2', 'Machine à café à prêter', 'Une belle machine à café à prêter', '/pelle.jpg', 10, 'joelD')");
-                exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('2', 'Machine à thé à prêter', 'Une belle machine à thé à prêter', '/pelle.jpg', 10, 'joelD')");
+                exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('1', 'Pelle à prêter', 'Une belle pelle à prêter', 'pelle.jpg', 10, 'joelD')");
+                exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('2', 'Machine à café à prêter', 'Une belle machine à café à prêter', 'pelle.jpg', 100, 'joelD')");
+                exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('3', 'Machine à thé à prêter', 'Une belle machine à thé à prêter', 'pelle.jpg', 50, 'joelD')");
 
                 // Fetch data from table1
                 ArrayList<ArrayList<Object>> dataTable1 = fetchAll("SELECT * FROM Users");
