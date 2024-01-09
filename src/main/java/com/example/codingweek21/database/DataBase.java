@@ -53,6 +53,25 @@ public class DataBase {
         }
     }
 
+    public ArrayList<String> fetchUser(String query, Object... args) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            setParameters(preparedStatement, args);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            ArrayList<String> row = new ArrayList<>();
+            for (int i = 1; i <= columnCount; i++) {
+                row.add((String) resultSet.getObject(i));
+            }
+            return row;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public List<List<Object>> fetchAll(String query, Object... args) {
         List<List<Object>> result = new ArrayList<>();
 
@@ -88,12 +107,12 @@ public class DataBase {
         try {
             File dbFile = new File(dbName);
             if (!dbFile.exists()) {
-                exec("CREATE TABLE IF NOT EXISTS Users (firstName TEXT, lastName TEXT, userName TEXT PRIMARY KEY, email TEXT, password TEXT, coins INTEGER)");
+                exec("CREATE TABLE IF NOT EXISTS Users (firstName TEXT, lastName TEXT, userName TEXT PRIMARY KEY, email TEXT, address TEXT, zipCode TEXT, city TEXT, password TEXT, coins TEXT)");
                 exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, FOREIGN KEY(user) REFERENCES Users(id))");
 
                 // Insert data into table1
-                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('user1', 'firstName1', 'lastName1', 'email1', 'password1', 100)");
-                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('user2', 'firstName2', 'lastName2', 'email2', 'password2', 50)");
+                exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES ('user1', 'firstName1', 'lastName1', 'email1', 'address1', '75000', 'city1', 'password1', '100')");
+                exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES ('user2', 'firstName2', 'lastName2', 'address2', '01000', 'city2', 'email2', 'password2', 50)");
 
                 // Insert data into table2
                 exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('1', 'title1', 'description1', 'imagePath1', 10, 'user1')");

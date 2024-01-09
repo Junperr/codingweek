@@ -1,9 +1,12 @@
 package com.example.codingweek21.controller;
 
 import com.example.codingweek21.Main;
+import com.example.codingweek21.auth.User;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.MouseEvent;
@@ -13,39 +16,36 @@ import java.io.IOException;
 import java.net.URL;
 
 public class LayoutController {
-
-    public Label myProfile;
-    public Label offers;
-    public MenuBar menuBar;
-    public Label logout;
+    @FXML
+    private Button goToProfile, goToOffers, logOut;
 
 
-    public void goToMyProfilePage(MouseEvent actionEvent) throws IOException {
+    public void goToProfile() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/myProfile.fxml");
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
-        Stage modification = (Stage) myProfile.getScene().getWindow();
-        modification.setScene(new Scene(root));
-
-    }
-
-    public void goToOffers(MouseEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getResource("allOffers.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
-        Stage modification = (Stage) offers.getScene().getWindow();
+        Stage modification = (Stage) goToProfile.getScene().getWindow();
         modification.setScene(new Scene(root));
     }
 
-    public void logout(MouseEvent actionEvent) throws IOException {
+    public void goToOffers() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getResource("form-login.fxml");
+        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/allOffers.fxml");
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
-        Stage modification = (Stage) logout.getScene().getWindow();
+        Stage modification = (Stage) goToOffers.getScene().getWindow();
+        modification.setScene(new Scene(root));
+    }
+
+    public void logout() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-login.fxml");
+        loader.setLocation(xmlUrl);
+        Parent root = loader.load();
+        Stage modification = (Stage) logOut.getScene().getWindow();
         modification.setScene(new Scene(root));
 
+        User currentUser = User.wipeInstance();
     }
 }

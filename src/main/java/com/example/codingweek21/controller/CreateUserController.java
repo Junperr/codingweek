@@ -35,7 +35,7 @@ public class CreateUserController {
         String password = passwordTextField.getText();
         String address = addressTextField.getText();
         String city = cityTextField.getText();
-        int zipCode = Integer.parseInt(zipCodeTextField.getText());
+        String zipCode = zipCodeTextField.getText();
 
         if (firstName.length() < 3 || firstName.length() > 30) {
             errorLabel.setText("Your first name must contain between 3 and 30 letters");
@@ -65,14 +65,10 @@ public class CreateUserController {
             errorLabel.setText("Your city name must be less than 200 character long");
             return;
         }
-        if (zipCode < 1000 || zipCode > 98899) {
-            errorLabel.setText("Your zip code must be between 01000 and 98899");
-            return;
-        }
 
         // when the dependencies will work, need to hash the pass word
         DataBase db = DataBase.getInstance();
-        db.exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES (?,?,?,?,?,100)", userName, firstName, lastName, email, password);
+        db.exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES (?,?,?,?,?,?,?,?,'100')", userName, firstName, lastName, email, address, zipCode, city, password);
 
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-login.fxml");

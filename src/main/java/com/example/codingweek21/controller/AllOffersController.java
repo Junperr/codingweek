@@ -1,5 +1,6 @@
 package com.example.codingweek21.controller;
 
+import com.example.codingweek21.auth.User;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
