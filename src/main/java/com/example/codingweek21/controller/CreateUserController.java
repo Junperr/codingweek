@@ -35,7 +35,7 @@ public class CreateUserController {
         String password = (passwordTextField.getText() != null && !passwordTextField.getText().isEmpty()) ? passwordTextField.getText() : handleEmptyField("password");
         String address = (addressTextField.getText() != null && !addressTextField.getText().isEmpty()) ? addressTextField.getText() : handleEmptyField("address");
         String city = (cityTextField.getText() != null && !cityTextField.getText().isEmpty()) ? cityTextField.getText() : handleEmptyField("city");
-        Integer zipCode = (zipCodeTextField.getText() != null && !zipCodeTextField.getText().isEmpty()) ? Integer.parseInt(zipCodeTextField.getText()) : handleEmptyField("zipCode", "int");
+        String zipCode = (zipCodeTextField.getText() != null && !zipCodeTextField.getText().isEmpty()) ? zipCodeTextField.getText() : handleEmptyField("zipCode");
 
         if (!errorLabel.getText().isEmpty()){
             return ;
@@ -69,14 +69,10 @@ public class CreateUserController {
             errorLabel.setText("Your city name must be less than 200 character long");
             return;
         }
-        if (zipCode < 1000 || zipCode > 98899) {
-            errorLabel.setText("Your zip code must be between 01000 and 98899");
-            return;
-        }
 
         // when the dependencies will work, need to hash the pass word
         DataBase db = DataBase.getInstance();
-        db.exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES (?,?,?,?,?,100)", userName, firstName, lastName, email, password);
+        db.exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES (?,?,?,?,?,?,?,?,'100')", userName, firstName, lastName, email, address, zipCode, city, password);
 
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-login.fxml");
@@ -113,5 +109,4 @@ public class CreateUserController {
         }
         return null;
     }
-
 }

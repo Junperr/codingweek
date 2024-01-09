@@ -11,13 +11,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LogInController {
     @FXML
@@ -31,10 +32,13 @@ public class LogInController {
     @FXML
     private ImageView eyeImageView;
 
+    @FXML
     private void initialize() {
-        String imagePath = getClass().getResource("static/images/eye.png").toExternalForm();
-        javafx.scene.image.Image image = new javafx.scene.image.Image(imagePath);
-        eyeImageView.setImage(new javafx.scene.image.Image(imagePath, 15, 15, true, true));
+        //String imagePath = getClass().getResource("src/main/resources/static/images/eye.png").toExternalForm();
+
+        Image image = new Image(Objects.requireNonNull(Main.class.getClassLoader().getResource("static/images/eye.png")).toExternalForm(), 50, 50, true, true);
+        eyeImageView.setImage(image);
+        System.out.println("test");
     }
 
     public void login() throws IOException {
@@ -42,11 +46,9 @@ public class LogInController {
         String password = passwordTextField.getText();
 
         DataBase db = DataBase.getInstance();
-        ArrayList<Object> userInfo = db.fetchOne("select * from Users where userName=?", userName);
+        ArrayList<String> userInfo = db.fetchUser("select * from Users where userName=?", userName);
 
-        System.out.println(userInfo);
-
-        if (userInfo == null || !password.equals(userInfo.get(4))){
+        if (userInfo == null || !password.equals(userInfo.get(7))){
             errorLabel.setText("Incorrect username or password");
         } else {
             FXMLLoader loader = new FXMLLoader();
@@ -55,6 +57,8 @@ public class LogInController {
             Parent root = loader.load();
             Stage modification = (Stage) loginButton.getScene().getWindow();
             modification.setScene(new Scene(root));
+
+            User currentUser = User.makeInstance(userInfo.get(0), userInfo.get(1),userInfo.get(2),userInfo.get(3),userInfo.get(7),userInfo.get(4),userInfo.get(6),userInfo.get(5), Integer.parseInt(userInfo.get(8)));
         }
     }
 
