@@ -1,7 +1,6 @@
 package com.example.codingweek21.controller;
 
 import com.example.codingweek21.Main;
-import com.example.codingweek21.auth.User;
 import com.example.codingweek21.database.DataBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -35,6 +33,7 @@ public class LogInController {
         String imagePath = getClass().getResource("static/images/eye.png").toExternalForm();
         javafx.scene.image.Image image = new javafx.scene.image.Image(imagePath);
         eyeImageView.setImage(new javafx.scene.image.Image(imagePath, 15, 15, true, true));
+
     }
 
     public void login() throws IOException {

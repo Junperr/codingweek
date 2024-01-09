@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="offer" prefHeight="126.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek21.controller.OfferViewController">
+        <children>
+            <VBox prefHeight="128.0" prefWidth="558.0">
+                <children>
+                    <Label fx:id="offerTitle" prefHeight="36.0" prefWidth="382.0" text="Titre" />
+                    <HBox prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                  <ImageView fx:id="imageOffer" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                            <GridPane prefHeight="88.0" prefWidth="439.0">
+                                <columnConstraints>
+                                    <ColumnConstraints />
+                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="69.39999809265137" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="493.80000000000007" minWidth="10.0" prefWidth="289.00000190734863" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints maxHeight="27.399998092651366" minHeight="10.0" prefHeight="24.399998092651366" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="42.600001907348634" minHeight="10.0" prefHeight="35.400000000000006" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                <children>
+                                    <Label prefHeight="18.0" prefWidth="37.0" text="Type :" GridPane.columnIndex="1" />
+                                    <Label prefHeight="18.0" prefWidth="58.0" text="Category :" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label prefHeight="19.0" prefWidth="69.0" text="Description :" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label fx:id="offerType" text="Label" GridPane.columnIndex="2" />
+                        <Label fx:id="userOffer" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                    <Label fx:id="offerCategory" layoutX="84.0" layoutY="7.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label fx:id="offerDescription" layoutX="84.0" layoutY="24.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <Label text="Price :" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label fx:id="offerPrice" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <Label text="User :" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                </children>
+                            </GridPane>
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+        </children>
+    </VBox>
