@@ -47,11 +47,9 @@ public class LogInController {
         String password = passwordTextField.getText();
 
         DataBase db = DataBase.getInstance();
-        ArrayList<Object> userInfo = db.fetchOne("select * from Users where userName=?", userName);
+        ArrayList<String> userInfo = db.fetchUser("select * from Users where userName=?", userName);
 
-        System.out.println(userInfo);
-
-        if (userInfo == null || !password.equals(userInfo.get(4))){
+        if (userInfo == null || !password.equals(userInfo.get(7))){
             errorLabel.setText("Incorrect username or password");
         } else {
             FXMLLoader loader = new FXMLLoader();
@@ -60,6 +58,8 @@ public class LogInController {
             Parent root = loader.load();
             Stage modification = (Stage) loginButton.getScene().getWindow();
             modification.setScene(new Scene(root));
+
+            User currentUser = User.makeInstance(userInfo.get(0), userInfo.get(1),userInfo.get(2),userInfo.get(3),userInfo.get(7),userInfo.get(4),userInfo.get(6),userInfo.get(5), Integer.parseInt(userInfo.get(8)));
         }
     }
 

@@ -28,14 +28,18 @@ public class CreateUserController {
     private void submit() throws IOException {
         Pattern EmailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
 
-        String firstName = firstNameTextField.getText();
-        String lastName = lastNameTextField.getText();
-        String userName = userNameTextField.getText();
-        String email = emailTextField.getText();
-        String password = passwordTextField.getText();
-        String address = addressTextField.getText();
-        String city = cityTextField.getText();
-        int zipCode = Integer.parseInt(zipCodeTextField.getText());
+        String firstName = (firstNameTextField.getText() != null && !firstNameTextField.getText().isEmpty()) ? firstNameTextField.getText(): handleEmptyField("firstName");
+        String lastName = (lastNameTextField.getText() != null && !lastNameTextField.getText().isEmpty()) ? lastNameTextField.getText() : handleEmptyField("lastName");
+        String userName = (userNameTextField.getText() != null && !userNameTextField.getText().isEmpty()) ? userNameTextField.getText() : handleEmptyField("userName");
+        String email = (emailTextField.getText() != null && !emailTextField.getText().isEmpty()) ? emailTextField.getText() : handleEmptyField("email");
+        String password = (passwordTextField.getText() != null && !passwordTextField.getText().isEmpty()) ? passwordTextField.getText() : handleEmptyField("password");
+        String address = (addressTextField.getText() != null && !addressTextField.getText().isEmpty()) ? addressTextField.getText() : handleEmptyField("address");
+        String city = (cityTextField.getText() != null && !cityTextField.getText().isEmpty()) ? cityTextField.getText() : handleEmptyField("city");
+        String zipCode = (zipCodeTextField.getText() != null && !zipCodeTextField.getText().isEmpty()) ? zipCodeTextField.getText() : handleEmptyField("zipCode");
+
+        if (!errorLabel.getText().isEmpty()){
+            return ;
+        }
 
         if (firstName.length() < 3 || firstName.length() > 30) {
             errorLabel.setText("Your first name must contain between 3 and 30 letters");
@@ -65,14 +69,10 @@ public class CreateUserController {
             errorLabel.setText("Your city name must be less than 200 character long");
             return;
         }
-        if (zipCode < 1000 || zipCode > 98899) {
-            errorLabel.setText("Your zip code must be between 01000 and 98899");
-            return;
-        }
 
         // when the dependencies will work, need to hash the pass word
         DataBase db = DataBase.getInstance();
-        db.exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES (?,?,?,?,?,100)", userName, firstName, lastName, email, password);
+        db.exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES (?,?,?,?,?,?,?,?,'100')", userName, firstName, lastName, email, address, zipCode, city, password);
 
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-login.fxml");
@@ -90,5 +90,23 @@ public class CreateUserController {
         Parent root = loader.load();
         Stage modification = (Stage) back.getScene().getWindow();
         modification.setScene(new Scene(root));
+    }
+
+    private <T> T handleEmptyField(String fieldName) {
+        return handleEmptyField(fieldName,"String");
+    }
+
+    private <T> T handleEmptyField(String fieldName, String type) {
+        if (errorLabel.getText().isEmpty()){
+            errorLabel.setText("Please fill all the fields, empty fields: " + fieldName);
+        }else{
+            errorLabel.setText(errorLabel.getText() + ", " + fieldName);
+        }
+        if (type.equals("String")){
+            return (T) "";
+        }else if (type.equals("int")){
+            return (T)(Integer) 0;
+        }
+        return null;
     }
 }
