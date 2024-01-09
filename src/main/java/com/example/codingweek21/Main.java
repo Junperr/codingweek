@@ -20,7 +20,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
         DataBase dataBase = DataBase.getInstance();
-//        dataBase.printData(dataBase.fetchAll("SELECT * FROM Users"));
+        // dataBase.printData(dataBase.fetchAll("SELECT * FROM Users"));
     }
 
     public static void main(String[] args) {

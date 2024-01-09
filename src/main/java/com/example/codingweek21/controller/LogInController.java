@@ -1,10 +1,13 @@
 package com.example.codingweek21.controller;
 
 import com.example.codingweek21.Main;
+import com.example.codingweek21.database.DataBase;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -13,10 +16,19 @@ import java.net.URL;
 
 public class LogInController {
 
-    public Button loginButton;
-    public Button registerButton;
+    @FXML
+    private Button loginButton, registerButton;
+    @FXML
+    private TextField userNameTextField, passwordTextField;
 
-    public void login(MouseEvent mouseEvent) throws IOException {
+    public void login() throws IOException {
+        String userName = userNameTextField.getText();
+        String password = passwordTextField.getText();
+
+        DataBase db = DataBase.getInstance();
+        db.fetchOne("select * from Users where userName=?", userName);
+
+
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/allOffers.fxml");
         loader.setLocation(xmlUrl);
@@ -25,7 +37,7 @@ public class LogInController {
         modification.setScene(new Scene(root));
     }
 
-    public void register(MouseEvent mouseEvent) throws IOException {
+    public void register() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-new-account.fxml");
         System.out.println(xmlUrl);

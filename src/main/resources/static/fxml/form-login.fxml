@@ -19,8 +19,8 @@
                 </Pane>
                 <VBox alignment="CENTER" fillWidth="false" prefHeight="111.0" prefWidth="202.0" spacing="20.0">
                     <children>
-                        <TextField promptText="Username" />
-                        <TextField promptText="Password" />
+                        <TextField fx:id="userNameTextField" promptText="Username" />
+                        <TextField fx:id="passwordTextField" promptText="Password" />
                     </children>
                 </VBox>
                 <Pane prefHeight="53.0" prefWidth="202.0">

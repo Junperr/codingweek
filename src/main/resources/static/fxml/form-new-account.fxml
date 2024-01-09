@@ -62,7 +62,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="362.0">
                             <children>
-                                <TextField fx:id="usernameTextField" prefHeight="26.0" prefWidth="129.0" />
+                                <TextField fx:id="userNameTextField" prefHeight="26.0" prefWidth="129.0" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="362.0">
@@ -77,7 +77,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="395.0">
                             <children>
-                                <TextField fx:id="adressTextField" prefHeight="26.0" prefWidth="208.0" />
+                                <TextField fx:id="addressTextField" prefHeight="26.0" prefWidth="208.0" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="395.0">
