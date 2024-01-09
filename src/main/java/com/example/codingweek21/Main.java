@@ -4,9 +4,11 @@ import com.example.codingweek21.database.DataBase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public class Main extends Application {
@@ -17,6 +19,8 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         String css = Objects.requireNonNull(Main.class.getClassLoader().getResource("static/css/style.css")).toExternalForm();
         scene.getStylesheets().add(css);
+        //Image icon = new Image(Objects.requireNonNull(Main.class.getClassLoader().getResource("static/images/icon.png")).toExternalForm());
+        //stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
         DataBase dataBase = DataBase.getInstance();

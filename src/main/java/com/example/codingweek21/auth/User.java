@@ -1,13 +1,12 @@
 package com.example.codingweek21.auth;
 
-import java.util.UUID;
-
 public class User {
-    private String firstName, lastName, userName, email, passWord, address, city;
-    private int zipCode;
-    private UUID uuid;
+    public String firstName, lastName, userName, email, passWord, address, city, zipCode;
+    public int coins;
+    private static User instance;
 
-    public User(String firstName, String lastName, String userName, String email, String passWord, String address, String city, int zipCode, UUID uuid) {
+
+    private User(String firstName, String lastName, String userName, String email, String passWord, String address, String city, String zipCode, int coins) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -16,7 +15,21 @@ public class User {
         this.address = address;
         this.city = city;
         this.zipCode = zipCode;
-        this.uuid = uuid;
+        this.coins = coins;
+    }
+
+    public static synchronized User makeInstance(String firstName, String lastName, String userName, String email, String passWord, String address, String city, String zipCode, int coins) {
+        instance = new User(firstName, lastName, userName, email, passWord, address, city, zipCode, coins);
+        return instance;
+    }
+
+    public static synchronized User wipeInstance() {
+        instance = null;
+        return null;
+    }
+
+    public static synchronized User getInstance() {
+        return instance;
     }
 
     private void changeUsername(String newName) {

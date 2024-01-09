@@ -7,11 +7,11 @@
 
     <children>
       <ToolBar prefHeight="36.0" prefWidth="607.0">
-        <items>
-            <Label fx:id="myProfile" onMouseClicked="#goToMyProfilePage" text="My profile" />
-            <Label fx:id="offers" onMouseClicked="#goToOffers" text="Offers" />
-            <Label fx:id="logout" alignment="CENTER_RIGHT" contentDisplay="RIGHT" onMouseClicked="#logout" text="Logout" />
-        </items>
+         <items>
+            <Label fx:id="goToProfile" mnemonicParsing="false" onMouseClicked="#goToProfile" text="myProfile" />
+            <Label fx:id="goToOffers" mnemonicParsing="false" onMouseClicked="#goToOffers" text="Offers" />
+             <Label fx:id="logOut" mnemonicParsing="false" onMouseClicked="#logout" text="Log-out" />
+         </items>
       </ToolBar>
    </children>
 </HBox>

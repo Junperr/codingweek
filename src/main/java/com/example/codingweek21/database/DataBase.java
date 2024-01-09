@@ -52,6 +52,25 @@ public class DataBase {
         }
     }
 
+    public ArrayList<String> fetchUser(String query, Object... args) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            setParameters(preparedStatement, args);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            ArrayList<String> row = new ArrayList<>();
+            for (int i = 1; i <= columnCount; i++) {
+                row.add((String) resultSet.getObject(i));
+            }
+            return row;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public ArrayList<ArrayList<Object>> fetchAll(String query, Object... args) {
         ArrayList<ArrayList<Object>> result = new ArrayList<>();
 
@@ -87,14 +106,14 @@ public class DataBase {
         try {
             File dbFile = new File(dbName);
             if (!dbFile.exists()) {
-                exec("CREATE TABLE IF NOT EXISTS Users (firstName TEXT, lastName TEXT, userName TEXT PRIMARY KEY, email TEXT, password TEXT, coins INTEGER)");
+                exec("CREATE TABLE IF NOT EXISTS Users (firstName TEXT, lastName TEXT, userName TEXT PRIMARY KEY, email TEXT, address TEXT, zipCode TEXT, city TEXT, password TEXT, coins TEXT)");
                 exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, FOREIGN KEY(user) REFERENCES Users(id))");
 
                 // Insert data into Users
-                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('annaG', 'Anna', 'Galkowski', 'anna.galkowski@telecomnancy.net', '1234', 1000)");
-                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('joelD', 'Joel', 'Duhem', 'joel.duhem@telecomnancy.net', '2704', 10)");
-                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('ugoG', 'Ugo', 'Gosso', 'ugo.gosso@telecomnancy.net', '0000', 50)");
-                exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES ('julieZ', 'Julie', 'Zhen', 'julie.zhen@telecomnancy.net', '8888', 5000)");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Anna', 'Galkowski', 'annaG', 'anna.galkowski@telecomnancy.net', 'address1', '33000', 'city1', '12345678', '1000')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Joel', 'Duhem', 'joelD', 'joel.duhem@telecomnancy.net', 'address2', '59000', 'city1', '27042704', '10')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Ugo', 'Gosso', 'ugoG', 'ugo.gosso@telecomnancy.net', 'address3', '25000', 'city1', '00000000', '9000')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Julie', 'Zhen', 'julieZ', 'julie.zhen@telecomnancy.net', 'address4', '75000', 'city1', '88888888', '5000')");
 
                 // Insert data into Offers
                 exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('1', 'Pelle à prêter', 'Une belle pelle à prêter', 'pelle.jpg', 10, 'joelD')");
