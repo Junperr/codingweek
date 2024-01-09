@@ -6,4 +6,6 @@ module com.example.codingweek {
 
     opens com.example.codingweek21 to javafx.fxml;
     exports com.example.codingweek21;
+    exports com.example.codingweek21.controller;
+    opens com.example.codingweek21.controller to javafx.fxml;
 }

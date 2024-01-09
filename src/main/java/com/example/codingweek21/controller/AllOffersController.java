@@ -1,4 +1,4 @@
-package com.example.codingweek21;
+package com.example.codingweek21.controller;
 
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
