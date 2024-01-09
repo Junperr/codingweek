@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LogInController {
     @FXML
@@ -31,10 +33,13 @@ public class LogInController {
     @FXML
     private ImageView eyeImageView;
 
+    @FXML
     private void initialize() {
-        String imagePath = getClass().getResource("static/images/eye.png").toExternalForm();
-        javafx.scene.image.Image image = new javafx.scene.image.Image(imagePath);
-        eyeImageView.setImage(new javafx.scene.image.Image(imagePath, 15, 15, true, true));
+        //String imagePath = getClass().getResource("src/main/resources/static/images/eye.png").toExternalForm();
+
+        Image image = new Image(Objects.requireNonNull(Main.class.getClassLoader().getResource("static/images/eye.png")).toExternalForm(), 50, 50, true, true);
+        eyeImageView.setImage(image);
+        System.out.println("test");
     }
 
     public void login() throws IOException {
