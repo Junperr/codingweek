@@ -1,6 +1,7 @@
 package com.example.codingweek21.controller;
 
 import com.example.codingweek21.Main;
+import com.example.codingweek21.auth.User;
 import com.example.codingweek21.database.DataBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
