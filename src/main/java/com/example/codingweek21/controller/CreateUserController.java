@@ -1,6 +1,7 @@
 package com.example.codingweek21.controller;
 
 import com.example.codingweek21.Main;
+import com.example.codingweek21.database.DataBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,11 +18,11 @@ import java.util.regex.Pattern;
 
 public class CreateUserController {
     @FXML
-    private TextField firstNameTextField, lastNameTextField, userNameTextField, emailTextField, passWordTextField, addressTextField, cityTextField, zipCodeTextField;
+    private TextField firstNameTextField, lastNameTextField, userNameTextField, emailTextField, passwordTextField, addressTextField, cityTextField, zipCodeTextField;
     @FXML
     private Label errorLabel;
     @FXML
-    private Button newAccountButton;
+    private Button newAccountButton, back;
 
     @FXML
     private void submit() throws IOException {
@@ -31,7 +32,7 @@ public class CreateUserController {
         String lastName = lastNameTextField.getText();
         String userName = userNameTextField.getText();
         String email = emailTextField.getText();
-        String passWord = passWordTextField.getText();
+        String password = passwordTextField.getText();
         String address = addressTextField.getText();
         String city = cityTextField.getText();
         int zipCode = Integer.parseInt(zipCodeTextField.getText());
@@ -52,7 +53,7 @@ public class CreateUserController {
             errorLabel.setText("You must enter a valid e-mail address");
             return;
         }
-        if (passWord.length() < 8 || passWord.length() > 60) {
+        if (password.length() < 8 || password.length() > 60) {
             errorLabel.setText("Your password must contain between 8 and 60 letters");
             return;
         }
@@ -70,13 +71,24 @@ public class CreateUserController {
         }
 
         // when the dependencies will work, need to hash the pass word
-        // write in the db
+        DataBase db = DataBase.getInstance();
+        db.exec("INSERT INTO Users (userName, firstName, lastName, email, password, coins) VALUES (?,?,?,?,?,100)", userName, firstName, lastName, email, password);
 
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-login.fxml");
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
         Stage modification = (Stage) newAccountButton.getScene().getWindow();
+        modification.setScene(new Scene(root));
+    }
+
+    @FXML
+    private void cancel() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-login.fxml");
+        loader.setLocation(xmlUrl);
+        Parent root = loader.load();
+        Stage modification = (Stage) back.getScene().getWindow();
         modification.setScene(new Scene(root));
     }
 }

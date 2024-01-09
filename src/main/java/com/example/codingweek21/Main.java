@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public class Main extends Application {
@@ -19,8 +20,6 @@ public class Main extends Application {
         scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.show();
-        DataBase dataBase = DataBase.getInstance();
-//        dataBase.printData(dataBase.fetchAll("SELECT * FROM Users"));
     }
 
     public static void main(String[] args) {

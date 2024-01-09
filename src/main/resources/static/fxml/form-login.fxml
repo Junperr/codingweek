@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek21.controller.LogInController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek21.controller.LogInController">
     <children>
         <VBox alignment="CENTER_RIGHT" layoutX="198.0" layoutY="45.0" prefHeight="310.0" prefWidth="202.0">
             <children>
@@ -19,8 +19,9 @@
                 </Pane>
                 <VBox alignment="CENTER" fillWidth="false" prefHeight="111.0" prefWidth="202.0" spacing="20.0">
                     <children>
-                        <TextField promptText="Username" />
-                        <TextField promptText="Password" />
+                        <TextField fx:id="userNameTextField" promptText="Username" />
+                        <TextField fx:id="passwordTextField" promptText="Password" />
+                  <Label fx:id="errorLabel"/>
                     </children>
                 </VBox>
                 <Pane prefHeight="53.0" prefWidth="202.0">

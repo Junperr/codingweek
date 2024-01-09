@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek21.controller.CreateUserController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek21.controller.CreateUserController">
     <children>
         <Label layoutX="234.0" layoutY="12.0" text="Create a new account">
             <font>
@@ -62,7 +58,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="362.0">
                             <children>
-                                <TextField fx:id="usernameTextField" prefHeight="26.0" prefWidth="129.0" />
+                                <TextField fx:id="userNameTextField" prefHeight="26.0" prefWidth="129.0" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="362.0">
@@ -77,7 +73,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="395.0">
                             <children>
-                                <TextField fx:id="adressTextField" prefHeight="26.0" prefWidth="208.0" />
+                                <TextField fx:id="addressTextField" prefHeight="26.0" prefWidth="208.0" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="395.0">
@@ -93,5 +89,6 @@
         </HBox>
         <Button fx:id="newAccountButton" layoutX="273.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#submit" text="Submit" />
       <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="223.0" layoutY="34.0" prefHeight="18.0" prefWidth="164.0" textAlignment="CENTER" textFill="#ae0000" />
+      <Button fx:id="back" layoutX="102.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#cancel" text="Back" />
     </children>
 </AnchorPane>
