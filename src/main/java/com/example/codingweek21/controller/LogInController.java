@@ -1,6 +1,7 @@
 package com.example.codingweek21.controller;
 
 import com.example.codingweek21.Main;
+import com.example.codingweek21.auth.User;
 import com.example.codingweek21.database.DataBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,10 +30,12 @@ public class LogInController {
         String password = passwordTextField.getText();
 
         DataBase db = DataBase.getInstance();
-        Object userInfo = db.fetchOne("select * from Users where userName=?", userName);
+        ArrayList<Object> userInfo = db.fetchOne("select * from Users where userName=?", userName);
 
-        if (userInfo == null) {
-            errorLabel.setText("Incorrect password or username");
+        if (userInfo.isEmpty()) {
+            errorLabel.setText("Incorrect username or password");
+        } else  if (!password.equals(userInfo.get(4))){
+            errorLabel.setText("Incorrect username or password");
         } else {
             FXMLLoader loader = new FXMLLoader();
             URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/allOffers.fxml");

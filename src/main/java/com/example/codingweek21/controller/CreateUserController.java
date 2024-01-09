@@ -22,7 +22,7 @@ public class CreateUserController {
     @FXML
     private Label errorLabel;
     @FXML
-    private Button newAccountButton;
+    private Button newAccountButton, back;
 
     @FXML
     private void submit() throws IOException {
@@ -79,6 +79,16 @@ public class CreateUserController {
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
         Stage modification = (Stage) newAccountButton.getScene().getWindow();
+        modification.setScene(new Scene(root));
+    }
+
+    @FXML
+    private void cancel() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-login.fxml");
+        loader.setLocation(xmlUrl);
+        Parent root = loader.load();
+        Stage modification = (Stage) back.getScene().getWindow();
         modification.setScene(new Scene(root));
     }
 }

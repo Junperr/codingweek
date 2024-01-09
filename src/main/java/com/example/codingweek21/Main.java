@@ -20,8 +20,6 @@ public class Main extends Application {
         scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.show();
-        DataBase dataBase = DataBase.getInstance();
-        dataBase.printData(List.of(dataBase.fetchOne("SELECT * FROM Users")));
     }
 
     public static void main(String[] args) {
