@@ -1,6 +1,6 @@
 package com.example.codingweek.DAO;
 
-import com.example.codingweek.data.Offer;
+import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
 import com.example.codingweek.error.ErrorManager;
@@ -8,7 +8,6 @@ import com.example.codingweek.error.ErrorManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class UserDAO {
 
@@ -23,7 +22,7 @@ public class UserDAO {
         ErrorManager errManager = new ErrorManager();
 
         try {
-            errManager.handleUser(user);
+            errManager.handleRegister(user, getUserByUsername(user.userName));
         }
         catch (Exception e){
             System.out.println(e.getMessage());
@@ -43,9 +42,47 @@ public class UserDAO {
                 user.coins);
     }
 
+    public void logUser(String username, String pwd) throws Exception {
+
+        User user = getUserByPassword(username, pwd);
+
+        ErrorManager errManager = new ErrorManager();
+
+        try {
+            errManager.handleLogin(user);
+            CurrentUser.logUser(user);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            throw e;
+        }
+    }
+
+    public User getUserByPassword(String username, String pwd){
+        DataBase db = DataBase.getInstance();
+
+        Map<String,Object> userMap = db.fetchOneMap("SELECT * FROM Users WHERE username = ? AND password = ?", username, pwd);
+
+        if (userMap.get("userName") == null) {
+            return null;
+        }
+
+        return new User(userMap.get("firstName").toString(),
+                userMap.get("lastName").toString(),
+                username,
+                userMap.get("email").toString(),
+                pwd,
+                userMap.get("address").toString(),
+                userMap.get("city").toString(),
+                userMap.get("zipCode").toString(),
+                Integer.parseInt(userMap.get("coins").toString()));
+    }
+
+
 
     public User getUserByUsername(String username) {
         //todo make regex for each field
+
         DataBase db = DataBase.getInstance();
 
         Map<String,Object> userMap = db.fetchOneMap("SELECT * FROM Users WHERE username = ?", username);

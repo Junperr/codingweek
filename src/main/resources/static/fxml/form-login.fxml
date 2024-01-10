@@ -45,7 +45,7 @@
                                 <ImageView fx:id="eyeImageView" fitHeight="15.0" fitWidth="15.0" onMouseClicked="#togglePasswordVisibility" pickOnBounds="true" preserveRatio="true" />
                              </children>
                           </HBox>
-                          <Label fx:id="errorLabel" />
+                          <Label fx:id="errorLabel" textFill="#ae0000"/>
                             </children>
                         </VBox>
                         <Pane prefHeight="53.0" prefWidth="202.0">

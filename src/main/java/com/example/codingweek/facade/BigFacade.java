@@ -30,4 +30,8 @@ public class BigFacade {
         userDAO.newUser(firstName, lastName, userName, email, password, address, city, zipCode);
     }
 
+    public void logUser(String username, String pwd) throws Exception{
+        userDAO.logUser(username, pwd);
+    }
+
 }

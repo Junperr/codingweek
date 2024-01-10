@@ -3,6 +3,7 @@ package com.example.codingweek.controller;
 import com.example.codingweek.Main;
 import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
+import com.example.codingweek.facade.BigFacade;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -60,17 +61,11 @@ public class LogInController {
     }
 
     public void login() throws IOException {
-        errorLabel.setText("");
 
-        String userName = userNameTextField.getText();
-        String password = passwordTextField.getText();
+        BigFacade bf = new BigFacade();
+        try {
+            bf.logUser(userNameTextField.getText(), passwordTextField.getText());
 
-        DataBase db = DataBase.getInstance();
-        ArrayList<String> userInfo = db.fetchUser("select * from Users where userName=?", userName);
-
-        if (userInfo == null || !password.equals(userInfo.get(7))) {
-            errorLabel.setText("Incorrect username or password");
-        } else {
             FXMLLoader loader = new FXMLLoader();
             URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/allOffers.fxml");
             loader.setLocation(xmlUrl);
@@ -78,14 +73,15 @@ public class LogInController {
             Stage modification = (Stage) loginButton.getScene().getWindow();
             modification.setScene(new Scene(root));
 
-            User.makeInstance(userInfo.get(0), userInfo.get(1),userInfo.get(2),userInfo.get(3),userInfo.get(7),userInfo.get(4),userInfo.get(6),userInfo.get(5), Integer.parseInt(userInfo.get(8)));
+        } catch (Exception e) {
+            errorLabel.setText(e.getMessage());
         }
+
     }
 
     public void register() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-new-account.fxml");
-        System.out.println(xmlUrl);
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
         Stage modification = (Stage) registerButton.getScene().getWindow();
