@@ -12,17 +12,22 @@ And propose or request services. In exchange of a virtual money called Florain.
 
 ## Road-Map :
 - Monday :
-  1. Create account
-  2. Basic front-end of the pages 
-  3. Artistic Direction
+  1. Create account OK
+  2. Basic front-end of the pages OK
+  3. Artistic Direction OK
+  + Database OK
 
-- Tuesday : 
-  0. Log-in & Log-out
+  - Tuesday :
+    + Log-in & Log-out OK
   1. Simple offer 
   2. Simple research 
   3. FeedBack evaluation 
 
 - Wednesday : 
+    + Creation offer
+    + Offer Page
+    + Back of research offer
+    + FeedBack evaluation
   1. Command history 
       - passed
       - received
