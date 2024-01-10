@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.AllOffersController">
-    <fx:include fx:id="menuBar" source="layout.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"  />
+    <fx:include fx:id="menuBar" source="layout.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    <VBox layoutY="54.0" prefHeight="36.0" prefWidth="1080.0">
       <children>
          <ToolBar prefHeight="36.0" prefWidth="1066.0">
@@ -33,7 +33,7 @@
          </ToolBar>
       </children>
    </VBox>
-   <VBox fx:id="offerToAdd" layoutY="135.0" prefHeight="582.0" prefWidth="1080.0">
+   <VBox fx:id="offerToAdd" layoutY="94.0" prefHeight="623.0" prefWidth="1080.0">
       <children>
          <ScrollPane fx:id="scrollPane" prefHeight="602.0" prefWidth="1080.0">
             <content>
