@@ -110,8 +110,8 @@ public class DataBase {
                 exec("CREATE TABLE IF NOT EXISTS Users (firstName TEXT, lastName TEXT, userName TEXT PRIMARY KEY, email TEXT, address TEXT, zipCode TEXT, city TEXT, password TEXT, coins TEXT)");
                 exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, type TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, availability BOOL, FOREIGN KEY(user) REFERENCES Users(id))");
                 exec("CREATE TABLE IF NOT EXISTS Categories (offer UUID, category TEXT, FOREIGN KEY(offer) REFERENCES Offers(id),UNIQUE(offer, category))");
-                exec("create table if not exists Orders (id UUID PRIMARY KEY, cost INTEGER, FOREIGN KEY(buyer) REFERENCES Users(userName), FOREIGN KEY(seller) REFERENCES Users(userName))");
-                exec("create table if not exists Marks (id UUID PRIMARY KEY, mark INTEGER, FOREIGN KEY(order) REFERENCES Orders(id))");
+                exec("create table if not exists Orders (id UUID PRIMARY KEY, buyer TEXT, seller TEXT, cost INTEGER, FOREIGN KEY(buyer) REFERENCES Users(userName), FOREIGN KEY(seller) REFERENCES Users(userName))");
+                exec("create table if not exists Marks (id UUID PRIMARY KEY, order TEXT, mark INTEGER, FOREIGN KEY(order) REFERENCES Orders(id))");
 
                 // Insert data into Users
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('', '', 'admin', '', '', '', '', '', '100000000')");
@@ -121,10 +121,10 @@ public class DataBase {
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Julie', 'Zhen', 'julieZ', 'julie.zhen@telecomnancy.net', 'address4', '75000', 'city1', '88888888', '5000')");
 
                 // Insert data into Offers
-                exec("INSERT INTO Offers (id, title, description, imagePath, price, user, availability) VALUES ('1', 'Pelle à prêter', 'Une belle pelle à prêter', 'pelle.jpg', 25, 'joelD', 1)");
-                exec("INSERT INTO Offers (id, title, description, imagePath, price, user, availability) VALUES ('2', 'Machine à café à prêter', 'Une belle machine à café à prêter', 'pelle.jpg', 100, 'joelD', 1)");
-                exec("INSERT INTO Offers (id, title, description, imagePath, price, user, availability) VALUES ('3', 'Machine à thé à prêter', 'Une belle machine à thé à prêter', 'pelle.jpg', 50, 'joelD', 1)");
-                exec("INSERT INTO Offers (id, title, description, imagePath, price, user, availability) VALUES ('4', 'Aspirateur', 'Une belle machine à thé à prêter', 'pelle.jpg', 50, 'joelD', 1)");
+                exec("INSERT INTO Offers (id, title, description, imagePath, price, user, availability, type) VALUES ('917af26d-526a-4821-b325-1b1dd54dc4e1', 'Pelle à prêter', 'Une belle pelle à prêter', 'pelle.jpg', 25, 'joelD', 1, 'Loan')");
+                exec("INSERT INTO Offers (id, title, description, imagePath, price, user, availability, type) VALUES ('9c934d93-771a-4df8-800b-8659d2778260', 'Machine à café à prêter', 'Une belle machine à café à prêter', 'pelle.jpg', 100, 'joelD', 1, 'Loan')");
+                exec("INSERT INTO Offers (id, title, description, imagePath, price, user, availability, type) VALUES ('1aa9627d-41da-4389-92f1-d2e774f918ce', 'Machine à thé à prêter', 'Une belle machine à thé à prêter', 'pelle.jpg', 50, 'joelD', 1, 'Loan')");
+                exec("INSERT INTO Offers (id, title, description, imagePath, price, user, availability, type) VALUES ('73b633f4-52fe-4058-8266-991bc9c87348', 'Aspirateur', 'Une belle machine à thé à prêter', 'pelle.jpg', 50, 'joelD', 1, 'Loan')");
 
                 // Insert data into Categories
                 exec("INSERT INTO Categories (offer, category) VALUES ('1', 'Jardinage')");

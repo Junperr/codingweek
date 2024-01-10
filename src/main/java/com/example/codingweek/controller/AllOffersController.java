@@ -45,18 +45,23 @@ public class AllOffersController implements Initializable {
         for (ArrayList<Object> o : list) {
             String imagePath = (o.get(2) != null) ? o.get(2).toString() : "default.png";
 
+            for (int i = 0; i < 6; i++) {
+                System.out.println(o.get(i));
+            }
+
+
             loadOffersFromDatabase(
                     o.get(0).toString(),   // title
                     o.get(1).toString(),   // description
                     imagePath,             // imagePath
                     o.get(3).toString(),   // price
                     o.get(4).toString(),    // user
-                    o.get(5).toString()
+                    UUID.fromString(o.get(5).toString())
             );
         }
     }
 
-    public void loadOffersFromDatabase(String title, String description, String imagePath, String price, String user, String id) {
+    public void loadOffersFromDatabase(String title, String description, String imagePath, String price, String user, UUID id) {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getClassLoader().getResource("static/fxml/offerView.fxml"));
             VBox offer = loader.load();
@@ -70,7 +75,7 @@ public class AllOffersController implements Initializable {
             userOffer.setText(user);
 
             OfferViewController offerViewController = loader.getController();
-            offerViewController.setOfferId(UUID.fromString(id));
+            offerViewController.setOfferId(id);
 
             ImageView imageView = (ImageView) offer.lookup("#imageOffer");
             URL imageUrl = Main.class.getClassLoader().getResource("static/images/" + imagePath);
