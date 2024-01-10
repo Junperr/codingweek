@@ -1,0 +1,32 @@
+/*#fieldTest{
+-fx-border: none;
+
+-fx-background: bottom left linear-gradient(#a9a9a9, #a9a9a9) no-repeat, bottom center linear-gradient(#a9a9a9, #a9a9a9) repeat-x, bottom right linear-gradient(#a9a9a9, #a9a9a9) no-repeat;
+}
+
+#welcome{
+    -fx-text-fill: #f600ff;
+}
+
+#loginButton{
+    -fx-
+}
+
+
+#imageArea {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 10, 0, 0, 0);
+
+    -fx-cursor: hand;
+}
+
+#imageArea:hover .overlay-cross {
+    -fx-background-color: rgba(255, 255, 255, 0.7);
+    -fx-shape: "M0,0 L10,10 M10,0 L0,10";
+    -fx-stroke: red;
+    -fx-stroke-width: 2;
+    -fx-stroke-line-cap: ROUND;
+}*/
+
+#addImageButton{
+    -font-size: 20 px;
+}
