@@ -13,6 +13,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,23 +24,30 @@ import java.util.Objects;
 
 public class LogInController {
     @FXML
+    private HBox passwordContainer;
+    @FXML
     private Button loginButton, registerButton;
     @FXML
     private TextField userNameTextField;
     @FXML
     private PasswordField passwordTextField;
+    private TextField visibleTextField;
     @FXML
     private Label errorLabel;
     @FXML
     private ImageView eyeImageView;
+    private boolean passwordVisible = false;
 
     @FXML
     private void initialize() {
-        //String imagePath = getClass().getResource("src/main/resources/static/images/eye.png").toExternalForm();
 
-        Image image = new Image(Objects.requireNonNull(Main.class.getClassLoader().getResource("static/images/eye.png")).toExternalForm(), 50, 50, true, true);
-        eyeImageView.setImage(image);
-        System.out.println("test");
+        visibleTextField = new TextField();
+        visibleTextField.setPromptText("Password");
+        visibleTextField.setVisible(false);
+        visibleTextField.setPrefWidth(0);
+        passwordContainer.getChildren().add(visibleTextField);
+
+        updateEyeImage();
     }
 
     public void login() throws IOException {
@@ -48,7 +57,7 @@ public class LogInController {
         DataBase db = DataBase.getInstance();
         ArrayList<String> userInfo = db.fetchUser("select * from Users where userName=?", userName);
 
-        if (userInfo == null || !password.equals(userInfo.get(7))){
+        if (userInfo == null || !password.equals(userInfo.get(7))) {
             errorLabel.setText("Incorrect username or password");
         } else {
             FXMLLoader loader = new FXMLLoader();
@@ -71,4 +80,34 @@ public class LogInController {
         Stage modification = (Stage) registerButton.getScene().getWindow();
         modification.setScene(new Scene(root));
     }
+
+    @FXML
+    public void togglePasswordVisibility(MouseEvent e) {
+        passwordVisible = !passwordVisible;
+
+        if (passwordVisible) {
+            visibleTextField.setText(passwordTextField.getText());
+            passwordTextField.setVisible(false);
+            visibleTextField.setVisible(true);
+            visibleTextField.setPrefWidth(TextField.USE_COMPUTED_SIZE);
+            passwordTextField.setPrefWidth(0);
+        } else {
+            passwordTextField.setText(visibleTextField.getText());
+            passwordTextField.setVisible(true);
+            visibleTextField.setVisible(false);
+            visibleTextField.setPrefWidth(0);
+            passwordTextField.setPrefWidth(TextField.USE_COMPUTED_SIZE);
+        }
+
+        updateEyeImage();
+    }
+
+
+    private void updateEyeImage() {
+        String imagePath = passwordVisible ? "static/images/eye.png" : "static/images/closedeye.png";
+        Image image = new Image(Objects.requireNonNull(Main.class.getClassLoader().getResource(imagePath).toExternalForm()));
+        eyeImageView.setImage(image);
+    }
+
 }
+
