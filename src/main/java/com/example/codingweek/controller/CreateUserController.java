@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class CreateUserController {
@@ -28,7 +29,9 @@ public class CreateUserController {
     private void submit() throws IOException {
         Pattern emailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
 
-        String firstName = (firstNameTextField.getText() != null && !firstNameTextField.getText().isEmpty()) ? firstNameTextField.getText() : handleEmptyField("firstName");
+        errorLabel.setText("");
+
+        String firstName = (firstNameTextField.getText() != null && !firstNameTextField.getText().isEmpty()) ? firstNameTextField.getText(): handleEmptyField("firstName");
         String lastName = (lastNameTextField.getText() != null && !lastNameTextField.getText().isEmpty()) ? lastNameTextField.getText() : handleEmptyField("lastName");
         String userName = (userNameTextField.getText() != null && !userNameTextField.getText().isEmpty()) ? userNameTextField.getText() : handleEmptyField("userName");
         String email = (emailTextField.getText() != null && !emailTextField.getText().isEmpty()) ? emailTextField.getText() : handleEmptyField("email");
@@ -37,8 +40,8 @@ public class CreateUserController {
         String city = (cityTextField.getText() != null && !cityTextField.getText().isEmpty()) ? cityTextField.getText() : handleEmptyField("city");
         String zipCode = (zipCodeTextField.getText() != null && !zipCodeTextField.getText().isEmpty()) ? zipCodeTextField.getText() : handleEmptyField("zipCode");
 
-        if (!errorLabel.getText().isEmpty()) {
-            return;
+        if (!errorLabel.getText().isEmpty()){
+            return ;
         }
 
         if (firstName.length() < 3 || firstName.length() > 30) {
@@ -72,7 +75,14 @@ public class CreateUserController {
 
         // when the dependencies will work, need to hash the pass word
         DataBase db = DataBase.getInstance();
-        db.exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES (?,?,?,?,?,?,?,?,'100')", userName, firstName, lastName, email, address, zipCode, city, password);
+        ArrayList<String> alHere = db.fetchUser("select * from Users where userName=?", userName);
+
+        if (alHere == null) {
+            db.exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES (?,?,?,?,?,?,?,?,'100')", userName, firstName, lastName, email, address, zipCode, city, password);
+        } else {
+            errorLabel.setText("This username is already used, try another one");
+            return;
+        }
 
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-login.fxml");
