@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 
 public class ModifyProfileController {
@@ -80,33 +81,43 @@ public class ModifyProfileController {
                         return;
                     }
                 case "password":
-                    currentUser.password = newData;
-                    db.exec("update Users set password=? where userName=?", newData, currentUser.userName);
-                    break;
+                    if (newData.length() < 8 || newData.length() > 60) {
+                        currentUser.password = newData;
+                        db.exec("update Users set password=? where userName=?", newData, currentUser.userName);
+                        break;
+                    } else {
+                        errorLabel.setText("Password must be of length 8 minimum");
+                        return;
+                    }
                 case "last name":
-                    currentUser.lastName = newData;
-                    db.exec("update Users set lastName=? where userName=?", newData, currentUser.userName);
-                    break;
+                    if (newData.length() < 3 || newData.length() > 30) {
+                        currentUser.lastName = newData;
+                        db.exec("update Users set lastName=? where userName=?", newData, currentUser.userName);
+                        break;
+                    } else {
+                        errorLabel.setText("Last name must be of length 3 minimum");
+                        return;
+                    }
                 case "first name":
-                    currentUser.firstName = newData;
-                    db.exec("update Users set firstName=? where userName=?", newData, currentUser.userName);
-                    break;
+                    if (newData.length() < 3 || newData.length() > 30) {
+                        currentUser.firstName = newData;
+                        db.exec("update Users set firstName=? where userName=?", newData, currentUser.userName);
+                        break;
+                    } else {
+                        errorLabel.setText("First name must be of length 3 minimum");
+                        return;
+                    }
                 case "email":
-                    currentUser.email = newData;
-                    db.exec("update Users set email=? where userName=?", newData, currentUser.userName);
-                    break;
-                case "address":
-                    currentUser.address = newData;
-                    db.exec("update Users set address=? where userName=?", newData, currentUser.userName);
-                    break;
-                case "zipcode":
-                    currentUser.zipCode = newData;
-                    db.exec("update Users set zipCode=? where userName=?", newData, currentUser.userName);
-                    break;
-                case "city":
-                    currentUser.city = newData;
-                    db.exec("update Users set city=? where userName=?", newData, currentUser.userName);
-                    break;
+                    Pattern emailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+
+                    if (!emailPattern.matcher(newData).find()) {
+                        currentUser.email = newData;
+                        db.exec("update Users set email=? where userName=?", newData, currentUser.userName);
+                        break;
+                    } else {
+                        errorLabel.setText("You must enter valid email");
+                        return;
+                    }
             }
 
             FXMLLoader loader = new FXMLLoader();
