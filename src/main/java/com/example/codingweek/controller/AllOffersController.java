@@ -43,7 +43,6 @@ public class AllOffersController implements Initializable {
         DataBase db = DataBase.getInstance();
         ArrayList<ArrayList<Object>> list = db.fetchAll("select title, description, imagePath, price, user, id from Offers");
         for (ArrayList<Object> o : list) {
-            loadOffersFromDatabase(o.get(0).toString(), o.get(1).toString(), o.get(2).toString(), o.get(3).toString(), o.get(4).toString(), o.get(5).toString());
             String imagePath = (o.get(2) != null) ? o.get(2).toString() : "default.png";
 
 
