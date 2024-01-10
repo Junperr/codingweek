@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class AllOffersController implements Initializable {
     @FXML
@@ -32,6 +33,7 @@ public class AllOffersController implements Initializable {
     public VBox offerToAdd, offers;
     @FXML
     public Label offerType, offerCategory, offerDescription, offerPrice, offerTitle;
+
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle){
         type.getItems().addAll("Service", "Loan");
@@ -39,21 +41,14 @@ public class AllOffersController implements Initializable {
         offers.getChildren().clear();
 
         DataBase db = DataBase.getInstance();
-        ArrayList<ArrayList<Object>> list = db.fetchAll("select title, description, imagePath, price, user from Offers");
+        ArrayList<ArrayList<Object>> list = db.fetchAll("select title, description, imagePath, price, user, id from Offers");
         for (ArrayList<Object> o : list) {
-            String imagePath = (o.get(2) != null) ? o.get(2).toString() : "default.png";
+            loadOffersFromDatabase(o.get(0).toString(), o.get(1).toString(), o.get(2).toString(), o.get(3).toString(), o.get(4).toString(), o.get(5).toString());
 
-            loadOffersFromDatabase(
-                    o.get(0).toString(),   // title
-                    o.get(1).toString(),   // description
-                    imagePath,             // imagePath
-                    o.get(3).toString(),   // price
-                    o.get(4).toString()    // user
-            );
         }
     }
 
-    public void loadOffersFromDatabase(String title, String description, String imagePath, String price, String user) {
+    public void loadOffersFromDatabase(String title, String description, String imagePath, String price, String user, String id) {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getClassLoader().getResource("static/fxml/offerView.fxml"));
             VBox offer = loader.load();
@@ -66,9 +61,11 @@ public class AllOffersController implements Initializable {
             Label userOffer = (Label) offer.lookup("#userOffer");
             userOffer.setText(user);
 
+            OfferViewController offerViewController = loader.getController();
+            offerViewController.setOfferId(UUID.fromString(id));
+
             ImageView imageView = (ImageView) offer.lookup("#imageOffer");
             URL imageUrl = Main.class.getClassLoader().getResource("static/images/" + imagePath);
-            System.out.println(imageUrl);
             if (imageUrl == null) {
                 imageUrl = Main.class.getClassLoader().getResource("static/images/default.png");
             }
