@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -32,6 +34,11 @@ public class ModifyProfileController {
     private MyProfileController myProfileController;
     private String index;
 
+
+    @FXML
+    private void initialize() {
+        currentPW.setOnKeyPressed(this::handleEnterKeyPress);
+    }
 
     public void initData(String toChange) {
         this.index = toChange;
@@ -127,4 +134,15 @@ public class ModifyProfileController {
         }
         return null;
     }
+
+    private void handleEnterKeyPress(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                submit();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

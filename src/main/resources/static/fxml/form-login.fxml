@@ -11,52 +11,57 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.LogInController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.LogInController">
     <children>
-        <VBox alignment="CENTER_RIGHT" layoutX="198.0" layoutY="45.0" prefHeight="310.0" prefWidth="202.0">
-            <children>
-                <Pane prefHeight="49.0" prefWidth="163.0">
+    <Pane fx:id="centeredPane" layoutY="84.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <children>
+                <VBox fx:id="centeredVBox" alignment="CENTER" layoutX="365.0" prefHeight="551.0" prefWidth="350.0">
                     <children>
-                        <Label fx:id="welcome" layoutX="48.0" layoutY="14.0" text="Welcome Back !">
-                            <font>
-                                <Font size="15.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </Pane>
-                <VBox alignment="CENTER" fillWidth="false" prefHeight="111.0" prefWidth="218.0" spacing="10.0">
-                    <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
-                     <children>
-                              <TextField fx:id="userNameTextField" promptText="Username" />
-                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
-                     <children>
-                        <HBox fx:id="passwordContainer" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <PasswordField fx:id="passwordTextField" promptText="Password" />
-                           </children>
+                        <Pane prefHeight="99.0" prefWidth="350.0">
+                            <children>
+                                <Label fx:id="welcome" layoutX="122.0" layoutY="14.0" text="Welcome Back !">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </Pane>
+                        <VBox alignment="CENTER" fillWidth="false" prefHeight="111.0" prefWidth="218.0" spacing="10.0">
+                            <children>
+                          <HBox alignment="CENTER" prefHeight="38.0" prefWidth="265.0" spacing="5.0">
+                             <children>
+                                      <TextField fx:id="userNameTextField" promptText="Username" />
+                                <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
+                             </children>
+                          </HBox>
+                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                             <children>
+                                <Pane prefHeight="200.0" prefWidth="200.0">
+                                   <children>
+                                      <PasswordField fx:id="passwordTextField" layoutX="16.0" layoutY="6.0" promptText="Password" />
+                                      <TextField fx:id="visibleTextField" layoutX="16.0" layoutY="6.0" promptText="Password" />
+                                   </children>
+                                </Pane>
+                                <ImageView fx:id="eyeImageView" fitHeight="15.0" fitWidth="15.0" onMouseClicked="#togglePasswordVisibility" pickOnBounds="true" preserveRatio="true" />
+                             </children>
+                          </HBox>
+                          <Label fx:id="errorLabel" />
+                            </children>
+                        </VBox>
+                        <Pane prefHeight="53.0" prefWidth="202.0">
+                            <children>
+                                <Button fx:id="loginButton" layoutX="147.0" layoutY="9.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="36.0" prefWidth="57.0" text="Login" />
+                            </children>
+                        </Pane>
+                        <HBox alignment="CENTER" prefHeight="116.0" prefWidth="350.0" spacing="15.0">
+                            <children>
+                                <Label text="New here ?" />
+                                <Button fx:id="registerButton" mnemonicParsing="false" onMouseClicked="#register" text="Register now" />
+                            </children>
                         </HBox>
-                        <ImageView fx:id="eyeImageView" fitHeight="15.0" fitWidth="15.0" onMouseClicked="#togglePasswordVisibility" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </HBox>
-                  <Label fx:id="errorLabel" />
                     </children>
                 </VBox>
-                <Pane prefHeight="53.0" prefWidth="202.0">
-                    <children>
-                        <Button fx:id="loginButton" layoutX="73.0" layoutY="9.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="36.0" prefWidth="57.0" text="Login" />
-                    </children>
-                </Pane>
-                <HBox alignment="CENTER" prefHeight="53.0" prefWidth="202.0" spacing="15.0">
-                    <children>
-                        <Label text="New here ?" />
-                        <Button fx:id="registerButton" mnemonicParsing="false" onMouseClicked="#register" text="Register now" />
-                    </children>
-                </HBox>
             </children>
-        </VBox>
+        </Pane>
     </children>
 </AnchorPane>
