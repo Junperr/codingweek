@@ -11,6 +11,8 @@ import java.util.Map;
 
 public class UserDAO {
 
+    DataBase db = DataBase.getInstance();
+
     public User newUser(String firstName, String lastName, String userName, String email, String password, String address, String city, String zipCode) throws Exception {
         User user = new User(firstName, lastName, userName, email, password, address, city, zipCode, 100);
         addUser(user);
@@ -22,7 +24,15 @@ public class UserDAO {
         ErrorManager errManager = new ErrorManager();
 
         try {
-            errManager.handleRegister(user, getUserByUsername(user.userName));
+            errManager.handleEmptyFields(user);
+            errManager.handleInvalidEmail(user.email);
+            errManager.handleInvalidPassword(user.password);
+            errManager.handleInvalidAddress(user.address);
+            errManager.handleInvalidCity(user.city);
+            errManager.handleInvalidZipCode(user.zipCode);
+            errManager.handleInvalidFirstName(user.firstName);
+            errManager.handleInvalidLastName(user.lastName);
+            errManager.handleInvalidUserName(user.userName, getUserByUsername(user.userName));
         }
         catch (Exception e){
             System.out.println(e.getMessage());
@@ -59,7 +69,6 @@ public class UserDAO {
     }
 
     public User getUserByPassword(String username, String pwd){
-        DataBase db = DataBase.getInstance();
 
         Map<String,Object> userMap = db.fetchOneMap("SELECT * FROM Users WHERE username = ? AND password = ?", username, pwd);
 
@@ -83,8 +92,6 @@ public class UserDAO {
     public User getUserByUsername(String username) {
         //todo make regex for each field
 
-        DataBase db = DataBase.getInstance();
-
         Map<String,Object> userMap = db.fetchOneMap("SELECT * FROM Users WHERE username = ?", username);
 
         if (userMap.get("userName") == null) {
@@ -103,8 +110,6 @@ public class UserDAO {
     }
 
     public ArrayList<User> getAllUsers() {
-        DataBase db = DataBase.getInstance();
-
         ArrayList<HashMap<String,Object>> usersMap = db.fetchAllMap("SELECT * FROM Users WHERE username");
 
         ArrayList<User> users = new ArrayList<>();
@@ -121,6 +126,31 @@ public class UserDAO {
                     Integer.parseInt(user.get("coins").toString())));
         }
         return users;
+    }
+
+
+    public void checkedUpdatePos(User user, String address, String city, String zipcode, String pwd) throws Exception{
+        ErrorManager errManager = new ErrorManager();
+        try {
+            errManager.handleCheckPassWord(getUserByPassword(user.userName, pwd));
+            errManager.handleInvalidAddress(address);
+            errManager.handleInvalidCity(city);
+            errManager.handleInvalidZipCode(zipcode);
+            updatePos(address, zipcode, city, user.userName);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            throw e;
+        }
+    }
+
+    public void updatePos(String username, String address, String city, String zipcode) {
+        db.exec("UPDATE Users SET address = ?, city = ?, zipcode = ? WHERE username = ?", address, city, zipcode, username);
+        User user = CurrentUser.getUser();
+        user.address = address;
+        user.city = city;
+        user.zipCode = zipcode;
+        CurrentUser.logUser(user);
     }
 
 }

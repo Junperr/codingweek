@@ -3,6 +3,7 @@ package com.example.codingweek.facade;
 import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.DAO.UserDAO;
 import com.example.codingweek.data.Offer;
+import com.example.codingweek.data.User;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -32,6 +33,10 @@ public class BigFacade {
 
     public void logUser(String username, String pwd) throws Exception{
         userDAO.logUser(username, pwd);
+    }
+
+    public void updatePosUser(User user, String address, String city, String zipcode, String pwd) throws Exception{
+        userDAO.checkedUpdatePos(user, address, city, zipcode, pwd);
     }
 
 }

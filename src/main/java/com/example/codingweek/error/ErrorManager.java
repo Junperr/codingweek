@@ -24,29 +24,10 @@ public class ErrorManager {
     }
 
     public void handleLogin(User user) throws Exception {
-
         if (user == null) {
             errorMessage = "Incorrect username or password";
         }
         raise();
-    }
-
-    public void handleRegister(User user, User userByname) throws Exception {
-
-        try {
-            handleEmptyFields(user);
-            handleInvalidEmail(user.email);
-            handleInvalidPassword(user.password);
-            handleInvalidAddress(user.address);
-            handleInvalidCity(user.city);
-            handleInvalidZipCode(user.zipCode);
-            handleInvalidFirstName(user.firstName);
-            handleInvalidLastName(user.lastName);
-            handleInvalidUserName(user.userName, userByname);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw e;
-        }
     }
 
     public void handleEmptyField(String fieldName) {
@@ -132,6 +113,13 @@ public class ErrorManager {
         raise();
     }
 
+    public void handleCheckPassWord(User user) throws Exception {
+        if (user.userName == null) {
+            errorMessage = "Wrong password";
+        }
+        raise();
+
+    }
 
 //    public void checkMail(Pattern, field)
 }

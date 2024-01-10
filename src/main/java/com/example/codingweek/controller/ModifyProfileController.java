@@ -122,7 +122,6 @@ public class ModifyProfileController {
 
             FXMLLoader loader = new FXMLLoader();
             URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/valid.fxml");
-            System.out.println(xmlUrl);
             loader.setLocation(xmlUrl);
             Parent root = loader.load();
             Stage modification = (Stage) saveButton.getScene().getWindow();
