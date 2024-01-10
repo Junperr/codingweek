@@ -96,7 +96,7 @@
                                  </Pane>
                                  <Pane prefHeight="30.0" prefWidth="178.0">
                                     <children>
-                                       <Label fx:id="adress" layoutX="77.0" layoutY="6.0" text="Label" />
+                                       <Label fx:id="address" layoutX="77.0" layoutY="6.0" text="Label" />
                                     </children>
                                  </Pane>
                                  <Pane prefHeight="30.0" prefWidth="178.0">
@@ -115,42 +115,42 @@
                               <children>
                                  <Pane prefHeight="30.0" prefWidth="165.0">
                                     <children>
-                                       <Button fx:id="modifyUserName" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" text="Modifier" />
+                                       <Button fx:id="modifyUserName" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setUserName" text="Modifier" />
                                     </children>
                                  </Pane>
                                  <Pane prefHeight="30.0" prefWidth="165.0">
                                     <children>
-                                       <Button fx:id="modifyPassword" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" text="Modifier" />
+                                       <Button fx:id="modifyPassword" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setPassword" text="Modifier" />
                                     </children>
                                  </Pane>
                                  <Pane prefHeight="31.0" prefWidth="165.0">
                                     <children>
-                                       <Button fx:id="modifyLastName" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" text="Modifier" />
+                                       <Button fx:id="modifyLastName" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setLastName" text="Modifier" />
                                     </children>
                                  </Pane>
                                  <Pane prefHeight="30.0" prefWidth="165.0">
                                     <children>
-                                       <Button fx:id="modifyFirstName" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" text="Modifier" />
+                                       <Button fx:id="modifyFirstName" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setFirstName" text="Modifier" />
                                     </children>
                                  </Pane>
                                  <Pane prefHeight="30.0" prefWidth="165.0">
                                     <children>
-                                       <Button fx:id="modifyEmail" layoutX="58.0" layoutY="1.0" mnemonicParsing="false" text="Modifier" />
+                                       <Button fx:id="modifyEmail" layoutX="58.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#setEmail" text="Modifier" />
                                     </children>
                                  </Pane>
                                  <Pane prefHeight="30.0" prefWidth="165.0">
                                     <children>
-                                       <Button fx:id="modifyAdress" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" text="Modifier" />
+                                       <Button fx:id="modifyAddress" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setAddress" text="Modifier" />
                                     </children>
                                  </Pane>
                                  <Pane prefHeight="30.0" prefWidth="165.0">
                                     <children>
-                                       <Button fx:id="modifyZip" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" text="Modifier" />
+                                       <Button fx:id="modifyZip" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setZip" text="Modifier" />
                                     </children>
                                  </Pane>
                                  <Pane prefHeight="30.0" prefWidth="165.0">
                                     <children>
-                                       <Button fx:id="modifyCity" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" text="Modifier" />
+                                       <Button fx:id="modifyCity" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setCity" text="Modifier" />
                                     </children>
                                  </Pane>
                               </children>
@@ -159,7 +159,7 @@
                      </HBox>
                   </content>
                </TitledPane>
-               <TitledPane animated="false" text="Your Offers">
+               <TitledPane animated="false"  text="Your Offers">
                  <content>
                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                  </content>
