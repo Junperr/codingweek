@@ -22,4 +22,7 @@ public class OfferFacade {
         return offerDAO.getOfferById(id);
     }
 
+    public ArrayList<Offer> getAllOffers() {
+        return offerDAO.getAllOffers();
+    }
 }
