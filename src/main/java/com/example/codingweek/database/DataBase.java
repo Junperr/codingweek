@@ -1,4 +1,4 @@
-package com.example.codingweek21.database;
+package com.example.codingweek.database;
 
 import java.io.File;
 import java.sql.*;
@@ -96,6 +96,7 @@ public class DataBase {
         return result;
     }
 
+
     private void setParameters(PreparedStatement preparedStatement, Object... args) throws SQLException {
         for (int i = 0; i < args.length; i++) {
             preparedStatement.setObject(i + 1, args[i]);
@@ -108,8 +109,10 @@ public class DataBase {
             if (!dbFile.exists()) {
                 exec("CREATE TABLE IF NOT EXISTS Users (firstName TEXT, lastName TEXT, userName TEXT PRIMARY KEY, email TEXT, address TEXT, zipCode TEXT, city TEXT, password TEXT, coins TEXT)");
                 exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, FOREIGN KEY(user) REFERENCES Users(id))");
+                exec("CREATE TABLE IF NOT EXISTS Categories (offer UUID, category TEXT, FOREIGN KEY(offer) REFERENCES Offers(id),UNIQUE(offer, category))");
 
                 // Insert data into Users
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('', '', 'admin', '', '', '', '', '', '100000000')");
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Anna', 'Galkowski', 'annaG', 'anna.galkowski@telecomnancy.net', 'address1', '33000', 'city1', '12345678', '1000')");
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Joel', 'Duhem', 'joelD', 'joel.duhem@telecomnancy.net', 'address2', '59000', 'city1', '27042704', '10')");
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Ugo', 'Gosso', 'ugoG', 'ugo.gosso@telecomnancy.net', 'address3', '25000', 'city1', '00000000', '9000')");
@@ -119,6 +122,14 @@ public class DataBase {
                 exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('1', 'Pelle à prêter', 'Une belle pelle à prêter', 'pelle.jpg', 10, 'joelD')");
                 exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('2', 'Machine à café à prêter', 'Une belle machine à café à prêter', 'pelle.jpg', 100, 'joelD')");
                 exec("INSERT INTO offers (id, title, description, imagePath, price, user) VALUES ('3', 'Machine à thé à prêter', 'Une belle machine à thé à prêter', 'pelle.jpg', 50, 'joelD')");
+
+                // Insert data into Categories
+                exec("INSERT INTO Categories (offer, category) VALUES ('1', 'Jardinage')");
+                exec("INSERT INTO Categories (offer, category) VALUES ('1', 'Jardin')");
+                exec("INSERT INTO Categories (offer, category) VALUES ('1', 'Outils')");
+                exec("INSERT INTO Categories (offer, category) VALUES ('2', 'Electroménager')");
+                exec("INSERT INTO Categories (offer, category) VALUES ('3', 'Electroménager')");
+
 
                 // Fetch data from table1
                 ArrayList<ArrayList<Object>> dataTable1 = fetchAll("SELECT * FROM Users");

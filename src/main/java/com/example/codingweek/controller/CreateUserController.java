@@ -1,7 +1,7 @@
-package com.example.codingweek21.controller;
+package com.example.codingweek.controller;
 
-import com.example.codingweek21.Main;
-import com.example.codingweek21.database.DataBase;
+import com.example.codingweek.Main;
+import com.example.codingweek.database.DataBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class CreateUserController {
@@ -26,7 +27,9 @@ public class CreateUserController {
 
     @FXML
     private void submit() throws IOException {
-        Pattern EmailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+        Pattern emailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+
+        errorLabel.setText("");
 
         String firstName = (firstNameTextField.getText() != null && !firstNameTextField.getText().isEmpty()) ? firstNameTextField.getText(): handleEmptyField("firstName");
         String lastName = (lastNameTextField.getText() != null && !lastNameTextField.getText().isEmpty()) ? lastNameTextField.getText() : handleEmptyField("lastName");
@@ -53,7 +56,7 @@ public class CreateUserController {
             errorLabel.setText("Your user name must contain between 3 and 30 letters");
             return;
         }
-        if (!EmailPattern.matcher(email).find()) {
+        if (!emailPattern.matcher(email).find()) {
             errorLabel.setText("You must enter a valid e-mail address");
             return;
         }
@@ -72,7 +75,14 @@ public class CreateUserController {
 
         // when the dependencies will work, need to hash the pass word
         DataBase db = DataBase.getInstance();
-        db.exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES (?,?,?,?,?,?,?,?,'100')", userName, firstName, lastName, email, address, zipCode, city, password);
+        ArrayList<String> alHere = db.fetchUser("select * from Users where userName=?", userName);
+
+        if (alHere == null) {
+            db.exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES (?,?,?,?,?,?,?,?,'100')", userName, firstName, lastName, email, address, zipCode, city, password);
+        } else {
+            errorLabel.setText("This username is already used, try another one");
+            return;
+        }
 
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-login.fxml");
@@ -93,19 +103,19 @@ public class CreateUserController {
     }
 
     private <T> T handleEmptyField(String fieldName) {
-        return handleEmptyField(fieldName,"String");
+        return handleEmptyField(fieldName, "String");
     }
 
     private <T> T handleEmptyField(String fieldName, String type) {
-        if (errorLabel.getText().isEmpty()){
+        if (errorLabel.getText().isEmpty()) {
             errorLabel.setText("Please fill all the fields, empty fields: " + fieldName);
-        }else{
+        } else {
             errorLabel.setText(errorLabel.getText() + ", " + fieldName);
         }
-        if (type.equals("String")){
+        if (type.equals("String")) {
             return (T) "";
-        }else if (type.equals("int")){
-            return (T)(Integer) 0;
+        } else if (type.equals("int")) {
+            return (T) (Integer) 0;
         }
         return null;
     }

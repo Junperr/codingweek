@@ -1,4 +1,4 @@
-package com.example.codingweek21.controller;
+package com.example.codingweek.controller;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;

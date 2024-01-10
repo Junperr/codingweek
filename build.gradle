@@ -25,8 +25,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-  mainModule = 'com.example.codingweek21'
-  mainClass = 'com.example.codingweek21.HelloApplication'
+  mainModule = 'com.example.codingweek'
+  mainClass = 'com.example.codingweek.Main'
 }
 
 javafx {
@@ -35,7 +35,7 @@ javafx {
 }
 
 dependencies {
-  implementation 'org.xerial:sqlite-jdbc:3.34.0'
+  implementation 'org.xerial:sqlite-jdbc:3.41.2.2'
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
@@ -53,4 +53,10 @@ jlink {
 
 jlinkZip {
   group = 'distribution'
+}
+
+jar {
+  manifest {
+    attributes 'Main-Class': application.mainClass
+  }
 }

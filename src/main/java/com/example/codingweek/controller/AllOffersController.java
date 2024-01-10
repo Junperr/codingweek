@@ -1,7 +1,7 @@
-package com.example.codingweek21.controller;
+package com.example.codingweek.controller;
 
-import com.example.codingweek21.Main;
-import com.example.codingweek21.database.DataBase;
+import com.example.codingweek.Main;
+import com.example.codingweek.database.DataBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,19 +21,17 @@ public class AllOffersController implements Initializable {
     @FXML
     public HBox menuBar;
     @FXML
-    public ChoiceBox<String> type;
+    public ChoiceBox<String> type, radiusOrPostcode;
     @FXML
     public ComboBox<String> category;
-    @FXML
-    public ChoiceBox<String> radiusOrPostcode;
     @FXML
     public ScrollPane scrollPane;
     @FXML
     public TextField location;
-    public VBox offerToAdd;
     @FXML
-    public VBox offers;
-
+    public VBox offerToAdd, offers;
+    @FXML
+    public Label offerType, offerCategory, offerDescription, offerPrice, offerTitle;
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle){
         type.getItems().addAll("Service", "Loan");
@@ -62,8 +60,11 @@ public class AllOffersController implements Initializable {
             userOffer.setText(user);
 
             ImageView imageView = (ImageView) offer.lookup("#imageOffer");
-            imagePath = Main.class.getClassLoader().getResource("static/images/" + imagePath).toExternalForm();
-            Image image = new Image(imagePath);
+            URL imageUrl = Main.class.getClassLoader().getResource("static/images/" + imagePath);
+            if (imageUrl == null) {
+                imageUrl = Main.class.getClassLoader().getResource("static/images/default.png");
+            }
+            Image image = new Image(imageUrl.toExternalForm());
             imageView.setImage(image);
 
             offers.getChildren().add(offer);
@@ -82,10 +83,6 @@ public class AllOffersController implements Initializable {
         String chosenNumber = location.getText();
 
         //db command
-        DataBase db = DataBase.getInstance();
-        ArrayList<ArrayList<Object>> list = db.fetchAll("select title, description, imagePath, price, user from Offers order by price DESC");
-        System.out.println(list);
-
 
         //affichage
         

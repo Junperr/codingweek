@@ -1,25 +1,25 @@
-package com.example.codingweek21.auth;
+package com.example.codingweek.auth;
 
 public class User {
-    public String firstName, lastName, userName, email, passWord, address, city, zipCode;
+    public String firstName, lastName, userName, email, password, address, city, zipCode;
     public int coins;
     private static User instance;
 
 
-    private User(String firstName, String lastName, String userName, String email, String passWord, String address, String city, String zipCode, int coins) {
+    private User(String firstName, String lastName, String userName, String email, String password, String address, String city, String zipCode, int coins) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.email = email;
-        this.passWord = passWord;
+        this.password = password;
         this.address = address;
         this.city = city;
         this.zipCode = zipCode;
         this.coins = coins;
     }
 
-    public static synchronized User makeInstance(String firstName, String lastName, String userName, String email, String passWord, String address, String city, String zipCode, int coins) {
-        instance = new User(firstName, lastName, userName, email, passWord, address, city, zipCode, coins);
+    public static synchronized User makeInstance(String firstName, String lastName, String userName, String email, String password, String address, String city, String zipCode, int coins) {
+        instance = new User(firstName, lastName, userName, email, password, address, city, zipCode, coins);
         return instance;
     }
 
