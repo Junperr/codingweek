@@ -6,8 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -33,6 +31,8 @@ public class AllOffersController implements Initializable {
     public VBox offerToAdd, offers;
     @FXML
     public Label offerType, offerCategory, offerDescription, offerPrice, offerTitle;
+    @FXML
+    public UUID offerId;
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle){
@@ -45,44 +45,28 @@ public class AllOffersController implements Initializable {
         for (ArrayList<Object> o : list) {
             String imagePath = (o.get(2) != null) ? o.get(2).toString() : "default.png";
 
-
             loadOffersFromDatabase(
                     o.get(0).toString(),   // title
                     o.get(1).toString(),   // description
                     imagePath,             // imagePath
                     o.get(3).toString(),   // price
                     o.get(4).toString(),    // user
-                    UUID.fromString(o.get(5).toString())
+                    o.get(5).toString()
             );
+
         }
     }
 
-    public void loadOffersFromDatabase(String title, String description, String imagePath, String price, String user, UUID id) {
+    public void loadOffersFromDatabase(String title, String description, String imagePath, String price, String user, String id) {
         try {
-            FXMLLoader loader = new FXMLLoader(Main.class.getClassLoader().getResource("static/fxml/offerView.fxml"));
+            URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/offerView.fxml");
+            FXMLLoader loader = new FXMLLoader(xmlUrl);
+            loader.setLocation(xmlUrl);
             VBox offer = loader.load();
-            Label offerTitle = (Label) offer.lookup("#offerTitle");
-            offerTitle.setText(title);
-            Label offerDescription = (Label) offer.lookup("#offerDescription");
-            offerDescription.setText(description);
-            Label offerPrice = (Label) offer.lookup("#offerPrice");
-            offerPrice.setText(price);
-            Label userOffer = (Label) offer.lookup("#userOffer");
-            userOffer.setText(user);
+
 
             OfferViewController offerViewController = loader.getController();
-            offerViewController.setOfferId(id);
-
-
-
-            ImageView imageView = (ImageView) offer.lookup("#imageOffer");
-            URL imageUrl = Main.class.getClassLoader().getResource("static/images/" + imagePath);
-            if (imageUrl == null) {
-                imageUrl = Main.class.getClassLoader().getResource("static/images/default.png");
-            }
-            Image image = new Image(imageUrl.toExternalForm());
-            imageView.setImage(image);
-
+            offerViewController.initOfferView(title, description, imagePath, price, user, id);
             offers.getChildren().add(offer);
 
         } catch (IOException e) {
