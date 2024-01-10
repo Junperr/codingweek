@@ -1,11 +1,12 @@
-package com.example.codingweek.Offer;
+package com.example.codingweek.data;
 
 import com.example.codingweek.DAO.OfferDAO;
+import com.example.codingweek.SerializedData;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Offer {
+public class Offer extends SerializedData {
 
     private final UUID id;
     private String title, type, user, description, imagePath;

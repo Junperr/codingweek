@@ -1,12 +1,14 @@
-package com.example.codingweek.auth;
+package com.example.codingweek.data;
 
-public class User {
+import com.example.codingweek.SerializedData;
+
+public class User extends SerializedData {
     public String firstName, lastName, userName, email, password, address, city, zipCode;
     public int coins;
     private static User instance;
 
 
-    private User(String firstName, String lastName, String userName, String email, String password, String address, String city, String zipCode, int coins) {
+    public User(String firstName, String lastName, String userName, String email, String password, String address, String city, String zipCode, int coins) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
