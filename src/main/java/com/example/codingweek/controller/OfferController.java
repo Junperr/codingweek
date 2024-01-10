@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -20,14 +19,14 @@ public class OfferController {
     @FXML
     private Button order;
     @FXML
-    private Label offerPageUser, userPageAvailability, offerPagePrice, offerPageCategory, offerPageDescription, pageOfferTitle;
+    private Label offerPageUser, offerPageAvailability, offerPagePrice, offerPageCategory, offerPageDescription, offerPageTitle;
     @FXML
     private ImageView pageOfferImage;
-    private UUID offer_id;
+    private UUID offerId;
     private ArrayList<Object> data;
 
     public void initData(UUID offer_id) {
-        this.offer_id = offer_id;
+        this.offerId = offerId;
 
         DataBase db = DataBase.getInstance();
         data = db.fetchOne("select * from Offers where id=?", offer_id);
@@ -49,5 +48,15 @@ public class OfferController {
         orderController.setStage(modification);
         orderController.setMainController(this);
         modification.showAndWait();
+    }
+
+
+    public void initOfferPage(String userPageOffer, String availabilityPageOffer, String pricePageOffer, String descriptionPageOffer, String titlePageOffer, UUID offerId){
+        this.offerPageUser.setText(userPageOffer);
+        this.offerPageAvailability.setText(availabilityPageOffer);
+        this.offerPagePrice.setText(pricePageOffer);
+        this.offerPageDescription.setText(descriptionPageOffer);
+        this.offerPageTitle.setText(titlePageOffer);
+        this.offerId = offerId;
     }
 }

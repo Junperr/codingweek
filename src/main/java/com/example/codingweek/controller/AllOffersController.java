@@ -77,6 +77,8 @@ public class AllOffersController implements Initializable {
             OfferViewController offerViewController = loader.getController();
             offerViewController.setOfferId(id);
 
+
+
             ImageView imageView = (ImageView) offer.lookup("#imageOffer");
             URL imageUrl = Main.class.getClassLoader().getResource("static/images/" + imagePath);
             if (imageUrl == null) {
