@@ -29,7 +29,7 @@ public class OfferController {
     private Integer cost;
     private String sellerId;
 
-    // to be used but petite flemme right know
+    // to be used but petite flemme right now
 //    public void initData(UUID offer_id) {
 //        // this.offerId = offerId;
 //

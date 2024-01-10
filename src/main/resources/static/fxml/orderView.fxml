@@ -11,7 +11,7 @@
 
 <VBox fx:id="order" prefHeight="126.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.OrderViewController">
     <children>
-        <VBox fx:id="feedback"  prefHeight="128.0" prefWidth="558.0">
+        <VBox fx:id="feedback" onMouseClicked="#getFeedback" prefHeight="128.0" prefWidth="558.0">
             <children>
                 <Label fx:id="commandUUID" prefHeight="36.0" prefWidth="382.0" text="Titre">
                     <font>
