@@ -3,6 +3,7 @@ package com.example.codingweek.database;
 import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DataBase {
     private String dbName;
@@ -43,6 +44,25 @@ public class DataBase {
             ArrayList<Object> row = new ArrayList<>();
             for (int i = 1; i <= columnCount; i++) {
                 row.add(resultSet.getObject(i));
+            }
+            return row;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public HashMap<String,Object> fetchOneMap(String query, Object... args) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            setParameters(preparedStatement, args);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            HashMap row = new HashMap();
+            for (int i = 1; i <= columnCount; i++) {
+                row.put(metaData.getColumnLabel(i),resultSet.getObject(i));
             }
             return row;
 

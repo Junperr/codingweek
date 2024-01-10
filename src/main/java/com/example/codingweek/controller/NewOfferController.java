@@ -1,8 +1,11 @@
 package com.example.codingweek.controller;
 
+import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.Main;
+import com.example.codingweek.Offer.Offer;
 import com.example.codingweek.auth.User;
 import com.example.codingweek.database.DataBase;
+import com.example.codingweek.facade.OfferFacade;
 import com.example.codingweek.javafxComponent.ComboPanel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class NewOfferController {
@@ -59,16 +63,15 @@ public class NewOfferController {
             return ;
         }
 
-        // get the database instance
-        DataBase db = DataBase.getInstance();
-        // Generate a random UUID for the offer
-        UUID offerId = UUID.randomUUID();
-        // Insert the offer into the database
-        db.exec("INSERT INTO Offers (id,title, description, price, type, user, availability) VALUES (?, ?, ?, ?, ?, ?, 1)", offerId, title, description, price, selectedType, User.getInstance().userName);
-        // Insert the offer themes into the database
+        ArrayList<String> themes = new ArrayList<>();
         for (String theme : themeComboPanel.getSelectedThemes()) {
-            db.exec("INSERT INTO Categories (offer, category) VALUES (?, ?)", offerId, theme);
+            themes.add(theme);
         }
+
+        OfferFacade offerFacade = new OfferFacade();
+        // image is not implemented yet so by default we put null for the path
+        Offer offer = offerFacade.createNewOffer(title, description, null, Integer.parseInt(price), selectedType, themes);
+
     }
 
     @FXML
