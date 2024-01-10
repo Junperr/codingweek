@@ -108,10 +108,10 @@ public class DataBase {
             File dbFile = new File(dbName);
             if (!dbFile.exists()) {
                 exec("CREATE TABLE IF NOT EXISTS Users (firstName TEXT, lastName TEXT, userName TEXT PRIMARY KEY, email TEXT, address TEXT, zipCode TEXT, city TEXT, password TEXT, coins TEXT)");
-                exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, availability BOOL, FOREIGN KEY(user) REFERENCES Users(id))");
+                exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, type TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, availability BOOL, FOREIGN KEY(user) REFERENCES Users(id))");
                 exec("CREATE TABLE IF NOT EXISTS Categories (offer UUID, category TEXT, FOREIGN KEY(offer) REFERENCES Offers(id),UNIQUE(offer, category))");
-                exec("create table if not exists Orders (id UUID PRIMARY KEY, cost INTEGER, buyer TEXT, seller TEXT, FOREIGN KEY(buyer) REFERENCES Users(userName), FOREIGN KEY(seller) REFERENCES Users(userName))");
-                exec("create table if not exists Marks (id UUID PRIMARY KEY, mark INTEGER, description TEXT, order UUID, FOREIGN KEY(order) REFERENCES Orders(id))");
+                exec("create table if not exists Orders (id UUID PRIMARY KEY, cost INTEGER, FOREIGN KEY(buyer) REFERENCES Users(userName), FOREIGN KEY(seller) REFERENCES Users(userName))");
+                exec("create table if not exists Marks (id UUID PRIMARY KEY, mark INTEGER, FOREIGN KEY(order) REFERENCES Orders(id))");
 
                 // Insert data into Users
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('', '', 'admin', '', '', '', '', '', '100000000')");

@@ -13,8 +13,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,31 +27,37 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class LogInController {
-    @FXML
-    private HBox passwordContainer;
+
     @FXML
     private Button loginButton, registerButton;
     @FXML
     private TextField userNameTextField;
     @FXML
     private PasswordField passwordTextField;
+    @FXML
     private TextField visibleTextField;
     @FXML
     private Label errorLabel;
     @FXML
     private ImageView eyeImageView;
+    @FXML
+    private Pane centeredPane;
+
+    @FXML
+    private VBox centeredVBox;
     private boolean passwordVisible = false;
 
     @FXML
     private void initialize() {
 
-        visibleTextField = new TextField();
-        visibleTextField.setPromptText("Password");
         visibleTextField.setVisible(false);
-        visibleTextField.setPrefWidth(0);
-        passwordContainer.getChildren().add(visibleTextField);
 
         updateEyeImage();
+
+        passwordTextField.setOnKeyPressed(this::handleEnterKeyPress);
+
+        centeredPane.widthProperty().addListener((obs, oldVal, newVal) -> centerVBox());
+        centerVBox();
     }
 
     public void login() throws IOException {
@@ -67,7 +77,7 @@ public class LogInController {
             Stage modification = (Stage) loginButton.getScene().getWindow();
             modification.setScene(new Scene(root));
 
-            User currentUser = User.makeInstance(userInfo.get(0), userInfo.get(1), userInfo.get(2), userInfo.get(3), userInfo.get(7), userInfo.get(4), userInfo.get(6), userInfo.get(5), Integer.parseInt(userInfo.get(8)));
+            User.makeInstance(userInfo.get(0), userInfo.get(1),userInfo.get(2),userInfo.get(3),userInfo.get(7),userInfo.get(4),userInfo.get(6),userInfo.get(5), Integer.parseInt(userInfo.get(8)));
         }
     }
 
@@ -89,14 +99,10 @@ public class LogInController {
             visibleTextField.setText(passwordTextField.getText());
             passwordTextField.setVisible(false);
             visibleTextField.setVisible(true);
-            visibleTextField.setPrefWidth(TextField.USE_COMPUTED_SIZE);
-            passwordTextField.setPrefWidth(0);
         } else {
             passwordTextField.setText(visibleTextField.getText());
             passwordTextField.setVisible(true);
             visibleTextField.setVisible(false);
-            visibleTextField.setPrefWidth(0);
-            passwordTextField.setPrefWidth(TextField.USE_COMPUTED_SIZE);
         }
 
         updateEyeImage();
@@ -107,6 +113,24 @@ public class LogInController {
         String imagePath = passwordVisible ? "static/images/eye.png" : "static/images/closedeye.png";
         Image image = new Image(Objects.requireNonNull(Main.class.getClassLoader().getResource(imagePath).toExternalForm()));
         eyeImageView.setImage(image);
+    }
+
+    private void centerVBox() {
+        double xOffset = (centeredPane.getWidth() - centeredVBox.getWidth()) / 2;
+        double yOffset = (centeredPane.getHeight() - centeredVBox.getHeight()) / 2;
+
+        centeredVBox.setLayoutX(xOffset);
+        centeredVBox.setLayoutY(yOffset);
+    }
+
+    private void handleEnterKeyPress(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                login();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
