@@ -12,8 +12,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,7 +39,9 @@ public class NewOfferController {
     private ComboPanel themeComboPanel;
 
     @FXML
-    private Button newOfferButton, newOfferToOffersButton;
+    private Button newOfferButton, newOfferToOffersButton, addImageButton;
+    @FXML
+    private ImageView imageArea;
 
     @FXML
     public void initialize() {
@@ -103,4 +109,34 @@ public class NewOfferController {
         }
         return null;
     }
+
+    @FXML
+    public void addImage() throws IOException{
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Sélectionner une image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(addImageButton.getScene().getWindow());
+
+        if (selectedFile != null) {
+            Image image = new Image(selectedFile.toURI().toURL().toString());
+            System.out.println("Chemin de l'image ajoutée : " + selectedFile.toURI().toURL().toString());
+            imageArea.setImage(image);
+            rafraichirInterfaceUtilisateur();
+        }
+    }
+
+    private void rafraichirInterfaceUtilisateur() {
+
+    }
+
+    @FXML
+    public void suppImage() throws IOException{
+        imageArea.setImage(null);
+        rafraichirInterfaceUtilisateur();
+    }
+
+
 }
