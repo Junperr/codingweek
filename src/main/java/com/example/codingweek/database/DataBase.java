@@ -91,6 +91,31 @@ public class DataBase {
         }
     }
 
+    public ArrayList<HashMap<String,Object>> fetchAllMap(String query, Object... args) {
+        ArrayList<HashMap<String,Object>> result = new ArrayList<>();
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            setParameters(preparedStatement, args);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+
+            while (resultSet.next()) {
+                HashMap row = new HashMap();
+                for (int i = 1; i <= columnCount; i++) {
+                    row.put(metaData.getColumnLabel(i),resultSet.getObject(i));
+                }
+                result.add(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
     public ArrayList<ArrayList<Object>> fetchAll(String query, Object... args) {
         ArrayList<ArrayList<Object>> result = new ArrayList<>();
 
@@ -139,16 +164,16 @@ public class DataBase {
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Julie', 'Zhen', 'julieZ', 'julie.zhen@telecomnancy.net', 'address4', '75000', 'city1', '88888888', '5000')");
 
                 // Insert data into Offers
-                exec("INSERT INTO offers (id, title, type, description, imagePath, price, user, availability) VALUES ('1', 'Pelle à prêter', 'Offer', 'Une belle pelle à prêter', 'pelle.jpg', 10, 'joelD', 1)");
-                exec("INSERT INTO offers (id, title, type, description, imagePath, price, user, availability) VALUES ('2', 'Machine à café à prêter', 'Offer', 'Une belle machine à café à prêter', 'pelle.jpg', 100, 'joelD', 1)");
-                exec("INSERT INTO offers (id, title, type, description, imagePath, price, user, availability) VALUES ('3', 'Machine à thé à prêter', 'Offer', 'Une belle machine à thé à prêter', 'pelle.jpg', 50, 'joelD', 1)");
+                exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('6cc0106a-8d73-4ead-935e-971d00196e6f', 'Pelle à prêter', 'Offer', 'Une belle pelle à prêter', 'pelle.jpg', 10, 'joelD', 1)");
+                exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('337bc42e-1a1a-4237-a45d-a66d3da4ed03', 'Machine à café à prêter', 'Offer', 'Une belle machine à café à prêter', 'pelle.jpg', 100, 'joelD', 1)");
+                exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('cfe6e949-e07f-4b87-a0e6-0715db4da09a', 'Machine à thé à prêter', 'Offer', 'Une belle machine à thé à prêter', 'pelle.jpg', 50, 'joelD', 1)");
 
                 // Insert data into Categories
-                exec("INSERT INTO Categories (offer, category) VALUES ('1', 'Jardinage')");
-                exec("INSERT INTO Categories (offer, category) VALUES ('1', 'Jardin')");
-                exec("INSERT INTO Categories (offer, category) VALUES ('1', 'Outils')");
-                exec("INSERT INTO Categories (offer, category) VALUES ('2', 'Electroménager')");
-                exec("INSERT INTO Categories (offer, category) VALUES ('3', 'Electroménager')");
+                exec("INSERT INTO Categories (offer, category) VALUES ('6cc0106a-8d73-4ead-935e-971d00196e6f', 'Jardinage')");
+                exec("INSERT INTO Categories (offer, category) VALUES ('6cc0106a-8d73-4ead-935e-971d00196e6f', 'Jardin')");
+                exec("INSERT INTO Categories (offer, category) VALUES ('6cc0106a-8d73-4ead-935e-971d00196e6f', 'Outils')");
+                exec("INSERT INTO Categories (offer, category) VALUES ('337bc42e-1a1a-4237-a45d-a66d3da4ed03', 'Electroménager')");
+                exec("INSERT INTO Categories (offer, category) VALUES ('cfe6e949-e07f-4b87-a0e6-0715db4da09a', 'Electroménager')");
 
 
                 // Fetch data from table1
