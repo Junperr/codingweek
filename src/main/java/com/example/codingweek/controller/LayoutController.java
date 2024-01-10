@@ -1,6 +1,7 @@
 package com.example.codingweek.controller;
 
 import com.example.codingweek.Main;
+import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,7 +47,7 @@ public class LayoutController {
         Stage modification = (Stage) logOut.getScene().getWindow();
         modification.setScene(new Scene(root));
 
-        User currentUser = User.wipeInstance();
+        CurrentUser.logoutUser();
     }
 
     @FXML

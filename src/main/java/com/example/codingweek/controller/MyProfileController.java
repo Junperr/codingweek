@@ -1,5 +1,6 @@
 package com.example.codingweek.controller;
 
+import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +24,7 @@ public class MyProfileController {
 
     @FXML
     private void initialize() {
-        User currentUser = User.getInstance();
+        User currentUser = CurrentUser.getUser();
         userNameBig.setText(currentUser.userName);
         balance.setText(String.valueOf(currentUser.coins));
         userName.setText(currentUser.userName);

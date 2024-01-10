@@ -1,6 +1,7 @@
 package com.example.codingweek.controller;
 
 import com.example.codingweek.Main;
+import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
 import javafx.fxml.FXML;
@@ -61,7 +62,7 @@ public class ModifyProfileController {
             return;
         }
 
-        User currentUser = User.getInstance();
+        User currentUser = CurrentUser.getUser();
         DataBase db = DataBase.getInstance();
 
         if (currentUser.password.equals(currentPass)) {
