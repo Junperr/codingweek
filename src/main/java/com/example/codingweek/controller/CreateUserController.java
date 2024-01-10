@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class CreateUserController {
@@ -76,8 +77,10 @@ public class CreateUserController {
         // when the dependencies will work, need to hash the pass word
         DataBase db = DataBase.getInstance();
         ArrayList<String> alHere = db.fetchUser("select * from Users where userName=?", userName);
+        String[] nullable = {null, null, null, null, null, null, null, null, null};
+        ArrayList<String> null_ = new ArrayList<>(Arrays.asList(nullable));
 
-        if (alHere == null) {
+        if (alHere.equals(null_)) {
             db.exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES (?,?,?,?,?,?,?,?,'100')", userName, firstName, lastName, email, address, zipCode, city, password);
         } else {
             errorLabel.setText("This username is already used, try another one");
