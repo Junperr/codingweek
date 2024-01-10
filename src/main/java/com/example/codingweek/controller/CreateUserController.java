@@ -73,6 +73,10 @@ public class CreateUserController {
             errorLabel.setText("Your city name must be less than 200 character long");
             return;
         }
+        if (zipCode.length() == 5) {
+            errorLabel.setText("Your zipcode must be of length 5");
+            return;
+        }
 
         // when the dependencies will work, need to hash the pass word
         DataBase db = DataBase.getInstance();
