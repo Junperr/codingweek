@@ -58,7 +58,7 @@ public class LogInController {
             Stage modification = (Stage) loginButton.getScene().getWindow();
             modification.setScene(new Scene(root));
 
-            User currentUser = User.makeInstance(userInfo.get(0), userInfo.get(1),userInfo.get(2),userInfo.get(3),userInfo.get(7),userInfo.get(4),userInfo.get(6),userInfo.get(5), Integer.parseInt(userInfo.get(8)));
+            User.makeInstance(userInfo.get(0), userInfo.get(1),userInfo.get(2),userInfo.get(3),userInfo.get(7),userInfo.get(4),userInfo.get(6),userInfo.get(5), Integer.parseInt(userInfo.get(8)));
         }
     }
 

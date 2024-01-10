@@ -16,7 +16,7 @@ public class LayoutController {
     @FXML
     private Label goToProfile, goToOffers, logOut;
 
-
+    @FXML
     public void goToProfile() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/myProfile.fxml");
@@ -26,7 +26,8 @@ public class LayoutController {
         modification.setScene(new Scene(root));
     }
 
-    public void goToOffers() throws IOException {
+    @FXML
+    public void goToAllOffers() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/allOffers.fxml");
         loader.setLocation(xmlUrl);
@@ -35,6 +36,7 @@ public class LayoutController {
         modification.setScene(new Scene(root));
     }
 
+    @FXML
     public void logout() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-login.fxml");
@@ -44,5 +46,15 @@ public class LayoutController {
         modification.setScene(new Scene(root));
 
         User currentUser = User.wipeInstance();
+    }
+
+    @FXML
+    public void goToOffers() throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-new-offer.fxml");
+        loader.setLocation(xmlUrl);
+        Parent root = loader.load();
+        Stage modification = (Stage) goToOffers.getScene().getWindow();
+        modification.setScene(new Scene(root));
     }
 }
