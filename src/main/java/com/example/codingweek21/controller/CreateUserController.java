@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class CreateUserController {
@@ -27,6 +28,8 @@ public class CreateUserController {
     @FXML
     private void submit() throws IOException {
         Pattern EmailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+
+        errorLabel.setText("");
 
         String firstName = (firstNameTextField.getText() != null && !firstNameTextField.getText().isEmpty()) ? firstNameTextField.getText(): handleEmptyField("firstName");
         String lastName = (lastNameTextField.getText() != null && !lastNameTextField.getText().isEmpty()) ? lastNameTextField.getText() : handleEmptyField("lastName");
@@ -72,7 +75,14 @@ public class CreateUserController {
 
         // when the dependencies will work, need to hash the pass word
         DataBase db = DataBase.getInstance();
-        db.exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES (?,?,?,?,?,?,?,?,'100')", userName, firstName, lastName, email, address, zipCode, city, password);
+        ArrayList<String> alHere = db.fetchUser("select * from Users where userName=?", userName);
+
+        if (alHere == null) {
+            db.exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES (?,?,?,?,?,?,?,?,'100')", userName, firstName, lastName, email, address, zipCode, city, password);
+        } else {
+            errorLabel.setText("This username is already used, try another one");
+            return;
+        }
 
         FXMLLoader loader = new FXMLLoader();
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-login.fxml");
