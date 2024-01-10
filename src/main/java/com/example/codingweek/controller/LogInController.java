@@ -61,6 +61,8 @@ public class LogInController {
     }
 
     public void login() throws IOException {
+        errorLabel.setText("");
+
         String userName = userNameTextField.getText();
         String password = passwordTextField.getText();
 
