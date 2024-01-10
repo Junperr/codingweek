@@ -130,7 +130,7 @@ public class MyProfileController {
     @FXML
     private void setAddress() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getClassLoader().getResource("static/fxml/modifyProfile.fxml");
+        URL xmlUrl = getClass().getClassLoader().getResource("static/fxml/modifyAddress.fxml");
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
 
@@ -140,42 +140,6 @@ public class MyProfileController {
 
         ModifyProfileController modifyProfileController = loader.getController();
         modifyProfileController.initData("address");
-        modifyProfileController.setStage(modification);
-        modifyProfileController.setMainController(this);
-        modification.showAndWait();
-    }
-
-    @FXML
-    private void setZip() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getClassLoader().getResource("static/fxml/modifyProfile.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
-
-        Stage modification = new Stage();
-        modification.setTitle("Change zipcode");
-        modification.setScene(new Scene(root));
-
-        ModifyProfileController modifyProfileController = loader.getController();
-        modifyProfileController.initData("zipcode");
-        modifyProfileController.setStage(modification);
-        modifyProfileController.setMainController(this);
-        modification.showAndWait();
-    }
-
-    @FXML
-    private void setCity() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getClassLoader().getResource("static/fxml/modifyProfile.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
-
-        Stage modification = new Stage();
-        modification.setTitle("Change city");
-        modification.setScene(new Scene(root));
-
-        ModifyProfileController modifyProfileController = loader.getController();
-        modifyProfileController.initData("city");
         modifyProfileController.setStage(modification);
         modifyProfileController.setMainController(this);
         modification.showAndWait();
