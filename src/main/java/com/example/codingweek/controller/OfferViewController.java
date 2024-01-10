@@ -1,6 +1,7 @@
 package com.example.codingweek.controller;
 
 import com.example.codingweek.Main;
+import com.example.codingweek.database.DataBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,13 +9,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class OfferViewController extends VBox implements Initializable {
     @FXML
@@ -33,19 +37,44 @@ public class OfferViewController extends VBox implements Initializable {
     @FXML
     public Label userOffer;
 
+    private UUID offerId;
+
+    public void setOfferId(UUID id){
+        this.offerId = id;
+    }
+    public UUID getOfferId(){
+        return this.offerId;
+    }
+
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    public void goToOffer(KeyEvent keyEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/offerPage.fxml");
+    public void goToOffer(MouseEvent mouseEvent) throws IOException {
 
-        //Label offerId = (Label) offer.lookup("#offerTitle");
-        //offerTitle.setText(title);
+        DataBase db = DataBase.getInstance();
+        ArrayList<Object> list = db.fetchOne("select user, availability, price, description, title from Offers where id=?", this.offerId);
 
-        loader.setLocation(xmlUrl);
+        String userPageOffer = list.get(0).toString();
+        Boolean availabilityPageOffer = (Boolean) list.get(1);
+        int pricePageOffer = Integer.parseInt(list.get(2).toString());
+        String descriptionPageOffer = list.get(3).toString();
+        String titlePageOffer = list.get(4).toString();
+
+        FXMLLoader loader = new FXMLLoader(Main.class.getClassLoader().getResource("static/fxml/offerPage.fxml"));
+        AnchorPane offer = loader.load();
+
+        Label title = (Label) offer.lookup("#pageOfferTitle");
+        title.setText(titlePageOffer);
+        Label offerTitle = (Label) offer.lookup("#pageOfferTitle");
+        offerTitle.setText(titlePageOffer);
+//        Label offerTitle = (Label) offer.lookup("#pageOfferTitle");
+//        offerTitle.setText(titlePageOffer);
+//        Label offerTitle = (Label) offer.lookup("#pageOfferTitle");
+//        offerTitle.setText(titlePageOffer);
+
+//        loader.setLocation(xmlUrl);
         Parent root = loader.load();
         Stage modification = (Stage) offerTitle.getScene().getWindow();
         modification.setScene(new Scene(root));
