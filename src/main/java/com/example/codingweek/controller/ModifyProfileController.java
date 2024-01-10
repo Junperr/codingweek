@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 
@@ -66,15 +67,18 @@ public class ModifyProfileController {
         if (currentUser.password.equals(currentPass)) {
             switch (index) {
                 case "username":
-                    ArrayList<String> alHere = db.fetchUser("select * from Users where userName=?", currentUser.userName);
+                    ArrayList<String> alHere = db.fetchUser("select * from Users where userName=?", newData);
+                    String[] nullable = {null, null, null, null, null, null, null, null, null};
+                    ArrayList<String> null_ = new ArrayList<>(Arrays.asList(nullable));
 
-                    if (alHere == null) {
+                    if (alHere.equals(null_)) {
                         db.exec("update Users set userName=? where userName=?", newData, currentUser.userName);
                         currentUser.userName = newData;
+                        break;
                     } else {
                         errorLabel.setText("This username is already used, try another one");
+                        return;
                     }
-                    break;
                 case "password":
                     currentUser.password = newData;
                     db.exec("update Users set password=? where userName=?", newData, currentUser.userName);
