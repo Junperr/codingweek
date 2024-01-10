@@ -8,9 +8,9 @@
     <children>
       <ToolBar prefHeight="36.0" prefWidth="607.0">
          <items>
-            <Label fx:id="goToProfile" mnemonicParsing="false" onMouseClicked="#goToProfile" text="myProfile" />
-            <Label fx:id="goToOffers" mnemonicParsing="false" onMouseClicked="#goToOffers" text="Offers" />
-             <Label fx:id="logOut" mnemonicParsing="false" onMouseClicked="#logout" text="Log-out" />
+            <Label fx:id="goToProfile" onMouseClicked="#goToProfile" text="myProfile" />
+            <Label fx:id="goToOffers" onMouseClicked="#goToOffers" text="Offers" />
+             <Label fx:id="logOut" onMouseClicked="#logout" text="Log-out" />
          </items>
       </ToolBar>
    </children>
