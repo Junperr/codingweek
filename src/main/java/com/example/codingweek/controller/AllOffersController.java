@@ -45,10 +45,6 @@ public class AllOffersController implements Initializable {
         for (ArrayList<Object> o : list) {
             String imagePath = (o.get(2) != null) ? o.get(2).toString() : "default.png";
 
-            for (int i = 0; i < 6; i++) {
-                System.out.println(o.get(i));
-            }
-
 
             loadOffersFromDatabase(
                     o.get(0).toString(),   // title
