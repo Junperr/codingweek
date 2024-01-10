@@ -1,8 +1,8 @@
 package com.example.codingweek.javafxComponent;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
@@ -35,12 +35,8 @@ public class ComboPanel extends StackPane {
         });
     }
 
-    public String getSelectedTheme() {
-        return comboBox.getSelectionModel().getSelectedItem();
-    }
-
-    public void resetComboPanel() {
-        resetComboBox();
+    public ObservableList<String> getSelectedThemes() {
+        return selectedOptionsListView.getItems();
     }
 
     private void resetComboBox() {
@@ -53,7 +49,7 @@ public class ComboPanel extends StackPane {
         selectedOptionsListView = new ListView<>();
         selectedOptionsListView.setPrefHeight(50);
         selectedOptionsListView.setCellFactory(param -> new ListCell<String>() {
-            private final Label deleteLabel = new Label("✖");
+            private final Button deleteButton = new Button("✖");
 
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -63,18 +59,13 @@ public class ComboPanel extends StackPane {
                     setGraphic(null);
                     setText(null);
                 } else {
-                    HBox hbox = new HBox(new Label(item), deleteLabel);
+                    HBox hbox = new HBox(new Label(item), deleteButton);
                     setGraphic(hbox);
 
-                    deleteLabel.setOnMouseClicked(this::handleDeleteLabelClick);
-                }
-            }
-
-            private void handleDeleteLabelClick(MouseEvent event) {
-                String item = getItem();
-                if (item != null) {
-                    getListView().getItems().remove(item);
-                    resetComboBox();
+                    deleteButton.setOnAction(event -> {
+                        getListView().getItems().remove(item);
+                        resetComboBox();
+                    });
                 }
             }
         });
