@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.AllOffersController">
-    <fx:include fx:id="menuBar" source="layout.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-   <VBox layoutY="54.0" prefHeight="26.0" prefWidth="602.0">
+<AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.AllOffersController">
+    <fx:include fx:id="menuBar" source="layout.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"  />
+   <VBox layoutY="54.0" prefHeight="36.0" prefWidth="1080.0">
       <children>
-         <ToolBar prefHeight="40.0" prefWidth="200.0">
+         <ToolBar prefHeight="36.0" prefWidth="1066.0">
             <items>
                <Label text="Offer type :" />
                <ChoiceBox fx:id="type" prefHeight="25.0" prefWidth="60.0" />
@@ -26,11 +33,11 @@
          </ToolBar>
       </children>
    </VBox>
-   <VBox fx:id="offerToAdd" layoutY="135.0" prefHeight="251.0" prefWidth="602.0">
+   <VBox fx:id="offerToAdd" layoutY="135.0" prefHeight="582.0" prefWidth="1080.0">
       <children>
-         <ScrollPane fx:id="scrollPane" prefHeight="252.0" prefWidth="602.0">
+         <ScrollPane fx:id="scrollPane" prefHeight="602.0" prefWidth="1080.0">
             <content>
-               <VBox fx:id="offers" prefHeight="171.0" prefWidth="598.0">
+               <VBox fx:id="offers" prefHeight="567.0" prefWidth="1078.0">
                   <padding>
                      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                   </padding>
