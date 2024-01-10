@@ -1,13 +1,172 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek21.controller.MyProfileController">
-    <fx:include fx:id="menuBar" source="layout.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.MyProfileController">
+    <fx:include fx:id="menuBar" source="layout.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
    <VBox layoutY="37.0" prefHeight="30.0" prefWidth="602.0">
       <children>
-         <Label text="My Profil" />
+         <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="600.0">
+            <children>
+               <Label text="Hello, " />
+               <Label fx:id="userNameBig" prefHeight="18.0" prefWidth="245.0" />
+               <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="210.0" text="Account Balance : " textAlignment="RIGHT" />
+               <Label fx:id="balance" prefHeight="18.0" prefWidth="74.0" />
+            </children>
+            <padding>
+               <Insets left="20.0" />
+            </padding>
+         </HBox>
+         <Accordion prefHeight="326.0" prefWidth="600.0">
+           <panes>
+             <TitledPane animated="false" prefHeight="89.0" prefWidth="600.0" text="Login &amp; Security">
+                  <content>
+                     <HBox prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                           <VBox prefHeight="229.0" prefWidth="110.0">
+                              <children>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Label layoutX="36.0" layoutY="6.0" text="Username :" />
+                                    </children></Pane>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Label layoutX="40.0" layoutY="6.0" text="Password :" />
+                                    </children></Pane>
+                                 <Pane prefHeight="31.0" prefWidth="165.0">
+                                    <children>
+                                       <Label layoutX="36.0" layoutY="6.0" text="Last name :" />
+                                    </children></Pane>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Label layoutX="35.0" layoutY="6.0" text="First name :" />
+                                    </children></Pane>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Label layoutX="61.0" layoutY="6.0" text="Email :" />
+                                    </children></Pane>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Label layoutX="47.0" layoutY="6.0" text="Address :" />
+                                    </children></Pane>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Label layoutX="42.0" layoutY="5.0" text="ZIP Code :" />
+                                    </children></Pane>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Label layoutX="68.0" layoutY="5.0" text="City :" />
+                                    </children></Pane>
+                              </children>
+                           </VBox>
+                           <VBox prefHeight="229.0" prefWidth="182.0">
+                              <children>
+                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                    <children>
+                                       <Label fx:id="userName" layoutX="77.0" layoutY="6.0" text="Label" />
+                                    </children>
+                                 </Pane>
+                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                    <children>
+                                       <Label fx:id="password" layoutX="77.0" layoutY="6.0" text="Label" />
+                                    </children>
+                                 </Pane>
+                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                    <children>
+                                       <Label fx:id="lastName" layoutX="77.0" layoutY="6.0" text="Label" />
+                                    </children>
+                                 </Pane>
+                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                    <children>
+                                       <Label fx:id="firstName" layoutX="77.0" layoutY="6.0" text="Label" />
+                                    </children>
+                                 </Pane>
+                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                    <children>
+                                       <Label fx:id="email" layoutX="77.0" layoutY="6.0" text="Label" />
+                                    </children>
+                                 </Pane>
+                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                    <children>
+                                       <Label fx:id="address" layoutX="77.0" layoutY="6.0" text="Label" />
+                                    </children>
+                                 </Pane>
+                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                    <children>
+                                       <Label fx:id="zip" layoutX="77.0" layoutY="5.0" text="Label" />
+                                    </children>
+                                 </Pane>
+                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                    <children>
+                                       <Label fx:id="city" layoutX="77.0" layoutY="6.0" text="Label" />
+                                    </children>
+                                 </Pane>
+                              </children>
+                           </VBox>
+                           <VBox prefHeight="229.0" prefWidth="177.0">
+                              <children>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Button fx:id="modifyUserName" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setUserName" text="Modifier" />
+                                    </children>
+                                 </Pane>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Button fx:id="modifyPassword" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setPassword" text="Modifier" />
+                                    </children>
+                                 </Pane>
+                                 <Pane prefHeight="31.0" prefWidth="165.0">
+                                    <children>
+                                       <Button fx:id="modifyLastName" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setLastName" text="Modifier" />
+                                    </children>
+                                 </Pane>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Button fx:id="modifyFirstName" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setFirstName" text="Modifier" />
+                                    </children>
+                                 </Pane>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Button fx:id="modifyEmail" layoutX="58.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#setEmail" text="Modifier" />
+                                    </children>
+                                 </Pane>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Button fx:id="modifyAddress" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setAddress" text="Modifier" />
+                                    </children>
+                                 </Pane>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Button fx:id="modifyZip" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setZip" text="Modifier" />
+                                    </children>
+                                 </Pane>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Button fx:id="modifyCity" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setCity" text="Modifier" />
+                                    </children>
+                                 </Pane>
+                              </children>
+                           </VBox>
+                        </children>
+                     </HBox>
+                  </content>
+               </TitledPane>
+               <TitledPane animated="false"  text="Your Offers">
+                 <content>
+                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                 </content>
+               </TitledPane>
+             <TitledPane animated="false" prefHeight="466.0" prefWidth="600.0" text="Your Orders" />
+           </panes>
+         </Accordion>
       </children>
    </VBox>
 

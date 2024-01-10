@@ -1,8 +1,8 @@
-package com.example.codingweek21.controller;
+package com.example.codingweek.controller;
 
-import com.example.codingweek21.Main;
-import com.example.codingweek21.auth.User;
-import com.example.codingweek21.database.DataBase;
+import com.example.codingweek.Main;
+import com.example.codingweek.auth.User;
+import com.example.codingweek.database.DataBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
