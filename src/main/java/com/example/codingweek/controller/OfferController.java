@@ -65,7 +65,7 @@ public class OfferController {
                 modification.setScene(new Scene(root));
 
                 OrderController orderController = loader.getController();
-                orderController.initData(offerId);
+                orderController.initData(offerId, cost, offerPageTitle.getText());
                 orderController.setStage(modification);
                 orderController.setMainController(this);
                 modification.showAndWait();
