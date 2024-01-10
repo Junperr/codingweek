@@ -127,6 +127,8 @@ public class ModifyProfileController {
             Parent root = loader.load();
             Stage modification = (Stage) saveButton.getScene().getWindow();
             modification.setScene(new Scene(root));
+
+            myProfileController.updateProfile();
         } else {
             errorLabel.setText("Wrong current password");
         }

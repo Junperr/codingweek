@@ -41,9 +41,15 @@ public class ModifyAddressController {
     
     public void setStage(Stage stage) {this.stage = stage;}
 
+    public void initData() {
+        newAddressTextField.setPromptText("New Address");
+        newZipCodeTextField.setPromptText("New Zip Code");
+        newCityTextField.setPromptText("New City");
+    }
+
     public void setMainController(MyProfileController myProfileController) {this.myProfileController = myProfileController;}
 
-
+    @FXML
     private void submit() throws IOException {
         errorLabel.setText("");
 
@@ -65,10 +71,10 @@ public class ModifyAddressController {
                 return;
             }
             if (newCity.length() > 100) {
-                errorLabel.setText("Your city name must be less than 200 character long");
+                errorLabel.setText("Your city name must be less than 100 character long");
                 return;
             }
-            if (newZipCode.length() == 5) {
+            if (!(newZipCode.length() == 5)) {
                 errorLabel.setText("Your zipcode must be of length 5");
                 return;
             }
@@ -90,6 +96,8 @@ public class ModifyAddressController {
         Parent root = loader.load();
         Stage modification = (Stage) saveButton.getScene().getWindow();
         modification.setScene(new Scene(root));
+
+        myProfileController.updateProfile();
     }
 
     private <T> T handleEmptyField(String fieldName) {
