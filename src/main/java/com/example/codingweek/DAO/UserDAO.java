@@ -220,5 +220,9 @@ public class UserDAO {
         CurrentUser.logUser(user);
     }
 
+    public void getUserAverageMarks(User user){
+        int marks = exec("select marks from ")
+    }
+
 
 }

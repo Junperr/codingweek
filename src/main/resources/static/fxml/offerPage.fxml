@@ -49,7 +49,7 @@
                                  <Label text="Price :" GridPane.rowIndex="3" />
                                  <Label text="Category :" GridPane.rowIndex="4" />
                                  <Label text="Description : " GridPane.rowIndex="5" />
-                                 <Label fx:id="sellerId" text="Label" GridPane.columnIndex="1" />
+                                 <Label fx:id="sellerId" onMouseClicked="#goToUserProfile" text="Label" GridPane.columnIndex="1" />
                                  <Label fx:id="offerPageAvailability" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  <Label fx:id="offerPagePrice" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                  <Label fx:id="offerPageCategory" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />

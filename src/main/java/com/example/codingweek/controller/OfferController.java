@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -103,5 +104,20 @@ public class OfferController {
             a.setContentText("You can't order from yourself");
             a.show();
         }
+    }
+
+    public void goToUserProfile(MouseEvent mouseEvent) throws Exception {
+        BigFacade bf = new BigFacade();
+        User seller = bf.getUserByUsername(this.sellerId.getText());
+
+        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/offerPage.fxml");
+        FXMLLoader loader = new FXMLLoader(xmlUrl);
+        loader.setLocation(xmlUrl);
+        Parent root = loader.load();
+        Stage modification = (Stage) sellerId.getScene().getWindow();
+
+        ProfileForOthersController profileForOthersController = loader.getController();
+        profileForOthersController.initUserPageForOthers();
+        modification.getScene().setRoot(root);
     }
 }
