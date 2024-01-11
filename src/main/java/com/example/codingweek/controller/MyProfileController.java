@@ -7,6 +7,7 @@ import com.example.codingweek.database.DataBase;
 import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,15 +28,14 @@ public class MyProfileController {
     @FXML
     private Button modifyUserName, modifyPassword, modifyLastName, modifyFirstName, modifyEmail, modifyAddress;
     @FXML
+    private VBox offerToAdd, orderToAdd, offers, orders;
+    @FXML
     private Label userNameBig, balance, userName, password, lastName, firstName, email, address, zip, city;
-
-    private OfferViewController offers;
-    private OrderViewController orders;
 
     private final ChangeScene changeScene = new ChangeScene();
 
     @FXML
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize() {
         User currentUser = CurrentUser.getUser();
         userNameBig.setText(currentUser.userName);
         balance.setText(String.valueOf(currentUser.coins));
@@ -150,3 +150,5 @@ public class MyProfileController {
         }
     }
 }
+
+// update userName and all in all table not just Users

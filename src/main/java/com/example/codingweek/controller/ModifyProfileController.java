@@ -4,6 +4,7 @@ import com.example.codingweek.Main;
 import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
+import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,6 +36,8 @@ public class ModifyProfileController {
     private Stage stage;
     private MyProfileController myProfileController;
     private String index;
+
+    private final ChangeScene changeScene = new ChangeScene();
 
 
     @FXML
@@ -120,12 +123,7 @@ public class ModifyProfileController {
                     }
             }
 
-            FXMLLoader loader = new FXMLLoader();
-            URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/valid.fxml");
-            loader.setLocation(xmlUrl);
-            Parent root = loader.load();
-            Stage modification = (Stage) saveButton.getScene().getWindow();
-            modification.setScene(new Scene(root));
+            changeScene.changeSameSceneButton("static/fxml/valid.fxml", saveButton);
 
             myProfileController.initialize();
         } else {

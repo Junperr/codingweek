@@ -14,28 +14,26 @@ import java.io.IOException;
 import java.net.URL;
 
 public class ChangeScene {
-    public void changeSameSceneButton(String pathToFXML, Button buttonName) throws IOException {
+    private FXMLLoader loader(String ressourcePath) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = Main.class.getClassLoader().getResource(pathToFXML);
+        URL xmlUrl = Main.class.getClassLoader().getResource(ressourcePath);
         loader.setLocation(xmlUrl);
-        Parent root = loader.load();
+
+        return loader;
+    }
+
+    public void changeSameSceneButton(String pathToFXML, Button buttonName) throws IOException {
         Stage modification = (Stage) buttonName.getScene().getWindow();
-        modification.setScene(new Scene(root));
+        modification.setScene(new Scene(loader(pathToFXML).load()));
     }
 
     public void changeSameSceneLabel(String pathToFXML, Label labelName) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = Main.class.getClassLoader().getResource(pathToFXML);
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
         Stage modification = (Stage) labelName.getScene().getWindow();
-        modification.setScene(new Scene(root));
+        modification.setScene(new Scene(loader(pathToFXML).load()));
     }
 
     public void changeSceneModifyProfile(String setTitle, MyProfileController mainController) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getClassLoader().getResource("static/fxml/modifyProfile.fxml");
-        loader.setLocation(xmlUrl);
+        FXMLLoader loader = loader("static/fxml/modifyProfile.fxml");
         Parent root = loader.load();
 
         Stage modification = new Stage();
