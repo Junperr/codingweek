@@ -139,7 +139,7 @@ public class OfferDAO {
                     }
                 }
             }
-            if (query.length() >= 3) {
+            if (queryEnd.length() >= 3) {
                 queryEnd = queryEnd.substring(0, queryEnd.length() - 3);
                 query += queryEnd;
                 query += ") group by o.id";
@@ -148,7 +148,6 @@ public class OfferDAO {
                 query += " group by o.id";
             }
         } else query = "select * from offers";
-
 
         ArrayList<HashMap<String,Object>> offerMap = db.fetchAllMap(query);
 
