@@ -158,7 +158,7 @@ public class DataBase {
                 exec("create table if not exists Orders (id UUID PRIMARY KEY, offer UUID, cost INTEGER, buyer TEXT, seller TEXT)");
 //                exec("create table if not exists Reviews (id UUID PRIMARY KEY, eval INTEGER, writer TEXT, description TEXT, order UUID)");
                 exec("CREATE TABLE IF NOT EXISTS Reviews (orderId UUID, writer TEXT, eval INTEGER, description TEXT,FOREIGN KEY(orderId) REFERENCES Orders(id),UNIQUE(orderId, writer))");
-                exec("create table if not exists Messages (id UUID PRIMARY KEY, timeStamp Integer, content TEXT, sender TEXT, receiver TEXT, seen TEXT)");
+                exec("create table if not exists Messages (id UUID PRIMARY KEY, timestamp Integer, content TEXT, sender TEXT, receiver TEXT, seen TEXT)");
 
                 // Insert data into Users
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('', '', 'admin', '', '', '', '', '', '100000000')");

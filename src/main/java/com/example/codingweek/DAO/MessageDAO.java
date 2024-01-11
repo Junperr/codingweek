@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 import java.util.*;
 
 public class MessageDAO {
-    public Message newMessage(Timestamp timestamp, String content, String sender, String receiver) {
+    public Message newMessage(String content, String sender, String receiver) {
         Message message = new Message(content, sender, receiver);
         addMessage(message);
         return message;
@@ -57,7 +57,7 @@ public class MessageDAO {
 
     public ArrayList<HashMap<String, Object>> getAllMessageWith(String userNameCurrent, String userName) {
         DataBase db = DataBase.getInstance();
-        ArrayList<HashMap<String, Object>> message = db.fetchAllMap("select * from Messages where (receiver=? and sender=?) or (receiver=? and sender=?)",userNameCurrent, userName, userName, userNameCurrent);
+        ArrayList<HashMap<String, Object>> message = db.fetchAllMap("select * from Messages where (receiver=? and sender=?) or (receiver=? and sender=?) order by timestamp asc)",userNameCurrent, userName, userName, userNameCurrent);
 
         for (HashMap<String, Object> stringObjectHashMap : message) {
             if (stringObjectHashMap.get("seen").equals("false")) {

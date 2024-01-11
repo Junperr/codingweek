@@ -46,7 +46,7 @@
                         <String fx:value="messages2" />
                      </styleClass>
                   </ImageView>
-                  <Label fx:id="toMessage" prefHeight="22.0" prefWidth="98.0" stylesheets="@../css/layout.css" text="Messages" onMouseEntered="#hoverHandlerM" onMouseExited="#hoverExitHandlerM">
+                  <Label fx:id="toMessage" prefHeight="22.0" prefWidth="98.0" stylesheets="@../css/layout.css" text="Messages" onMouseEntered="#hoverHandlerM" onMouseExited="#hoverExitHandlerM" onMouseClicked="#goToMessages">
                      <styleClass>
                         <String fx:value="text" />
                         <String fx:value="messages2" />

@@ -88,20 +88,39 @@ public class BigFacade {
 
     // Messages
 
-    public Integer getUnreadNumberLogedInUser() {
+    public Integer getUnreadNumberLoggedInUser() {
         User currentUser = CurrentUser.getUser();
         return messageDAO.getUnreadNumber(currentUser.userName);
     }
 
-    public void getConvPreview() {
+    public ArrayList<HashMap<String, HashMap<String, Object>>> getConvPreview() {
         User currentUser = CurrentUser.getUser();
         Set<String> allUser = messageDAO.getAllUser(currentUser.userName);
 
-        ArrayList<HashMap<String, Object>> lastMessage = new ArrayList<>();
+        ArrayList<HashMap<String, HashMap<String, Object>>> lastMessages = new ArrayList<>();
 
         for (String s : allUser) {
-            assert true;
+            HashMap<String, HashMap<String, Object>> toAdd = new HashMap<>();
+            HashMap<String, Object> lM = messageDAO.getLastMessageWith(currentUser.userName, s);
+            HashMap<String, Object> m = new HashMap<>();
+
+            m.put("timestamp", lM.get("timestamp"));
+            m.put("content", lM.get("content"));
+
+            toAdd.put(s, m);
+            lastMessages.add(toAdd);
         }
 
+        return lastMessages;
+    }
+
+    public ArrayList<HashMap<String, Object>> getConv(String userName) {
+        User currentUser = CurrentUser.getUser();
+
+        return messageDAO.getAllMessageWith(currentUser.userName, userName);
+    }
+
+    public Message newMessage(String content, String sender, String receiver) {
+        return messageDAO.newMessage(content, sender, receiver);
     }
 }
