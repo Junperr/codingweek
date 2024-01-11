@@ -27,14 +27,14 @@ public class ProfessorController {
     private Button saveButton;
     private UUID order_id;
     private Stage stage;
-    private MyProfileController myProfileController;
+    private OrderViewController orderViewController;
 
     public void setStage(Stage stage) {this.stage = stage;}
 
-    public void setMainController(MyProfileController myProfileController) {this.myProfileController = myProfileController;}
+    public void setMainController(OrderViewController orderViewController) {this.orderViewController = orderViewController;}
 
 
-    private void orderData(UUID order_id) {
+    void orderData(UUID order_id) {
         this.order_id = order_id;
     }
 
@@ -48,6 +48,16 @@ public class ProfessorController {
         UUID id = UUID.randomUUID();
 
         if (!errorLabel.getText().isEmpty()) {
+            return;
+        }
+
+        if (mark > 5) {
+            errorLabel.setText("The mark must be between 0 and 5");
+            return;
+        }
+
+        if (description.length() > 500) {
+            errorLabel.setText("Description is tooo long ");
             return;
         }
 

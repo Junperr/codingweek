@@ -8,7 +8,7 @@
 
 ## Description : 
 We are required to create a app were people can loan/borrow equipment. 
-And propose or request services. In exchange of a virtual money called Florain.
+And propose or request services. In exchange of a virtual money called Florin.
 
 ## Road-Map :
 - Monday :

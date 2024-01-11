@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getClassLoader().getResource("static/fxml/allOffers.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getClassLoader().getResource("static/fxml/form-login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
         String css = Objects.requireNonNull(Main.class.getClassLoader().getResource("static/css/style.css")).toExternalForm();
         scene.getStylesheets().add(css);
@@ -21,7 +21,7 @@ public class Main extends Application {
         DataBase dataBase = DataBase.getInstance();
         dataBase.printData(dataBase.fetchAll("SELECT * FROM Offers"));
         dataBase.printData(dataBase.fetchAll("SELECT * FROM Users"));
-
+        dataBase.printData(dataBase.fetchAll("SELECT * FROM Orders"));
     }
 
     public static void main(String[] args) {
