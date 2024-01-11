@@ -102,7 +102,7 @@
                               <String fx:value="text" />
                               <String fx:value="right" />
                            </styleClass></Label>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="1.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
                            <children>
                                           <Label fx:id="offerPrice" prefHeight="18.0" prefWidth="31.0" stylesheets="@../css/offer.css" text="Label">
                                  <styleClass>
@@ -110,7 +110,7 @@
                                     <String fx:value="right" />
                                  </styleClass>
                               </Label>
-                              <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="illu" fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                                 </children>

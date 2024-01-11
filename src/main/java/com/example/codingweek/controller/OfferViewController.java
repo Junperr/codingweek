@@ -18,6 +18,9 @@ import java.util.StringJoiner;
 import java.util.UUID;
 
 public class OfferViewController extends VBox {
+
+    @FXML
+    public ImageView illu;
     @FXML
     public VBox offer;
     @FXML
@@ -35,6 +38,8 @@ public class OfferViewController extends VBox {
     public Label userOffer;
     public VBox goToOffer;
     public Label zipCode;
+
+
 
     private UUID offerId;
 
@@ -59,6 +64,8 @@ public class OfferViewController extends VBox {
 
         Image image = new Image(Main.class.getClassLoader().getResource("static/images/" + offer.getImagePath()).toExternalForm());
         this.imageOffer.setImage(image);
+        illu.setImage(new Image("static/images/florain.png"));
+        illu.setFitHeight(20);
     }
 
     public void goToOffer(MouseEvent mouseEvent) throws Exception {
