@@ -4,6 +4,7 @@ import com.example.codingweek.SerializedData;
 import com.example.codingweek.data.User;
 
 import java.util.HashMap;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class ErrorManager {
@@ -134,6 +135,14 @@ public class ErrorManager {
         raise();
 
     }
+
+    public void handleInvalidCoins(Integer coins) throws Exception{
+        if (coins < 0) {
+            errorMessage = "Not enough coins to order that\n(try to put offers to gain coins)";
+        }
+        raise();
+    }
+
 
 //    public void checkMail(Pattern, field)
 }

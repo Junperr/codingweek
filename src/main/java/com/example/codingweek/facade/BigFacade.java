@@ -74,4 +74,8 @@ public class BigFacade {
         return orderDAO.getOwnOrders(username);
     }
 
+    public void passOrder(UUID offerId, String pwd, User user) throws Exception{
+        orderDAO.passOrder(offerId, pwd, user);
+    }
+
 }
