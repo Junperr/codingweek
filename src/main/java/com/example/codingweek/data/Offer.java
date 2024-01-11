@@ -65,7 +65,7 @@ public class Offer extends SerializedData {
         this.Categories = Categories;
     }
 
-    public Offer(UUID id,String title, String type, String user, String description, String imagePath, Integer price, Boolean availability, ArrayList<String> Categories) {
+    public Offer(UUID id, String title, String type, String user, String description, String imagePath, Integer price, Boolean availability, ArrayList<String> Categories) {
         this.id = id;
         this.title = title;
         this.type = type;

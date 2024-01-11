@@ -53,7 +53,8 @@ public class OfferDAO {
 
     public ArrayList<Offer> getOfferAvailableWithoutOwnOffer(String currentUserName){
         DataBase db = DataBase.getInstance();
-        ArrayList<HashMap<String,Object>> offerMap = db.fetchAllMap("SELECT * FROM Offers join Users U on U.userName = Offers.user WHERE userName != '?' and availability != 0", currentUserName);
+        ArrayList<HashMap<String,Object>> offerMap = db.fetchAllMap("SELECT * FROM Offers join Users U on U.userName = Offers.user WHERE userName != ? and availability != 0", currentUserName);
+        System.out.println(offerMap);
         ArrayList<HashMap<String,Object>> categories = db.fetchAllMap("SELECT category FROM Categories");
         ArrayList<Offer> offers = new ArrayList<>();
 
