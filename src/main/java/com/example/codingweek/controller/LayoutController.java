@@ -1,7 +1,8 @@
 package com.example.codingweek.controller;
 
 import com.example.codingweek.Main;
-import com.example.codingweek.auth.User;
+import com.example.codingweek.auth.CurrentUser;
+import com.example.codingweek.data.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 public class LayoutController {
     @FXML
@@ -45,7 +47,7 @@ public class LayoutController {
         Stage modification = (Stage) logOut.getScene().getWindow();
         modification.setScene(new Scene(root));
 
-        User currentUser = User.wipeInstance();
+        CurrentUser.logoutUser();
     }
 
     @FXML

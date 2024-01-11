@@ -1,23 +1,23 @@
 package com.example.codingweek.controller;
 
-import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.Main;
-import com.example.codingweek.Offer.Offer;
-import com.example.codingweek.auth.User;
-import com.example.codingweek.database.DataBase;
-import com.example.codingweek.facade.OfferFacade;
+import com.example.codingweek.data.Offer;
+import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxComponent.ComboPanel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class NewOfferController {
 
@@ -35,7 +35,9 @@ public class NewOfferController {
     private ComboPanel themeComboPanel;
 
     @FXML
-    private Button newOfferButton, newOfferToOffersButton;
+    private Button newOfferButton, newOfferToOffersButton, addImageButton;
+    @FXML
+    private ImageView imageArea;
 
     @FXML
     public void initialize() {
@@ -68,9 +70,9 @@ public class NewOfferController {
             themes.add(theme);
         }
 
-        OfferFacade offerFacade = new OfferFacade();
+        BigFacade bigFacade = new BigFacade();
         // image is not implemented yet so by default we put null for the path
-        Offer offer = offerFacade.createNewOffer(title, description, null, Integer.parseInt(price), selectedType, themes);
+        Offer offer = bigFacade.createNewOffer(title, description, null, Integer.parseInt(price), selectedType, themes);
 
     }
 
@@ -103,4 +105,34 @@ public class NewOfferController {
         }
         return null;
     }
+
+    @FXML
+    public void addImage() throws IOException{
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Sélectionner une image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(addImageButton.getScene().getWindow());
+
+        if (selectedFile != null) {
+            Image image = new Image(selectedFile.toURI().toURL().toString());
+            System.out.println("Chemin de l'image ajoutée : " + selectedFile.toURI().toURL().toString());
+            imageArea.setImage(image);
+            rafraichirInterfaceUtilisateur();
+        }
+    }
+
+    private void rafraichirInterfaceUtilisateur() {
+
+    }
+
+    @FXML
+    public void suppImage() throws IOException{
+        imageArea.setImage(null);
+        rafraichirInterfaceUtilisateur();
+    }
+
+
 }

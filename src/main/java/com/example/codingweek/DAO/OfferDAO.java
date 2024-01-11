@@ -1,10 +1,9 @@
 package com.example.codingweek.DAO;
 
-import com.example.codingweek.Offer.Offer;
-import com.example.codingweek.auth.User;
+import com.example.codingweek.data.Offer;
+import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
 
-import javax.print.attribute.HashPrintServiceAttributeSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -49,6 +48,31 @@ public class OfferDAO {
                 Integer.parseInt(offerMap.get("price").toString()),
                 Boolean.parseBoolean(offerMap.get("availability").toString()),
                 categoriesString);
+    }
+
+    public ArrayList<Offer> getAllOffers(){
+        DataBase db = DataBase.getInstance();
+        ArrayList<HashMap<String,Object>> offerMap = db.fetchAllMap("SELECT * FROM Offers");
+        ArrayList<HashMap<String,Object>> categories = db.fetchAllMap("SELECT category FROM Categories");
+
+        ArrayList<Offer> offers = new ArrayList<>();
+
+        for (HashMap<String,Object> offer : offerMap) {
+            ArrayList<String> categoriesString = new ArrayList<>();
+            for (HashMap<String, Object> category : categories) {
+                categoriesString.add(category.get("category").toString());
+            }
+            offers.add(new Offer(UUID.fromString(offer.get("id").toString()),
+                    offer.get("title").toString(),
+                    offer.get("type").toString(),
+                    offer.get("user").toString(),
+                    offer.get("description").toString(),
+                    (offer.get("imagePath") != null) ? offer.get("imagePath").toString() : "default.png",
+                    Integer.parseInt(offer.get("price").toString()),
+                    Boolean.parseBoolean(offer.get("availability").toString()),
+                    categoriesString));
+        }
+        return offers;
     }
 
 }

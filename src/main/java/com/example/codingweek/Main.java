@@ -14,7 +14,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getClassLoader().getResource("static/fxml/form-login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
-        String css = Objects.requireNonNull(Main.class.getClassLoader().getResource("static/css/style.css")).toExternalForm();
+        String css = Objects.requireNonNull(Main.class.getClassLoader().getResource("static/css/login.css")).toExternalForm();
         scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.show();

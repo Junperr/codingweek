@@ -68,7 +68,6 @@ public class AllOffersController implements Initializable {
 
             ImageView imageView = (ImageView) offer.lookup("#imageOffer");
             URL imageUrl = Main.class.getClassLoader().getResource("static/images/" + imagePath);
-            System.out.println(imageUrl);
             if (imageUrl == null) {
                 imageUrl = Main.class.getClassLoader().getResource("static/images/default.png");
             }

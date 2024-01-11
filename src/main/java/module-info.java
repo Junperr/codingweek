@@ -3,8 +3,10 @@ module com.example.codingweek {
     requires javafx.fxml;
     requires java.sql;
     requires java.desktop;
+    requires com.fasterxml.jackson.core;
+    requires com.fasterxml.jackson.databind;
 
-
+    opens com.example.codingweek.data to com.fasterxml.jackson.databind;
     opens com.example.codingweek to javafx.fxml;
     exports com.example.codingweek;
     exports com.example.codingweek.controller;
