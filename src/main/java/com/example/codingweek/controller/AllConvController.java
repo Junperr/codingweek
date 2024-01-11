@@ -8,12 +8,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AllConvController implements Initializable {
-    private LayoutController layoutController;
-    private Stage stage;
 
-    public void setStage(Stage stage) {this.stage = stage;}
+    public void setStage(Stage stage) {
+    }
 
-    public void setMainController(LayoutController layoutController) {this.layoutController = layoutController;}
+    public void setMainController(LayoutController layoutController) {
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
