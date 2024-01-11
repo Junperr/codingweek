@@ -31,6 +31,10 @@ public class BigFacade {
         return offerDAO.getAllOffers();
     }
 
+    public ArrayList<Offer> getOffersWithFilters(String type, String zipCode, String priceMin, String priceMax, ArrayList<String> categories) {
+        return offerDAO.getOffersWithFilters(type, zipCode, priceMin, priceMax, categories);
+    }
+
     public void createNewUser(String firstName, String lastName, String userName, String email, String password, String address, String city, String zipCode) throws Exception{
         userDAO.newUser(firstName, lastName, userName, email, password, address, city, zipCode);
     }
