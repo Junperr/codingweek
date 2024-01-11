@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,6 +33,12 @@ public class ProfessorController {
     private Stage stage;
     private OrderViewController orderViewController;
 
+    @FXML
+    private void initialize() {
+        PW.setOnKeyPressed(this::handleEnterKeyPress);
+        markTextField.setOnKeyPressed(this::handleEnterKeyPress);
+    }
+
     private final ChangeScene changeScene = new ChangeScene();
 
     public void setStage(Stage stage) {this.stage = stage;}
@@ -41,6 +49,8 @@ public class ProfessorController {
     void orderData(UUID order_id) {
         this.order_id = order_id;
     }
+
+
 
     @FXML
     private void submit() throws IOException {
@@ -93,5 +103,15 @@ public class ProfessorController {
             return (T)(Integer) 0;
         }
         return null;
+    }
+
+    private void handleEnterKeyPress(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                submit();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

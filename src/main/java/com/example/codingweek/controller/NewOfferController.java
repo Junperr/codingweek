@@ -16,6 +16,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -64,6 +66,8 @@ public class NewOfferController {
         newOfferButton.setOnAction(event -> {
 
         });
+        titleTextField.setOnKeyPressed(this::handleEnterKeyPress);
+        priceTextField.setOnKeyPressed(this::handleEnterKeyPress);
 
     }
 
@@ -152,6 +156,16 @@ public class NewOfferController {
         rafraichirInterfaceUtilisateur();
         background.setStyle("-fx-background-color: #ffffff");
         crossImage.setImage(null);
+    }
+
+    private void handleEnterKeyPress(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                submit();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
