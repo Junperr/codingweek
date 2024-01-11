@@ -52,6 +52,8 @@ public class Offer extends SerializedData {
         return id;
     }
 
+
+
     public Offer(String title, String description, String user, String imagePath, Integer price, String type, Boolean availability, ArrayList<String> Categories) {
         this.id = UUID.randomUUID();
         this.title = title;
