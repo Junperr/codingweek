@@ -8,6 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,7 +20,36 @@ public class LayoutController {
     @FXML
     private Label goToProfile, goToOffers, logOut;
 
+    @FXML
+    private ImageView logout;
+
+
     private final ChangeScene changeScene = new ChangeScene();
+
+    @FXML
+    public void initialize(){
+        logout.setImage(new Image("static/images/logout.png"));
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setBrightness(1.0);
+        logout.setEffect(colorAdjust);
+
+    }
+
+    @FXML
+    public void hoverHandler(){
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setBrightness(0.1);
+        logout.setEffect(colorAdjust);
+        logOut.setStyle("-fx-text-fill: #000000");
+    }
+
+    @FXML
+    public void hoverExitHandler(){
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setBrightness(1.0);
+        logout.setEffect(colorAdjust);
+        logOut.setStyle("-fx-text-fill: #ffffff");
+    }
 
     @FXML
     public void goToProfile() throws IOException {

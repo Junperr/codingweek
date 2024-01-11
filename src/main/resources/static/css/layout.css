@@ -3,3 +3,28 @@
 *{
     -fx-font-family: "Poppins", sans-serif;
 }
+
+.text{
+    -fx-font-size: 15 px;
+
+    -fx-text-fill: white;}
+
+.myprofile:hover{
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+}
+
+.offers:hover{
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+}
+
+.newoffer:hover{
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+}
+
+.logout2:hover{
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+}

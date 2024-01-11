@@ -1,19 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox prefHeight="36.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.LayoutController">
+<HBox prefHeight="36.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.LayoutController">
 
     <children>
-        <ToolBar prefHeight="36.0" prefWidth="1080.0">
-            <items>
-                <Label fx:id="goToProfile" onMouseClicked="#goToProfile" text="myProfile" />
-                <Label fx:id="goToOffers" onMouseClicked="#goToAllOffers" text="Offers" />
-                <Label fx:id="createOffer" onMouseClicked="#goToOffers" text="New Offer" />
-                <Label fx:id="logOut" alignment="TOP_RIGHT" onMouseClicked="#logout" text="Log-out" />
-            </items>
-        </ToolBar>
+      <HBox prefHeight="36.0" prefWidth="1080.0">
+         <children>
+              <ToolBar prefHeight="36.0" prefWidth="996.0" style="-fx-background-color: #FFB5A7;" stylesheets="@../css/layout.css">
+                  <items>
+                  <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="262.0" spacing="10.0">
+                     <children>
+                            <Label fx:id="goToProfile" onMouseClicked="#goToProfile" stylesheets="@../css/layout.css" text="My Profile">
+                           <styleClass>
+                              <String fx:value="text" />
+                              <String fx:value="myprofile" />
+                           </styleClass></Label>
+                            <Label fx:id="goToOffers" onMouseClicked="#goToAllOffers" text="Offers">
+                           <styleClass>
+                              <String fx:value="text" />
+                              <String fx:value="offers" />
+                           </styleClass></Label>
+                            <Label fx:id="createOffer" onMouseClicked="#goToOffers" text="New Offer">
+                           <styleClass>
+                              <String fx:value="text" />
+                              <String fx:value="newoffer" />
+                           </styleClass></Label>
+                     </children>
+                  </HBox>
+                  </items>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+              </ToolBar>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFB5A7;" stylesheets="@../css/layout.css">
+               <children>
+                  <ImageView fx:id="logout" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#logout" onMouseEntered="#hoverHandler" onMouseExited="#hoverExitHandler" pickOnBounds="true" preserveRatio="true">
+                     <styleClass>
+                        <String fx:value="logout" />
+                        <String fx:value="logout2" />
+                     </styleClass></ImageView>
+                      <Label fx:id="logOut" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#logout" onMouseEntered="#hoverHandler" onMouseExited="#hoverExitHandler" prefHeight="22.0" prefWidth="74.0" stylesheets="@../css/layout.css" text="Log Out">
+                     <styleClass>
+                        <String fx:value="text" />
+                        <String fx:value="logout2" />
+                     </styleClass></Label>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
     </children>
 </HBox>
