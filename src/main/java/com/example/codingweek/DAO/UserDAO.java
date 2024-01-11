@@ -136,7 +136,7 @@ public class UserDAO {
             errManager.handleInvalidAddress(address);
             errManager.handleInvalidCity(city);
             errManager.handleInvalidZipCode(zipcode);
-            updatePos(address, zipcode, city, user.userName);
+            updatePos(user.userName, address, city, zipcode);
         }
         catch (Exception e){
             System.out.println(e.getMessage());
