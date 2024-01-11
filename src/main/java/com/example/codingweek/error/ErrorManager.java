@@ -138,7 +138,7 @@ public class ErrorManager {
 
     public void handleInvalidCoins(Integer coins) throws Exception{
         if (coins < 0) {
-            errorMessage = "Not enough coins to order that\n(try to put offers to gain coins)";
+            errorMessage = "Not enough coins to order that,(try to put offers to gain coins)";
         }
         raise();
     }
