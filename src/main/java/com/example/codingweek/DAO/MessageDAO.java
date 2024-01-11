@@ -8,8 +8,8 @@ import java.sql.Timestamp;
 public class MessageDAO {
     public Message newMessage(Timestamp timestamp, String content, String sender, String receiver) {
         Message message = new Message(timestamp, content, sender, receiver);
-        addMessage(Message);
-        return Message;
+        addMessage(message);
+        return message;
     }
 
     public void addMessage(Message message) {
