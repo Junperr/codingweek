@@ -1,6 +1,8 @@
 package com.example.codingweek.javafxSceneHandler;
 
 import com.example.codingweek.Main;
+import com.example.codingweek.controller.AllConvController;
+import com.example.codingweek.controller.LayoutController;
 import com.example.codingweek.controller.ModifyProfileController;
 import com.example.codingweek.controller.MyProfileController;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +46,19 @@ public class ChangeScene {
         modifyProfileController.initData(setTitle);
         modifyProfileController.setStage(modification);
         modifyProfileController.setMainController(mainController);
+        modification.showAndWait();
+    }
+
+    public void changeSceneToMessage(LayoutController layoutController) throws IOException {
+        FXMLLoader loader = loader("static/fxml/allConvos.fxml");
+        Parent root = loader.load();
+
+        Stage modification = new Stage();
+        modification.setScene(new Scene(root));
+
+        AllConvController allConvController = loader.getController();
+        allConvController.setStage(modification);
+        allConvController.setMainController(layoutController);
         modification.showAndWait();
     }
 }

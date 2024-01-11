@@ -1,7 +1,6 @@
 package com.example.codingweek.DAO;
 
 import com.example.codingweek.data.Message;
-import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
 
 import java.sql.Timestamp;

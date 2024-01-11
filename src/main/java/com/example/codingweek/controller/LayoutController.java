@@ -18,7 +18,7 @@ import java.net.URL;
 
 public class LayoutController {
     @FXML
-    private Label goToProfile, goToOffers, logOut;
+    private Label goToProfile, goToOffers, logOut, toMessages;
 
     @FXML
     private ImageView logout;
@@ -71,5 +71,10 @@ public class LayoutController {
     @FXML
     public void goToOffers() throws IOException{
         changeScene.changeSameSceneLabel("static/fxml/form-new-offer.fxml", goToOffers);
+    }
+
+    @FXML
+    public void goToMessages() throws IOException {
+        changeScene.changeSceneToMessage(this);
     }
 }
