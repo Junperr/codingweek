@@ -130,36 +130,24 @@ public class UserDAO {
         ErrorManager errManager = new ErrorManager();
         try {
             errManager.handleCheckPassWord(getUserByPassword(user.userName, pwd));
-            System.out.println(field);
-            System.out.println(newValue);
             switch (field) {
                 case "first name":
-                    System.out.println("firstName");
-                    System.out.println(field);
                     errManager.handleInvalidFirstName(newValue);
                     updateFirstName(user, newValue);
                     break;
                 case "last name":
-                    System.out.println("lastName");
-                    System.out.println(field);
                     errManager.handleInvalidLastName(newValue);
                     updateLastName(user, newValue);
                     break;
                 case "email":
-                    System.out.println("email");
-                    System.out.println(field);
                     errManager.handleInvalidEmail(newValue);
                     updateEmail(user, newValue);
                     break;
                 case "password":
-                    System.out.println("password");
-                    System.out.println(field);
                     errManager.handleInvalidPassword(newValue);
                     updatePassword(user, newValue);
                     break;
                 case "username":
-                    System.out.println("username");
-                    System.out.println(field);
                     errManager.handleInvalidUserName(newValue, getUserByUsername(newValue));
                     updateUsername(user, newValue);
                     break;

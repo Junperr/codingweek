@@ -3,6 +3,7 @@ package com.example.codingweek.controller;
 import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.Main;
 import com.example.codingweek.data.Offer;
+import com.example.codingweek.facade.BigFacade;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -44,14 +45,14 @@ public class OfferViewController extends VBox {
         return this.offerId;
     }
 
-    public void initOfferView(String title, String description, String imagePath, String price, String user, String id){
-        this.offerId = UUID.fromString(id);
-        this.offerTitle.setText(title);
-        this.offerDescription.setText(description);
-        this.offerPrice.setText(price);
-        this.userOffer.setText(user);
+    public void initOfferView(Offer offer){
+        this.offerId = offer.getId();
+        this.offerTitle.setText(offer.getTitle());
+        this.offerDescription.setText(offer.getDescription());
+        this.offerPrice.setText(offer.getPrice().toString());
+        this.userOffer.setText(offer.getUser());
 
-        URL imageUrl = Main.class.getClassLoader().getResource("static/images/" + imagePath);
+        URL imageUrl = Main.class.getClassLoader().getResource("static/images/" + offer.getImagePath());
         if (imageUrl == null) {
             imageUrl = Main.class.getClassLoader().getResource("static/images/default.png");
         }
@@ -63,8 +64,8 @@ public class OfferViewController extends VBox {
 
     public void goToOffer(MouseEvent mouseEvent) throws IOException {
 
-        OfferDAO offerDAO = new OfferDAO();
-        Offer offer = offerDAO.getOfferById(this.offerId);
+        BigFacade bf = new BigFacade();
+        Offer offer = bf.getOfferById(offerId);
 
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/offerPage.fxml");
         FXMLLoader loader = new FXMLLoader(xmlUrl);
@@ -73,7 +74,7 @@ public class OfferViewController extends VBox {
         Stage modification = (Stage) goToOffer.getScene().getWindow();
 
         OfferController offerController = loader.getController();
-        offerController.initOfferPage(offer.getUser(), offer.getAvailability().toString(), offer.getPrice().toString(), offer.getDescription(), offer.getTitle(), offerId);
+        offerController.initOfferPage(offer);
         modification.getScene().setRoot(root);
 
     }

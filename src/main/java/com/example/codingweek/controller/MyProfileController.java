@@ -2,8 +2,10 @@ package com.example.codingweek.controller;
 
 import com.example.codingweek.Main;
 import com.example.codingweek.auth.CurrentUser;
+import com.example.codingweek.data.Offer;
 import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
+import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,21 +53,13 @@ public class MyProfileController {
         offers.getChildren().clear();
 
         DataBase db = DataBase.getInstance();
-        ArrayList<ArrayList<Object>> listOffer = db.fetchAll("select title, description, imagePath, price, user, id from Offers where user=?", currentUser.userName);
+
+        BigFacade bf = new BigFacade();
+        ArrayList<Offer> listOffer = bf.getAllOffers();
         ArrayList<ArrayList<Object>> listOrder = db.fetchAll("select id, cost, seller from Orders where buyer=?", currentUser.userName);
 
-        for (ArrayList<Object> o : listOffer) {
-            String imagePath = (o.get(2) != null) ? o.get(2).toString() : "default.png";
-
-            loadOffersFromDatabase(
-                    o.get(0).toString(),   // title
-                    o.get(1).toString(),   // description
-                    imagePath,             // imagePath
-                    o.get(3).toString(),   // price
-                    o.get(4).toString(),    // user
-                    o.get(5).toString()
-            );
-
+        for (Offer offer : listOffer) {
+            loadOffersFromDatabase(offer);
         }
 
         for (ArrayList<Object> o : listOrder) {
@@ -116,17 +110,17 @@ public class MyProfileController {
         modification.showAndWait();
     }
 
-    public void loadOffersFromDatabase(String title, String description, String imagePath, String price, String user, String id) {
+    public void loadOffersFromDatabase(Offer offer) {
         try {
             URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/offerView.fxml");
             FXMLLoader loader = new FXMLLoader(xmlUrl);
             loader.setLocation(xmlUrl);
-            VBox offer = loader.load();
+            VBox offerVBox = loader.load();
 
 
             OfferViewController offerViewController = loader.getController();
-            offerViewController.initOfferView(title, description, imagePath, price, user, id);
-            offers.getChildren().add(offer);
+            offerViewController.initOfferView(offer);
+            offers.getChildren().add(offerVBox);
 
         } catch (IOException e) {
             throw new RuntimeException(e);

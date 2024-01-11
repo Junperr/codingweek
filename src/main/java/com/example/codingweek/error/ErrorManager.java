@@ -100,7 +100,7 @@ public class ErrorManager {
     }
 
     public void handleInvalidFirstName(String firstName) throws Exception {
-        if (firstName.length() < 3 || firstName.length() > 30) {
+        if (firstName.length() < 3 || firstName.length() > 31) {
             errorMessage = "Your first name must contain between 3 and 30 letters";
         }
         raise();

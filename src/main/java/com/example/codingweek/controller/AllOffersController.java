@@ -4,6 +4,7 @@ import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.Main;
 import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.Offer;
+import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxComponent.ComboPanel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,25 +46,26 @@ public class AllOffersController implements Initializable {
         type.getItems().addAll("Service", "Loan");
         offers.getChildren().clear();
 
-        OfferDAO offerDAO = new OfferDAO();
-        ArrayList<Offer> offers = offerDAO.getOfferAvailableWithoutOwnOffer(CurrentUser.getUser().userName);
-        for (Offer offer: offers) {
+        BigFacade bf = new BigFacade();
+        ArrayList<Offer> offersList = bf.getAllOffers();
+
+        for (Offer offer: offersList) {
             try {
-                loadOffersFromDatabase(offer.getTitle(), offer.getDescription(), offer.getImagePath(), offer.getPrice().toString(), offer.getUser(), offer.getId().toString());
+                loadOffersFromDatabase(offer);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
     }
 
-    public void loadOffersFromDatabase(String title, String description, String imagePath, String price, String user, String id) throws IOException {
+    public void loadOffersFromDatabase(Offer offer) throws IOException {
             URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/offerView.fxml");
             FXMLLoader loader = new FXMLLoader(xmlUrl);
             loader.setLocation(xmlUrl);
-            VBox offer = loader.load();
+            VBox offerVBox = loader.load();
             OfferViewController offerViewController = loader.getController();
-            offerViewController.initOfferView(title, description, imagePath, price, user, id);
-            offers.getChildren().add(offer);
+            offerViewController.initOfferView(offer);
+            offers.getChildren().add(offerVBox);
     }
 
 
@@ -110,7 +112,7 @@ public class AllOffersController implements Initializable {
             loader.setLocation(xmlUrl);
             VBox offerVbox = loader.load();
             OfferViewController offerViewController = loader.getController();
-            offerViewController.initOfferView(offer.getTitle(), offer.getDescription(), offer.getImagePath(), offer.getPrice().toString(), offer.getUser(), offer.getId().toString());
+            offerViewController.initOfferView(offer);
             this.offers.getChildren().add(offerVbox);
         }
     }

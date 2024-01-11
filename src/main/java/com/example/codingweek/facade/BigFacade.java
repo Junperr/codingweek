@@ -27,6 +27,10 @@ public class BigFacade {
         return offerDAO.getOfferById(id);
     }
 
+    public ArrayList<Offer> getAllOffers() {
+        return offerDAO.getAllOffers();
+    }
+
     public void createNewUser(String firstName, String lastName, String userName, String email, String password, String address, String city, String zipCode) throws Exception{
         userDAO.newUser(firstName, lastName, userName, email, password, address, city, zipCode);
     }
