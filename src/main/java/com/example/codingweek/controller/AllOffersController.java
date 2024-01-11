@@ -46,27 +46,13 @@ public class AllOffersController implements Initializable {
         offers.getChildren().clear();
 
         BigFacade bf = new BigFacade();
-        ArrayList<Offer> offersList = bf.getAllOffers();
 
-        for (Offer offer: offersList) {
-            try {
-                loadOffersFromDatabase(offer);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            updateVBoxContent(bf.getOffersWithFilters(null, null, null, null, null));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
-
-    public void loadOffersFromDatabase(Offer offer) throws Exception {
-            URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/offerView.fxml");
-            FXMLLoader loader = new FXMLLoader(xmlUrl);
-            loader.setLocation(xmlUrl);
-            VBox offerVBox = loader.load();
-            OfferViewController offerViewController = loader.getController();
-            offerViewController.initOfferView(offer);
-            offers.getChildren().add(offerVBox);
-    }
-
 
     @FXML
     public void saveFilters(MouseEvent mouseEvent) throws Exception {

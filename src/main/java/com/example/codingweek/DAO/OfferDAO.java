@@ -4,12 +4,11 @@ import com.example.codingweek.data.Offer;
 import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class OfferDAO {
+
+    private final DataBase db = DataBase.getInstance();
 
     public Offer newOffer(String title, String description, String imagePath, Integer price, String type, ArrayList<String> Categories) {
         Offer offer = new Offer(title, description, User.getInstance().userName, imagePath, price, type, true, Categories);
@@ -18,7 +17,6 @@ public class OfferDAO {
     }
 
     public void addOffer(Offer offer) {
-        DataBase db = DataBase.getInstance();
         db.exec("INSERT INTO Offers (id,title, description, price, type, user, availability) VALUES (?, ?, ?, ?, ?, ?, 1)",
                 offer.getId(),
                 offer.getTitle(),
@@ -33,7 +31,6 @@ public class OfferDAO {
     }
 
     public Offer getOfferById(UUID id) {
-        DataBase db = DataBase.getInstance();
         HashMap<String, Object> offerMap = db.fetchOneMap("SELECT * FROM Offers WHERE id = ?", id);
         ArrayList<ArrayList<Object>> categories = db.fetchAll("SELECT category FROM Categories WHERE offer = ?", id);
         ArrayList<String> categoriesString = new ArrayList<>();
@@ -52,7 +49,6 @@ public class OfferDAO {
     }
 
     public ArrayList<Offer> getOfferAvailableWithoutOwnOffer(String currentUserName) {
-        DataBase db = DataBase.getInstance();
         ArrayList<HashMap<String, Object>> offerMap = db.fetchAllMap("SELECT * FROM Offers join Users U on U.userName = Offers.user WHERE userName != ? and availability != 0", currentUserName);
 
         ArrayList<HashMap<String, Object>> categories = db.fetchAllMap("SELECT category FROM Categories");
@@ -82,17 +78,11 @@ public class OfferDAO {
 
 
     public ArrayList<Offer> getAllOffers() {
-        DataBase db = DataBase.getInstance();
         ArrayList<HashMap<String, Object>> offerMap = db.fetchAllMap("SELECT * FROM Offers");
-        ArrayList<HashMap<String, Object>> categories = db.fetchAllMap("SELECT category FROM Categories");
 
         ArrayList<Offer> offers = new ArrayList<>();
 
         for (HashMap<String, Object> offer : offerMap) {
-            ArrayList<String> categoriesString = new ArrayList<>();
-            for (HashMap<String, Object> category : categories) {
-                categoriesString.add(category.get("category").toString());
-            }
             offers.add(new Offer(UUID.fromString(offer.get("id").toString()),
                     offer.get("title").toString(),
                     offer.get("type").toString(),
@@ -101,9 +91,19 @@ public class OfferDAO {
                     (offer.get("imagePath") != null) ? offer.get("imagePath").toString() : "default.png",
                     Integer.parseInt(offer.get("price").toString()),
                     Boolean.parseBoolean(offer.get("availability").toString()),
-                    categoriesString));
+                    getOfferCategories(offer)));
         }
         return offers;
+    }
+
+    public ArrayList<String> getOfferCategories(Map<String,Object> offer) {
+
+        ArrayList<HashMap<String, Object>> categoriesMap = db.fetchAllMap("SELECT Category FROM Categories Where offer = ?", offer.get("id").toString());
+        ArrayList<String> categories = new ArrayList<>();
+        for (HashMap<String, Object> category : categoriesMap) {
+            categories.add(category.get("category").toString());
+        }
+        return categories;
     }
 
     public Map<String, Object> getFilters(String type, String zipCode, String priceMin, String priceMax, ArrayList<String> categories) {
@@ -120,7 +120,6 @@ public class OfferDAO {
     public ArrayList<Offer> getOffersWithFilters(String type, String zipCode, String priceMin, String priceMax, ArrayList<String> Selectedcategories) {
         Map<String, Object> args = getFilters(type, zipCode, priceMin, priceMax, Selectedcategories);
 
-        DataBase db = DataBase.getInstance();
         var query = "select * from Offers as o join Categories as c on c.offer = o.id join Users u on o.user = u.userName ";
         if (!args.isEmpty()) {
             query += "where";
@@ -171,10 +170,8 @@ public class OfferDAO {
         ArrayList<Offer> offers = new ArrayList<>();
         ArrayList<String> categoriesString = new ArrayList<>();
         for (HashMap<String, Object> offer : offerMap) {
-            ArrayList<HashMap<String, Object>> categories = db.fetchAllMap("SELECT category FROM Categories where offer= ?", offer.get("id"));
-            for (HashMap<String, Object> category : categories) {
-                categoriesString.add(category.get("category").toString());
-            }
+            System.out.println(offer.get("id"));
+
             offers.add(new Offer(UUID.fromString(offer.get("id").toString()),
                     offer.get("title").toString(),
                     offer.get("type").toString(),
@@ -183,7 +180,7 @@ public class OfferDAO {
                     (offer.get("imagePath") != null) ? offer.get("imagePath").toString() : "default.png",
                     Integer.parseInt(offer.get("price").toString()),
                     Boolean.parseBoolean(offer.get("availability").toString()),
-                    categoriesString));
+                    getOfferCategories(offer)));
         }
         return offers;
     }
