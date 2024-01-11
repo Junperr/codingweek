@@ -187,6 +187,10 @@ public class UserDAO {
         CurrentUser.logUser(user);
     }
 
+    public void updateCoins(User user, Integer newValue){
+        db.exec("UPDATE Users SET coins = ? WHERE username = ?", newValue, user.userName);
+    }
+
     public void updateUsername(User user, String newValue) {
         db.exec("UPDATE Users SET username = ? WHERE username = ?", newValue, user.userName);
         db.exec("UPDATE Offers SET user = ? WHERE user = ?", newValue, user.userName);

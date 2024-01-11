@@ -41,7 +41,7 @@ public class OrderViewController {
         Parent root = loader.load();
 
         Stage modification = new Stage();
-        modification.setTitle("Give a feedback");
+        modification.setTitle("Give a reviews");
         modification.setScene(new Scene(root));
 
         ProfessorController professorController = loader.getController();

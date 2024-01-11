@@ -2,7 +2,9 @@ package com.example.codingweek.DAO;
 
 import com.example.codingweek.data.Offer;
 import com.example.codingweek.data.Order;
+import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
+import com.example.codingweek.error.ErrorManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,6 +63,36 @@ public class OrderDAO {
                 (Integer) orderMap.get("cost"),
                 orderMap.get("buyer").toString(),
                 orderMap.get("seller").toString());
+    }
+
+
+
+    public void passOrder(UUID offerId, String pwd, User user) throws Exception {
+        ErrorManager errManager = new ErrorManager();
+        UserDAO userDAO = new UserDAO();
+        OfferDAO offerDAO = new OfferDAO();
+
+        try {
+            errManager.handleCheckPassWord(userDAO.getUserByPassword(user.userName, pwd));
+
+            Offer offer = offerDAO.getOfferById(offerId);
+            errManager.handleInvalidCoins(user.coins - offer.getPrice());
+            User seller = userDAO.getUserByUsername(offer.getUser());
+            userDAO.updateCoins(user, user.coins - offer.getPrice());
+            userDAO.updateCoins(seller, seller.coins + offer.getPrice());
+
+            Order order = newOrder(offerId,offer.getPrice(),user.userName,seller.userName);
+            addOrder(order);
+
+            offerDAO.updateAvailability(offer);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            throw e;
+        }
+
+
+
     }
 
 }
