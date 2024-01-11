@@ -81,7 +81,7 @@ public class ModifyProfileController {
                         return;
                     }
                 case "password":
-                    if (newData.length() < 8 || newData.length() > 60) {
+                    if (!(newData.length() < 8 || newData.length() > 60)) {
                         currentUser.password = newData;
                         db.exec("update Users set password=? where userName=?", newData, currentUser.userName);
                         break;
@@ -127,7 +127,7 @@ public class ModifyProfileController {
             Stage modification = (Stage) saveButton.getScene().getWindow();
             modification.setScene(new Scene(root));
 
-            myProfileController.updateProfile();
+            myProfileController.initialize();
         } else {
             errorLabel.setText("Wrong current password");
         }

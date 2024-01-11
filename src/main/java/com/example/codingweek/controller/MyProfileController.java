@@ -4,22 +4,17 @@ import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
 
-public class MyProfileController implements Initializable {
-    @FXML
-    private VBox offerToAdd, orderToAdd, offers, orders;
+public class MyProfileController {
     @FXML
     private HBox menuBar;
     @FXML
@@ -27,8 +22,8 @@ public class MyProfileController implements Initializable {
     @FXML
     private Label userNameBig, balance, userName, password, lastName, firstName, email, address, zip, city;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    public void initialize() {
         User currentUser = CurrentUser.getUser();
         userNameBig.setText(currentUser.userName);
         balance.setText(String.valueOf(currentUser.coins));
@@ -149,19 +144,4 @@ public class MyProfileController implements Initializable {
         modifyAddressController.setMainController(this);
         modification.showAndWait();
     }
-
-    public void updateProfile() {
-        User currentUser = User.getInstance();
-        userNameBig.setText(currentUser.userName);
-        balance.setText(String.valueOf(currentUser.coins));
-        userName.setText(currentUser.userName);
-        password.setText(currentUser.password);
-        lastName.setText(currentUser.lastName);
-        firstName.setText(currentUser.firstName);
-        email.setText(currentUser.email);
-        address.setText(currentUser.address);
-        zip.setText(currentUser.zipCode);
-        city.setText(currentUser.city);
-    }
-
 }
