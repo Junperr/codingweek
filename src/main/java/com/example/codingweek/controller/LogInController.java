@@ -1,13 +1,9 @@
 package com.example.codingweek.controller;
 
 import com.example.codingweek.Main;
-import com.example.codingweek.data.User;
-import com.example.codingweek.database.DataBase;
 import com.example.codingweek.facade.BigFacade;
+import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -19,11 +15,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class LogInController {
@@ -31,21 +24,20 @@ public class LogInController {
     @FXML
     private Button loginButton, registerButton;
     @FXML
-    private TextField userNameTextField;
+    private TextField userNameTextField, visibleTextField;
     @FXML
     private PasswordField passwordTextField;
-    @FXML
-    private TextField visibleTextField;
     @FXML
     private Label errorLabel;
     @FXML
     private ImageView eyeImageView;
     @FXML
     private Pane centeredPane;
-
     @FXML
     private VBox centeredVBox;
+
     private boolean passwordVisible = false;
+    private final ChangeScene changeScene = new ChangeScene();
 
     @FXML
     private void initialize() {
@@ -66,12 +58,7 @@ public class LogInController {
         try {
             bf.logUser(userNameTextField.getText(), passwordTextField.getText());
 
-            FXMLLoader loader = new FXMLLoader();
-            URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/allOffers.fxml");
-            loader.setLocation(xmlUrl);
-            Parent root = loader.load();
-            Stage modification = (Stage) loginButton.getScene().getWindow();
-            modification.setScene(new Scene(root));
+            changeScene.changeSameSceneButton("static/fxml/allOffers.fxml", loginButton);
 
         } catch (Exception e) {
             errorLabel.setText(e.getMessage());
@@ -80,12 +67,7 @@ public class LogInController {
     }
 
     public void register() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-new-account.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
-        Stage modification = (Stage) registerButton.getScene().getWindow();
-        modification.setScene(new Scene(root));
+        changeScene.changeSameSceneButton("static/fxml/form-new-account.fxml", registerButton);
     }
 
     @FXML
@@ -104,7 +86,6 @@ public class LogInController {
 
         updateEyeImage();
     }
-
 
     private void updateEyeImage() {
         String imagePath = passwordVisible ? "static/images/eye.png" : "static/images/closedeye.png";
