@@ -49,7 +49,7 @@ public class ErrorManager {
     }
 
     public void handleInvalidEmail(String email) throws Exception {
-        Pattern emailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+        Pattern emailPattern = Pattern.compile("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])\n");
 
         if (!emailPattern.matcher(email).find()) {
             errorMessage = "Please enter a valid e-mail address";
@@ -58,29 +58,37 @@ public class ErrorManager {
     }
 
     public void handleInvalidPassword(String password) throws Exception {
-        if (password.length() < 8 || password.length() > 60) {
-            errorMessage = "Your password must contain between 8 and 60 letters";
+        Pattern pwPattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$@!%&*?])[A-Za-z\\d#$@!%&*?]{8,60}$");
+
+        if (!pwPattern.matcher(password).find()) {
+            errorMessage = "Your password must contain at least, 1 uppercase and 1 lowercase characters, 1 digit, 1 special character and be between 8 and 60 letters long.";
         }
         raise();
     }
 
     public void handleInvalidAddress(String address) throws Exception {
-        if (address.length() > 200) {
+        Pattern addressPattern = Pattern.compile("^([a-zA-Z\\u0080-\\u024F\\d]{1,50}(?:. |-| |')){0,3}[a-zA-Z\\u0080-\\u024F]{0,50}$");
+
+        if (!addressPattern.matcher(address).find()) {
             errorMessage = "Your address must be less than 200 character long";
         }
         raise();
     }
 
     public void handleInvalidCity(String city) throws Exception {
-        if (city.length() > 100) {
+        Pattern cityPattern = Pattern.compile("^([a-zA-Z\\u0080-\\u024F]{1,50}(?:. |-| |')){0,3}[a-zA-Z\\u0080-\\u024F]{0,50}$");
+
+        if (!cityPattern.matcher(city).find()) {
             errorMessage = "Your city name must be less than 100 character long";
         }
         raise();
     }
 
     public void handleInvalidZipCode(String zipCode) throws Exception {
-        if (zipCode.length() != 5) {
-            errorMessage = "Your zipcode must be of length 5";
+        Pattern zipCodePattern = Pattern.compile("^(F-)?\\d{5}");
+
+        if (!zipCodePattern.matcher(zipCode).find()) {
+            errorMessage = "You need to enter a valid zip code";
         }
         raise();
     }
@@ -100,15 +108,21 @@ public class ErrorManager {
     }
 
     public void handleInvalidFirstName(String firstName) throws Exception {
-        if (firstName.length() < 3 || firstName.length() > 31) {
-            errorMessage = "Your first name must contain between 3 and 30 letters";
+        Pattern firstNamePattern = Pattern.compile("^([a-zA-Z\\u0080-\\u024F]{3,20}(?:. |-| |')){0,2}[a-zA-Z\\u0080-\\u024F]{3,20}$");
+
+
+        if (!firstNamePattern.matcher(firstName).find()) {
+            errorMessage = "Your first name must contain at least 3 letters";
         }
         raise();
     }
 
     public void handleInvalidLastName(String lastName) throws Exception {
-        if (lastName.length() < 3 || lastName.length() > 30) {
-            errorMessage = "Your last name must contain between 3 and 30 letters";
+        Pattern lastNamePattern = Pattern.compile("^([a-zA-Z\\u0080-\\u024F]{3,20}(?:. |-| |')){0,2}[a-zA-Z\\u0080-\\u024F]{3,20}$");
+
+
+        if (!lastNamePattern.matcher(lastName).find()) {
+            errorMessage = "Your last name must contain at least 3 letters";
         }
         raise();
     }
