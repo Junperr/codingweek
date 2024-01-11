@@ -161,17 +161,18 @@ public class DataBase {
                 exec("create table if not exists Messages (id UUID PRIMARY KEY, timestamp Integer, content TEXT, sender TEXT, receiver TEXT, seen TEXT)");
 
                 // Insert data into Users
-                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('', '', 'admin', '', '', '', '', '', '100000000')");
-                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Anna', 'Galkowski', 'annaG', 'anna.galkowski@telecomnancy.net', 'address1', '33000', 'city1', '12345678', '1000')");
-                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Joel', 'Duhem', 'joelD', 'joel.duhem@telecomnancy.net', 'address2', '59000', 'city1', '66666666', '0')");
-                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Ugo', 'Gosso', 'ugoG', 'ugo.gosso@telecomnancy.net', 'address3', '25000', 'city1', '00000000', '9000')");
-                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('Julie', 'Zhen', 'julieZ', 'julie.zhen@telecomnancy.net', 'address4', '75000', 'city1', '88888888', '5000')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('', '', 'admin', '', '', '', '', '', '100000000', '5')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Anna', 'Galkowski', 'annaG', 'anna.galkowski@telecomnancy.net', 'address1', '33000', 'city1', '12345678', '1000', '-1')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Joel', 'Duhem', 'joelD', 'joel.duhem@telecomnancy.net', 'address2', '59000', 'city1', '66666666', '0', '1')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Ugo', 'Gosso', 'ugoG', 'ugo.gosso@telecomnancy.net', 'address3', '25000', 'city1', '00000000', '9000', '4')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Julie', 'Zhen', 'julieZ', 'julie.zhen@telecomnancy.net', 'address4', '75000', 'city1', '88888888', '5000', '-1')");
 
                 // Insert data into Offers
                 exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('6cc0106a-8d73-4ead-935e-971d00196e6f', 'Pelle à prêter', 'Loan', 'Une belle pelle à prêter', 'pelle.jpg', 10, 'joelD', 'true')");
-                exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('337bc42e-1a1a-4237-a45d-a66d3da4ed03', 'Machine à café à prêter', 'Loan', 'Une belle machine à café à prêter', 'pelle.jpg', 100, 'joelD', 'false')");
+                exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('337bc42e-1a1a-4237-a45d-a66d3da4ed03', 'Machine à café à prêter', 'Loan', 'Une belle machine à café à prêter', 'pelle.jpg', 30, 'joelD', 'false')");
                 exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('cfe6e949-e07f-4b87-a0e6-0715db4da09a', 'Machine à thé à prêter', 'Loan', 'Une belle machine à thé à prêter', 'pelle.jpg', 50, 'joelD', 'true')");
-                exec("INSERT INTO Offers (id, title, type, description, price, user, availability) VALUES ('cfe6e949-e07f-4b87-a0e6-0715db4da860', 'Cours particulier', 'Service', 'Donne cours de maths pas cher', 200,'annaG', 'true')");
+                exec("INSERT INTO Offers (id, title, type, description, price, user, availability) VALUES ('f3925355-d605-4f40-b012-829adb56738c', 'Cours particulier', 'Service', 'Donne cours de maths pas cher', 200,'annaG', 'true')");
+                exec("INSERT INTO Offers (id, title, type, description, price, user, availability) VALUES ('c307e79f-de27-4803-b3f4-48007300a43f', 'Cours de natation', 'Service', 'Donne cours de natation pas cher', 50,'ugoG', 'false')");
 
                 // Insert data into Categories
                 exec("INSERT INTO Categories (offer, category) VALUES ('6cc0106a-8d73-4ead-935e-971d00196e6f', 'Jardinage')");
@@ -179,18 +180,23 @@ public class DataBase {
                 exec("INSERT INTO Categories (offer, category) VALUES ('6cc0106a-8d73-4ead-935e-971d00196e6f', 'Outils')");
                 exec("INSERT INTO Categories (offer, category) VALUES ('337bc42e-1a1a-4237-a45d-a66d3da4ed03', 'Electroménager')");
                 exec("INSERT INTO Categories (offer, category) VALUES ('cfe6e949-e07f-4b87-a0e6-0715db4da09a', 'Electroménager')");
+                exec("INSERT INTO Categories (offer, category) VALUES" +
+                        "('f3925355-d605-4f40-b012-829adb56738c', 'Cours')," +
+                        "('f3925355-d605-4f40-b012-829adb56738c', 'Maths')," +
+                        "('c307e79f-de27-4803-b3f4-48007300a43f', 'Cours'),"+
+                        "('c307e79f-de27-4803-b3f4-48007300a43f', 'Natation')");
+
 
                 // Insert data into Orders
-                exec("INSERT INTO Orders (id, cost, buyer, seller) VALUES " +
-                        "('cfe6e949-e07f-4b87-a0e6-0715db4da800', 50, 'ugoG', 'joelD')," +
-                        "('cfe6e949-e07f-4b87-a0e6-0715db4da801', 30, 'annaG', 'joelD')," +
-                        "('cfe6e949-e07f-4b87-a0e6-0715db4da802', 80, 'julieZ', 'joelD')");
+                exec("INSERT INTO Orders (id, offer, cost, buyer, seller) VALUES " +
+                        "('fff862f5-dbd3-4c41-ac9a-b778fd2ed222', '337bc42e-1a1a-4237-a45d-a66d3da4ed03', 30, 'annaG', 'joelD')," +
+                        "('ec8f59cc-15df-4207-ab46-12789fc97e8d', 'c307e79f-de27-4803-b3f4-48007300a43f', 50, 'joelD', 'ugoG')");
 
                 // Insert data into Evals
-                exec("INSERT INTO Evals (id, eval, writer, description, order) VALUES " +
-                        "('cfe6e949-e07f-4b87-a0e6-0715db4da900', 5, 'ugoG', 'Great service!', 'cfe6e949-e07f-4b87-a0e6-0715db4da800')," +
-                        "('cfe6e949-e07f-4b87-a0e6-0715db4da901', 4, 'annaG', 'Good transaction', 'cfe6e949-e07f-4b87-a0e6-0715db4da801')," +
-                        "('cfe6e949-e07f-4b87-a0e6-0715db4da902', 5, 'julieZ', 'Excellent seller', 'cfe6e949-e07f-4b87-a0e6-0715db4da802')");
+                exec("INSERT INTO Reviews (orderId, eval, writer, description) VALUES " +
+                        "('fff862f5-dbd3-4c41-ac9a-b778fd2ed222', 1, 'annaG', 'Great service hahahaha...')," +
+                        "('ec8f59cc-15df-4207-ab46-12789fc97e8d', 4, 'joelD', 'Had fun !')");
+
 
 
                 // Fetch data from Users
