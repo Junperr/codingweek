@@ -19,27 +19,29 @@ And propose or request services. In exchange of a virtual money called Florain.
 
   - Tuesday :
     + Log-in & Log-out OK
-  1. Simple offer 
-  2. Simple research 
-  3. FeedBack evaluation 
+  1. Simple offer OK
+  2. Simple research OK
+  3. FeedBack evaluation OK
 
 - Wednesday : 
-    + Creation offer
-    + Offer Page
-    + Back of research offer
-    + FeedBack evaluation
-  1. Command history 
+    + Creation offer OK
+    + Offer Page OK
+    + Back of research offer OK
+    + FeedBack evaluation OK
+  1. Command history OK
       - passed
       - received
-  2. Command validation
-  3. Uploaded offer
+  2. Command validation OK
+  3. Uploaded offer OK
       - disponible
       - passed
   4. Complex offer
 
 - Thursday : 
+  + Complex offer
   1. Chat
   2. Complex research
+
 
 - Friday : 
   1. Test
@@ -52,4 +54,4 @@ And propose or request services. In exchange of a virtual money called Florain.
 - Anna Galkowski
 - Julie Zhen
 - Aristide Duhem
-- Gosso Ugo 
+- Ugo Gosso 
