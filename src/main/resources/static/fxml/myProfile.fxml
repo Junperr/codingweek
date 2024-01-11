@@ -10,8 +10,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.MyProfileController">
+<AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.MyProfileController">
     <fx:include fx:id="menuBar" source="layout.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    <VBox layoutY="37.0" prefHeight="683.0" prefWidth="1080.0">
       <children>
@@ -152,39 +155,36 @@
                      </HBox>
                   </content>
                </TitledPane>
-               <TitledPane animated="false" text="Your Offers">
-                  <content>
-                     <VBox fx:id="offerToAdd" prefHeight="623.0" prefWidth="1080.0">
-                        <children>
-                           <ScrollPane fx:id="scrollPane" prefHeight="602.0" prefWidth="1080.0">
-                              <content>
-                                 <VBox fx:id="offers" prefHeight="567.0" prefWidth="1078.0">
-                                    <padding>
-                                       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                    </padding>
-                                 </VBox>
-                              </content>
-                           </ScrollPane>
-                        </children>
-                     </VBox>
-                  </content>
-               </TitledPane>
              <TitledPane animated="false" prefHeight="466.0" prefWidth="600.0" text="Your Orders">
-                  <content>
-                     <VBox fx:id="offerToAdd1" prefHeight="623.0" prefWidth="1080.0">
-                        <children>
-                           <ScrollPane fx:id="scrollPane1" prefHeight="602.0" prefWidth="1080.0">
-                              <content>
-                                 <VBox fx:id="offers1" prefHeight="567.0" prefWidth="1078.0">
-                                    <padding>
-                                       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                    </padding>
-                                 </VBox>
-                              </content>
-                           </ScrollPane>
-                        </children>
-                     </VBox>
-                  </content></TitledPane>
+              <VBox fx:id="orderToAdd" layoutY="135.0" prefHeight="582.0" prefWidth="1080.0">
+                 <children>
+                    <ScrollPane prefHeight="602.0" prefWidth="1080.0">
+                       <content>
+                          <VBox fx:id="orders" prefHeight="567.0" prefWidth="1078.0">
+                             <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                             </padding>
+                          </VBox>
+                       </content>
+                    </ScrollPane>
+                 </children>
+              </VBox>
+           </TitledPane>
+               <TitledPane animated="false" text="Your Offers">
+                  <VBox fx:id="offerToAdd" layoutY="135.0" prefHeight="582.0" prefWidth="1080.0">
+                     <children>
+                        <ScrollPane prefHeight="602.0" prefWidth="1080.0">
+                           <content>
+                              <VBox fx:id="offers" prefHeight="567.0" prefWidth="1078.0">
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+               </TitledPane>
            </panes>
          </Accordion>
       </children>

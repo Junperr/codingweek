@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="168.0" prefWidth="394.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.ProfessorController">
+
+    <children>
+        <Button fx:id="saveButton" layoutX="176.0" layoutY="138.0" mnemonicParsing="false" onMouseClicked="#submit" text="Save" />
+        <TextField fx:id="markTextField" layoutX="120.0" layoutY="18.0" />
+        <TextArea fx:id="descriptionTextArea" layoutX="120.0" layoutY="18.0" />
+        <PasswordField fx:id="PW" layoutX="119.0" layoutY="110.0" />
+        <Label layoutX="151.0" layoutY="95.0" text="Enter your password">
+            <font>
+                <Font size="10.0" />
+            </font>
+        </Label>
+        <Label fx:id="errorLabel" layoutX="181.0" layoutY="115.0">
+            <font>
+                <Font size="9.0" />
+            </font>
+        </Label>
+      <Label layoutX="129.0" layoutY="2.0" text="Please give your rate (0-5)" />
+        <Label layoutX="129.0" layoutY="2.0" text="If you want you can leave a short description (500 characters)" />
+    </children>
+
+</AnchorPane>

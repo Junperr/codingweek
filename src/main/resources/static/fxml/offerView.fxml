@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox fx:id="offer" prefHeight="126.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.OfferViewController">
         <children>
-            <VBox prefHeight="128.0" prefWidth="558.0">
+            <VBox fx:id="goToOffer" onMouseClicked="#goToOffer" prefHeight="128.0" prefWidth="558.0">
                 <children>
-                    <Label fx:id="offerTitle" prefHeight="36.0" prefWidth="382.0" text="Titre" />
+                    <Label fx:id="offerTitle" prefHeight="36.0" prefWidth="382.0" text="Titre">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin></Label>
                     <HBox prefHeight="100.0" prefWidth="200.0">
                         <children>
-                  <ImageView fx:id="imageOffer" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageOffer" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin></ImageView>
                             <GridPane prefHeight="88.0" prefWidth="439.0">
                                 <columnConstraints>
                                     <ColumnConstraints />
@@ -37,10 +48,16 @@
                                     <Label fx:id="offerPrice" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                         <Label text="User :" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                 </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
                             </GridPane>
                         </children>
                     </HBox>
                 </children>
             </VBox>
         </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
     </VBox>
