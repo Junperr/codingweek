@@ -162,7 +162,6 @@ public class OfferDAO {
             }
         } else query = "select * from offers";
 
-
         ArrayList<HashMap<String, Object>> offerMap = db.fetchAllMap(query);
 
         ArrayList<Offer> offers = new ArrayList<>();

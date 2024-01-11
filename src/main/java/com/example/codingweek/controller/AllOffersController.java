@@ -2,7 +2,6 @@ package com.example.codingweek.controller;
 
 import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.Main;
-import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.Offer;
 import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxComponent.ComboPanel;
