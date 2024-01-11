@@ -1,6 +1,7 @@
 package com.example.codingweek.controller;
 
 import com.example.codingweek.auth.CurrentUser;
+import com.example.codingweek.data.Offer;
 import com.example.codingweek.data.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,15 +39,18 @@ public class OfferController {
 //    }
 
     // will use init data instead of this one
-    public void initOfferPage(String userPageOffer, String availabilityPageOffer, String pricePageOffer, String descriptionPageOffer, String titlePageOffer, UUID offerId){
-        this.offerPageUser.setText(userPageOffer);
-        this.offerPageAvailability.setText(availabilityPageOffer);
-        this.offerPagePrice.setText(pricePageOffer);
-        this.offerPageDescription.setText(descriptionPageOffer);
-        this.offerPageTitle.setText(titlePageOffer);
-        this.offerId = offerId;
-        this.cost = Integer.parseInt(pricePageOffer);
-        this.sellerId = userPageOffer;
+    public void initOfferPage(Offer offer){
+
+        String availibility = offer.getAvailability() ? "Available" : "Unavailable";
+
+        this.offerPageUser.setText(CurrentUser.getUser().userName);
+        this.offerPageAvailability.setText(availibility);
+        this.offerPagePrice.setText(offer.getPrice().toString());
+        this.offerPageDescription.setText(offer.getDescription());
+        this.offerPageTitle.setText(offer.getTitle());
+        this.offerId = offer.getId();
+        this.cost = offer.getPrice();
+        this.sellerId = offer.getUser();
     }
 
     @FXML
