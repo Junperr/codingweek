@@ -59,6 +59,10 @@ public class OfferDAO {
             for (HashMap<String, Object> category : categories) {
                 categoriesString.add(category.get("category").toString());
             }
+
+            int availabilityInt = Integer.parseInt(offer.get("availability").toString());
+            String availabilityStatus = (availabilityInt == 1) ? "true" : "false";
+
             offers.add(new Offer(UUID.fromString(offer.get("id").toString()),
                     offer.get("title").toString(),
                     offer.get("type").toString(),
@@ -66,7 +70,7 @@ public class OfferDAO {
                     offer.get("description").toString(),
                     (offer.get("imagePath") != null) ? offer.get("imagePath").toString() : "default.png",
                     Integer.parseInt(offer.get("price").toString()),
-                    Boolean.parseBoolean(offer.get("availability").toString()),
+                    Boolean.parseBoolean(availabilityStatus),
                     categoriesString));
         }
         return offers;
