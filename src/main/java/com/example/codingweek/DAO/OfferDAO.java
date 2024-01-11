@@ -2,7 +2,6 @@ package com.example.codingweek.DAO;
 
 import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.Offer;
-import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
 
 import java.util.*;
@@ -29,6 +28,10 @@ public class OfferDAO {
         for (String theme : offer.getCategories()) {
             db.exec("INSERT INTO Categories (offer, category) VALUES (?, ?)", offer.getId(), theme);
         }
+    }
+
+    public void updateAvailability(Offer offer){
+        db.exec("UPDATE Offers SET availability = ? WHERE id = ?", "false", offer.getId());
     }
 
     public Offer getOfferById(UUID id) {

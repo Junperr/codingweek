@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<VBox fx:id="order" prefHeight="126.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.OrderViewController">
+<VBox fx:id="order" prefHeight="126.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.OrderViewController">
     <children>
         <VBox fx:id="feedback" onMouseClicked="#getFeedback" prefHeight="128.0" prefWidth="558.0">
             <children>
-                <Label fx:id="commandUUID" prefHeight="36.0" prefWidth="382.0" text="Titre">
+                <Label fx:id="commandUUID" prefHeight="36.0" prefWidth="382.0" stylesheets="@../css/orderView.css" text="Titre">
                     <font>
                         <Font name="System Bold" size="22.0" />
                     </font>
                     <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </VBox.margin></Label>
+                    </VBox.margin>
+               <styleClass>
+                  <String fx:value="text" />
+                  <String fx:value="titre" />
+               </styleClass></Label>
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <GridPane prefHeight="88.0" prefWidth="439.0">
@@ -38,7 +43,7 @@
                             <children>
                                 <Label prefHeight="18.0" prefWidth="58.0" text="Seller :" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <Label prefHeight="19.0" prefWidth="69.0" text="Description :" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                <Label fx:id="sellerLabel" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                                <Label fx:id="sellerLabel" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                 <Label fx:id="costLabel" layoutX="84.0" layoutY="7.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                             </children>
                             <HBox.margin>

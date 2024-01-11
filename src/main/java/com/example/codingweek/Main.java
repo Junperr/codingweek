@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Main extends Application {
     @Override
@@ -19,10 +20,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
         DataBase dataBase = DataBase.getInstance();
-        dataBase.printData(dataBase.fetchAll("SELECT * FROM Offers"));
-        dataBase.printData(dataBase.fetchAll("SELECT * FROM Users"));
-        dataBase.printData(dataBase.fetchAll("SELECT * FROM Orders"));
-    }
+        }
 
     public static void main(String[] args) {
         launch();

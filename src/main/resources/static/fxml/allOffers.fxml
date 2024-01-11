@@ -48,11 +48,11 @@
          </ToolBar>
       </children>
    </VBox>
-   <VBox fx:id="offerToAdd" layoutY="161.0" prefHeight="556.0" prefWidth="1080.0">
+   <VBox fx:id="offerToAdd" layoutY="161.0" prefHeight="556.0" prefWidth="1080.0" >
       <children>
-         <ScrollPane fx:id="scrollPane" prefHeight="602.0" prefWidth="1080.0">
+         <ScrollPane fx:id="scrollPane" prefHeight="602.0" prefWidth="1080.0" styleClass="scrollpane" stylesheets="@../css/allOffers.css" >
             <content>
-               <VBox fx:id="offers" prefHeight="514.0" prefWidth="1078.0">
+               <VBox fx:id="offers" prefHeight="514.0" prefWidth="1078.0" styleClass="background" stylesheets="@../css/allOffers.css">
                   <padding>
                      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                   </padding>

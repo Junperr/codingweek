@@ -18,6 +18,9 @@ import java.util.StringJoiner;
 import java.util.UUID;
 
 public class OfferViewController extends VBox {
+
+    @FXML
+    public ImageView illu;
     @FXML
     public VBox offer;
     @FXML
@@ -35,6 +38,8 @@ public class OfferViewController extends VBox {
     public Label userOffer;
     public VBox goToOffer;
     public Label zipCode;
+
+
 
     private UUID offerId;
 
@@ -55,19 +60,12 @@ public class OfferViewController extends VBox {
         //access to user's zipCode
         BigFacade bf = new BigFacade();
         this.zipCode.setText(bf.getUserByUsername(offer.getUser()).zipCode);
+        this.offerCategory.setText(offer.categoryString());
 
-        StringJoiner categories = new StringJoiner(", ");
-        for (String str : offer.getCategories()) {
-            categories.add(str);
-        }
-        this.offerCategory.setText(categories.toString());
-
-        URL imageUrl = Main.class.getClassLoader().getResource("static/images/" + offer.getImagePath());
-        if (imageUrl == null) {
-            imageUrl = Main.class.getClassLoader().getResource("static/images/default.png");
-        }
-        Image image = new Image(imageUrl.toExternalForm());
+        Image image = new Image(Main.class.getClassLoader().getResource("static/images/" + offer.getImagePath()).toExternalForm());
         this.imageOffer.setImage(image);
+        illu.setImage(new Image("static/images/florain.png"));
+        illu.setFitHeight(20);
     }
 
     public void goToOffer(MouseEvent mouseEvent) throws Exception {
@@ -84,9 +82,23 @@ public class OfferViewController extends VBox {
         OfferController offerController = loader.getController();
         offerController.initOfferPage(offer);
         modification.getScene().setRoot(root);
-
     }
 
     public void goToUser(MouseEvent mouseEvent) {
+    }
+
+    public void hoverHandler(MouseEvent mouseEvent) {
+        offer.setStyle("-fx-background-color: #f2f2f2");
+        offerTitle.setStyle("-fx-text-fill: #FFB5A7");
+        offer.setStyle("-fx-border-padding: 3");
+        offer.setStyle("-fx-border-color: #FFB5A7");
+    }
+
+    public void exitHandler(MouseEvent mouseEvent) {
+        offer.setStyle("-fx-background-color: #ffffff");
+        offerTitle.setStyle("-fx-text-fill: #000000");
+        offer.setStyle("-fx-border-padding: 3");
+        offer.setStyle("-fx-border-color: #ffffff");
+
     }
 }
