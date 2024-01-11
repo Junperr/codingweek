@@ -17,13 +17,13 @@
 
 <AnchorPane id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../css/newOffer.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.NewOfferController">
     <children>
-      <Button fx:id="newOfferToOffersButton" layoutX="68.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#goHome" stylesheets="@../css/newOffer.css" text="←">
+      <Button id="button" fx:id="newOfferToOffersButton" layoutX="49.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#goHome" prefHeight="52.0" prefWidth="54.0" stylesheets="@../css/newOffer.css" text="←">
          <font>
-            <Font size="15.0" />
+            <Font name="System Bold" size="22.0" />
          </font>
       </Button>
       <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="282.0" layoutY="62.0" textFill="RED" />
-      <Pane id="box" fx:id="box" layoutX="294.0" layoutY="44.0" prefHeight="631.0" prefWidth="491.0" stylesheets="@../css/newOffer.css">
+      <Pane id="box" fx:id="box" layoutX="294.0" layoutY="44.0" prefHeight="631.0" prefWidth="491.0" style="-fx-border-color: #FFB5A7; -fx-border-radius: 3; -fx-border-width: 2;" stylesheets="@../css/newOffer.css">
          <children>
               <HBox id="hbox" layoutX="40.0" layoutY="64.0" prefHeight="467.0" prefWidth="411.0">
                   <children>
@@ -68,9 +68,9 @@
                       </VBox>
                       <VBox alignment="CENTER_RIGHT" prefHeight="369.0" prefWidth="296.0" spacing="10.0">
                           <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="294.0">
                                   <children>
-                                      <TextField id="textfield" fx:id="titleTextField" prefHeight="26.0" prefWidth="226.0" stylesheets="@../css/newOffer.css" />
+                                      <TextField id="textfield" fx:id="titleTextField" prefHeight="13.0" prefWidth="226.0" stylesheets="@../css/newOffer.css" />
                                   </children>
                               </HBox>
                               <HBox prefHeight="120.0" prefWidth="300.0">
@@ -103,10 +103,13 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="296.0" spacing="20.0">
                            <children>
-                              <Button fx:id="addImageButton" mnemonicParsing="false" onAction="#addImage" prefHeight="38.0" prefWidth="68.0" stylesheets="@../css/newOffer.css" text="+" />
+                              <Button fx:id="addImageButton" mnemonicParsing="false" onAction="#addImage" prefHeight="55.0" prefWidth="58.0" stylesheets="@../css/newOffer.css" text="+">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font></Button>
                               <Pane id="background" fx:id="background" prefHeight="86.0" prefWidth="203.0">
                                  <children>
-                                    <ImageView id="cross" fx:id="crossImage" fitHeight="50.0" fitWidth="50.0" layoutX="17.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView id="cross" fx:id="crossImage" fitHeight="32.0" fitWidth="32.0" layoutX="17.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
                                     <ImageView id="image" fx:id="imageArea" fitHeight="69.0" fitWidth="85.0" onMouseClicked="#suppImage" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
@@ -116,7 +119,7 @@
                       </VBox>
                   </children>
               </HBox>
-            <Button fx:id="newOfferButton" layoutX="219.0" layoutY="566.0" mnemonicParsing="false" onMouseClicked="#submit" stylesheets="@../css/newOffer.css" text="Submit" />
+            <Button fx:id="newOfferButton" layoutX="217.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#submit" prefHeight="39.0" prefWidth="65.0" stylesheets="@../css/newOffer.css" text="Submit" />
       
               <Label id="newOffer" fx:id="newOffer" layoutX="202.0" layoutY="23.0" stylesheets="@../css/newOffer.css" text="New offer" />
          </children>

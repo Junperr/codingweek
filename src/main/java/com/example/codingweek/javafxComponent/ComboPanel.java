@@ -59,7 +59,9 @@ public class ComboPanel extends StackPane {
                     setGraphic(null);
                     setText(null);
                 } else {
+                    deleteButton.setStyle("-fx-background-color: #f8edeb");
                     HBox hbox = new HBox(new Label(item), deleteButton);
+                    hbox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
                     setGraphic(hbox);
 
                     deleteButton.setOnAction(event -> {
