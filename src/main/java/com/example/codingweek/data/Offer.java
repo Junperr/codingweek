@@ -1,6 +1,5 @@
 package com.example.codingweek.data;
 
-import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.SerializedData;
 
 import java.util.ArrayList;
@@ -76,6 +75,7 @@ public class Offer extends SerializedData {
         this.availability = availability;
         this.Categories = Categories;
     }
+
 
     public void printOffer() {
         System.out.println("Offer{" +

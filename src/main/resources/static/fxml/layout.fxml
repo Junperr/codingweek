@@ -12,7 +12,7 @@
     <children>
       <HBox prefHeight="36.0" prefWidth="1080.0">
          <children>
-              <ToolBar prefHeight="36.0" prefWidth="996.0" style="-fx-background-color: #FFB5A7;" stylesheets="@../css/layout.css">
+              <ToolBar prefHeight="36.0" prefWidth="828.0" style="-fx-background-color: #FFB5A7;" stylesheets="@../css/layout.css">
                   <items>
                   <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="262.0" spacing="10.0">
                      <children>
@@ -38,8 +38,20 @@
                   <Insets />
                </HBox.margin>
               </ToolBar>
-            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFB5A7;" stylesheets="@../css/layout.css">
+            <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="260.0" style="-fx-background-color: #FFB5A7;" stylesheets="@../css/layout.css">
                <children>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <styleClass>
+                        <String fx:value="messages2" />
+                        <String fx:value="messages" />
+                     </styleClass>
+                  </ImageView>
+                  <Label fx:id="toMessage" prefHeight="22.0" prefWidth="98.0" stylesheets="@../css/layout.css" text="Messages">
+                     <styleClass>
+                        <String fx:value="text" />
+                        <String fx:value="messages2" />
+                     </styleClass>
+                  </Label>
                   <ImageView fx:id="logout" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#logout" onMouseEntered="#hoverHandler" onMouseExited="#hoverExitHandler" pickOnBounds="true" preserveRatio="true">
                      <styleClass>
                         <String fx:value="logout" />
