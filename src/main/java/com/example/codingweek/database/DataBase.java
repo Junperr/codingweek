@@ -179,12 +179,12 @@ public class DataBase {
                 exec("INSERT INTO Categories (offer, category) VALUES ('cfe6e949-e07f-4b87-a0e6-0715db4da09a', 'Electroménager')");
 
 
-                // Fetch data from table1
+                // Fetch data from Users
                 ArrayList<ArrayList<Object>> dataTable1 = fetchAll("SELECT * FROM Users");
                 System.out.println("Data from Users:");
                 printData(dataTable1);
 
-                // Fetch data from table2
+                // Fetch data from Offers
                 ArrayList<ArrayList<Object>> dataTable2 = fetchAll("SELECT * FROM Offers");
                 System.out.println("Data from Offers:");
                 printData(dataTable2);

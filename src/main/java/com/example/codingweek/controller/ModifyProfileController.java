@@ -4,6 +4,8 @@ import com.example.codingweek.Main;
 import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
+import com.example.codingweek.javafxSceneHandler.ChangeScene;
+import com.example.codingweek.facade.BigFacade;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -81,7 +83,7 @@ public class ModifyProfileController {
                         return;
                     }
                 case "password":
-                    if (newData.length() < 8 || newData.length() > 60) {
+                    if (!(newData.length() < 8 || newData.length() > 60)) {
                         currentUser.password = newData;
                         db.exec("update Users set password=? where userName=?", newData, currentUser.userName);
                         break;
@@ -127,7 +129,7 @@ public class ModifyProfileController {
             Stage modification = (Stage) saveButton.getScene().getWindow();
             modification.setScene(new Scene(root));
 
-            myProfileController.updateProfile();
+            myProfileController.initialize();
         } else {
             errorLabel.setText("Wrong current password");
         }

@@ -47,7 +47,7 @@ public class ComboPanel extends StackPane {
 
     private void initSelectedOptionsListView() {
         selectedOptionsListView = new ListView<>();
-        selectedOptionsListView.setPrefHeight(50);
+        selectedOptionsListView.setPrefHeight(80);
         selectedOptionsListView.setCellFactory(param -> new ListCell<String>() {
             private final Button deleteButton = new Button("✖");
 

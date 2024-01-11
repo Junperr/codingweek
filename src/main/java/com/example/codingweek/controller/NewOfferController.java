@@ -4,16 +4,23 @@ import com.example.codingweek.Main;
 import com.example.codingweek.data.Offer;
 import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxComponent.ComboPanel;
+import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -38,16 +45,25 @@ public class NewOfferController {
     private Button newOfferButton, newOfferToOffersButton, addImageButton;
     @FXML
     private ImageView imageArea;
+    @FXML
+    private ImageView crossImage;
+    @FXML
+    private Pane background;
+    @FXML
+    private ImageView florainImage;
+
+    private final ChangeScene changeScene = new ChangeScene();
 
     @FXML
     public void initialize() {
         // Initialize your controller here
-        type.getItems().addAll("Offer", "Service"); // Offer types
-
+        type.getItems().addAll("Offer", "Service");// Offer types
+        florainImage.setImage(new Image("static/images/florain.png"));
         // Event handler for newOfferButton
         newOfferButton.setOnAction(event -> {
 
         });
+
     }
 
     @FXML
@@ -78,14 +94,7 @@ public class NewOfferController {
 
     @FXML
     private void goHome() throws IOException{
-        // method to go back to the home page
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/allOffers.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = null;
-        root = loader.load();
-        Stage modification = (Stage) newOfferToOffersButton.getScene().getWindow();
-        modification.setScene(new Scene(root));
+        changeScene.changeSameSceneButton("static/fxml/allOffers.fxml", newOfferToOffersButton);
     }
 
     private <T> T handleEmptyField(String fieldName) {
@@ -118,8 +127,16 @@ public class NewOfferController {
 
         if (selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toURL().toString());
-            System.out.println("Chemin de l'image ajoutée : " + selectedFile.toURI().toURL().toString());
+
+
             imageArea.setImage(image);
+            //rendre le background de couleur #f8edeb
+            background.setStyle("-fx-background-color: #f8edeb");
+            background.setPrefHeight(imageArea.getFitHeight());
+            background.setPrefWidth(imageArea.getFitWidth());
+
+            //crossImage.setImage(new Image("static/images/cross.png"));
+            //crossImage.setFitHeight(imageArea.getFitHeight());
             rafraichirInterfaceUtilisateur();
         }
     }
@@ -132,6 +149,8 @@ public class NewOfferController {
     public void suppImage() throws IOException{
         imageArea.setImage(null);
         rafraichirInterfaceUtilisateur();
+        background.setStyle("-fx-background-color: #ffffff");
+        //crossImage.setImage(null);
     }
 
 
