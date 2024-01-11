@@ -17,9 +17,10 @@ public class OfferDAO {
     }
 
     public void addOffer(Offer offer) {
-        db.exec("INSERT INTO Offers (id,title, description, price, type, user, availability) VALUES (?, ?, ?, ?, ?, ?, 1)",
+        db.exec("INSERT INTO Offers (id,title, description, imagePath, price, type, user, availability) VALUES (?, ?, ?, ?, ?, ?, ?, 1)",
                 offer.getId(),
                 offer.getTitle(),
+                offer.getImagePath(),
                 offer.getDescription(),
                 offer.getPrice(),
                 offer.getType(),
@@ -177,6 +178,9 @@ public class OfferDAO {
                     }
                 }
             }
+//            System.out.println(String.format(" o.availability = true and o.user != '%s' and", CurrentUser.getUser().userName));
+            query += String.format(" o.availability = true and o.user != '%s' and", CurrentUser.getUser().userName);
+//            System.out.println(query);
             if (queryEnd.length() >= 3) {
                 queryEnd = queryEnd.substring(0, queryEnd.length() - 3);
                 query += queryEnd;
@@ -187,10 +191,13 @@ public class OfferDAO {
             }
         } else query = "select * from offers";
 
+        System.out.println(query);
+
         ArrayList<HashMap<String, Object>> offerMap = db.fetchAllMap(query);
 
+        System.out.println(offerMap);
+
         ArrayList<Offer> offers = new ArrayList<>();
-        ArrayList<String> categoriesString = new ArrayList<>();
         for (HashMap<String, Object> offer : offerMap) {
             System.out.println(offer.get("id"));
 
