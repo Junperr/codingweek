@@ -34,16 +34,6 @@ public class OfferController {
     private ArrayList<Object> data;
     private Integer cost;
 
-
-    // to be used but petite flemme right now
-//    public void initData(UUID offer_id) {
-//        // this.offerId = offerId;
-//
-//        DataBase db = DataBase.getInstance();
-//        data = db.fetchOne("select * from Offers where id=?", offer_id);
-//    }
-
-    // will use init data instead of this one
     public void initOfferPage(Offer offer) throws Exception {
 
         String availibility = offer.getAvailability() ? "Available" : "Unavailable";
@@ -56,11 +46,8 @@ public class OfferController {
         this.offerPageTitle.setText(offer.getTitle());
         this.offerId = offer.getId();
         this.cost = offer.getPrice();
-        StringJoiner categories = new StringJoiner(", ");
-        for (String str : offer.getCategories()) {
-            categories.add(str);
-        }
-        this.offerPageCategory.setText(categories.toString());
+        this.offerPageCategory.setText(offer.categoryString());
+
         BigFacade bf = new BigFacade();
         this.offerPageZipCode.setText(bf.getUserByUsername(offer.getUser()).zipCode);
 
