@@ -89,6 +89,17 @@
     -fx-background-color: #ffffff;
 }
 
+.button{
+    -fx-background-color: #FFB5A7;
+    -fx-text-fill: #ffffff;
+}
+
+.button:hover{
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #FFB5A7;
+    -fx-border-color:  #FFB5A7;
+    -fx-border-radius: 3;
+}
 
 
 #image:hover {
@@ -103,4 +114,3 @@
     -fx-opacity: 1.0;
 }
 
-/*rends les textFields jolis*/

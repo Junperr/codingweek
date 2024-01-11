@@ -56,10 +56,11 @@ public class NewOfferController {
 
     @FXML
     public void initialize() {
-        // Initialize your controller here
         type.getItems().addAll("Offer", "Service");// Offer types
         florainImage.setImage(new Image("static/images/florain.png"));
-        // Event handler for newOfferButton
+        //changer la couleur de bord du combo panel
+        themeComboPanel.setStyle("-fx-border-color: #f8edeb");
+        themeComboPanel.setStyle("-fx-background-color: #ffffff");
         newOfferButton.setOnAction(event -> {
 
         });
@@ -104,6 +105,7 @@ public class NewOfferController {
     private <T> T handleEmptyField(String fieldName, String type) {
         if (errorLabel.getText().isEmpty()) {
             errorLabel.setText("Please fill all the fields, empty fields: " + fieldName);
+
         } else {
             errorLabel.setText(errorLabel.getText() + ", " + fieldName);
         }
@@ -130,13 +132,12 @@ public class NewOfferController {
 
 
             imageArea.setImage(image);
-            //rendre le background de couleur #f8edeb
             background.setStyle("-fx-background-color: #f8edeb");
             background.setPrefHeight(imageArea.getFitHeight());
             background.setPrefWidth(imageArea.getFitWidth());
 
-            //crossImage.setImage(new Image("static/images/cross.png"));
-            //crossImage.setFitHeight(imageArea.getFitHeight());
+            crossImage.setImage(new Image("static/images/cross.png"));
+            crossImage.setFitHeight(imageArea.getFitHeight());
             rafraichirInterfaceUtilisateur();
         }
     }
@@ -150,7 +151,7 @@ public class NewOfferController {
         imageArea.setImage(null);
         rafraichirInterfaceUtilisateur();
         background.setStyle("-fx-background-color: #ffffff");
-        //crossImage.setImage(null);
+        crossImage.setImage(null);
     }
 
 
