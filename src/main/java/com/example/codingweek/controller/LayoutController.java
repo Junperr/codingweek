@@ -19,7 +19,7 @@ import java.net.URL;
 
 public class LayoutController {
     @FXML
-    private Label goToProfile, goToOffers, logOut, toMessages;
+    private Label goToProfile, goToOffers, logOut, toMessage;
 
     @FXML
     private ImageView logout;
@@ -37,7 +37,7 @@ public class LayoutController {
         BigFacade bf = new BigFacade();
         Integer unread = bf.getUnreadNumberLogedInUser();
         if (unread > 0) {
-            toMessages.setText("Message (" + unread + ")");
+            toMessage.setText("Message (" + unread + ")");
         }
     }
 
@@ -56,6 +56,23 @@ public class LayoutController {
         logout.setEffect(colorAdjust);
         logOut.setStyle("-fx-text-fill: #ffffff");
     }
+
+    @FXML
+    public void hoverHandlerM(){
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setBrightness(0.1);
+        message.setEffect(colorAdjust);
+        toMessage.setStyle("-fx-text-fill: #000000");
+    }
+
+    @FXML
+    public void hoverExitHandlerM(){
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setBrightness(1.0);
+        message.setEffect(colorAdjust);
+        toMessage.setStyle("-fx-text-fill: #ffffff");
+    }
+
 
     @FXML
     public void goToProfile() throws IOException {

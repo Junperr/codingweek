@@ -22,7 +22,6 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
-      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="282.0" layoutY="62.0" textFill="RED" />
       <Pane id="box" fx:id="box" layoutX="294.0" layoutY="44.0" prefHeight="631.0" prefWidth="491.0" style="-fx-border-color: #FFB5A7; -fx-border-radius: 3; -fx-border-width: 2;" stylesheets="@../css/newOffer.css">
          <children>
               <HBox id="hbox" layoutX="40.0" layoutY="64.0" prefHeight="467.0" prefWidth="411.0">
@@ -122,6 +121,7 @@
             <Button fx:id="newOfferButton" layoutX="217.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#submit" prefHeight="39.0" prefWidth="65.0" stylesheets="@../css/newOffer.css" text="Submit" />
       
               <Label id="newOffer" fx:id="newOffer" layoutX="202.0" layoutY="23.0" stylesheets="@../css/newOffer.css" text="New offer" />
+            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="67.0" layoutY="544.0" prefHeight="18.0" prefWidth="357.0" textAlignment="CENTER" textFill="RED" />
          </children>
       </Pane>
     </children>

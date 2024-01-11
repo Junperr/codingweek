@@ -47,6 +47,7 @@ public class LogInController {
         updateEyeImage();
 
         passwordTextField.setOnKeyPressed(this::handleEnterKeyPress);
+        userNameTextField.setOnKeyPressed(this::handleEnterKeyPress);
 
         centeredPane.widthProperty().addListener((obs, oldVal, newVal) -> centerVBox());
         centerVBox();

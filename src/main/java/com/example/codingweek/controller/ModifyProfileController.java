@@ -40,7 +40,9 @@ public class ModifyProfileController {
 
     @FXML
     private void initialize() {
+
         currentPW.setOnKeyPressed(this::handleEnterKeyPress);
+        newWhat.setOnKeyPressed(this::handleEnterKeyPress);
     }
 
     public void initData(String toChange) {

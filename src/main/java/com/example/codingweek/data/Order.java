@@ -3,7 +3,7 @@ package com.example.codingweek.data;
 import java.util.UUID;
 
 public class Order {
-    private final UUID id;
+    private final UUID id,offerId;
     private final Integer cost;
     private final String buyer, seller;
 
@@ -15,18 +15,24 @@ public class Order {
 
     public String getSeller() { return seller; }
 
-    public Order(Integer cost, String buyer, String seller) {
+    public UUID getOfferId() {
+        return offerId;
+    }
+
+    public Order(UUID offerId, Integer cost, String buyer, String seller) {
         this.id = UUID.randomUUID();
         this.cost = cost;
         this.buyer = buyer;
         this.seller = seller;
+        this.offerId = offerId;
     }
 
-    public Order(UUID id, Integer cost, String buyer, String seller) {
+    public Order(UUID id, UUID offerId, Integer cost, String buyer, String seller) {
         this.id = id;
         this.cost = cost;
         this.buyer = buyer;
         this.seller = seller;
+        this.offerId = offerId;
     }
 
     public void printOrder() {

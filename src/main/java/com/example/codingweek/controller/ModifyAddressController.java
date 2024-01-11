@@ -38,7 +38,11 @@ public class ModifyAddressController {
     
     @FXML
     private void initialize() {
+
         currentPW.setOnKeyPressed(this::handleEnterKeyPress);
+        newAddressTextField.setOnKeyPressed(this::handleEnterKeyPress);
+        newZipCodeTextField.setOnKeyPressed(this::handleEnterKeyPress);
+        newCityTextField.setOnKeyPressed(this::handleEnterKeyPress);
     }
     
     public void setStage(Stage stage) {this.stage = stage;}
