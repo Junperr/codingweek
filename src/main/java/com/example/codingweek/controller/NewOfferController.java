@@ -26,6 +26,9 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 public class NewOfferController {
@@ -53,6 +56,8 @@ public class NewOfferController {
     private Pane background;
     @FXML
     private ImageView florainImage;
+    private String relativeImagePath;
+    private String imageName;
 
     private final ChangeScene changeScene = new ChangeScene();
 
@@ -77,10 +82,11 @@ public class NewOfferController {
         errorLabel.setText("");
 
         // Retrieve values from the controls
-        String title = (titleTextField.getText() != null && !titleTextField.getText().isEmpty()) ? titleTextField.getText(): handleEmptyField("tittle");
+        String title = (titleTextField.getText() != null && !titleTextField.getText().isEmpty()) ? titleTextField.getText(): handleEmptyField("title");
         String description = (desc.getText() != null && !desc.getText().isEmpty()) ? desc.getText(): handleEmptyField("description");
         String price = (priceTextField.getText() != null && !priceTextField.getText().isEmpty()) ? priceTextField.getText(): handleEmptyField("price");
         String selectedType = (type.getValue() != null && !type.getValue().isEmpty()) ? type.getValue(): handleEmptyField("type");
+
 
         if (!errorLabel.getText().isEmpty()){
             return ;
@@ -93,7 +99,7 @@ public class NewOfferController {
 
         BigFacade bigFacade = new BigFacade();
         // image is not implemented yet so by default we put null for the path
-        Offer offer = bigFacade.createNewOffer(title, description, null, Integer.parseInt(price), selectedType, themes);
+        Offer offer = bigFacade.createNewOffer(title, description, imageName, Integer.parseInt(price), selectedType, themes);
 
     }
 
@@ -134,6 +140,16 @@ public class NewOfferController {
         if (selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toURL().toString());
 
+            String destinationDirectory = "src/main/resources/static/images/offers";
+
+            Path targetPath = Path.of(destinationDirectory, selectedFile.getName());
+            Files.copy(selectedFile.toPath(), targetPath, StandardCopyOption.REPLACE_EXISTING);
+
+            String relativeImagePath = "images/offers/" + selectedFile.getName();
+            this.relativeImagePath = relativeImagePath;
+            this.imageName = selectedFile.getName();
+
+            System.out.println("Nom de l'image : " + imageName);
 
             imageArea.setImage(image);
             background.setStyle("-fx-background-color: #f8edeb");
@@ -156,6 +172,9 @@ public class NewOfferController {
         rafraichirInterfaceUtilisateur();
         background.setStyle("-fx-background-color: #ffffff");
         crossImage.setImage(null);
+        //supprimer l'image du répertoire des images des offres
+        Files.delete(Path.of("src/main/resources/static/" + relativeImagePath));
+
     }
 
     private void handleEnterKeyPress(KeyEvent event) {
