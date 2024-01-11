@@ -64,7 +64,8 @@ public class OfferController {
         BigFacade bf = new BigFacade();
         this.offerPageZipCode.setText(bf.getUserByUsername(offer.getUser()).zipCode);
 
-        URL imageUrl = Main.class.getClassLoader().getResource("static/images/" + offer.getImagePath());
+        URL imageUrl = Main.class.getClassLoader().getResource("static/images/offers/");
+        System.out.println(imageUrl);
         if (imageUrl == null) {
             imageUrl = Main.class.getClassLoader().getResource("static/images/default.png");
         }
