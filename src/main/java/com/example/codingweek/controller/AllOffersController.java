@@ -2,7 +2,7 @@ package com.example.codingweek.controller;
 
 import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.Main;
-import com.example.codingweek.Offer.Offer;
+import com.example.codingweek.data.Offer;
 import com.example.codingweek.database.DataBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -1,10 +1,9 @@
 package com.example.codingweek.DAO;
 
-import com.example.codingweek.Offer.Offer;
-import com.example.codingweek.auth.User;
+import com.example.codingweek.data.Offer;
+import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
 
-import javax.print.attribute.HashPrintServiceAttributeSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
