@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.example.codingweek.javafxComponent.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -8,33 +9,48 @@
     <fx:include fx:id="menuBar" source="layout.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    <VBox layoutY="54.0" prefHeight="36.0" prefWidth="1080.0">
       <children>
-         <ToolBar prefHeight="36.0" prefWidth="1066.0">
+         <ToolBar prefHeight="83.0" prefWidth="1080.0">
             <items>
                <Label text="Offer type :" />
                <ChoiceBox fx:id="type" prefHeight="25.0" prefWidth="60.0" />
                <Label text="Category :" />
-               <ComboBox fx:id="category" prefHeight="25.0" prefWidth="60.0" />
-               <Label text="Zip code :" />
+               <ComboPanel fx:id="themeComboPanel" prefWidth="300">
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
+                  <padding>
+                     <Insets top="20.0" />
+                  </padding></ComboPanel>
+               <Label text="Zip code :">
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding></Label>
                <TextField fx:id="location" prefHeight="26.0" prefWidth="51.0" promptText="54510" />
-               <Label text="Price :" />
+               <Label text="Price :">
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding></Label>
                <Label text="min" />
-               <TextField fx:id="priceMin" prefHeight="26.0" prefWidth="26.0" />
+               <TextField fx:id="priceMin" prefHeight="26.0" prefWidth="47.0" />
                <Label text="max" />
-               <TextField fx:id="priceMax" prefHeight="26.0" prefWidth="27.0" />
+               <TextField fx:id="priceMax" prefHeight="26.0" prefWidth="47.0" />
                <VBox prefHeight="26.0" prefWidth="88.0">
                   <children>
-                     <Button mnemonicParsing="false" onMouseClicked="#saveFilters" prefHeight="26.0" prefWidth="91.0" text="Save filters" />
+                     <Button mnemonicParsing="false" onMouseClicked="#saveFilters" prefHeight="26.0" prefWidth="91.0" text="Save filters">
+                        <VBox.margin>
+                           <Insets left="10.0" top="22.0" />
+                        </VBox.margin></Button>
                   </children>
                </VBox>
             </items>
          </ToolBar>
       </children>
    </VBox>
-   <VBox fx:id="offerToAdd" layoutY="94.0" prefHeight="623.0" prefWidth="1080.0">
+   <VBox fx:id="offerToAdd" layoutY="135.0" prefHeight="582.0" prefWidth="1080.0">
       <children>
          <ScrollPane fx:id="scrollPane" prefHeight="602.0" prefWidth="1080.0">
             <content>
-               <VBox fx:id="offers" prefHeight="567.0" prefWidth="1078.0">
+               <VBox fx:id="offers" prefHeight="543.0" prefWidth="1078.0">
                   <padding>
                      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                   </padding>
