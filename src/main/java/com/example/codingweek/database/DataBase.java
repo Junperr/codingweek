@@ -155,8 +155,9 @@ public class DataBase {
                 exec("CREATE TABLE IF NOT EXISTS Users (firstName TEXT, lastName TEXT, userName TEXT PRIMARY KEY, email TEXT, address TEXT, zipCode TEXT, city TEXT, password TEXT, coins TEXT)");
                 exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, type TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, availability BOOL, FOREIGN KEY(user) REFERENCES Users(id))");
                 exec("CREATE TABLE IF NOT EXISTS Categories (offer UUID, category TEXT, FOREIGN KEY(offer) REFERENCES Offers(id),UNIQUE(offer, category))");
-                exec("create table if not exists Orders (id UUID PRIMARY KEY, cost INTEGER, buyer TEXT, seller TEXT)");
-                exec("create table if not exists Marks (id UUID PRIMARY KEY, mark INTEGER, description TEXT, order UUID, FOREIGN KEY(order) REFERENCES Orders(id))");
+                exec("create table if not exists Orders (id UUID PRIMARY KEY, offer UUID, cost INTEGER, buyer TEXT, seller TEXT)");
+//                exec("create table if not exists Reviews (id UUID PRIMARY KEY, eval INTEGER, writer TEXT, description TEXT, order UUID)");
+                exec("CREATE TABLE IF NOT EXISTS Reviews (orderId UUID, writer TEXT, eval INTEGER, description TEXT,FOREIGN KEY(orderId) REFERENCES Orders(id),UNIQUE(orderId, writer))");
 
                 // Insert data into Users
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('', '', 'admin', '', '', '', '', '', '100000000')");
@@ -177,6 +178,18 @@ public class DataBase {
                 exec("INSERT INTO Categories (offer, category) VALUES ('6cc0106a-8d73-4ead-935e-971d00196e6f', 'Outils')");
                 exec("INSERT INTO Categories (offer, category) VALUES ('337bc42e-1a1a-4237-a45d-a66d3da4ed03', 'Electroménager')");
                 exec("INSERT INTO Categories (offer, category) VALUES ('cfe6e949-e07f-4b87-a0e6-0715db4da09a', 'Electroménager')");
+
+                // Insert data into Orders
+                exec("INSERT INTO Orders (id, offer, cost, buyer, seller) VALUES " +
+                        "('cfe6e949-e07f-4b87-a0e6-0715db4da800', '6cc0106a-8d73-4ead-935e-971d00196e6f', 50, 'ugoG', 'joelD')," +
+                        "('cfe6e949-e07f-4b87-a0e6-0715db4da801', '337bc42e-1a1a-4237-a45d-a66d3da4ed03', 30, 'annaG', 'joelD')," +
+                        "('cfe6e949-e07f-4b87-a0e6-0715db4da802', 'cfe6e949-e07f-4b87-a0e6-0715db4da09a', 80, 'julieZ', 'joelD')");
+
+                // Insert data into Evals
+                exec("INSERT INTO Reviews (orderId, eval, writer, description) VALUES " +
+                        "('cfe6e949-e07f-4b87-a0e6-0715db4da800', 5, 'ugoG', 'Great service!')," +
+                        "('cfe6e949-e07f-4b87-a0e6-0715db4da801', 4, 'annaG', 'Good transaction')," +
+                        "('cfe6e949-e07f-4b87-a0e6-0715db4da802', 5, 'julieZ', 'Excellent seller')");
 
 
                 // Fetch data from Users

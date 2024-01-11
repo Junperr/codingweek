@@ -18,10 +18,10 @@ import java.net.URL;
 
 public class LayoutController {
     @FXML
-    private Label goToProfile, goToOffers, logOut;
+    private Label goToProfile, goToOffers, logOut, toMessage;
 
     @FXML
-    private ImageView logout;
+    private ImageView logout, message;
 
 
     private final ChangeScene changeScene = new ChangeScene();
@@ -32,11 +32,13 @@ public class LayoutController {
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(1.0);
         logout.setEffect(colorAdjust);
+        message.setImage(new Image("static/images/message.png"));
+        message.setEffect(colorAdjust);
 
     }
 
     @FXML
-    public void hoverHandler(){
+    public void hoverHandlerL(){
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(0.1);
         logout.setEffect(colorAdjust);
@@ -44,12 +46,29 @@ public class LayoutController {
     }
 
     @FXML
-    public void hoverExitHandler(){
+    public void hoverExitHandlerL(){
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(1.0);
         logout.setEffect(colorAdjust);
         logOut.setStyle("-fx-text-fill: #ffffff");
     }
+
+    @FXML
+    public void hoverHandlerM(){
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setBrightness(0.1);
+        message.setEffect(colorAdjust);
+        toMessage.setStyle("-fx-text-fill: #000000");
+    }
+
+    @FXML
+    public void hoverExitHandlerM(){
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setBrightness(1.0);
+        message.setEffect(colorAdjust);
+        toMessage.setStyle("-fx-text-fill: #ffffff");
+    }
+
 
     @FXML
     public void goToProfile() throws IOException {

@@ -1,5 +1,6 @@
 package com.example.codingweek.DAO;
 
+import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.Offer;
 import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
@@ -11,7 +12,7 @@ public class OfferDAO {
     private final DataBase db = DataBase.getInstance();
 
     public Offer newOffer(String title, String description, String imagePath, Integer price, String type, ArrayList<String> Categories) {
-        Offer offer = new Offer(title, description, User.getInstance().userName, imagePath, price, type, true, Categories);
+        Offer offer = new Offer(title, description, CurrentUser.getUser().userName, imagePath, price, type, true, Categories);
         addOffer(offer);
         return offer;
     }
@@ -23,7 +24,7 @@ public class OfferDAO {
                 offer.getDescription(),
                 offer.getPrice(),
                 offer.getType(),
-                User.getInstance().userName);
+                CurrentUser.getUser().userName);
         // Insert the offer themes into the database
         for (String theme : offer.getCategories()) {
             db.exec("INSERT INTO Categories (offer, category) VALUES (?, ?)", offer.getId(), theme);
@@ -32,11 +33,6 @@ public class OfferDAO {
 
     public Offer getOfferById(UUID id) {
         HashMap<String, Object> offerMap = db.fetchOneMap("SELECT * FROM Offers WHERE id = ?", id);
-        ArrayList<ArrayList<Object>> categories = db.fetchAll("SELECT category FROM Categories WHERE offer = ?", id);
-        ArrayList<String> categoriesString = new ArrayList<>();
-        for (ArrayList<Object> category : categories) {
-            categoriesString.add(category.get(0).toString());
-        }
         return new Offer(id,
                 offerMap.get("title").toString(),
                 offerMap.get("type").toString(),
@@ -45,10 +41,33 @@ public class OfferDAO {
                 (offerMap.get("imagePath") != null) ? offerMap.get("imagePath").toString() : "default.png",
                 Integer.parseInt(offerMap.get("price").toString()),
                 Boolean.parseBoolean(offerMap.get("availability").toString()),
-                categoriesString);
+                getOfferCategories(offerMap));
     }
 
-    public ArrayList<Offer> getOfferAvailableWithoutOwnOffer(String currentUserName) {
+    public ArrayList<Offer> getOwnOffers(String username){
+        ArrayList<HashMap<String, Object>> offerMap = db.fetchAllMap("SELECT * FROM Offers Where user = ?",username);
+
+        ArrayList<Offer> offers = new ArrayList<>();
+
+        for (HashMap<String, Object> offer : offerMap) {
+            offers.add(new Offer(UUID.fromString(offer.get("id").toString()),
+                    offer.get("title").toString(),
+                    offer.get("type").toString(),
+                    offer.get("user").toString(),
+                    offer.get("description").toString(),
+                    (offer.get("imagePath") != null) ? offer.get("imagePath").toString() : "default.png",
+                    Integer.parseInt(offer.get("price").toString()),
+                    Boolean.parseBoolean(offer.get("availability").toString()),
+                    getOfferCategories(offer)));
+        }
+        return offers;
+    }
+
+    /**
+     * @param currentUserName
+     * @return
+     */
+    public ArrayList<Offer> getOthersOffer(String currentUserName) {
         ArrayList<HashMap<String, Object>> offerMap = db.fetchAllMap("SELECT * FROM Offers join Users U on U.userName = Offers.user WHERE userName != ? and availability != 0", currentUserName);
 
         ArrayList<HashMap<String, Object>> categories = db.fetchAllMap("SELECT category FROM Categories");

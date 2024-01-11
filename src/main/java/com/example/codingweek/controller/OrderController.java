@@ -62,7 +62,7 @@ public class OrderController {
             return;
         }
 
-        User currentUser = User.getInstance();
+        User currentUser = CurrentUser.getUser();
         DataBase db = DataBase.getInstance();
 
         ArrayList<Object> dataOffer = db.fetchOne("select * from Offers where id=?", offerId);

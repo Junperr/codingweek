@@ -1,5 +1,6 @@
 package com.example.codingweek.controller;
 
+import com.example.codingweek.data.Order;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,10 +24,10 @@ public class OrderViewController {
     private Integer cost;
     private String seller;
 
-    public void initOrderView(UUID orderId, Integer cost, String seller) {
-        this.orderId = orderId;
-        this.cost = cost;
-        this.seller = seller;
+    public void initOrderView(Order order) {
+        this.orderId = order.getId();
+        this.cost = order.getCost();
+        this.seller = order.getSeller();
         commandUUID.setText(orderId.toString());
         sellerLabel.setText(seller);
         costLabel.setText(cost.toString());
