@@ -14,6 +14,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -32,14 +34,17 @@ public class MyProfileController {
     private VBox offerToAdd, orderToAdd, offers, orders;
     @FXML
     private Label userNameBig, balance, userName, password, lastName, firstName, email, address, zip, city;
+    @FXML
+    private ImageView florain;
 
     private final ChangeScene changeScene = new ChangeScene();
 
     @FXML
     public void initialize() {
         User currentUser = CurrentUser.getUser();
-        userNameBig.setText(currentUser.userName);
-        balance.setText(String.valueOf(currentUser.coins));
+        userNameBig.setText("Hello, " + currentUser.userName);
+        florain.setImage(new Image("static/images/florain.png"));
+        balance.setText("Current Balance : " + String.valueOf(currentUser.coins));
         userName.setText(currentUser.userName);
         password.setText(currentUser.password);
         lastName.setText(currentUser.lastName);
