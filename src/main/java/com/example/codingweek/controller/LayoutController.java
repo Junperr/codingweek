@@ -2,6 +2,7 @@ package com.example.codingweek.controller;
 
 import com.example.codingweek.Main;
 import com.example.codingweek.auth.CurrentUser;
+import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +34,11 @@ public class LayoutController {
         colorAdjust.setBrightness(1.0);
         logout.setEffect(colorAdjust);
 
+        BigFacade bf = new BigFacade();
+        Integer unread = bf.getUnreadNumberLogedInUser();
+        if (unread > 0) {
+            toMessages.setText("Message (" + unread + ")");
+        }
     }
 
     @FXML

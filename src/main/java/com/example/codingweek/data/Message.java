@@ -33,9 +33,9 @@ public class Message {
         return seen;
     }
 
-    public Message(Timestamp timestamp, String content, String sender, String receiver) {
+    public Message(String content, String sender, String receiver) {
         this.id = UUID.randomUUID();
-        this.timestamp = timestamp;
+        this.timestamp = new Timestamp(System.currentTimeMillis());
         this.content = content;
         this.sender = sender;
         this.receiver = receiver;
