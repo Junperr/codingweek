@@ -20,8 +20,8 @@ public class OfferDAO {
         db.exec("INSERT INTO Offers (id,title, description, imagePath, price, type, user, availability) VALUES (?, ?, ?, ?, ?, ?, ?, 1)",
                 offer.getId(),
                 offer.getTitle(),
-                offer.getImagePath(),
                 offer.getDescription(),
+                offer.getImagePath(),
                 offer.getPrice(),
                 offer.getType(),
                 CurrentUser.getUser().userName);
