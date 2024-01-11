@@ -1,6 +1,7 @@
 package com.example.codingweek.controller;
 
 import com.example.codingweek.Main;
+import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
 import javafx.fxml.FXML;
@@ -44,9 +45,11 @@ public class OrderController {
         this.offerId = offerId;
         this.cost = cost;
 
-        User currentUser = User.getInstance();
+        User currentUser = CurrentUser.getUser();
         Integer remain = (currentUser.coins - cost);
-        recap.setText("By clicking confirm you will order of \"" + title + "\" it is going to cost you " + cost + " florin. After the operation you will have " + remain + " florin remain.");
+        recap.setAlignment(javafx.geometry.Pos.CENTER);
+        recap.setText("By clicking Confirm you will order \"" + title + "\". \n It is going to cost you " + cost + " florin.\n After the operation you will have " + remain + " florin remaining.");
+
     }
 
     @FXML
