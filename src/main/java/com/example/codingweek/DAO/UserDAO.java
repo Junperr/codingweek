@@ -59,11 +59,13 @@ public class UserDAO {
 
         try {
             errManager.handleLogin(user);
-            CurrentUser.logUser(user);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw e;
         }
+
+        CurrentUser.logUser(user);
+
     }
 
     public User getUserByPassword(String username, String pwd) {
