@@ -51,4 +51,7 @@ public class BigFacade {
         userDAO.checkedUpdatePos(user, address, city, zipcode, pwd);
     }
 
+    public User getUserByUsername(String username) throws Exception{
+        return userDAO.getUserByUsername(username);
+    }
 }

@@ -13,7 +13,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.StringJoiner;
 import java.util.UUID;
@@ -46,13 +45,16 @@ public class OfferViewController extends VBox {
         return this.offerId;
     }
 
-    public void initOfferView(Offer offer){
+    public void initOfferView(Offer offer) throws Exception {
         this.offerId = offer.getId();
         this.offerTitle.setText(offer.getTitle());
         this.offerDescription.setText(offer.getDescription());
         this.offerPrice.setText(offer.getPrice().toString());
         this.userOffer.setText(offer.getUser());
         this.offerType.setText(offer.getType());
+        //access to user's zipCode
+        BigFacade bf = new BigFacade();
+        this.zipCode.setText(bf.getUserByUsername(offer.getUser()).zipCode);
 
         StringJoiner categories = new StringJoiner(", ");
         for (String str : offer.getCategories()) {
@@ -66,11 +68,9 @@ public class OfferViewController extends VBox {
         }
         Image image = new Image(imageUrl.toExternalForm());
         this.imageOffer.setImage(image);
-
-
     }
 
-    public void goToOffer(MouseEvent mouseEvent) throws IOException {
+    public void goToOffer(MouseEvent mouseEvent) throws Exception {
 
         BigFacade bf = new BigFacade();
         Offer offer = bf.getOfferById(offerId);
@@ -87,4 +87,6 @@ public class OfferViewController extends VBox {
 
     }
 
+    public void goToUser(MouseEvent mouseEvent) {
+    }
 }

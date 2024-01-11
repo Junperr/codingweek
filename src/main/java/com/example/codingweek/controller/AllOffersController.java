@@ -1,6 +1,5 @@
 package com.example.codingweek.controller;
 
-import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.Main;
 import com.example.codingweek.data.Offer;
 import com.example.codingweek.facade.BigFacade;
@@ -16,9 +15,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class AllOffersController implements Initializable {
     @FXML
@@ -51,13 +51,13 @@ public class AllOffersController implements Initializable {
         for (Offer offer: offersList) {
             try {
                 loadOffersFromDatabase(offer);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
     }
 
-    public void loadOffersFromDatabase(Offer offer) throws IOException {
+    public void loadOffersFromDatabase(Offer offer) throws Exception {
             URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/offerView.fxml");
             FXMLLoader loader = new FXMLLoader(xmlUrl);
             loader.setLocation(xmlUrl);
@@ -69,12 +69,12 @@ public class AllOffersController implements Initializable {
 
 
     @FXML
-    public void saveFilters(MouseEvent mouseEvent) throws IOException {
+    public void saveFilters(MouseEvent mouseEvent) throws Exception {
         BigFacade bf = new BigFacade();
         updateVBoxContent(bf.getOffersWithFilters(type.getValue(), location.getText(), priceMin.getText(), priceMax.getText(), new ArrayList<>(themeComboPanel.getSelectedThemes())));
     }
 
-    public void updateVBoxContent(ArrayList<Offer> offers) throws IOException {
+    public void updateVBoxContent(ArrayList<Offer> offers) throws Exception {
         this.offers.getChildren().clear();
         for (Offer offer : offers) {
             URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/offerView.fxml");

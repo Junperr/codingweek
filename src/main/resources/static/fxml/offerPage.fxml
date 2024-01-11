@@ -21,7 +21,7 @@
          </Label>
          <HBox prefHeight="253.0" prefWidth="600.0">
             <children>
-               <ImageView fx:id="pageOfferImage" fitHeight="254.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fx:id="pageOfferImage" fitHeight="248.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                   <HBox.margin>
                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                   </HBox.margin>
@@ -36,23 +36,26 @@
                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="239.99999237060547" minWidth="10.0" prefWidth="187.99999237060547" />
                              </columnConstraints>
                              <rowConstraints>
-                               <RowConstraints maxHeight="82.4" minHeight="10.0" prefHeight="23.6" vgrow="SOMETIMES" />
-                               <RowConstraints maxHeight="163.40000762939454" minHeight="8.999999999999993" prefHeight="34.0" vgrow="SOMETIMES" />
-                                 <RowConstraints maxHeight="213.4" minHeight="0.0" prefHeight="35.39999237060547" vgrow="SOMETIMES" />
-                               <RowConstraints maxHeight="219.6" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                                 <RowConstraints maxHeight="219.6" minHeight="10.0" prefHeight="124.79999999999998" vgrow="SOMETIMES" />
+                               <RowConstraints maxHeight="82.4" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                                 <RowConstraints maxHeight="213.4" minHeight="10.0" prefHeight="30.399996185302726" vgrow="SOMETIMES" />
+                               <RowConstraints maxHeight="163.40000762939454" minHeight="8.999999999999993" prefHeight="24.800000000000004" vgrow="SOMETIMES" />
+                                 <RowConstraints maxHeight="213.4" minHeight="0.0" prefHeight="30.399996185302726" vgrow="SOMETIMES" />
+                               <RowConstraints maxHeight="219.6" minHeight="10.0" prefHeight="28.000003814697266" vgrow="SOMETIMES" />
+                                 <RowConstraints maxHeight="219.6" minHeight="10.0" prefHeight="52.80000000000001" vgrow="SOMETIMES" />
                              </rowConstraints>
                               <children>
                                  <Label prefHeight="35.0" prefWidth="71.0" text="User :" />
-                                 <Label text="Availability :" GridPane.rowIndex="1" />
-                                 <Label text="Price :" GridPane.rowIndex="2" />
-                                 <Label text="Category :" GridPane.rowIndex="3" />
-                                 <Label text="Description : " GridPane.rowIndex="4" />
-                                 <Label fx:id="offerPageUser" text="Label" GridPane.columnIndex="1" />
-                                 <Label fx:id="offerPageAvailability" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                 <Label fx:id="offerPagePrice" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                 <Label fx:id="offerPageCategory" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                 <Label fx:id="offerPageDescription" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                 <Label text="Availability :" GridPane.rowIndex="2" />
+                                 <Label text="Price :" GridPane.rowIndex="3" />
+                                 <Label text="Category :" GridPane.rowIndex="4" />
+                                 <Label text="Description : " GridPane.rowIndex="5" />
+                                 <Label fx:id="sellerId" text="Label" GridPane.columnIndex="1" />
+                                 <Label fx:id="offerPageAvailability" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                 <Label fx:id="offerPagePrice" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                 <Label fx:id="offerPageCategory" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                 <Label fx:id="offerPageDescription" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                 <Label text="Zip Code :" GridPane.rowIndex="1" />
+                                 <Label fx:id="offerPageZipCode" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               </children>
                               <VBox.margin>
                                  <Insets bottom="5.0" top="5.0" />
