@@ -42,7 +42,7 @@ public class OrderDAO {
         ArrayList<Order> orderList = new ArrayList<>();
         ArrayList<HashMap<String, Object>> ordersMap = db.fetchAllMap("SELECT * FROM Orders Where buyer = ?", username);
         for (HashMap<String,Object> order : ordersMap){
-            orderList.add(new Order((UUID) order.get("id"),
+            orderList.add(new Order(UUID.fromString(order.get("id").toString()),
                     (Integer) order.get("cost"),
                     order.get("buyer").toString(),
                     order.get("seller").toString()));
