@@ -117,7 +117,7 @@ public class OfferController {
         Stage modification = (Stage) sellerId.getScene().getWindow();
 
         ProfileForOthersController profileForOthersController = loader.getController();
-        profileForOthersController.initUserPageForOthers();
+        profileForOthersController.initUserPageForOthers(bf.getUserByUsername(sellerId.getText()));
         modification.getScene().setRoot(root);
     }
 }

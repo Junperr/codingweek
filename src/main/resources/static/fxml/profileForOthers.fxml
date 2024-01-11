@@ -33,10 +33,6 @@
                                                     </children></Pane>
                                                 <Pane prefHeight="30.0" prefWidth="165.0">
                                                     <children>
-                                                        <Label layoutX="191.0" layoutY="5.0" text="Email :" />
-                                                    </children></Pane>
-                                                <Pane prefHeight="30.0" prefWidth="165.0">
-                                                    <children>
                                                         <Label layoutX="172.0" layoutY="8.0" text="ZIP Code :" />
                                                     </children></Pane>
                                                 <Pane prefHeight="30.0" prefWidth="165.0">
@@ -55,11 +51,6 @@
                                                 <Pane prefHeight="30.0" prefWidth="178.0">
                                                     <children>
                                                         <Label fx:id="userName" layoutX="77.0" layoutY="6.0" prefHeight="17.0" prefWidth="264.0" text="Label" />
-                                                    </children>
-                                                </Pane>
-                                                <Pane prefHeight="30.0" prefWidth="178.0">
-                                                    <children>
-                                                        <Label fx:id="email" layoutX="77.0" layoutY="6.0" prefHeight="17.0" prefWidth="266.0" text="Label" />
                                                     </children>
                                                 </Pane>
                                                 <Pane prefHeight="30.0" prefWidth="178.0">
@@ -96,7 +87,7 @@
                             </content>
                         </TitledPane>
                         <TitledPane animated="false" prefHeight="466.0" prefWidth="600.0" text="Your Orders">
-                            <VBox fx:id="orderToAdd" layoutY="135.0" prefHeight="582.0" prefWidth="1080.0">
+                            <VBox fx:id="orderToAddOther" layoutY="135.0" prefHeight="582.0" prefWidth="1080.0">
                                 <children>
                                     <ScrollPane prefHeight="602.0" prefWidth="1080.0">
                                         <content>
@@ -111,7 +102,7 @@
                             </VBox>
                         </TitledPane>
                         <TitledPane animated="false" text="Your Offers">
-                            <VBox fx:id="offerToAdd" layoutY="135.0" prefHeight="582.0" prefWidth="1080.0">
+                            <VBox fx:id="offerToAddOther" layoutY="135.0" prefHeight="582.0" prefWidth="1080.0">
                                 <children>
                                     <ScrollPane prefHeight="602.0" prefWidth="1080.0">
                                         <content>

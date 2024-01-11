@@ -46,9 +46,9 @@ public class AllOffersController implements Initializable {
         offers.getChildren().clear();
 
         BigFacade bf = new BigFacade();
-
         try {
             updateVBoxContent(bf.getOffersWithFilters(null, null, null, null, null));
+            System.out.println("j'ai ajoute!");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

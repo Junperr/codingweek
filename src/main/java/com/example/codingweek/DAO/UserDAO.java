@@ -220,8 +220,12 @@ public class UserDAO {
         CurrentUser.logUser(user);
     }
 
-    public void getUserAverageMarks(User user){
-        int marks = exec("select marks from ")
+    public int getUserAvgEval(User user){
+        return user.avgEval;
+    }
+
+    public void updateAvgEval(User user){
+        user.avgEval = Integer.parseInt(db.fetchOneMap("select avg(eval) from Reviews r join Orders o on o.id = r.orderId where o.seller = ?", user.userName).get("avg(eval)").toString());
     }
 
 
