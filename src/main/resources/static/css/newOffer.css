@@ -1,13 +1,106 @@
+/*&rosef = #FFB5A7;
+&rosep = #FCD5CE;
+&beige = #F8EDEB;
+&orangec = #F9DCC4;
+&orange = #FEC89A;*/
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+
 #image {
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 10, 0, 0, 0);
 
     -fx-cursor: hand;
 }
 
-#image:hover {
-    -fx-background-color: rgba(255, 255, 255, 0.7);
+#textfield{
+    -fx-font-size: 15 px;
+    -fx-background-color: #ffffff;
+    /*-fx-border-color: #FFB5A7;*/
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-padding: 8;
+    -fx-border-color: transparent transparent #ffb5a7 transparent;
+
+    }
+
+#textarea{
+    -fx-font-size: 13 px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #FFB5A7;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-padding: 8;
+    }
+
+#combopanel{
+    -fx-font-size: 12 px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #FFB5A7;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-padding: 8;
+    }
+
+#choicebox{
+    -fx-font-size: 15 px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #FFB5A7;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-padding: 8;
+    }
+
+#text{
+    -fx-font-size: 15 px;
+
+    -fx-font-weight: bold;
+}
+
+*{
+    -fx-font-family: "Poppins", sans-serif;
+}
+
+#newOffer {
+    -fx-font-size: 20 px;
+    -fx-font-weight: bold;
+    }
+
+/*#image:hover {
     -fx-shape: "M0,0 L10,10 M10,0 L0,10";
     -fx-stroke: red;
     -fx-stroke-width: 2;
     -fx-stroke-line-cap: ROUND;
+}*/
+
+#box{
+    -fx-background-color: #ffffff;
 }
+
+#anchorPane{
+    -fx-background-color: #f8edeb;
+}
+
+#hbox {
+    -fx-background-color: #ffffff;
+}
+
+#background {
+    -fx-background-color: #ffffff;
+}
+
+
+
+#image:hover {
+    -fx-opacity: 0.6;
+}
+
+.cross{
+    -fx-opacity: 0.0;
+    }
+
+#image:hover + .cross{
+    -fx-opacity: 1.0;
+}
+
+/*rends les textFields jolis*/

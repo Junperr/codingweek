@@ -33,8 +33,7 @@ public class UserDAO {
             errManager.handleInvalidFirstName(user.firstName);
             errManager.handleInvalidLastName(user.lastName);
             errManager.handleInvalidUserName(user.userName, getUserByUsername(user.userName));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             throw e;
         }
@@ -61,16 +60,15 @@ public class UserDAO {
         try {
             errManager.handleLogin(user);
             CurrentUser.logUser(user);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             throw e;
         }
     }
 
-    public User getUserByPassword(String username, String pwd){
+    public User getUserByPassword(String username, String pwd) {
 
-        Map<String,Object> userMap = db.fetchOneMap("SELECT * FROM Users WHERE username = ? AND password = ?", username, pwd);
+        Map<String, Object> userMap = db.fetchOneMap("SELECT * FROM Users WHERE username = ? AND password = ?", username, pwd);
 
         if (userMap.get("userName") == null) {
             return null;
@@ -88,11 +86,10 @@ public class UserDAO {
     }
 
 
-
     public User getUserByUsername(String username) {
         //todo make regex for each field
 
-        Map<String,Object> userMap = db.fetchOneMap("SELECT * FROM Users WHERE username = ?", username);
+        Map<String, Object> userMap = db.fetchOneMap("SELECT * FROM Users WHERE username = ?", username);
 
         if (userMap.get("userName") == null) {
             return null;
@@ -110,7 +107,7 @@ public class UserDAO {
     }
 
     public ArrayList<User> getAllUsers() {
-        ArrayList<HashMap<String,Object>> usersMap = db.fetchAllMap("SELECT * FROM Users WHERE username");
+        ArrayList<HashMap<String, Object>> usersMap = db.fetchAllMap("SELECT * FROM Users WHERE username");
 
         ArrayList<User> users = new ArrayList<>();
 
@@ -128,17 +125,97 @@ public class UserDAO {
         return users;
     }
 
+    public void updateField(String newValue, String field, String pwd, User user) throws Exception{
 
-    public void checkedUpdatePos(User user, String address, String city, String zipcode, String pwd) throws Exception{
+        ErrorManager errManager = new ErrorManager();
+        try {
+            errManager.handleCheckPassWord(getUserByPassword(user.userName, pwd));
+            System.out.println(field);
+            System.out.println(newValue);
+            switch (field) {
+                case "first name":
+                    System.out.println("firstName");
+                    System.out.println(field);
+                    errManager.handleInvalidFirstName(newValue);
+                    updateFirstName(user, newValue);
+                    break;
+                case "last name":
+                    System.out.println("lastName");
+                    System.out.println(field);
+                    errManager.handleInvalidLastName(newValue);
+                    updateLastName(user, newValue);
+                    break;
+                case "email":
+                    System.out.println("email");
+                    System.out.println(field);
+                    errManager.handleInvalidEmail(newValue);
+                    updateEmail(user, newValue);
+                    break;
+                case "password":
+                    System.out.println("password");
+                    System.out.println(field);
+                    errManager.handleInvalidPassword(newValue);
+                    updatePassword(user, newValue);
+                    break;
+                case "username":
+                    System.out.println("username");
+                    System.out.println(field);
+                    errManager.handleInvalidUserName(newValue, getUserByUsername(newValue));
+                    updateUsername(user, newValue);
+                    break;
+                default:
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }
+
+    }
+
+    public void updateFirstName(User user, String newValue) {
+        db.exec("UPDATE Users SET firstName = ? WHERE username = ?", newValue, user.userName);
+        user.firstName = newValue;
+        CurrentUser.logUser(user);
+    }
+
+    public void updateLastName(User user, String newValue) {
+        db.exec("UPDATE Users SET lastName = ? WHERE username = ?", newValue, user.userName);
+        user.lastName = newValue;
+        CurrentUser.logUser(user);
+    }
+
+    public void updateEmail(User user, String newValue) {
+        db.exec("UPDATE Users SET email = ? WHERE username = ?", newValue, user.userName);
+        user.email = newValue;
+        CurrentUser.logUser(user);
+    }
+
+    public void updatePassword(User user, String newValue) {
+        db.exec("UPDATE Users SET password = ? WHERE username = ?", newValue, user.userName);
+        user.password = newValue;
+        CurrentUser.logUser(user);
+    }
+
+    public void updateUsername(User user, String newValue) {
+        db.exec("UPDATE Users SET username = ? WHERE username = ?", newValue, user.userName);
+        db.exec("UPDATE Offers SET user = ? WHERE user = ?", newValue, user.userName);
+        db.exec("UPDATE Orders SET buyer = ? WHERE buyer = ?", newValue, user.userName);
+        db.exec("UPDATE Orders SET buyer = ? WHERE buyer = ?", newValue, user.userName);
+        db.exec("UPDATE Users SET username = ? WHERE username = ?", newValue, user.userName);
+        user.userName = newValue;
+        CurrentUser.logUser(user);
+    }
+
+    public void checkedUpdatePos(User user, String address, String city, String zipcode, String pwd) throws Exception {
         ErrorManager errManager = new ErrorManager();
         try {
             errManager.handleCheckPassWord(getUserByPassword(user.userName, pwd));
             errManager.handleInvalidAddress(address);
             errManager.handleInvalidCity(city);
             errManager.handleInvalidZipCode(zipcode);
-            updatePos(address, zipcode, city, user.userName);
-        }
-        catch (Exception e){
+            updatePos(user.userName, address, city, zipcode);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             throw e;
         }
@@ -152,5 +229,6 @@ public class UserDAO {
         user.zipCode = zipcode;
         CurrentUser.logUser(user);
     }
+
 
 }
