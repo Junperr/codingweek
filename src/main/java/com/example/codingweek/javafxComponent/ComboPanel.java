@@ -75,6 +75,7 @@ public class ComboPanel extends StackPane {
 
     private void initLayout() {
         HBox hbox = new HBox(comboBox, selectedOptionsListView);
+
         getChildren().add(hbox);
     }
 }

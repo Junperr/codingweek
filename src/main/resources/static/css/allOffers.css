@@ -5,3 +5,43 @@
 *{
     -fx-font-family: "Poppins", sans-serif;
 }
+
+.text{
+    -fx-font-size: 12 px;
+}
+
+.button{
+    -fx-background-color: #FFB5A7;
+    -fx-text-fill: #ffffff;
+}
+
+.button:hover{
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #FFB5A7;
+    -fx-border-color:  #FFB5A7;
+    -fx-border-radius: 3;
+}
+
+.choicebox{
+    -fx-font-size: 12 px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #FFB5A7;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-padding: 8;
+    }
+
+.textfield{
+    -fx-font-size: 12 px;
+    -fx-background-color: #ffffff;
+    /*-fx-border-color: #FFB5A7;*/
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-padding: 8;
+    -fx-border-color: transparent transparent #ffb5a7 transparent;
+}
+
+.toolbar{
+    -fx-background-color: #FCD5CE;
+}
+
