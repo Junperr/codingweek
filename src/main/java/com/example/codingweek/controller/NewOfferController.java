@@ -4,6 +4,7 @@ import com.example.codingweek.Main;
 import com.example.codingweek.data.Offer;
 import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxComponent.ComboPanel;
+import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -51,6 +52,8 @@ public class NewOfferController {
     @FXML
     private ImageView florainImage;
 
+    private final ChangeScene changeScene = new ChangeScene();
+
     @FXML
     public void initialize() {
         // Initialize your controller here
@@ -91,14 +94,7 @@ public class NewOfferController {
 
     @FXML
     private void goHome() throws IOException{
-        // method to go back to the home page
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/allOffers.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = null;
-        root = loader.load();
-        Stage modification = (Stage) newOfferToOffersButton.getScene().getWindow();
-        modification.setScene(new Scene(root));
+        changeScene.changeSameSceneButton("static/fxml/allOffers.fxml", newOfferToOffersButton);
     }
 
     private <T> T handleEmptyField(String fieldName) {

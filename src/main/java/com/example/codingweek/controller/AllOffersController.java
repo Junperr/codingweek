@@ -2,12 +2,16 @@ package com.example.codingweek.controller;
 
 import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.Main;
+import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.Offer;
-import com.example.codingweek.database.DataBase;
+import com.example.codingweek.javafxComponent.ComboPanel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -21,8 +25,7 @@ public class AllOffersController implements Initializable {
     public HBox menuBar;
     @FXML
     public ChoiceBox<String> type;
-    @FXML
-    public ComboBox<String> category;
+
     @FXML
     public ScrollPane scrollPane;
     @FXML
@@ -35,30 +38,22 @@ public class AllOffersController implements Initializable {
     public UUID offerId;
     public TextField priceMin;
     public TextField priceMax;
+    public ComboPanel themeComboPanel;
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle){
         type.getItems().addAll("Service", "Loan");
         offers.getChildren().clear();
 
-        DataBase db = DataBase.getInstance();
-        ArrayList<ArrayList<Object>> list = db.fetchAll("select title, description, imagePath, price, user, id from Offers");
-        for (ArrayList<Object> o : list) {
-            String imagePath = (o.get(2) != null) ? o.get(2).toString() : "default.png";
-
+        OfferDAO offerDAO = new OfferDAO();
+        ArrayList<Offer> offers = offerDAO.getAllOffers();
+        offers = offerDAO.getOfferAvailableWithoutOwnOffer(CurrentUser.getUser().userName);
+        for (Offer offer: offers) {
             try {
-                loadOffersFromDatabase(
-                        o.get(0).toString(),   // title
-                        o.get(1).toString(),   // description
-                        imagePath,             // imagePath
-                        o.get(3).toString(),   // price
-                        o.get(4).toString(),    // user
-                        o.get(5).toString()
-                );
+                loadOffersFromDatabase(offer.getTitle(), offer.getDescription(), offer.getImagePath(), offer.getPrice().toString(), offer.getUser(), offer.getId().toString());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
         }
     }
 
@@ -77,9 +72,6 @@ public class AllOffersController implements Initializable {
     public void saveFilters(MouseEvent mouseEvent) throws IOException {
         String chosenType = type.getValue();
 
-        ArrayList<String> chosenCategory = new ArrayList<>();
-        chosenCategory.add("Jardinage");
-        chosenCategory.add("Jardin");
 
         String chosenZipCode = location.getText();
 
@@ -93,13 +85,14 @@ public class AllOffersController implements Initializable {
             chosenPriceMin = priceMin.getText();
         }
 
+        ArrayList<String> chosenCategories = new ArrayList<>(themeComboPanel.getSelectedThemes());
 
 
         OfferDAO offerDAO = new OfferDAO();
 
         Map<String, Object> map = new HashMap<>();
         if (chosenType != null) map.put("type",chosenType);
-        if (chosenCategory != null) map.put("category", chosenCategory);
+        if (!chosenCategories.isEmpty()) map.put("category", chosenCategories);
         if (!chosenZipCode.equals("")) map.put("zipCode", chosenZipCode);
         if (!chosenPriceMax.equals("")) map.put("priceMax", chosenPriceMax);
         if (!chosenPriceMin.equals("")) map.put("priceMin", chosenPriceMin);

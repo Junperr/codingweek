@@ -114,7 +114,7 @@ public class ErrorManager {
     }
 
     public void handleCheckPassWord(User user) throws Exception {
-        if (user.userName == null) {
+        if (user == null) {
             errorMessage = "Wrong password";
         }
         raise();

@@ -3,6 +3,7 @@ package com.example.codingweek.controller;
 import com.example.codingweek.Main;
 import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
+import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,6 +29,8 @@ public class ProfessorController {
     private UUID order_id;
     private Stage stage;
     private OrderViewController orderViewController;
+
+    private final ChangeScene changeScene = new ChangeScene();
 
     public void setStage(Stage stage) {this.stage = stage;}
 
@@ -67,13 +70,7 @@ public class ProfessorController {
         if (currentUser.password.equals(pw)) {
             db.exec("insert into Marks (id , mark , order, description) values (?,?,?,?)", id, mark, order_id, description);
 
-            FXMLLoader loader = new FXMLLoader();
-            URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/valid.fxml");
-            System.out.println(xmlUrl);
-            loader.setLocation(xmlUrl);
-            Parent root = loader.load();
-            Stage modification = (Stage) saveButton.getScene().getWindow();
-            modification.setScene(new Scene(root));
+            changeScene.changeSameSceneButton("static/fxml/valid.fxml", saveButton);
         } else {
             errorLabel.setText("Wrong current password");
         }

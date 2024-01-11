@@ -1,7 +1,8 @@
 package com.example.codingweek.controller;
 
+import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.Main;
-import com.example.codingweek.database.DataBase;
+import com.example.codingweek.data.Offer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.UUID;
 
 public class OfferViewController extends VBox {
@@ -63,14 +63,8 @@ public class OfferViewController extends VBox {
 
     public void goToOffer(MouseEvent mouseEvent) throws IOException {
 
-        DataBase db = DataBase.getInstance();
-        ArrayList<Object> list = db.fetchOne("select user, availability, price, description, title from Offers where id=?", this.offerId);
-
-        String userPageOffer = list.get(0).toString();
-        String availabilityPageOffer = list.get(1).toString();
-        String pricePageOffer = list.get(2).toString();
-        String descriptionPageOffer = list.get(3).toString();
-        String titlePageOffer = list.get(4).toString();
+        OfferDAO offerDAO = new OfferDAO();
+        Offer offer = offerDAO.getOfferById(this.offerId);
 
         URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/offerPage.fxml");
         FXMLLoader loader = new FXMLLoader(xmlUrl);
@@ -79,7 +73,7 @@ public class OfferViewController extends VBox {
         Stage modification = (Stage) goToOffer.getScene().getWindow();
 
         OfferController offerController = loader.getController();
-        offerController.initOfferPage(userPageOffer, availabilityPageOffer, pricePageOffer, descriptionPageOffer, titlePageOffer, offerId);
+        offerController.initOfferPage(offer.getUser(), offer.getAvailability().toString(), offer.getPrice().toString(), offer.getDescription(), offer.getTitle(), offerId);
         modification.getScene().setRoot(root);
 
     }
