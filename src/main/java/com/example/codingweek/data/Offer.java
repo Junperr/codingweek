@@ -14,7 +14,7 @@ public class Offer extends SerializedData {
 
     private Boolean availability;
 
-    private final ArrayList<String> Categories;
+    private final ArrayList<String> categories;
 
     public String getTitle() {
         return title;
@@ -45,7 +45,7 @@ public class Offer extends SerializedData {
     }
 
     public ArrayList<String> getCategories() {
-        return Categories;
+        return categories;
     }
 
     public UUID getId() {
@@ -63,7 +63,7 @@ public class Offer extends SerializedData {
         this.imagePath = imagePath;
         this.price = price;
         this.availability = availability;
-        this.Categories = Categories;
+        this.categories = Categories;
     }
 
     public Offer(UUID id, String title, String type, String user, String description, String imagePath, Integer price, Boolean availability, ArrayList<String> Categories) {
@@ -75,7 +75,7 @@ public class Offer extends SerializedData {
         this.imagePath = imagePath;
         this.price = price;
         this.availability = availability;
-        this.Categories = Categories;
+        this.categories = Categories;
     }
 
 
@@ -89,8 +89,12 @@ public class Offer extends SerializedData {
                 ", imagePath='" + imagePath + '\'' +
                 ", price=" + price +
                 ", availability=" + availability +
-                ", Categories=" + Categories +
+                ", Categories=" + categories +
                 '}');
+    }
+
+    public String categoryString(){
+        return String.join(", ", categories);
     }
 
 }
