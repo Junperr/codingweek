@@ -1,7 +1,8 @@
 package com.example.codingweek.controller;
 
 import com.example.codingweek.Main;
-import com.example.codingweek.auth.User;
+import com.example.codingweek.auth.CurrentUser;
+import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +20,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 
@@ -62,7 +62,7 @@ public class ModifyProfileController {
             return;
         }
 
-        User currentUser = User.getInstance();
+        User currentUser = CurrentUser.getUser();
         DataBase db = DataBase.getInstance();
 
         if (currentUser.password.equals(currentPass)) {
@@ -81,7 +81,7 @@ public class ModifyProfileController {
                         return;
                     }
                 case "password":
-                    if (newData.length() < 8 || newData.length() > 60) {
+                    if (!(newData.length() < 8 || newData.length() > 60)) {
                         currentUser.password = newData;
                         db.exec("update Users set password=? where userName=?", newData, currentUser.userName);
                         break;
@@ -122,13 +122,12 @@ public class ModifyProfileController {
 
             FXMLLoader loader = new FXMLLoader();
             URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/valid.fxml");
-            System.out.println(xmlUrl);
             loader.setLocation(xmlUrl);
             Parent root = loader.load();
             Stage modification = (Stage) saveButton.getScene().getWindow();
             modification.setScene(new Scene(root));
 
-            myProfileController.updateProfile();
+            myProfileController.initialize();
         } else {
             errorLabel.setText("Wrong current password");
         }

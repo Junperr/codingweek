@@ -21,7 +21,7 @@ public class Main extends Application {
         DataBase dataBase = DataBase.getInstance();
         dataBase.printData(dataBase.fetchAll("SELECT * FROM Offers"));
         dataBase.printData(dataBase.fetchAll("SELECT * FROM Users"));
-
+        dataBase.printData(dataBase.fetchAll("SELECT * FROM Orders"));
     }
 
     public static void main(String[] args) {

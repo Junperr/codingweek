@@ -1,7 +1,7 @@
 package com.example.codingweek.controller;
 
-import com.example.codingweek.Main;
-import com.example.codingweek.auth.User;
+import com.example.codingweek.auth.CurrentUser;
+import com.example.codingweek.data.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,8 +23,8 @@ public class MyProfileController {
     private Label userNameBig, balance, userName, password, lastName, firstName, email, address, zip, city;
 
     @FXML
-    private void initialize() {
-        User currentUser = User.getInstance();
+    public void initialize() {
+        User currentUser = CurrentUser.getUser();
         userNameBig.setText(currentUser.userName);
         balance.setText(String.valueOf(currentUser.coins));
         userName.setText(currentUser.userName);
@@ -143,19 +143,5 @@ public class MyProfileController {
         modifyAddressController.setStage(modification);
         modifyAddressController.setMainController(this);
         modification.showAndWait();
-    }
-
-    public void updateProfile() {
-        User currentUser = User.getInstance();
-        userNameBig.setText(currentUser.userName);
-        balance.setText(String.valueOf(currentUser.coins));
-        userName.setText(currentUser.userName);
-        password.setText(currentUser.password);
-        lastName.setText(currentUser.lastName);
-        firstName.setText(currentUser.firstName);
-        email.setText(currentUser.email);
-        address.setText(currentUser.address);
-        zip.setText(currentUser.zipCode);
-        city.setText(currentUser.city);
     }
 }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+
+<VBox fx:id="order" prefHeight="126.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.OrderViewController">
+    <children>
+        <VBox fx:id="feedback" onMouseClicked="#getFeedback" prefHeight="128.0" prefWidth="558.0">
+            <children>
+                <Label fx:id="commandUUID" prefHeight="36.0" prefWidth="382.0" text="Titre">
+                    <font>
+                        <Font name="System Bold" size="22.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </VBox.margin></Label>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <GridPane prefHeight="88.0" prefWidth="439.0">
+                            <columnConstraints>
+                                <ColumnConstraints />
+                                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="69.39999809265137" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="493.80000000000007" minWidth="10.0" prefWidth="289.00000190734863" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="27.399998092651366" minHeight="10.0" prefHeight="24.399998092651366" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="42.600001907348634" minHeight="10.0" prefHeight="35.400000000000006" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Label prefHeight="18.0" prefWidth="58.0" text="Seller :" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Label prefHeight="19.0" prefWidth="69.0" text="Description :" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <Label fx:id="sellerLabel" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                                <Label fx:id="costLabel" layoutX="84.0" layoutY="7.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                            </children>
+                            <HBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </HBox.margin>
+                        </GridPane>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+    </padding>
+</VBox>

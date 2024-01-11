@@ -1,22 +1,13 @@
 package com.example.codingweek.controller;
 
-import com.example.codingweek.Main;
-import com.example.codingweek.database.DataBase;
+import com.example.codingweek.facade.BigFacade;
+import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Pattern;
 
 public class CreateUserController {
     @FXML
@@ -26,104 +17,31 @@ public class CreateUserController {
     @FXML
     private Button newAccountButton, back;
 
+    private final ChangeScene changeScene = new ChangeScene();
+
     @FXML
-    private void submit() throws IOException {
-        Pattern emailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+    private void submit() {
+        BigFacade bf = new BigFacade();
+        try {
+            bf.createNewUser(firstNameTextField.getText(),
+                    lastNameTextField.getText(),
+                    userNameTextField.getText(),
+                    emailTextField.getText(),
+                    passwordTextField.getText(),
+                    addressTextField.getText(),
+                    cityTextField.getText(),
+                    zipCodeTextField.getText());
 
-        errorLabel.setText("");
+            changeScene.changeSameSceneButton("static/fxml/form-login.fxml", newAccountButton);
 
-        String firstName = (firstNameTextField.getText() != null && !firstNameTextField.getText().isEmpty()) ? firstNameTextField.getText(): handleEmptyField("firstName");
-        String lastName = (lastNameTextField.getText() != null && !lastNameTextField.getText().isEmpty()) ? lastNameTextField.getText() : handleEmptyField("lastName");
-        String userName = (userNameTextField.getText() != null && !userNameTextField.getText().isEmpty()) ? userNameTextField.getText() : handleEmptyField("userName");
-        String email = (emailTextField.getText() != null && !emailTextField.getText().isEmpty()) ? emailTextField.getText() : handleEmptyField("email");
-        String password = (passwordTextField.getText() != null && !passwordTextField.getText().isEmpty()) ? passwordTextField.getText() : handleEmptyField("password");
-        String address = (addressTextField.getText() != null && !addressTextField.getText().isEmpty()) ? addressTextField.getText() : handleEmptyField("address");
-        String city = (cityTextField.getText() != null && !cityTextField.getText().isEmpty()) ? cityTextField.getText() : handleEmptyField("city");
-        String zipCode = (zipCodeTextField.getText() != null && !zipCodeTextField.getText().isEmpty()) ? zipCodeTextField.getText() : handleEmptyField("zipCode");
-
-        if (!errorLabel.getText().isEmpty()){
-            return ;
-        }
-
-        if (firstName.length() < 3 || firstName.length() > 30) {
-            errorLabel.setText("Your first name must contain between 3 and 30 letters");
-            return;
-        }
-        if (lastName.length() < 3 || lastName.length() > 30) {
-            errorLabel.setText("Your last name must contain between 3 and 30 letters");
-            return;
-        }
-        if (userName.length() < 3 || userName.length() > 30) {
-            errorLabel.setText("Your user name must contain between 3 and 30 letters");
-            return;
-        }
-        if (!emailPattern.matcher(email).find()) {
-            errorLabel.setText("You must enter a valid e-mail address");
-            return;
-        }
-        if (password.length() < 8 || password.length() > 60) {
-            errorLabel.setText("Your password must contain between 8 and 60 letters");
-            return;
-        }
-        if (address.length() > 200) {
-            errorLabel.setText("Your address must be less than 200 character long");
-            return;
-        }
-        if (city.length() > 100) {
-            errorLabel.setText("Your city name must be less than 200 character long");
-            return;
-        }
-        if (zipCode.length() == 5) {
-            errorLabel.setText("Your zipcode must be of length 5");
-            return;
+        } catch (Exception e) {
+            errorLabel.setText(e.getMessage());
         }
 
-        // when the dependencies will work, need to hash the pass word
-        DataBase db = DataBase.getInstance();
-        ArrayList<String> alHere = db.fetchUser("select * from Users where userName=?", userName);
-        String[] nullable = {null, null, null, null, null, null, null, null, null};
-        ArrayList<String> null_ = new ArrayList<>(Arrays.asList(nullable));
-
-        if (alHere.equals(null_)) {
-            db.exec("INSERT INTO Users (userName, firstName, lastName, email, address, zipCode, city, password, coins) VALUES (?,?,?,?,?,?,?,?,'100')", userName, firstName, lastName, email, address, zipCode, city, password);
-        } else {
-            errorLabel.setText("This username is already used, try another one");
-            return;
-        }
-
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-login.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
-        Stage modification = (Stage) newAccountButton.getScene().getWindow();
-        modification.setScene(new Scene(root));
     }
 
     @FXML
     private void cancel() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/form-login.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
-        Stage modification = (Stage) back.getScene().getWindow();
-        modification.setScene(new Scene(root));
-    }
-
-    private <T> T handleEmptyField(String fieldName) {
-        return handleEmptyField(fieldName, "String");
-    }
-
-    private <T> T handleEmptyField(String fieldName, String type) {
-        if (errorLabel.getText().isEmpty()) {
-            errorLabel.setText("Please fill all the fields, empty fields: " + fieldName);
-        } else {
-            errorLabel.setText(errorLabel.getText() + ", " + fieldName);
-        }
-        if (type.equals("String")) {
-            return (T) "";
-        } else if (type.equals("int")) {
-            return (T) (Integer) 0;
-        }
-        return null;
+        changeScene.changeSameSceneButton("static/fxml/form-login.fxml", back);
     }
 }

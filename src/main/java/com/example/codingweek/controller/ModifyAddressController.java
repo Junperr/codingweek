@@ -1,8 +1,10 @@
 package com.example.codingweek.controller;
 
 import com.example.codingweek.Main;
-import com.example.codingweek.auth.User;
+import com.example.codingweek.auth.CurrentUser;
+import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
+import com.example.codingweek.facade.BigFacade;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,9 +19,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Pattern;
 
 public class ModifyAddressController {
     @FXML
@@ -51,53 +50,21 @@ public class ModifyAddressController {
 
     @FXML
     private void submit() throws IOException {
-        errorLabel.setText("");
 
-        String newAddress = (newAddressTextField.getText() != null && !newAddressTextField.getText().isEmpty()) ? newAddressTextField.getText() : handleEmptyField("new address");
-        String newZipCode = (newZipCodeTextField.getText() != null && !newZipCodeTextField.getText().isEmpty()) ? newZipCodeTextField.getText() : handleEmptyField("new zip code");
-        String newCity = (newCityTextField.getText() != null && !newCityTextField.getText().isEmpty()) ? newCityTextField.getText() : handleEmptyField("new city");
-        String currentPass = (currentPW.getText() != null && !currentPW.getText().isEmpty()) ? currentPW.getText() : handleEmptyField("currentPass");
+        BigFacade bf = new BigFacade();
+        try {
+            bf.updatePosUser(CurrentUser.getUser(),newAddressTextField.getText(),newCityTextField.getText(), newZipCodeTextField.getText(), currentPW.getText());
 
-        if (!errorLabel.getText().isEmpty()) {
-            return;
+            FXMLLoader loader = new FXMLLoader();
+            URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/valid.fxml");
+            loader.setLocation(xmlUrl);
+            Parent root = loader.load();
+            Stage modification = (Stage) saveButton.getScene().getWindow();
+            modification.setScene(new Scene(root));
+
+        } catch (Exception e) {
+            errorLabel.setText(e.getMessage());
         }
-
-        User currentUser = User.getInstance();
-        DataBase db = DataBase.getInstance();
-
-        if (currentUser.password.equals(currentPass)) {
-            if (newAddress.length() > 200) {
-                errorLabel.setText("Your address must be less than 200 character long");
-                return;
-            }
-            if (newCity.length() > 100) {
-                errorLabel.setText("Your city name must be less than 100 character long");
-                return;
-            }
-            if (!(newZipCode.length() == 5)) {
-                errorLabel.setText("Your zipcode must be of length 5");
-                return;
-            }
-
-            currentUser.address = newAddress;
-            currentUser.zipCode = newZipCode;
-            currentUser.city = newCity;
-            db.exec("update Users set address=?, zipCode=?, city=? where userName=?", newAddress, newZipCode, newCity, currentUser.userName);
-
-        } else {
-            errorLabel.setText("Wrong password");
-            return;
-        }
-
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/valid.fxml");
-        System.out.println(xmlUrl);
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
-        Stage modification = (Stage) saveButton.getScene().getWindow();
-        modification.setScene(new Scene(root));
-
-        myProfileController.updateProfile();
     }
 
     private <T> T handleEmptyField(String fieldName) {
