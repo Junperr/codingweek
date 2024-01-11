@@ -156,7 +156,7 @@ public class DataBase {
                 exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, type TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, availability BOOL, FOREIGN KEY(user) REFERENCES Users(id))");
                 exec("CREATE TABLE IF NOT EXISTS Categories (offer UUID, category TEXT, FOREIGN KEY(offer) REFERENCES Offers(id),UNIQUE(offer, category))");
                 exec("create table if not exists Orders (id UUID PRIMARY KEY, cost INTEGER, buyer TEXT, seller TEXT)");
-                exec("create table if not exists Marks (id UUID PRIMARY KEY, mark INTEGER, description TEXT, order UUID, FOREIGN KEY(order) REFERENCES Orders(id))");
+                exec("create table if not exists Evals (id UUID PRIMARY KEY, eval INTEGER, writer TEXT, description TEXT, order UUID, FOREIGN KEY(order) REFERENCES Orders(id))");
 
                 // Insert data into Users
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins) VALUES ('', '', 'admin', '', '', '', '', '', '100000000')");
@@ -177,6 +177,18 @@ public class DataBase {
                 exec("INSERT INTO Categories (offer, category) VALUES ('6cc0106a-8d73-4ead-935e-971d00196e6f', 'Outils')");
                 exec("INSERT INTO Categories (offer, category) VALUES ('337bc42e-1a1a-4237-a45d-a66d3da4ed03', 'Electroménager')");
                 exec("INSERT INTO Categories (offer, category) VALUES ('cfe6e949-e07f-4b87-a0e6-0715db4da09a', 'Electroménager')");
+
+                // Insert data into Orders
+                exec("INSERT INTO Orders (id, cost, buyer, seller) VALUES " +
+                        "('cfe6e949-e07f-4b87-a0e6-0715db4da800', 50, 'ugoG', 'joelD')," +
+                        "('cfe6e949-e07f-4b87-a0e6-0715db4da801', 30, 'annaG', 'joelD')," +
+                        "('cfe6e949-e07f-4b87-a0e6-0715db4da802', 80, 'julieZ', 'joelD')");
+
+                // Insert data into Evals
+                exec("INSERT INTO Evals (id, eval, writer, description, order) VALUES " +
+                        "('cfe6e949-e07f-4b87-a0e6-0715db4da900', 5, 'ugoG', 'Great service!', 'cfe6e949-e07f-4b87-a0e6-0715db4da800')," +
+                        "('cfe6e949-e07f-4b87-a0e6-0715db4da901', 4, 'annaG', 'Good transaction', 'cfe6e949-e07f-4b87-a0e6-0715db4da801')," +
+                        "('cfe6e949-e07f-4b87-a0e6-0715db4da902', 5, 'julieZ', 'Excellent seller', 'cfe6e949-e07f-4b87-a0e6-0715db4da802')");
 
 
                 // Fetch data from Users
