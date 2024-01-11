@@ -7,6 +7,7 @@ public class Message {
     private final UUID id;
     private final Timestamp timestamp;
     private final String content, sender, receiver;
+    private String seen;
 
     public UUID getId() {
         return id;
@@ -28,20 +29,26 @@ public class Message {
         return receiver;
     }
 
+    public String getSeen() {
+        return seen;
+    }
+
     public Message(Timestamp timestamp, String content, String sender, String receiver) {
         this.id = UUID.randomUUID();
         this.timestamp = timestamp;
         this.content = content;
         this.sender = sender;
         this.receiver = receiver;
+        this.seen = "false";
     }
 
-    public Message(UUID id, Timestamp timestamp, String content, String sender, String receiver) {
+    public Message(UUID id, Timestamp timestamp, String content, String sender, String receiver, String seen) {
         this.id = id;
         this.timestamp = timestamp;
         this.content = content;
         this.sender = sender;
         this.receiver = receiver;
+        this.seen = seen;
     }
 
     public void printMessage() {

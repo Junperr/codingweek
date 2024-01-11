@@ -1,6 +1,7 @@
 package com.example.codingweek.DAO;
 
 import com.example.codingweek.data.Message;
+import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
 
 import java.sql.Timestamp;
@@ -14,11 +15,12 @@ public class MessageDAO {
 
     public void addMessage(Message message) {
         DataBase db = DataBase.getInstance();
-        db.exec("insert into Messages (id, timestamp, content, sender, receiver) values (?,?,?,?,?)",
+        db.exec("insert into Messages (id, timestamp, content, sender, receiver, seen) values (?,?,?,?,?,?)",
                 message.getId(),
                 message.getTimestamp(),
                 message.getContent(),
                 message.getSender(),
-                message.getReceiver());
+                message.getReceiver(),
+                message.getSeen());
     }
 }
