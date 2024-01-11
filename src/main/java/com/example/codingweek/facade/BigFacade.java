@@ -35,6 +35,10 @@ public class BigFacade {
         userDAO.logUser(username, pwd);
     }
 
+    public void updateField(User user, String newValue, String field, String pwd) throws Exception{
+        userDAO.updateField(newValue, field, pwd, user);
+    }
+
     public void updatePosUser(User user, String address, String city, String zipcode, String pwd) throws Exception{
         userDAO.checkedUpdatePos(user, address, city, zipcode, pwd);
     }
