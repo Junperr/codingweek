@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.LogInController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.LogInController">
     <children>
     <Pane fx:id="centeredPane" layoutY="84.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <children>
@@ -28,9 +28,13 @@
                         </Pane>
                         <VBox alignment="CENTER" fillWidth="false" prefHeight="111.0" prefWidth="218.0" spacing="10.0">
                             <children>
-                          <HBox alignment="CENTER" prefHeight="38.0" prefWidth="265.0" spacing="5.0">
+                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                              <children>
-                                      <TextField fx:id="userNameTextField" promptText="Username" />
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                            <TextField fx:id="userNameTextField" layoutX="16.0" layoutY="6.0" promptText="Username" />
+                                 </children>
+                              </Pane>
                                 <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
                              </children>
                           </HBox>
@@ -45,7 +49,7 @@
                                 <ImageView fx:id="eyeImageView" fitHeight="15.0" fitWidth="15.0" onMouseClicked="#togglePasswordVisibility" pickOnBounds="true" preserveRatio="true" />
                              </children>
                           </HBox>
-                          <Label fx:id="errorLabel" textFill="#ae0000"/>
+                          <Label fx:id="errorLabel" textFill="#ae0000" />
                             </children>
                         </VBox>
                         <Pane prefHeight="53.0" prefWidth="202.0">
