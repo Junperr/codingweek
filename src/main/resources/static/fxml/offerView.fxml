@@ -42,7 +42,7 @@
                                     <Label prefHeight="18.0" prefWidth="58.0" text="Category :" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <Label prefHeight="19.0" prefWidth="69.0" text="Description :" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <Label fx:id="offerType" text="Label" GridPane.columnIndex="2" />
-                        <Label fx:id="userOffer" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <Label fx:id="userOffer" onMouseClicked="#goToUser" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                                     <Label fx:id="offerCategory" layoutX="84.0" layoutY="7.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                     <Label fx:id="offerDescription" layoutX="84.0" layoutY="24.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                                     <Label text="Price :" GridPane.columnIndex="1" GridPane.rowIndex="3" />

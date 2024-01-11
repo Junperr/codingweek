@@ -3,13 +3,13 @@ package com.example.codingweek.controller;
 import com.example.codingweek.Main;
 import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.Offer;
+import com.example.codingweek.data.Order;
 import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
 import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 import java.util.UUID;
 
 public class MyProfileController {
@@ -52,18 +51,16 @@ public class MyProfileController {
 
         offers.getChildren().clear();
 
-        DataBase db = DataBase.getInstance();
-
         BigFacade bf = new BigFacade();
-        ArrayList<Offer> listOffer = bf.getAllOffers();
-        ArrayList<ArrayList<Object>> listOrder = db.fetchAll("select id, cost, seller from Orders where buyer=?", currentUser.userName);
+        ArrayList<Offer> listOffer = bf.getOwnOffers(CurrentUser.getUser().userName);
+        ArrayList<Order> listOrder = bf.getOwnOrders(CurrentUser.getUser().userName);
 
         for (Offer offer : listOffer) {
             loadOffersFromDatabase(offer);
         }
 
-        for (ArrayList<Object> o : listOrder) {
-            loadOrdersFromDatabase(UUID.fromString((String) o.get(0)), Integer.parseInt(o.get(1).toString()), o.get(2).toString());
+        for (Order order : listOrder) {
+            loadOrdersFromDatabase(order);
         }
     }
 
@@ -122,23 +119,21 @@ public class MyProfileController {
             offerViewController.initOfferView(offer);
             offers.getChildren().add(offerVBox);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void loadOrdersFromDatabase(UUID orderId, Integer cost, String seller) {
+    public void loadOrdersFromDatabase(Order order) {
         try {
             URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/orderView.fxml");
             FXMLLoader loader = new FXMLLoader(xmlUrl);
             loader.setLocation(xmlUrl);
-            VBox order = loader.load();
+            VBox orderVBox = loader.load();
 
 
             OrderViewController orderViewController = loader.getController();
-            orderViewController.initOrderView(orderId, cost, seller);
-            orders.getChildren().add(order);
-
+            orderViewController.initOrderView(order);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
