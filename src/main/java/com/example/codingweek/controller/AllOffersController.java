@@ -48,7 +48,6 @@ public class AllOffersController implements Initializable {
         BigFacade bf = new BigFacade();
         try {
             updateVBoxContent(bf.getOffersWithFilters(null, null, null, null, null));
-            System.out.println("j'ai ajoute!");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -63,6 +62,7 @@ public class AllOffersController implements Initializable {
     public void updateVBoxContent(ArrayList<Offer> offers) throws Exception {
         this.offers.getChildren().clear();
         for (Offer offer : offers) {
+            System.out.println("offer : "+ offer.getTitle() );
             URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/offerView.fxml");
             FXMLLoader loader = new FXMLLoader(xmlUrl);
             loader.setLocation(xmlUrl);

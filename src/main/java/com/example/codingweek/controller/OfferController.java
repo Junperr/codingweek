@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.StringJoiner;
 import java.util.UUID;
 
 public class OfferController {
@@ -97,7 +96,7 @@ public class OfferController {
         BigFacade bf = new BigFacade();
         User seller = bf.getUserByUsername(this.sellerId.getText());
 
-        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/offerPage.fxml");
+        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/profileForOthers.fxml");
         FXMLLoader loader = new FXMLLoader(xmlUrl);
         loader.setLocation(xmlUrl);
         Parent root = loader.load();

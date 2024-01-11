@@ -5,6 +5,7 @@ import com.example.codingweek.data.Offer;
 import com.example.codingweek.data.Order;
 import com.example.codingweek.data.User;
 import com.example.codingweek.facade.BigFacade;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -13,11 +14,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class ProfileForOthersController {
-
-    public Label userName;
-    public Label zip;
-    public Label city;
-    public Label marks;
+    @FXML
+    public Label userName, zip, city, marks;
     public VBox orderToAddOther;
     public VBox offerToAddOther;
 
@@ -25,11 +23,13 @@ public class ProfileForOthersController {
         this.userName.setText(user.userName);
         this.city.setText(user.city);
         this.zip.setText(user.zipCode);
-        this.marks.setText(user.avgEval.toString());
+        System.out.println(user.userName +"'s reviews: " + user.avgEval);
+        if (user.avgEval.equals(-1)){this.marks.setText("No reviews");}
+        else this.marks.setText(user.avgEval.toString());
 
         BigFacade bf = new BigFacade();
         ArrayList<Offer> listOffer = bf.getOwnOffers(userName.getText());
-        ArrayList<Order> listOrder = bf.getOwnOrders(userName.getText());
+        ArrayList<Order> listOrder = bf.getOwnOrdersOther(userName.getText());
         for (Offer offer : listOffer) {
             loadOffers(offer);
         }
@@ -42,7 +42,7 @@ public class ProfileForOthersController {
     public void loadOrders(Order order){
         //orders by visitor to user page
         try {
-            URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/offerView.fxml");
+            URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/orderView.fxml");
             FXMLLoader loader = new FXMLLoader(xmlUrl);
             loader.setLocation(xmlUrl);
             VBox orderVBox = loader.load();

@@ -6,7 +6,7 @@ public class User extends SerializedData {
     public String firstName, lastName, userName, email, password, address, city, zipCode;
     public Integer coins, avgEval;
 
-    public User(String firstName, String lastName, String userName, String email, String password, String address, String city, String zipCode, int coins) {
+    public User(String firstName, String lastName, String userName, String email, String password, String address, String city, String zipCode, int coins, int avgEval) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -16,7 +16,7 @@ public class User extends SerializedData {
         this.city = city;
         this.zipCode = zipCode;
         this.coins = coins;
-        this.avgEval = -1;
+        this.avgEval = avgEval;
     }
 
     public Integer remainAfterBuy(Integer cost){

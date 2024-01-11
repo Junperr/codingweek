@@ -160,7 +160,7 @@ public class DataBase {
                 exec("CREATE TABLE IF NOT EXISTS Reviews (orderId UUID, writer TEXT, eval INTEGER, description TEXT,FOREIGN KEY(orderId) REFERENCES Orders(id),UNIQUE(orderId, writer))");
 
                 // Insert data into Users
-                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('', '', 'admin', '', '', '', '', '', '100000000')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('', '', 'admin', '', '', '', '', '', '100000000', '5')");
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Anna', 'Galkowski', 'annaG', 'anna.galkowski@telecomnancy.net', 'address1', '33000', 'city1', '12345678', '1000', '-1')");
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Joel', 'Duhem', 'joelD', 'joel.duhem@telecomnancy.net', 'address2', '59000', 'city1', '66666666', '0', '1')");
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Ugo', 'Gosso', 'ugoG', 'ugo.gosso@telecomnancy.net', 'address3', '25000', 'city1', '00000000', '9000', '4')");
@@ -183,7 +183,7 @@ public class DataBase {
                         "('f3925355-d605-4f40-b012-829adb56738c', 'Cours')," +
                         "('f3925355-d605-4f40-b012-829adb56738c', 'Maths')," +
                         "('c307e79f-de27-4803-b3f4-48007300a43f', 'Cours'),"+
-                        "('c307e79f-de27-4803-b3f4-48007300a43f', 'Natation'),");
+                        "('c307e79f-de27-4803-b3f4-48007300a43f', 'Natation')");
 
 
                 // Insert data into Orders

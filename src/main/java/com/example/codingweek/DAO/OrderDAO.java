@@ -1,6 +1,7 @@
 package com.example.codingweek.DAO;
 
 import com.example.codingweek.auth.CurrentUser;
+import com.example.codingweek.data.Offer;
 import com.example.codingweek.data.Order;
 import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
