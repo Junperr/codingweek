@@ -1,6 +1,5 @@
 package com.example.codingweek.controller;
 
-import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.Main;
 import com.example.codingweek.data.Offer;
 import com.example.codingweek.facade.BigFacade;
@@ -16,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.StringJoiner;
 import java.util.UUID;
 
 public class OfferViewController extends VBox {
@@ -35,6 +35,7 @@ public class OfferViewController extends VBox {
     @FXML
     public Label userOffer;
     public VBox goToOffer;
+    public Label zipCode;
 
     private UUID offerId;
 
@@ -51,6 +52,13 @@ public class OfferViewController extends VBox {
         this.offerDescription.setText(offer.getDescription());
         this.offerPrice.setText(offer.getPrice().toString());
         this.userOffer.setText(offer.getUser());
+        this.offerType.setText(offer.getType());
+
+        StringJoiner categories = new StringJoiner(", ");
+        for (String str : offer.getCategories()) {
+            categories.add(str);
+        }
+        this.offerCategory.setText(categories.toString());
 
         URL imageUrl = Main.class.getClassLoader().getResource("static/images/" + offer.getImagePath());
         if (imageUrl == null) {

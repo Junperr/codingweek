@@ -2,7 +2,6 @@ package com.example.codingweek.controller;
 
 import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.Main;
-import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.Offer;
 import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxComponent.ComboPanel;
@@ -71,37 +70,8 @@ public class AllOffersController implements Initializable {
 
     @FXML
     public void saveFilters(MouseEvent mouseEvent) throws IOException {
-        String chosenType = type.getValue();
-
-
-        String chosenZipCode = location.getText();
-
-        String chosenPriceMax = "1000000";
-        if (priceMax.getText() != "") {
-            chosenPriceMax = priceMax.getText();
-        }
-
-        String chosenPriceMin = "0";
-        if (priceMin.getText() != "") {
-            chosenPriceMin = priceMin.getText();
-        }
-
-        ArrayList<String> chosenCategories = new ArrayList<>(themeComboPanel.getSelectedThemes());
-
-
-        OfferDAO offerDAO = new OfferDAO();
-
-        Map<String, Object> map = new HashMap<>();
-        if (chosenType != null) map.put("type",chosenType);
-        if (!chosenCategories.isEmpty()) map.put("category", chosenCategories);
-        if (!chosenZipCode.equals("")) map.put("zipCode", chosenZipCode);
-        if (!chosenPriceMax.equals("")) map.put("priceMax", chosenPriceMax);
-        if (!chosenPriceMin.equals("")) map.put("priceMin", chosenPriceMin);
-
-        ArrayList<Offer> offers = offerDAO.getAllOffers();
-
-        //affichage
-        updateVBoxContent(offers);
+        BigFacade bf = new BigFacade();
+        updateVBoxContent(bf.getOffersWithFilters(type.getValue(), location.getText(), priceMin.getText(), priceMax.getText(), new ArrayList<>(themeComboPanel.getSelectedThemes())));
     }
 
     public void updateVBoxContent(ArrayList<Offer> offers) throws IOException {

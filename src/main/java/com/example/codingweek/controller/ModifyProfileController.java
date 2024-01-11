@@ -4,7 +4,6 @@ import com.example.codingweek.Main;
 import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
-import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import com.example.codingweek.facade.BigFacade;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +32,7 @@ public class ModifyProfileController {
     @FXML
     private PasswordField currentPW;
     @FXML
-    private Label errorLabel; 
+    private Label errorLabel;
     private Stage stage;
     private MyProfileController myProfileController;
     private String index;
@@ -55,72 +54,9 @@ public class ModifyProfileController {
 
     @FXML
     private void submit() throws IOException {
-        errorLabel.setText("");
-
-        String newData = (newWhat.getText() != null && !newWhat.getText().isEmpty()) ? newWhat.getText(): handleEmptyField("newData");
-        String currentPass = (currentPW.getText() != null && !currentPW.getText().isEmpty()) ? currentPW.getText(): handleEmptyField("currentPass");
-
-        if (!errorLabel.getText().isEmpty()) {
-            return;
-        }
-
-        User currentUser = CurrentUser.getUser();
-        DataBase db = DataBase.getInstance();
-
-        if (currentUser.password.equals(currentPass)) {
-            switch (index) {
-                case "username":
-                    ArrayList<String> alHere = db.fetchUser("select * from Users where userName=?", newData);
-                    String[] nullable = {null, null, null, null, null, null, null, null, null};
-                    ArrayList<String> null_ = new ArrayList<>(Arrays.asList(nullable));
-
-                    if (alHere.equals(null_)) {
-                        db.exec("update Users set userName=? where userName=?", newData, currentUser.userName);
-                        currentUser.userName = newData;
-                        break;
-                    } else {
-                        errorLabel.setText("This username is already used, try another one");
-                        return;
-                    }
-                case "password":
-                    if (!(newData.length() < 8 || newData.length() > 60)) {
-                        currentUser.password = newData;
-                        db.exec("update Users set password=? where userName=?", newData, currentUser.userName);
-                        break;
-                    } else {
-                        errorLabel.setText("Password must be of length 8 minimum");
-                        return;
-                    }
-                case "last name":
-                    if (newData.length() < 3 || newData.length() > 30) {
-                        currentUser.lastName = newData;
-                        db.exec("update Users set lastName=? where userName=?", newData, currentUser.userName);
-                        break;
-                    } else {
-                        errorLabel.setText("Last name must be of length 3 minimum");
-                        return;
-                    }
-                case "first name":
-                    if (newData.length() < 3 || newData.length() > 30) {
-                        currentUser.firstName = newData;
-                        db.exec("update Users set firstName=? where userName=?", newData, currentUser.userName);
-                        break;
-                    } else {
-                        errorLabel.setText("First name must be of length 3 minimum");
-                        return;
-                    }
-                case "email":
-                    Pattern emailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-
-                    if (!emailPattern.matcher(newData).find()) {
-                        currentUser.email = newData;
-                        db.exec("update Users set email=? where userName=?", newData, currentUser.userName);
-                        break;
-                    } else {
-                        errorLabel.setText("You must enter valid email");
-                        return;
-                    }
-            }
+        BigFacade bf = new BigFacade();
+        try{
+            bf.updateField(CurrentUser.getUser(), newWhat.getText(), index, currentPW.getText());
 
             FXMLLoader loader = new FXMLLoader();
             URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/valid.fxml");
@@ -130,27 +66,9 @@ public class ModifyProfileController {
             modification.setScene(new Scene(root));
 
             myProfileController.initialize();
-        } else {
-            errorLabel.setText("Wrong current password");
+        } catch (Exception e) {
+            errorLabel.setText(e.getMessage());
         }
-    }
-
-    private <T> T handleEmptyField(String fieldName) {
-        return handleEmptyField(fieldName,"String");
-    }
-
-    private <T> T handleEmptyField(String fieldName, String type) {
-        if (errorLabel.getText().isEmpty()){
-            errorLabel.setText("Please fill all the fields, empty fields: " + fieldName);
-        }else{
-            errorLabel.setText(errorLabel.getText() + ", " + fieldName);
-        }
-        if (type.equals("String")){
-            return (T) "";
-        }else if (type.equals("int")){
-            return (T)(Integer) 0;
-        }
-        return null;
     }
 
     private void handleEnterKeyPress(KeyEvent event) {
