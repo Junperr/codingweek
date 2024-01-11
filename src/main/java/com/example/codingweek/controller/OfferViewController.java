@@ -62,7 +62,7 @@ public class OfferViewController extends VBox {
         this.zipCode.setText(bf.getUserByUsername(offer.getUser()).zipCode);
         this.offerCategory.setText(offer.categoryString());
 
-        Image image = new Image(Main.class.getClassLoader().getResource("static/images/" + offer.getImagePath()).toExternalForm());
+        Image image = new Image(Main.class.getClassLoader().getResource("static/images/offers/" + offer.getImagePath()).toExternalForm());
         this.imageOffer.setImage(image);
         illu.setImage(new Image("static/images/florain.png"));
         illu.setFitHeight(20);

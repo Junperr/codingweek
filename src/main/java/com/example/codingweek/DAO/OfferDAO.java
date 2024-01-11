@@ -141,7 +141,7 @@ public class OfferDAO {
 
     public ArrayList<Offer> getOffersWithFilters(String type, String zipCode, String priceMin, String priceMax, ArrayList<String> Selectedcategories) {
         Map<String, Object> args = getFilters(type, zipCode, priceMin, priceMax, Selectedcategories);
-        System.out.println("here");
+
         var query = "select * from Offers as o join Categories as c on c.offer = o.id join Users u on o.user = u.userName ";
         if (!args.isEmpty()) {
             query += "where";
@@ -186,11 +186,10 @@ public class OfferDAO {
                 query += "and o.user != '" + CurrentUser.getUser().userName + "' and o.availability = 'true' group by o.id";
             }
         } else query = "select * from offers";
-        System.out.println(query);
+
         ArrayList<HashMap<String, Object>> offerMap = db.fetchAllMap(query);
-        System.out.println(offerMap);
+
         ArrayList<Offer> offers = new ArrayList<>();
-        ArrayList<String> categoriesString = new ArrayList<>();
         for (HashMap<String, Object> offer : offerMap) {
             System.out.println(offer.get("id"));
 
