@@ -89,4 +89,19 @@ public class OfferViewController extends VBox {
 
     public void goToUser(MouseEvent mouseEvent) {
     }
+
+    public void hoverHandler(MouseEvent mouseEvent) {
+        offer.setStyle("-fx-background-color: #f2f2f2");
+        offerTitle.setStyle("-fx-text-fill: #FFB5A7");
+        offer.setStyle("-fx-border-padding: 3");
+        offer.setStyle("-fx-border-color: #FFB5A7");
+    }
+
+    public void exitHandler(MouseEvent mouseEvent) {
+        offer.setStyle("-fx-background-color: #ffffff");
+        offerTitle.setStyle("-fx-text-fill: #000000");
+        offer.setStyle("-fx-border-padding: 3");
+        offer.setStyle("-fx-border-color: #ffffff");
+
+    }
 }

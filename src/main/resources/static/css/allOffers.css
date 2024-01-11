@@ -10,6 +10,11 @@
     -fx-font-size: 12 px;
 }
 
+.title{
+
+    -fx-font-weight: bold;
+}
+
 .button{
     -fx-background-color: #FFB5A7;
     -fx-text-fill: #ffffff;
@@ -44,4 +49,14 @@
 .toolbar{
     -fx-background-color: #FCD5CE;
 }
+
+.scrollpane{
+    -fx-background-color: #ffffff;
+    -fx-border-padding: 3;}
+
+.background{
+    -fx-background-color: #ffffff;
+}
+
+
 
