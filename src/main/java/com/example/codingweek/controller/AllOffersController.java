@@ -46,8 +46,7 @@ public class AllOffersController implements Initializable {
         offers.getChildren().clear();
 
         OfferDAO offerDAO = new OfferDAO();
-        ArrayList<Offer> offers = offerDAO.getAllOffers();
-        offers = offerDAO.getOfferAvailableWithoutOwnOffer(CurrentUser.getUser().userName);
+        ArrayList<Offer> offers = offerDAO.getOfferAvailableWithoutOwnOffer(CurrentUser.getUser().userName);
         for (Offer offer: offers) {
             try {
                 loadOffersFromDatabase(offer.getTitle(), offer.getDescription(), offer.getImagePath(), offer.getPrice().toString(), offer.getUser(), offer.getId().toString());
@@ -97,7 +96,7 @@ public class AllOffersController implements Initializable {
         if (!chosenPriceMax.equals("")) map.put("priceMax", chosenPriceMax);
         if (!chosenPriceMin.equals("")) map.put("priceMin", chosenPriceMin);
 
-        ArrayList<Offer> offers = offerDAO.getOffersWithFilters(map);
+        ArrayList<Offer> offers = offerDAO.getAllOffers();
 
         //affichage
         updateVBoxContent(offers);
