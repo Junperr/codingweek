@@ -9,104 +9,117 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <?import com.example.codingweek.javafxComponent.ComboPanel?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../css/newOffer.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.NewOfferController">
+
+<AnchorPane id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../css/newOffer.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.NewOfferController">
     <children>
-        <Label layoutX="513.0" layoutY="119.0" text="New offer" />
-        <HBox layoutX="334.0" layoutY="208.0" prefHeight="318.0" prefWidth="411.0">
-            <children>
-                <VBox alignment="TOP_RIGHT" prefHeight="316.0" prefWidth="138.0">
-                    <children>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="100.0">
-                            <children>
-                                <Label text="Title :  " />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="100.0">
-                            <children>
-                                <Label text="Description :  " />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="100.0">
-                            <children>
-                                <Label text="Type :  " />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="100.0">
-                            <children>
-                                <Label text="Theme :  " />
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="100.0">
-                            <children>
-                                <Label text="Price :  " />
-                            </children>
-                        </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="105.0" prefWidth="138.0">
-                     <children>
-                        <Label text="Image (Optional) :  " />
-                     </children>
-                  </HBox>
-                    </children>
-                </VBox>
-                <VBox prefHeight="254.0" prefWidth="252.0">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="252.0">
-                            <children>
-                                <TextField fx:id="titleTextField" />
-                            </children>
-                        </HBox>
-                        <HBox prefHeight="60.0" prefWidth="252.0">
-                            <children>
-                                <TextArea fx:id="desc" prefHeight="81.0" prefWidth="200.0">
-                                    <font>
-                                        <Font size="10.0" />
-                                    </font>
-                                    <HBox.margin>
-                                        <Insets bottom="1.0" top="1.0" />
-                                    </HBox.margin>
-                                </TextArea>
-                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="252.0">
-                     <children>
-                         <ChoiceBox fx:id="type" prefHeight="25.0" prefWidth="60.0" />
-                     </children>
-                        </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="252.0">
-                     <children>
-                        <ComboPanel fx:id="themeComboPanel" prefWidth="300" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="252.0">
-                     <children>
-                        <TextField fx:id="priceTextField" prefHeight="26.0" prefWidth="60.0" />
-                        <Label prefHeight="18.0" prefWidth="30.0" text="€">
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="103.0" prefWidth="252.0" spacing="20.0">
-                     <children>
-                        <Button fx:id="addImageButton" mnemonicParsing="false" onAction="#addImage" text="+" />
-                        <ImageView id="image" fx:id="imageArea" fitHeight="84.0" fitWidth="85.0" onMouseClicked="#suppImage" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </HBox>
-                    </children>
-                </VBox>
-            </children>
-        </HBox>
-      <Button fx:id="newOfferButton" layoutX="513.0" layoutY="550.0" mnemonicParsing="false" onMouseClicked="#submit" text="Submit" />
-      <Button fx:id="newOfferToOffersButton" layoutX="37.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#goHome" text="←">
+      <Button fx:id="newOfferToOffersButton" layoutX="68.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#goHome" stylesheets="@../css/newOffer.css" text="←">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
       <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="282.0" layoutY="62.0" textFill="RED" />
+      <Pane id="box" fx:id="box" layoutX="294.0" layoutY="44.0" prefHeight="631.0" prefWidth="491.0" stylesheets="@../css/newOffer.css">
+         <children>
+              <HBox id="hbox" layoutX="40.0" layoutY="64.0" prefHeight="467.0" prefWidth="411.0">
+                  <children>
+                      <VBox alignment="TOP_RIGHT" prefHeight="318.0" prefWidth="120.0">
+                          <children>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="100.0">
+                                  <children>
+                                      <Label id="text" stylesheets="@../css/newOffer.css" text="Title :  " />
+                                  </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="147.0" prefWidth="118.0">
+                                  <children>
+                                      <Label id="text" stylesheets="@../css/newOffer.css" text="Description :  " />
+                                  </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="77.0" prefWidth="118.0">
+                                  <children>
+                                      <Label id="text" stylesheets="@../css/newOffer.css" text="Type :  " />
+                                  </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="120.0" prefWidth="118.0">
+                                  <children>
+                                      <Label id="text" stylesheets="@../css/newOffer.css" text="Theme :  " />
+                                  </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="61.0" prefWidth="118.0">
+                                  <children>
+                                      <Label id="text" stylesheets="@../css/newOffer.css" text="Price :  " />
+                                  </children>
+                              </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="118.0">
+                           <children>
+                              <VBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="98.0">
+                                 <children>
+                                    <Label id="text" stylesheets="@../css/newOffer.css" text="Image :  " />
+                                    <Label text=" (Optional)    " />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                          </children>
+                      </VBox>
+                      <VBox alignment="CENTER_RIGHT" prefHeight="369.0" prefWidth="296.0" spacing="10.0">
+                          <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0">
+                                  <children>
+                                      <TextField id="textfield" fx:id="titleTextField" prefHeight="26.0" prefWidth="226.0" stylesheets="@../css/newOffer.css" />
+                                  </children>
+                              </HBox>
+                              <HBox prefHeight="120.0" prefWidth="300.0">
+                                  <children>
+                                      <TextArea id="textarea" fx:id="desc" prefHeight="120.0" prefWidth="300.0" stylesheets="@../css/newOffer.css">
+                                          <font>
+                                              <Font size="10.0" />
+                                          </font>
+                                          <HBox.margin>
+                                              <Insets bottom="1.0" top="1.0" />
+                                          </HBox.margin>
+                                      </TextArea>
+                                  </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="242.0">
+                           <children>
+                               <ChoiceBox id="choicebox" fx:id="type" prefHeight="25.0" prefWidth="110.0" stylesheets="@../css/newOffer.css" />
+                           </children>
+                              </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="120.0" prefWidth="252.0">
+                           <children>
+                              <ComboPanel id="combopanel" fx:id="themeComboPanel" prefWidth="300" stylesheets="@../css/newOffer.css" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="252.0">
+                           <children>
+                              <TextField id="textfield" fx:id="priceTextField" prefHeight="26.0" prefWidth="60.0" stylesheets="@../css/newOffer.css" />
+                              <ImageView fx:id="florainImage" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="296.0" spacing="20.0">
+                           <children>
+                              <Button fx:id="addImageButton" mnemonicParsing="false" onAction="#addImage" prefHeight="38.0" prefWidth="68.0" stylesheets="@../css/newOffer.css" text="+" />
+                              <Pane id="background" fx:id="background" prefHeight="86.0" prefWidth="203.0">
+                                 <children>
+                                    <ImageView id="cross" fx:id="crossImage" fitHeight="50.0" fitWidth="50.0" layoutX="17.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView id="image" fx:id="imageArea" fitHeight="69.0" fitWidth="85.0" onMouseClicked="#suppImage" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                          </children>
+                      </VBox>
+                  </children>
+              </HBox>
+            <Button fx:id="newOfferButton" layoutX="219.0" layoutY="566.0" mnemonicParsing="false" onMouseClicked="#submit" stylesheets="@../css/newOffer.css" text="Submit" />
+      
+              <Label id="newOffer" fx:id="newOffer" layoutX="202.0" layoutY="23.0" stylesheets="@../css/newOffer.css" text="New offer" />
+         </children>
+      </Pane>
     </children>
 </AnchorPane>
