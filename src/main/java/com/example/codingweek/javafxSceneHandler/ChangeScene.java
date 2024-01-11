@@ -1,6 +1,8 @@
 package com.example.codingweek.javafxSceneHandler;
 
 import com.example.codingweek.Main;
+import com.example.codingweek.controller.ModifyProfileController;
+import com.example.codingweek.controller.MyProfileController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -28,5 +30,22 @@ public class ChangeScene {
         Parent root = loader.load();
         Stage modification = (Stage) labelName.getScene().getWindow();
         modification.setScene(new Scene(root));
+    }
+
+    public void changeSceneModifyProfile(String setTitle, MyProfileController mainController) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL xmlUrl = getClass().getClassLoader().getResource("static/fxml/modifyProfile.fxml");
+        loader.setLocation(xmlUrl);
+        Parent root = loader.load();
+
+        Stage modification = new Stage();
+        modification.setTitle("Change " + setTitle);
+        modification.setScene(new Scene(root));
+
+        ModifyProfileController modifyProfileController = loader.getController();
+        modifyProfileController.initData(setTitle);
+        modifyProfileController.setStage(modification);
+        modifyProfileController.setMainController(mainController);
+        modification.showAndWait();
     }
 }

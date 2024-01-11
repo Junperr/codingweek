@@ -2,6 +2,7 @@ package com.example.codingweek.controller;
 
 import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.User;
+import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,6 +23,8 @@ public class MyProfileController {
     @FXML
     private Label userNameBig, balance, userName, password, lastName, firstName, email, address, zip, city;
 
+    private final ChangeScene changeScene = new ChangeScene();
+
     @FXML
     public void initialize() {
         User currentUser = CurrentUser.getUser();
@@ -39,92 +42,27 @@ public class MyProfileController {
 
     @FXML
     private void setUserName() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getClassLoader().getResource("static/fxml/modifyProfile.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
-
-        Stage modification = new Stage();
-        modification.setTitle("Change username");
-        modification.setScene(new Scene(root));
-
-        ModifyProfileController modifyProfileController = loader.getController();
-        modifyProfileController.initData("username");
-        modifyProfileController.setStage(modification);
-        modifyProfileController.setMainController(this);
-        modification.showAndWait();
+        changeScene.changeSceneModifyProfile("username", this);
     }
 
     @FXML
     private void setPassword() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getClassLoader().getResource("static/fxml/modifyProfile.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
-
-        Stage modification = new Stage();
-        modification.setTitle("Change password");
-        modification.setScene(new Scene(root));
-
-        ModifyProfileController modifyProfileController = loader.getController();
-        modifyProfileController.initData("password");
-        modifyProfileController.setStage(modification);
-        modifyProfileController.setMainController(this);
-        modification.showAndWait();
+        changeScene.changeSceneModifyProfile("password", this);
     }
 
     @FXML
     private void setLastName() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getClassLoader().getResource("static/fxml/modifyProfile.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
-
-        Stage modification = new Stage();
-        modification.setTitle("Change last name");
-        modification.setScene(new Scene(root));
-
-        ModifyProfileController modifyProfileController = loader.getController();
-        modifyProfileController.initData("last name");
-        modifyProfileController.setStage(modification);
-        modifyProfileController.setMainController(this);
-        modification.showAndWait();
+        changeScene.changeSceneModifyProfile("last name", this);
     }
 
     @FXML
     private void setFirstName() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getClassLoader().getResource("static/fxml/modifyProfile.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
-
-        Stage modification = new Stage();
-        modification.setTitle("Change first name");
-        modification.setScene(new Scene(root));
-
-        ModifyProfileController modifyProfileController = loader.getController();
-        modifyProfileController.initData("first name");
-        modifyProfileController.setStage(modification);
-        modifyProfileController.setMainController(this);
-        modification.showAndWait();
+        changeScene.changeSceneModifyProfile("first name", this);
     }
 
     @FXML
     private void setEmail() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        URL xmlUrl = getClass().getClassLoader().getResource("static/fxml/modifyProfile.fxml");
-        loader.setLocation(xmlUrl);
-        Parent root = loader.load();
-
-        Stage modification = new Stage();
-        modification.setTitle("Change email");
-        modification.setScene(new Scene(root));
-
-        ModifyProfileController modifyProfileController = loader.getController();
-        modifyProfileController.initData("email");
-        modifyProfileController.setStage(modification);
-        modifyProfileController.setMainController(this);
-        modification.showAndWait();
+        changeScene.changeSceneModifyProfile("email", this);
     }
 
     @FXML
