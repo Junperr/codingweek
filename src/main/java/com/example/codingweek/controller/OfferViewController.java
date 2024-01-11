@@ -55,18 +55,9 @@ public class OfferViewController extends VBox {
         //access to user's zipCode
         BigFacade bf = new BigFacade();
         this.zipCode.setText(bf.getUserByUsername(offer.getUser()).zipCode);
+        this.offerCategory.setText(offer.categoryString());
 
-        StringJoiner categories = new StringJoiner(", ");
-        for (String str : offer.getCategories()) {
-            categories.add(str);
-        }
-        this.offerCategory.setText(categories.toString());
-
-        URL imageUrl = Main.class.getClassLoader().getResource("static/images/" + offer.getImagePath());
-        if (imageUrl == null) {
-            imageUrl = Main.class.getClassLoader().getResource("static/images/default.png");
-        }
-        Image image = new Image(imageUrl.toExternalForm());
+        Image image = new Image(Main.class.getClassLoader().getResource("static/images/" + offer.getImagePath()).toExternalForm());
         this.imageOffer.setImage(image);
     }
 
@@ -84,7 +75,6 @@ public class OfferViewController extends VBox {
         OfferController offerController = loader.getController();
         offerController.initOfferPage(offer);
         modification.getScene().setRoot(root);
-
     }
 
     public void goToUser(MouseEvent mouseEvent) {

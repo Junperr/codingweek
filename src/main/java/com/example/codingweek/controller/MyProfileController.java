@@ -134,6 +134,7 @@ public class MyProfileController {
 
             OrderViewController orderViewController = loader.getController();
             orderViewController.initOrderView(order);
+            orders.getChildren().add(orderVBox);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
