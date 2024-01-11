@@ -40,24 +40,24 @@
               </ToolBar>
             <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="260.0" style="-fx-background-color: #FFB5A7;" stylesheets="@../css/layout.css">
                <children>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="message" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#hoverHandlerM" onMouseExited="#hoverExitHandlerM">
                      <styleClass>
-                        <String fx:value="messages2" />
                         <String fx:value="messages" />
+                        <String fx:value="messages2" />
                      </styleClass>
                   </ImageView>
-                  <Label fx:id="toMessage" prefHeight="22.0" prefWidth="98.0" stylesheets="@../css/layout.css" text="Messages">
+                  <Label fx:id="toMessage" prefHeight="22.0" prefWidth="98.0" stylesheets="@../css/layout.css" text="Messages" onMouseEntered="#hoverHandlerM" onMouseExited="#hoverExitHandlerM">
                      <styleClass>
                         <String fx:value="text" />
                         <String fx:value="messages2" />
                      </styleClass>
                   </Label>
-                  <ImageView fx:id="logout" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#logout" onMouseEntered="#hoverHandler" onMouseExited="#hoverExitHandler" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="logout" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#logout" onMouseEntered="#hoverHandlerL" onMouseExited="#hoverExitHandlerL" pickOnBounds="true" preserveRatio="true">
                      <styleClass>
                         <String fx:value="logout" />
                         <String fx:value="logout2" />
                      </styleClass></ImageView>
-                      <Label fx:id="logOut" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#logout" onMouseEntered="#hoverHandler" onMouseExited="#hoverExitHandler" prefHeight="22.0" prefWidth="74.0" stylesheets="@../css/layout.css" text="Log Out">
+                      <Label fx:id="logOut" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#logout" onMouseEntered="#hoverHandlerL" onMouseExited="#hoverExitHandlerL" prefHeight="22.0" prefWidth="74.0" stylesheets="@../css/layout.css" text="Log Out">
                      <styleClass>
                         <String fx:value="text" />
                         <String fx:value="logout2" />
