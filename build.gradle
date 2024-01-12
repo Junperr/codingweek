@@ -40,13 +40,21 @@ dependencies {
   implementation 'com.fasterxml.jackson.core:jackson-core:2.12.4'
   implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.4'
 
+  testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.3")
+
   implementation 'org.xerial:sqlite-jdbc:3.41.2.2'
-  testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
 }
 
 test {
-useJUnitPlatform()}
+  useJUnitPlatform()
+
+  testLogging {
+    events "passed", "skipped", "failed", "standardOut", "standardError"
+  }
+}
+
 
 jlink {
   imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
