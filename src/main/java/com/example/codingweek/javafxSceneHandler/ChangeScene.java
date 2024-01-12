@@ -26,11 +26,13 @@ public class ChangeScene {
 
     public void changeSameSceneButton(String pathToFXML, Button buttonName) throws IOException {
         Stage modification = (Stage) buttonName.getScene().getWindow();
+        modification.setResizable(false);
         modification.setScene(new Scene(loader(pathToFXML).load()));
     }
 
     public void changeSameSceneLabel(String pathToFXML, Label labelName) throws IOException {
         Stage modification = (Stage) labelName.getScene().getWindow();
+        modification.setResizable(false);
         modification.setScene(new Scene(loader(pathToFXML).load()));
     }
 
@@ -39,6 +41,7 @@ public class ChangeScene {
         Parent root = loader.load();
 
         Stage modification = new Stage();
+        modification.setResizable(false);
         modification.setTitle("Change " + setTitle);
         modification.setScene(new Scene(root));
 

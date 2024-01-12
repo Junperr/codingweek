@@ -14,12 +14,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.StringJoiner;
 import java.util.UUID;
 
 public class OfferController {
@@ -51,7 +51,9 @@ public class OfferController {
         BigFacade bf = new BigFacade();
         this.offerPageZipCode.setText(bf.getUserByUsername(offer.getUser()).zipCode);
 
-        URL imageUrl = Main.class.getClassLoader().getResource("static/images/" + offer.getImagePath());
+        URL imageUrl = Main.class.getClassLoader().getResource("static/images/offers/"+ offer.getImagePath());
+
+        System.out.println(offer.getImagePath());
         if (imageUrl == null) {
             imageUrl = Main.class.getClassLoader().getResource("static/images/default.png");
         }
@@ -90,5 +92,20 @@ public class OfferController {
             a.setContentText("You can't order from yourself");
             a.show();
         }
+    }
+
+    public void goToUserProfile(MouseEvent mouseEvent) throws Exception {
+        BigFacade bf = new BigFacade();
+        User seller = bf.getUserByUsername(this.sellerId.getText());
+
+        URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/profileForOthers.fxml");
+        FXMLLoader loader = new FXMLLoader(xmlUrl);
+        loader.setLocation(xmlUrl);
+        Parent root = loader.load();
+        Stage modification = (Stage) sellerId.getScene().getWindow();
+
+        ProfileForOthersController profileForOthersController = loader.getController();
+        profileForOthersController.initUserPageForOthers(bf.getUserByUsername(sellerId.getText()));
+        modification.getScene().setRoot(root);
     }
 }

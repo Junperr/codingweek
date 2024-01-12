@@ -1,11 +1,13 @@
 package com.example.codingweek.facade;
 
 import com.example.codingweek.DAO.MessageDAO;
+import com.example.codingweek.DAO.EvalDAO;
 import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.DAO.OrderDAO;
 import com.example.codingweek.DAO.UserDAO;
 import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.Message;
+import com.example.codingweek.data.Eval;
 import com.example.codingweek.data.Offer;
 import com.example.codingweek.data.Order;
 import com.example.codingweek.data.User;
@@ -22,6 +24,7 @@ public class BigFacade {
     private final UserDAO userDAO;
 
     private final OrderDAO orderDAO;
+    private final EvalDAO evalDAO;
 
     private final MessageDAO messageDAO;
 
@@ -30,6 +33,7 @@ public class BigFacade {
         this.userDAO = new UserDAO();
         this.orderDAO = new OrderDAO();
         this.messageDAO = new MessageDAO();
+        this.evalDAO = new EvalDAO();
     }
     // Offers
     public Offer createNewOffer(String title, String description, String imagePath, Integer price, String type, ArrayList<String> categories) {
@@ -85,6 +89,18 @@ public class BigFacade {
     public void passOrder(UUID offerId, String pwd, User user) throws Exception{
         orderDAO.passOrder(offerId, pwd, user);
     }
+
+    public ArrayList<Order> getOwnOrdersOther(String username){
+        return orderDAO.getOwnOrdersOther(username);
+    }
+
+
+    // Eval
+
+    public Eval createNewEval(UUID idReview, int eval, UUID orderId, String writer, String reviewDescription){
+        return evalDAO.createNewEval(idReview, eval, orderId, writer, reviewDescription);
+    }
+
 
     // Messages
 

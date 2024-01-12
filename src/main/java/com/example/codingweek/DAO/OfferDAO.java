@@ -180,17 +180,16 @@ public class OfferDAO {
             if (queryEnd.length() >= 3) {
                 queryEnd = queryEnd.substring(0, queryEnd.length() - 3);
                 query += queryEnd;
-                query += ") group by o.id";
+                query += ") and o.user != '" + CurrentUser.getUser().userName + "' and o.availability = 'true' group by o.id";
             } else {
                 query = query.substring(0, query.length() - 3);
-                query += " group by o.id";
+                query += "and o.user != '" + CurrentUser.getUser().userName + "' and o.availability = 'true' group by o.id";
             }
         } else query = "select * from offers";
 
         ArrayList<HashMap<String, Object>> offerMap = db.fetchAllMap(query);
 
         ArrayList<Offer> offers = new ArrayList<>();
-        ArrayList<String> categoriesString = new ArrayList<>();
         for (HashMap<String, Object> offer : offerMap) {
             System.out.println(offer.get("id"));
 

@@ -1,5 +1,6 @@
 package com.example.codingweek.DAO;
 
+import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.Offer;
 import com.example.codingweek.data.Order;
 import com.example.codingweek.data.User;
@@ -93,6 +94,18 @@ public class OrderDAO {
 
 
 
+    }
+
+    public ArrayList<Order> getOwnOrdersOther(String usernameSeller){
+        ArrayList<Order> orderList = new ArrayList<>();
+        ArrayList<HashMap<String, Object>> ordersMap = db.fetchAllMap("SELECT * FROM Orders Where buyer = ? and seller = ?", CurrentUser.getUser().userName, usernameSeller);
+        for (HashMap<String,Object> order : ordersMap){
+            orderList.add(new Order(UUID.fromString(order.get("id").toString()),
+                    (Integer) order.get("cost"),
+                    order.get("buyer").toString(),
+                    order.get("seller").toString()));
+        }
+        return orderList;
     }
 
 }

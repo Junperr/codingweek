@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.ProfileForOthersController">
+        <fx:include fx:id="menuBar" source="layout.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+        <VBox layoutY="37.0" prefHeight="683.0" prefWidth="1080.0">
+            <children>
+                <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="600.0">
+                    <children>
+                        <Label fx:id="balance" prefHeight="18.0" prefWidth="74.0" />
+                    </children>
+                    <padding>
+                        <Insets left="20.0" />
+                    </padding>
+                </HBox>
+                <Accordion prefHeight="639.0" prefWidth="1080.0">
+                    <panes>
+                        <TitledPane animated="false" prefHeight="89.0" prefWidth="600.0" text="Profile">
+                            <content>
+                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                        <VBox prefHeight="542.0" prefWidth="226.0">
+                                            <children>
+                                                <Pane prefHeight="30.0" prefWidth="165.0">
+                                                    <children>
+                                                        <Label layoutX="166.0" layoutY="8.0" text="Username :" />
+                                                    </children></Pane>
+                                                <Pane prefHeight="30.0" prefWidth="165.0">
+                                                    <children>
+                                                        <Label layoutX="172.0" layoutY="8.0" text="ZIP Code :" />
+                                                    </children></Pane>
+                                                <Pane prefHeight="30.0" prefWidth="165.0">
+                                                    <children>
+                                                        <Label layoutX="199.0" layoutY="8.0" text="City :" />
+                                                    </children></Pane>
+                                 <Pane layoutX="10.0" layoutY="101.0" prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Label layoutX="143.0" layoutY="7.0" prefHeight="17.0" prefWidth="95.0" text="Average Marks :" />
+                                    </children>
+                                 </Pane>
+                                            </children>
+                                        </VBox>
+                                        <VBox prefHeight="542.0" prefWidth="350.0">
+                                            <children>
+                                                <Pane prefHeight="30.0" prefWidth="178.0">
+                                                    <children>
+                                                        <Label fx:id="userName" layoutX="77.0" layoutY="6.0" prefHeight="17.0" prefWidth="264.0" text="Label" />
+                                                    </children>
+                                                </Pane>
+                                                <Pane prefHeight="30.0" prefWidth="178.0">
+                                                    <children>
+                                                        <Label fx:id="zip" layoutX="77.0" layoutY="5.0" prefHeight="17.0" prefWidth="266.0" text="Label" />
+                                                    </children>
+                                                </Pane>
+                                                <Pane prefHeight="30.0" prefWidth="178.0">
+                                                    <children>
+                                                        <Label fx:id="city" layoutX="77.0" layoutY="6.0" prefHeight="17.0" prefWidth="264.0" text="Label" />
+                                                    </children>
+                                                </Pane>
+                                 <Pane layoutX="10.0" layoutY="101.0" prefHeight="30.0" prefWidth="178.0">
+                                    <children>
+                                       <Label fx:id="marks" layoutX="77.0" layoutY="6.0" prefHeight="17.0" prefWidth="264.0" text="Label" />
+                                    </children>
+                                 </Pane>
+                                            </children>
+                                        </VBox>
+                                        <VBox prefHeight="229.0" prefWidth="177.0">
+                                            <children>
+                                                <Pane prefHeight="30.0" prefWidth="165.0" />
+                                                <Pane prefHeight="30.0" prefWidth="165.0" />
+                                                <Pane prefHeight="31.0" prefWidth="165.0" />
+                                                <Pane prefHeight="30.0" prefWidth="165.0" />
+                                                <Pane prefHeight="30.0" prefWidth="165.0" />
+                                                <Pane prefHeight="30.0" prefWidth="165.0" />
+                                                <Pane prefHeight="30.0" prefWidth="165.0" />
+                                                <Pane prefHeight="30.0" prefWidth="165.0" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                            </content>
+                        </TitledPane>
+                        <TitledPane animated="false" prefHeight="466.0" prefWidth="600.0" text="My orders ">
+                            <VBox layoutY="135.0" prefHeight="582.0" prefWidth="1080.0">
+                                <children>
+                                    <ScrollPane prefHeight="602.0" prefWidth="1080.0">
+                                        <content>
+                                            <VBox fx:id="orderToAddOther" prefHeight="567.0" prefWidth="1078.0">
+                                                <padding>
+                                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                                </padding>
+                                            </VBox>
+                                        </content>
+                                    </ScrollPane>
+                                </children>
+                            </VBox>
+                        </TitledPane>
+                        <TitledPane animated="false" text="Available offers">
+                            <VBox layoutY="135.0" prefHeight="582.0" prefWidth="1080.0">
+                                <children>
+                                    <ScrollPane prefHeight="602.0" prefWidth="1080.0">
+                                        <content>
+                                            <VBox fx:id="offerToAddOther" prefHeight="567.0" prefWidth="1078.0">
+                                                <padding>
+                                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                                </padding>
+                                            </VBox>
+                                        </content>
+                                    </ScrollPane>
+                                </children>
+                            </VBox>
+                        </TitledPane>
+                    </panes>
+                </Accordion>
+            </children>
+        </VBox>
+
+</AnchorPane>

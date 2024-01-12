@@ -1,21 +1,17 @@
 package com.example.codingweek.controller;
 
-import com.example.codingweek.Main;
 import com.example.codingweek.auth.CurrentUser;
+import com.example.codingweek.data.Eval;
 import com.example.codingweek.data.User;
-import com.example.codingweek.database.DataBase;
+import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.UUID;
 
 public class ProfessorController {
@@ -60,6 +56,7 @@ public class ProfessorController {
         String pw = (PW.getText() != null && !PW.getText().isEmpty()) ? PW.getText(): handleEmptyField("password");
         String description = descriptionTextArea.getText();
         UUID id = UUID.randomUUID();
+        String writer = CurrentUser.getUser().userName;
 
         if (!errorLabel.getText().isEmpty()) {
             return;
@@ -76,15 +73,19 @@ public class ProfessorController {
         }
 
         User currentUser = CurrentUser.getUser();
-        DataBase db = DataBase.getInstance();
 
         if (currentUser.password.equals(pw)) {
-            db.exec("insert into Marks (id , mark , order, description) values (?,?,?,?)", id, mark, order_id, description);
-
+            //create new Review
+            BigFacade bigFacade = new BigFacade();
+            Eval eval = bigFacade.createNewEval(id, mark, order_id, writer, description);
             changeScene.changeSameSceneButton("static/fxml/valid.fxml", saveButton);
         } else {
             errorLabel.setText("Wrong current password");
         }
+
+
+
+
     }
 
     private <T> T handleEmptyField(String fieldName) {
