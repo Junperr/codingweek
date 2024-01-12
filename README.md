@@ -32,7 +32,7 @@ And propose or request services. In exchange of a virtual money called Florin.
   2. Basic front-end of the pages OK
   3. Artistic Direction OK
   + Database OK
-
+ 
   - Tuesday :
     + Log-in & Log-out OK
   1. Simple offer OK
