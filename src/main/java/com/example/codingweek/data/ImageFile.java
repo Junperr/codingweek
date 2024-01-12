@@ -1,6 +1,9 @@
 package com.example.codingweek.data;
 
+import com.example.codingweek.Main;
+
 import java.io.File;
+import org.apache.commons.io.FileUtils;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -41,16 +44,38 @@ public class ImageFile extends File {
             // Full path for copying
             String imageName = ImageFile.getImageName(image);
             Path sourcePath = image.toPath();
-            Path targetPath = Paths.get("/home/junper/Info/PCD/codingweek-21/src/main/resources/static/images", imageName);
-
+            Path targetPath = Paths.get("src/main/resources/static/images", imageName);
             try {
                 // Copy the file using Files.copy
+                //@todo make target path dynamic
+                File newImage =  new File(targetPath.toString());
                 Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING);
+                waitForFileCompletion(newImage,2000);
             } catch (Exception e) {
                 // Handle the exception
                 throw new Exception("Error while saving the image", e);
             }
         }
     }
+
+    private static void waitForFileCompletion(File file, long timeout) throws InterruptedException {
+        long startTime = System.currentTimeMillis();
+        long lastModified = file.lastModified();
+
+        while (System.currentTimeMillis() - startTime < timeout) {
+            Thread.sleep(200); // Sleep for 1 second
+
+            long currentModified = file.lastModified();
+            if (currentModified == lastModified) {
+                // File hasn't been modified, assume it's completed
+                return;
+            }
+
+            lastModified = currentModified;
+        }
+
+        throw new RuntimeException("Timeout waiting for file completion");
+    }
+
 
 }

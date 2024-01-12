@@ -19,6 +19,7 @@ import java.util.UUID;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        System.out.println(Main.class.getClassLoader().getResource("static/fxml/form-login.fxml"));
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getClassLoader().getResource("static/fxml/form-login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
         String css = Objects.requireNonNull(Main.class.getClassLoader().getResource("static/css/login.css")).toExternalForm();
@@ -29,19 +30,7 @@ public class Main extends Application {
         }
 
     public static void main(String[] args) {
-//        ImageFile imagetest = new ImageFile("/home/junper/Info/PCD/codingweek-21/src/main/resources/static/images/offers/pelle.jpg", "offers/");
-//        System.out.println(ImageFile.getImageName(imagetest));
-//        System.out.println(imagetest.getTotalSpace());
-//        System.out.println(imagetest.getFileExtension());
-//        User admin = new UserDAO().getUserByUsername("admin");
-//        CurrentUser.logUser(admin);
-//        BigFacade bf = new BigFacade();
-//        try {
-//            bf.createNewOffer("test", "test", imagetest, 5, "Offer", new ArrayList<String>());
-//        } catch (Exception e) {
-//            System.out.println("Offer was not created");
-//            e.printStackTrace();
-//        }
+
 
                 launch();
     }

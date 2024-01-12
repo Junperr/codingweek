@@ -94,35 +94,21 @@ public class NewOfferController {
 
         BigFacade bigFacade = new BigFacade();
 
-        selectedFile.directory = "offers/";
+        this.selectedFile.directory = "offers/";
 
-        // image is not implemented yet so by default we put null for the path
-        Offer offer = bigFacade.createNewOffer(titleTextField.getText(), desc.getText(), selectedFile, Integer.parseInt(priceTextField.getText()), type.getValue(), (ArrayList<String>) themeComboPanel.getSelectedThemes());
+        ArrayList<String> themes = new ArrayList<>();
+
+        themeComboPanel.getSelectedThemes().forEach(theme -> themes.add(theme));
+
+        bigFacade.createNewOffer(titleTextField.getText(), desc.getText(), selectedFile, Integer.parseInt(priceTextField.getText()), type.getValue(), themes);
+
+        changeScene.changeSameSceneButton("static/fxml/allOffers.fxml", newOfferButton);
 
     }
 
     @FXML
     private void goHome() throws IOException{
         changeScene.changeSameSceneButton("static/fxml/allOffers.fxml", newOfferToOffersButton);
-    }
-
-    private <T> T handleEmptyField(String fieldName) {
-        return handleEmptyField(fieldName, "String");
-    }
-
-    private <T> T handleEmptyField(String fieldName, String type) {
-        if (errorLabel.getText().isEmpty()) {
-            errorLabel.setText("Please fill all the fields, empty fields: " + fieldName);
-
-        } else {
-            errorLabel.setText(errorLabel.getText() + ", " + fieldName);
-        }
-        if (type.equals("String")) {
-            return (T) "";
-        } else if (type.equals("int")) {
-            return (T) (Integer) 0;
-        }
-        return null;
     }
 
     @FXML
@@ -133,11 +119,12 @@ public class NewOfferController {
                 new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
         );
 
-        selectedFile = (ImageFile) fileChooser.showOpenDialog(addImageButton.getScene().getWindow());
+        File selectedFile = fileChooser.showOpenDialog(addImageButton.getScene().getWindow());
 
-        if (selectedFile != null) {
+        this.selectedFile = new ImageFile(selectedFile.getPath(), "offers/");
+
+        if (this.selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toURL().toString());
-
 
             imageArea.setImage(image);
             background.setStyle("-fx-background-color: #f8edeb");
@@ -148,6 +135,7 @@ public class NewOfferController {
             crossImage.setFitHeight(imageArea.getFitHeight());
             rafraichirInterfaceUtilisateur();
         }
+
     }
 
     private void rafraichirInterfaceUtilisateur() {
