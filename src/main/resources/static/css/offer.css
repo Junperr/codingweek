@@ -23,3 +23,8 @@
 .left{
     -fx-font-weight: bold;
 }
+
+#offerTitle{
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
