@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class OfferDAOTest {
 
     @Test
-    public void addOfferTest(){
+    public void addOfferTest() throws Exception {
         User joelD = new UserDAO().getUserByUsername("joelD");
         CurrentUser.logUser(joelD);
 
@@ -26,7 +26,7 @@ public class OfferDAOTest {
         Offer offer = new Offer("Location d'aspirateur", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", "joelD", null, 50, "Loan", true, categories);
 
         OfferDAO offerDAO = new OfferDAO();
-        offerDAO.addOffer(offer);
+        offerDAO.addOffer(offer, null);
         DataBase db = DataBase.getInstance();
         ArrayList<HashMap<String,Object>> fetch = db.fetchAllMap("select * from Offers where id =?", offer.getId());
         assertEquals(1, fetch.size());
@@ -42,7 +42,7 @@ public class OfferDAOTest {
         assertEquals("Ménage", fetchCategories.get(1).get("category"));
     }
     @Test
-    public void newOfferTest(){
+    public void newOfferTest() throws Exception {
         User joelD = new UserDAO().getUserByUsername("joelD");
         CurrentUser.logUser(joelD);
         OfferDAO offerDAO = new OfferDAO();
