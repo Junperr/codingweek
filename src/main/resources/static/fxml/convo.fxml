@@ -23,7 +23,7 @@
       <HBox alignment="CENTER" layoutY="358.0" prefHeight="42.0" prefWidth="600.0" spacing="15.0" style="-fx-background-color: #f9dcc4;">
          <children>
             <TextField fx:id="messageTextField" prefHeight="26.0" prefWidth="497.0" />
-            <Button mnemonicParsing="false" text="Send" fx:id="sendMessage" onMouseClicked="#sendMess"/>
+            <Button mnemonicParsing="false" text="Send" onMouseClicked="#sendMess"/>
          </children>
       </HBox>
       <ScrollPane fx:id="scroll" layoutY="42.0" prefHeight="316.0" prefWidth="600.0">
