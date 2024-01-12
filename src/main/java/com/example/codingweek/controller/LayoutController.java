@@ -30,12 +30,9 @@ public class LayoutController {
         colorAdjust.setBrightness(1.0);
         logout.setEffect(colorAdjust);
 
-        BigFacade bf = new BigFacade();
-        Integer unread = bf.getUnreadNumberLoggedInUser();
-
-        if (unread > 0) {
-            toMessage.setText("Message (" + unread + ")");
-        }
+        toMessage.setText("Messages");
+        message.setImage(new Image("static/images/message.png"));
+        message.setEffect(colorAdjust);
     }
 
     @FXML

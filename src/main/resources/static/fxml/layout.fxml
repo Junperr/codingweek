@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox prefHeight="36.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.LayoutController">
+<HBox prefHeight="36.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.LayoutController">
 
     <children>
       <HBox prefHeight="36.0" prefWidth="1080.0">
@@ -38,15 +38,15 @@
                   <Insets />
                </HBox.margin>
               </ToolBar>
-            <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="260.0" style="-fx-background-color: #FFB5A7;" stylesheets="@../css/layout.css">
+            <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="325.0" style="-fx-background-color: #FFB5A7;" stylesheets="@../css/layout.css">
                <children>
-                  <ImageView fx:id="message" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#hoverHandlerM" onMouseExited="#hoverExitHandlerM">
+                  <ImageView fx:id="message" fitHeight="30.0" fitWidth="30.0" onMouseEntered="#hoverHandlerM" onMouseExited="#hoverExitHandlerM" pickOnBounds="true" preserveRatio="true">
                      <styleClass>
                         <String fx:value="messages" />
                         <String fx:value="messages2" />
                      </styleClass>
                   </ImageView>
-                  <Label fx:id="toMessage" prefHeight="22.0" prefWidth="98.0" stylesheets="@../css/layout.css" text="Messages" onMouseEntered="#hoverHandlerM" onMouseExited="#hoverExitHandlerM" onMouseClicked="#goToMessages">
+                  <Label fx:id="toMessage" onMouseClicked="#goToMessages" onMouseEntered="#hoverHandlerM" onMouseExited="#hoverExitHandlerM" prefHeight="22.0" prefWidth="115.0" stylesheets="@../css/layout.css" text="Messages">
                      <styleClass>
                         <String fx:value="text" />
                         <String fx:value="messages2" />
