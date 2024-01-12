@@ -53,7 +53,7 @@ public class DataBase {
         }
     }
 
-    public HashMap<String,Object> fetchOneMap(String query, Object... args) {
+    public HashMap<String, Object> fetchOneMap(String query, Object... args) {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             setParameters(preparedStatement, args);
@@ -62,7 +62,7 @@ public class DataBase {
             int columnCount = metaData.getColumnCount();
             HashMap row = new HashMap();
             for (int i = 1; i <= columnCount; i++) {
-                row.put(metaData.getColumnLabel(i),resultSet.getObject(i));
+                row.put(metaData.getColumnLabel(i), resultSet.getObject(i));
             }
             return row;
 
@@ -91,8 +91,8 @@ public class DataBase {
         }
     }
 
-    public ArrayList<HashMap<String,Object>> fetchAllMap(String query, Object... args) {
-        ArrayList<HashMap<String,Object>> result = new ArrayList<>();
+    public ArrayList<HashMap<String, Object>> fetchAllMap(String query, Object... args) {
+        ArrayList<HashMap<String, Object>> result = new ArrayList<>();
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -105,7 +105,7 @@ public class DataBase {
             while (resultSet.next()) {
                 HashMap row = new HashMap();
                 for (int i = 1; i <= columnCount; i++) {
-                    row.put(metaData.getColumnLabel(i),resultSet.getObject(i));
+                    row.put(metaData.getColumnLabel(i), resultSet.getObject(i));
                 }
                 result.add(row);
             }
@@ -161,10 +161,10 @@ public class DataBase {
 
                 // Insert data into Users
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('', '', 'admin', '', '', '', '', '', '100000000', '5')");
-                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Anna', 'Galkowski', 'annaG', 'anna.galkowski@telecomnancy.net', 'address1', '33000', 'city1', '12345678', '1000', '-1')");
-                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Joel', 'Duhem', 'joelD', 'joel.duhem@telecomnancy.net', 'address2', '59000', 'city1', '66666666', '0', '1')");
-                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Ugo', 'Gosso', 'ugoG', 'ugo.gosso@telecomnancy.net', 'address3', '25000', 'city1', '00000000', '9000', '4')");
-                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Julie', 'Zhen', 'julieZ', 'julie.zhen@telecomnancy.net', 'address4', '75000', 'city1', '88888888', '5000', '-1')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Anna', 'Galkowski', 'annaG', 'anna.galkowski@telecomnancy.net', 'address1', '33000', 'city1', '', '1000', '-1')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Joel', 'Duhem', 'joelD', 'joel.duhem@telecomnancy.net', 'address2', '59000', 'city1', '', '0', '1')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Ugo', 'Gosso', 'ugoG', 'ugo.gosso@telecomnancy.net', 'address3', '25000', 'city1', '', '9000', '4')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Julie', 'Zhen', 'julieZ', 'julie.zhen@telecomnancy.net', 'address4', '75000', 'city1', '', '5000', '-1')");
 
                 // Insert data into Offers
                 exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('6cc0106a-8d73-4ead-935e-971d00196e6f', 'Pelle à prêter', 'Loan', 'Une belle pelle à prêter', 'offers/pelle.jpg', 10, 'joelD', 'true')");
@@ -182,7 +182,7 @@ public class DataBase {
                 exec("INSERT INTO Categories (offer, category) VALUES" +
                         "('f3925355-d605-4f40-b012-829adb56738c', 'Cours')," +
                         "('f3925355-d605-4f40-b012-829adb56738c', 'Maths')," +
-                        "('c307e79f-de27-4803-b3f4-48007300a43f', 'Cours'),"+
+                        "('c307e79f-de27-4803-b3f4-48007300a43f', 'Cours')," +
                         "('c307e79f-de27-4803-b3f4-48007300a43f', 'Natation')");
 
 
@@ -195,7 +195,6 @@ public class DataBase {
                 exec("INSERT INTO Reviews (orderId, eval, writer, description) VALUES " +
                         "('fff862f5-dbd3-4c41-ac9a-b778fd2ed222', 1, 'annaG', 'Great service hahahaha...')," +
                         "('ec8f59cc-15df-4207-ab46-12789fc97e8d', 4, 'joelD', 'Had fun !')");
-
 
 
                 // Fetch data from Users
@@ -211,6 +210,28 @@ public class DataBase {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void reset() {
+        try {
+            // Clear all data from relevant tables
+            exec("DELETE FROM Categories");
+            exec("DELETE FROM Offers");
+            exec("DELETE FROM Users");
+            exec("DELETE FROM Orders");
+            exec("DELETE FROM Reviews");
+
+//            // Insert default data
+//            createDatabaseFile(); // Assuming this method exists in your class
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void init() {
+        createDatabaseFile();
     }
 
     public void printData(ArrayList<ArrayList<Object>> data) {

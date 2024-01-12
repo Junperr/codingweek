@@ -94,7 +94,10 @@ public class NewOfferController {
 
         BigFacade bf = new BigFacade();
 
-        this.selectedFile.directory = "offers/";
+        if (this.selectedFile != null){
+            this.selectedFile.directory = "offers/";
+        }
+
 
         ArrayList<String> themes = new ArrayList<>();
 

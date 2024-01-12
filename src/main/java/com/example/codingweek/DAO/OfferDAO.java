@@ -18,6 +18,8 @@ public class OfferDAO {
 
     public Offer newOffer(String title, String description, ImageFile image, Integer price, String type, ArrayList<String> Categories) throws Exception {
         Offer offer = new Offer(title, description, CurrentUser.getUser().userName, getImageName(image), price, type, true, Categories);
+        System.out.println(image);
+        System.out.println(getImageName(image));
         addOffer(offer, image);
         return offer;
     }
@@ -62,6 +64,7 @@ public class OfferDAO {
 
     public void updateAvailability(Offer offer) {
         db.exec("UPDATE Offers SET availability = ? WHERE id = ?", "false", offer.getId());
+        offer.setAvailability(false);
     }
 
     public Offer getOfferById(UUID id) {

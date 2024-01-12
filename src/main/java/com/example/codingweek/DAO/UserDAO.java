@@ -90,7 +90,6 @@ public class UserDAO {
 
 
     public User getUserByUsername(String username) {
-        //todo make regex for each field
 
         Map<String, Object> userMap = db.fetchOneMap("SELECT * FROM Users WHERE username = ?", username);
 
@@ -198,7 +197,7 @@ public class UserDAO {
         db.exec("UPDATE Users SET username = ? WHERE username = ?", newValue, user.userName);
         db.exec("UPDATE Offers SET user = ? WHERE user = ?", newValue, user.userName);
         db.exec("UPDATE Orders SET buyer = ? WHERE buyer = ?", newValue, user.userName);
-        db.exec("UPDATE Orders SET buyer = ? WHERE buyer = ?", newValue, user.userName);
+        db.exec("UPDATE Orders SET seller = ? WHERE seller = ?", newValue, user.userName);
         db.exec("UPDATE Users SET username = ? WHERE username = ?", newValue, user.userName);
         user.userName = newValue;
         CurrentUser.logUser(user);
