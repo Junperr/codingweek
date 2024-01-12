@@ -26,7 +26,7 @@ public class MessagesDAOTest {
 
         assertEquals(testMessage.getId().getClass(), UUID.class);
         assertEquals(testMessage.getTimestamp().getClass(), Long.class);
-        assertEquals("Bonjour à tous", testMessage.getContent());
+        assertEquals("Bonne année", testMessage.getContent());
         assertEquals("Ugo", testMessage.getSender());
         assertEquals("Julie", testMessage.getReceiver());
         assertEquals("false", testMessage.getSeen());

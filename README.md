@@ -6,9 +6,25 @@
 - [Usage](#how-to-use-)
 - [Author](#author--)
 
-## Description : 
-We are required to create a app were people can loan/borrow equipment. 
+## Description :
+We are required to create a app were people can loan/borrow equipment.
 And propose or request services. In exchange of a virtual money called Florin.
+
+## How to use :
+
+- to setup the gradle project
+  ./gradlew build
+
+- to run the project
+  ./gradlew run
+
+- all tests
+  ./gradlew test
+
+- specific test
+  ./gradlew test --tests ProjectConfigurationTest
+
+
 
 ## Road-Map :
 - Monday :
@@ -23,27 +39,27 @@ And propose or request services. In exchange of a virtual money called Florin.
   2. Simple research OK
   3. FeedBack evaluation OK
 
-- Wednesday : 
-    + Creation offer OK
-    + Offer Page OK
-    + Back of research offer OK
-    + FeedBack evaluation OK
+- Wednesday :
+  + Creation offer OK
+  + Offer Page OK
+  + Back of research offer OK
+  + FeedBack evaluation OK
   1. Command history OK
-      - passed
-      - received
+    - passed
+    - received
   2. Command validation OK
   3. Uploaded offer OK
-      - disponible
-      - passed
+    - disponible
+    - passed
   4. Complex offer
 
-- Thursday : 
+- Thursday :
   + Complex offer ABANDONED
   1. Chat
   2. Complex research OK
 
 
-- Friday : 
+- Friday :
   + Finish chat
   1. Tests
   2. Validation, fix bug
@@ -51,7 +67,7 @@ And propose or request services. In exchange of a virtual money called Florin.
 
 ## How to use :
 
-## Author : 
+## Author :
 - Anna Galkowski
 - Julie Zhen
 - Aristide Duhem
