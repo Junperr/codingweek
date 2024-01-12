@@ -45,9 +45,9 @@ public class OfferDAOTest {
     public void newOfferTest() throws Exception {
         User joelD = new UserDAO().getUserByUsername("joelD");
         CurrentUser.logUser(joelD);
+
         OfferDAO offerDAO = new OfferDAO();
         ArrayList<String> categories = new ArrayList<>();
-
         categories.add("Aspirateur");
         categories.add("balai");
         Offer offer = offerDAO.newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end",  null, 50,  "Loan", categories);
@@ -63,5 +63,68 @@ public class OfferDAOTest {
         assertEquals("balai", offer.getCategories().get(1));
     }
 
+    @Test
+    public void updateAvailabilityTest() throws Exception {
+        Offer offer = createTestOffer();
+        OfferDAO offerDAO = new OfferDAO();
+        assertEquals(true, offer.getAvailability());
+        offerDAO.updateAvailability(offer);
+        assertEquals(false, offer.getAvailability());
+    }
+
+    @Test
+    public void getOfferByIdTest() throws Exception {
+        Offer offer = createTestOffer();
+        OfferDAO offerDAO = new OfferDAO();
+        Offer fetchedOffer = offerDAO.getOfferById(offer.getId());
+
+        assertEquals(offer.getTitle(), fetchedOffer.getTitle());
+        assertEquals(offer.getDescription(), fetchedOffer.getDescription());
+        assertEquals(offer.getUser(), fetchedOffer.getUser());
+        assertEquals(offer.getPrice(), fetchedOffer.getPrice());
+        assertEquals(offer.getType(), fetchedOffer.getType());
+        assertEquals(offer.getAvailability(), fetchedOffer.getAvailability());
+        assertEquals(offer.getCategories(), fetchedOffer.getCategories());
+    }
+
+    @Test
+    public void getOwnOffersTest() throws Exception {
+        User joelD = createTestUser();
+        Offer offer = createTestOffer();
+        OfferDAO offerDAO = new OfferDAO();
+
+        ArrayList<Offer> ownOffers = offerDAO.getOwnOffers(joelD.userName);
+
+        assertEquals(false, ownOffers.isEmpty());
+        assertEquals(offer.getTitle(), ownOffers.get(0).getTitle());
+        assertEquals(offer.getDescription(), ownOffers.get(0).getDescription());
+        assertEquals(offer.getUser(), ownOffers.get(0).getUser());
+        assertEquals(offer.getPrice(), ownOffers.get(0).getPrice());
+        assertEquals(offer.getType(), ownOffers.get(0).getType());
+        assertEquals(offer.getAvailability(), ownOffers.get(0).getAvailability());
+    }
+
+    @Test
+    public void getOthersOfferTest() {
+
+    }
+
+    @Test
+    public void getAllOffersTest() {
+
+    }
+    private Offer createTestOffer() throws Exception {
+        OfferDAO offerDAO = new OfferDAO();
+        ArrayList<String> categories = new ArrayList<>();
+        categories.add("Aspirateur");
+        categories.add("balai");
+        Offer offer = offerDAO.newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end",  null, 50,  "Loan", categories);
+        return offer;
+    }
+    private User createTestUser(){
+        User joelD = new UserDAO().getUserByUsername("joelD");
+        CurrentUser.logUser(joelD);
+        return joelD;
+    }
 
 }
