@@ -42,7 +42,9 @@ public class ConvController {
     }
 
     public void initConv(String otherName) {
+        messageTextField.setText("");
         oneMess.getChildren().clear();
+
         BigFacade bf = new BigFacade();
         ArrayList<Message> conv = bf.getConv(otherName);
 
@@ -54,10 +56,5 @@ public class ConvController {
 
         theirName.setText(otherName);
         scroll.setVvalue(1.0);
-    }
-
-    public void initConvOffer(String otherName) {
-        this.otherName = otherName;
-        theirName.setText(otherName);
     }
 }

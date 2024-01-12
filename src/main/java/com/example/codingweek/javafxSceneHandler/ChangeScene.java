@@ -91,7 +91,7 @@ public class ChangeScene {
         ConvController convController = loader.getController();
         convController.setStage(modification);
         convController.setMainControllerOffer(offerController);
-        convController.initConvOffer(otherName);
+        convController.initConv(otherName);
         modification.showAndWait();
     }
 

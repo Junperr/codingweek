@@ -11,12 +11,23 @@ import java.sql.Timestamp;
 import java.util.*;
 
 public class MessageDAO {
+    /**
+     * create a new messae, add it to the database and create a message instance
+     * @param content - the content of the message
+     * @param sender - the sender of the message
+     * @param receiver - the receiver of the message
+     * @return - the instance of the offer
+     */
     public Message newMessage(String content, String sender, String receiver) {
         Message message = new Message(content, sender, receiver);
         addMessage(message);
         return message;
     }
 
+    /**
+     * add a message to the database
+     * @param message - the instance of message to add in the database
+     */
     public void addMessage(Message message) {
         DataBase db = DataBase.getInstance();
         db.exec("insert into Messages (id, timestamp, content, sender, receiver, seen) values (?,?,?,?,?,?)",
@@ -29,7 +40,9 @@ public class MessageDAO {
     }
 
     /**
-     * get all the user who have a conv with current user
+     * used to get all the user who have a conv with current user
+     * @param userName - the name of the user we want to get all the other user in contact with
+     * @return - a set with all the name of the user in contact with userName
      */
     public Set<String> getAllUser(String userName) {
         DataBase db = DataBase.getInstance();
@@ -48,6 +61,12 @@ public class MessageDAO {
         return chatters;
     }
 
+    /**
+     * Last message between userNameCurrent and userName
+     * @param userNameCurrent - current logged in user
+     * @param userName - another user
+     * @return - a hash map containing the last message
+     */
     public HashMap<String, Object> getLastMessageWith(String userNameCurrent, String userName) {
         DataBase db = DataBase.getInstance();
         HashMap<String, Object> lastTimestamp = db.fetchOneMap("select max(timestamp) as timestamp from Messages where (receiver=? and sender=?) or (receiver=? and sender=?)",userNameCurrent, userName, userName, userNameCurrent);
@@ -55,6 +74,12 @@ public class MessageDAO {
         return db.fetchOneMap("select * from Messages where timestamp=?", lastTimestamp.get("timestamp"));
     }
 
+    /**
+     * get all message between two user (used with the current user and another one ordered by oldest to youngest
+     * @param userNameCurrent - current user or user 1
+     * @param userName - the other one or user 2
+     * @return - an Arraylist with all instance of message between the two user
+     */
     public ArrayList<Message> getAllMessageWith(String userNameCurrent, String userName) {
         DataBase db = DataBase.getInstance();
         ArrayList<HashMap<String, Object>> request = db.fetchAllMap("select * from Messages where ((receiver=? and sender=?) or (receiver=? and sender=?)) order by timestamp",userNameCurrent, userName, userName, userNameCurrent);
@@ -78,9 +103,14 @@ public class MessageDAO {
         return messages;
     }
 
+    /**
+     * get the number of unread message for a user
+     * @param userName - the user id
+     * @return - an int the number of unread message
+     */
     public Integer getUnreadNumber(String userName) {
         DataBase db = DataBase.getInstance();
-        HashMap<String, Object> unread = db.fetchOneMap("select count(*) as unread from Messages where receiver=?", userName);
+        HashMap<String, Object> unread = db.fetchOneMap("select count(*) as unread from Messages where receiver=? and seen='false'", userName);
 
         return (Integer) unread.get("unread");
     }
