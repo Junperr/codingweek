@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="250.0" onMouseClicked="#goToConv" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.MiniConvController">
+<VBox alignment="CENTER_LEFT" onMouseClicked="#goToConv" prefHeight="50.0" prefWidth="250.0" styleClass="background" stylesheets="@../css/miniConv.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.MiniConvController">
    <children>
-      <Label fx:id="time" prefHeight="18.0" prefWidth="34.0" />
-      <Label fx:id="otherName" prefHeight="18.0" prefWidth="128.0" />
-      <Label fx:id="lastMessage" prefHeight="18.0" prefWidth="243.0" />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="50.0" prefWidth="201.0">
+               <children>
+                  <Label fx:id="otherName" prefHeight="18.0" prefWidth="128.0" />
+                  <Label fx:id="lastMessage" prefHeight="30.0" prefWidth="199.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="50.0" prefWidth="53.0">
+               <children>
+                  <Label fx:id="time" prefHeight="18.0" prefWidth="34.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
 </VBox>
