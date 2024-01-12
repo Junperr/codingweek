@@ -2,6 +2,7 @@ package com.example.codingweek.controller;
 
 import com.example.codingweek.Main;
 import com.example.codingweek.data.Offer;
+import com.example.codingweek.data.ImageFile;
 import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxComponent.ComboPanel;
 import com.example.codingweek.javafxSceneHandler.ChangeScene;
@@ -48,16 +49,21 @@ public class NewOfferController {
     @FXML
     private ImageView imageArea;
     @FXML
+    private String imageName;
+
+    @FXML
     private ImageView crossImage;
     @FXML
     private Pane background;
     @FXML
     private ImageView florainImage;
 
+    private ImageFile selectedFile;
+
     private final ChangeScene changeScene = new ChangeScene();
 
     @FXML
-    public void initialize() {
+    public void initialize(){
         type.getItems().addAll("Offer", "Service");// Offer types
         florainImage.setImage(new Image("static/images/florain.png"));
         //changer la couleur de bord du combo panel
@@ -66,34 +72,32 @@ public class NewOfferController {
         newOfferButton.setOnAction(event -> {
 
         });
-        titleTextField.setOnKeyPressed(this::handleEnterKeyPress);
-        priceTextField.setOnKeyPressed(this::handleEnterKeyPress);
+        titleTextField.setOnKeyPressed(event -> {
+            try {
+                handleEnterKeyPress(event);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        priceTextField.setOnKeyPressed(event -> {
+            try {
+                handleEnterKeyPress(event);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
     }
 
     @FXML
-    public void submit() throws IOException{
-
-        errorLabel.setText("");
-
-        // Retrieve values from the controls
-        String title = (titleTextField.getText() != null && !titleTextField.getText().isEmpty()) ? titleTextField.getText(): handleEmptyField("tittle");
-        String description = (desc.getText() != null && !desc.getText().isEmpty()) ? desc.getText(): handleEmptyField("description");
-        String price = (priceTextField.getText() != null && !priceTextField.getText().isEmpty()) ? priceTextField.getText(): handleEmptyField("price");
-        String selectedType = (type.getValue() != null && !type.getValue().isEmpty()) ? type.getValue(): handleEmptyField("type");
-
-        if (!errorLabel.getText().isEmpty()){
-            return ;
-        }
-
-        ArrayList<String> themes = new ArrayList<>();
-        for (String theme : themeComboPanel.getSelectedThemes()) {
-            themes.add(theme);
-        }
+    public void submit() throws Exception{
 
         BigFacade bigFacade = new BigFacade();
+
+        selectedFile.directory = "offers/";
+
         // image is not implemented yet so by default we put null for the path
-        Offer offer = bigFacade.createNewOffer(title, description, null, Integer.parseInt(price), selectedType, themes);
+        Offer offer = bigFacade.createNewOffer(titleTextField.getText(), desc.getText(), selectedFile, Integer.parseInt(priceTextField.getText()), type.getValue(), (ArrayList<String>) themeComboPanel.getSelectedThemes());
 
     }
 
@@ -129,7 +133,7 @@ public class NewOfferController {
                 new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
         );
 
-        File selectedFile = fileChooser.showOpenDialog(addImageButton.getScene().getWindow());
+        selectedFile = (ImageFile) fileChooser.showOpenDialog(addImageButton.getScene().getWindow());
 
         if (selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toURL().toString());
@@ -158,7 +162,7 @@ public class NewOfferController {
         crossImage.setImage(null);
     }
 
-    private void handleEnterKeyPress(KeyEvent event) {
+    private void handleEnterKeyPress(KeyEvent event) throws Exception{
         if (event.getCode() == KeyCode.ENTER) {
             try {
                 submit();

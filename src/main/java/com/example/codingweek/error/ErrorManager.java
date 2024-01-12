@@ -1,10 +1,12 @@
 package com.example.codingweek.error;
 
 import com.example.codingweek.SerializedData;
+import com.example.codingweek.data.ImageFile;
 import com.example.codingweek.data.User;
 
+import java.io.File;
 import java.util.HashMap;
-import java.util.UUID;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class ErrorManager {
@@ -136,12 +138,52 @@ public class ErrorManager {
 
     }
 
-    public void handleInvalidCoins(Integer coins) throws Exception{
+    public void handleInvalidCoinsOrder(Integer coins) throws Exception{
         if (coins < 0) {
             errorMessage = "Not enough coins to order that,(try to put offers to gain coins)";
         }
         raise();
     }
+
+    public void handleInvalidDesc(String desc) throws Exception{
+        //todo regex et en dessous mon reuf (tt le serr ou ya pas d effort dans el msg)
+        if (desc == null){
+            errorMessage = "Desc";
+        }
+        raise();
+    }
+
+    public void handleInvalidTitle(String title) throws Exception{
+        if (title == null){
+            errorMessage = "title";
+        }
+        raise();
+    }
+
+    public void handleInvalidPrice(Integer price) throws Exception {
+        if (price == null || price < 0 ){
+            errorMessage = "prend ta tune mon reuf";
+        }
+        raise();
+    }
+
+    public void handleInvalidType(String type) throws Exception{
+        if (type == null){
+            errorMessage = "make a choice";
+        }
+        raise();
+    }
+
+    public void handleInvalidImage(ImageFile image) throws Exception{
+        if (!(Objects.equals(image.getFileExtension(), "png") || Objects.equals(image.getFileExtension(), "jpg") || Objects.equals(image.getFileExtension(), "jpeg"))){
+            errorMessage = "Image must be png, jpg or jpeg";
+        }
+        if (image.getTotalSpace() >  1000000000000L ){// val mise au pif
+            errorMessage = "Image to heavy";
+        }
+        raise();
+    }
+
 
 
 //    public void checkMail(Pattern, field)

@@ -4,11 +4,9 @@ import com.example.codingweek.DAO.EvalDAO;
 import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.DAO.OrderDAO;
 import com.example.codingweek.DAO.UserDAO;
-import com.example.codingweek.data.Eval;
-import com.example.codingweek.data.Offer;
-import com.example.codingweek.data.Order;
-import com.example.codingweek.data.User;
+import com.example.codingweek.data.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -28,8 +26,8 @@ public class BigFacade {
         this.evalDAO = new EvalDAO();
     }
     // Offers
-    public Offer createNewOffer(String title, String description, String imagePath, Integer price, String type, ArrayList<String> categories) {
-        return offerDAO.newOffer(title, description, imagePath, price, type, categories);
+    public Offer createNewOffer(String title, String description, ImageFile image, Integer price, String type, ArrayList<String> categories) throws Exception {
+        return offerDAO.newOffer(title, description, image, price, type, categories);
     }
 
     public Offer getOfferById(UUID id) {
