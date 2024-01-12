@@ -65,8 +65,8 @@ public class OfferDAOTest {
 
     @Test
     public void updateAvailabilityTest() throws Exception {
-        Offer offer = createTestOffer();
         OfferDAO offerDAO = new OfferDAO();
+        Offer offer = createTestOffer();
         assertEquals(true, offer.getAvailability());
         offerDAO.updateAvailability(offer);
         assertEquals(false, offer.getAvailability());
@@ -105,7 +105,13 @@ public class OfferDAOTest {
     }
 
     @Test
-    public void getOthersOfferTest() {
+    public void getOthersOfferTest() throws Exception {
+    User joelD = createTestUser();
+    Offer offer = createTestOffer();
+    OfferDAO offerDAO = new OfferDAO();
+
+
+
 
     }
 
@@ -114,6 +120,14 @@ public class OfferDAOTest {
 
     }
     private Offer createTestOffer() throws Exception {
+        OfferDAO offerDAO = new OfferDAO();
+        ArrayList<String> categories = new ArrayList<>();
+        categories.add("Aspirateur");
+        categories.add("balai");
+        Offer offer = offerDAO.newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end",  null, 50,  "Loan", categories);
+        return offer;
+    }
+    private Offer createTestOffer(String username) throws Exception {
         OfferDAO offerDAO = new OfferDAO();
         ArrayList<String> categories = new ArrayList<>();
         categories.add("Aspirateur");

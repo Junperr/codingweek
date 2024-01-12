@@ -26,7 +26,6 @@ public class UserDAO {
         try {
             errManager.handleEmptyFields(user);
             errManager.handleInvalidEmail(user.email);
-            errManager.handleInvalidPassword(user.password);
             errManager.handleInvalidAddress(user.address);
             errManager.handleInvalidCity(user.city);
             errManager.handleInvalidZipCode(user.zipCode);
