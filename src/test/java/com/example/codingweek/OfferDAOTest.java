@@ -3,6 +3,7 @@ package com.example.codingweek;
 import com.example.codingweek.DAO.OfferDAO;
 import com.example.codingweek.DAO.UserDAO;
 import com.example.codingweek.auth.CurrentUser;
+import com.example.codingweek.data.ImageFile;
 import com.example.codingweek.data.Offer;
 import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
@@ -32,7 +33,6 @@ public class OfferDAOTest {
         offerDAO.addOffer(offer, null);
 
 
-        DataBase db = DataBase.getInstance();
         ArrayList<HashMap<String, Object>> fetch = db.fetchAllMap("select * from Offers where id =?", offer.getId());
         assertEquals(1, fetch.size());
         HashMap<String, Object> offerMap = fetch.get(0);
@@ -42,6 +42,37 @@ public class OfferDAOTest {
         assertEquals(50, offerMap.get("price"));
         assertEquals("Loan", offerMap.get("type"));
         assertEquals("true", offerMap.get("availability"));
+        assertEquals("default.png",offerMap.get("imagePath"));
+        ArrayList<HashMap<String, Object>> fetchCategories = db.fetchAllMap("select * from Categories where offer =?", offer.getId());
+        assertEquals(2, fetchCategories.size());
+        assertEquals("Aspirateur", fetchCategories.get(0).get("category"));
+        assertEquals("Ménage", fetchCategories.get(1).get("category"));
+    }
+
+    @Test
+    public void addOfferTestImage() throws Exception {
+        db.reset();
+        User joelD = getTestUser();
+
+        ArrayList<String> categories = new ArrayList<>();
+        categories.add("Aspirateur");
+        categories.add("Ménage");
+        ImageFile imagetest = new ImageFile("/home/junper/Info/PCD/codingweek-21/src/main/resources/static/images/offers/pelle.jpg", "offers/");
+        Offer offer = new Offer("Location d'aspirateur", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", "joelDTest", ImageFile.getImageName(imagetest), 50, "Loan", true, categories);
+
+        OfferDAO offerDAO = new OfferDAO();
+        offerDAO.addOffer(offer, imagetest);
+
+        ArrayList<HashMap<String, Object>> fetch = db.fetchAllMap("select * from Offers where id =?", offer.getId());
+        assertEquals(1, fetch.size());
+        HashMap<String, Object> offerMap = fetch.get(0);
+        assertEquals("Location d'aspirateur", offerMap.get("title"));
+        assertEquals("Cherche à louer un aspirateur pour faire le grand ménage ce week-end", offerMap.get("description"));
+        assertEquals("joelDTest", offerMap.get("user"));
+        assertEquals(50, offerMap.get("price"));
+        assertEquals("Loan", offerMap.get("type"));
+        assertEquals("true", offerMap.get("availability"));
+        assertEquals(ImageFile.getImageName(imagetest),offerMap.get("imagePath"));
         ArrayList<HashMap<String, Object>> fetchCategories = db.fetchAllMap("select * from Categories where offer =?", offer.getId());
         assertEquals(2, fetchCategories.size());
         assertEquals("Aspirateur", fetchCategories.get(0).get("category"));
@@ -69,6 +100,34 @@ public class OfferDAOTest {
         assertEquals("Loan", offer.getType());
         assertEquals(true, offer.getAvailability());
         assertEquals(2, offer.getCategories().size());
+        assertEquals("Aspirateur", offer.getCategories().get(0));
+        assertEquals("balai", offer.getCategories().get(1));
+    }
+
+    @Test
+    public void newOfferTestImage() throws Exception {
+        db.reset();
+        User joelD = getTestUser();
+
+        System.out.println(CurrentUser.getUser());
+
+        OfferDAO offerDAO = new OfferDAO();
+        ArrayList<String> categories = new ArrayList<>();
+        categories.add("Aspirateur");
+        categories.add("balai");
+        ImageFile imagetest = new ImageFile("/home/junper/Info/PCD/codingweek-21/src/main/resources/static/images/offers/pelle.jpg", "offers/");
+
+        Offer offer = offerDAO.newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", imagetest, 50, "Loan", categories);
+
+
+        assertEquals("Location de balai", offer.getTitle());
+        assertEquals("Cherche à louer un aspirateur pour faire le grand ménage ce week-end", offer.getDescription());
+        assertEquals("joelDTest", offer.getUser());
+        assertEquals(50, offer.getPrice());
+        assertEquals("Loan", offer.getType());
+        assertEquals(true, offer.getAvailability());
+        assertEquals(2, offer.getCategories().size());
+        assertEquals(ImageFile.getImageName(imagetest),offer.getImagePath());
         assertEquals("Aspirateur", offer.getCategories().get(0));
         assertEquals("balai", offer.getCategories().get(1));
     }
@@ -102,6 +161,7 @@ public class OfferDAOTest {
     public void getOwnOffersTest() throws Exception {
         db.reset();
         db.init();
+
         User joelD = getTestUser();
         OfferDAO offerDAO = new OfferDAO();
 
@@ -117,22 +177,51 @@ public class OfferDAOTest {
         assertEquals(false, ownOffers.isEmpty());
         assertEquals(1, ownOffers.size());
 
-//        CurrentUser.logoutUser();
-//        User admin = new UserDAO().getUserByUsername("annaG");
-//        System.out.println(admin);
-//        CurrentUser.logUser(admin);
-//        new OfferDAO().newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", null, 50, "Loan", new ArrayList<>());
-//        CurrentUser.logoutUser();
-//        CurrentUser.logUser(joelD);
-//        ArrayList<Offer> ownOffers2 = offerDAO.getOwnOffers(joelD.userName);
-//
-//        assertEquals(false, ownOffers2.isEmpty());
-//        assertEquals(1, ownOffers2.size());
+        CurrentUser.logoutUser();
+        db.printData(db.fetchAll("SELECT * FROM Users"));
+        User admin = new UserDAO().getUserByUsername("admin");
+        System.out.println(admin);
+        CurrentUser.logUser(admin);
+        new OfferDAO().newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", null, 50, "Loan", new ArrayList<>());
+        CurrentUser.logoutUser();
+        CurrentUser.logUser(joelD);
+        ArrayList<Offer> ownOffers2 = offerDAO.getOwnOffers(joelD.userName);
+
+        assertEquals(false, ownOffers2.isEmpty());
+        assertEquals(1, ownOffers2.size());
     }
 
-    @Test
-    public void getOthersOfferTest() {
+    public void getOtherOffersTest() throws Exception {
+        db.reset();
+        db.init();
 
+        User joelD = getTestUser();
+        OfferDAO offerDAO = new OfferDAO();
+
+        ArrayList<Offer> ownOffers0 = offerDAO.getOwnOffers(joelD.userName);
+
+        assertEquals(true, ownOffers0.isEmpty());
+
+        Offer offer = createTestOffer();
+
+
+        ArrayList<Offer> ownOffers = offerDAO.getOwnOffers(joelD.userName);
+
+        assertEquals(false, ownOffers.isEmpty());
+        assertEquals(1, ownOffers.size());
+
+        CurrentUser.logoutUser();
+        db.printData(db.fetchAll("SELECT * FROM Users"));
+        User admin = new UserDAO().getUserByUsername("admin");
+        System.out.println(admin);
+        CurrentUser.logUser(admin);
+        new OfferDAO().newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", null, 50, "Loan", new ArrayList<>());
+        CurrentUser.logoutUser();
+        CurrentUser.logUser(joelD);
+        ArrayList<Offer> ownOffers2 = offerDAO.getOwnOffers(joelD.userName);
+
+        assertEquals(false, ownOffers2.isEmpty());
+        assertEquals(1, ownOffers2.size());
     }
 
     @Test

@@ -44,7 +44,7 @@ public class ErrorManager {
     public void handleEmptyFields(SerializedData objet) throws Exception {
         HashMap<String, Object> objetMap = objet.toMap();
         for (HashMap.Entry<String, Object> entry : objetMap.entrySet()) {
-            if (entry.getValue() == null || (entry.getValue().getClass() == String.class && entry.getValue().equals(""))) {
+            if (entry.getKey() != "imagePath" && ( entry.getValue() == null || (entry.getValue().getClass() == String.class && entry.getValue().equals("")))) {
                 handleEmptyField(entry.getKey());
             }
         }
