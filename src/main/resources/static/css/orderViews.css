@@ -4,3 +4,7 @@
     -fx-font-family: "Poppins", sans-serif;
 }
 
+.textfield{
+   -fx-border-color: transparent transparent #FEC89A transparent;
+   -fx-background-color: #ffffff;
+}

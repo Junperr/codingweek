@@ -4,5 +4,22 @@
     -fx-font-family: "Poppins", sans-serif;
 }
 
+.background{
+    -fx-background-color:  #FDF4EC;
+    -fx-background-radius: 6;
+}
 
+.button{
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FDF4EC;
+    -fx-background-color: #FEC89A;
+}
 
+.button:hover{
+    -fx-cursor: hand;
+}
+
+.left{
+    -fx-font-weight: bold;
+}

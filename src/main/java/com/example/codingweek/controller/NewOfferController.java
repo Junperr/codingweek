@@ -2,6 +2,7 @@ package com.example.codingweek.controller;
 
 import com.example.codingweek.Main;
 import com.example.codingweek.data.Offer;
+import com.example.codingweek.data.ImageFile;
 import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxComponent.ComboPanel;
 import com.example.codingweek.javafxSceneHandler.ChangeScene;
@@ -26,9 +27,6 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 public class NewOfferController {
@@ -51,18 +49,21 @@ public class NewOfferController {
     @FXML
     private ImageView imageArea;
     @FXML
+    private String imageName;
+
+    @FXML
     private ImageView crossImage;
     @FXML
     private Pane background;
     @FXML
     private ImageView florainImage;
-    private String relativeImagePath;
-    private String imageName;
+
+    private ImageFile selectedFile;
 
     private final ChangeScene changeScene = new ChangeScene();
 
     @FXML
-    public void initialize() {
+    public void initialize(){
         type.getItems().addAll("Offer", "Service");// Offer types
         florainImage.setImage(new Image("static/images/florain.png"));
         //changer la couleur de bord du combo panel
@@ -71,60 +72,43 @@ public class NewOfferController {
         newOfferButton.setOnAction(event -> {
 
         });
-        titleTextField.setOnKeyPressed(this::handleEnterKeyPress);
-        priceTextField.setOnKeyPressed(this::handleEnterKeyPress);
+        titleTextField.setOnKeyPressed(event -> {
+            try {
+                handleEnterKeyPress(event);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        priceTextField.setOnKeyPressed(event -> {
+            try {
+                handleEnterKeyPress(event);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
     }
 
     @FXML
-    public void submit() throws IOException{
+    public void submit() throws Exception{
 
-        errorLabel.setText("");
+        BigFacade bf = new BigFacade();
 
-        // Retrieve values from the controls
-        String title = (titleTextField.getText() != null && !titleTextField.getText().isEmpty()) ? titleTextField.getText(): handleEmptyField("title");
-        String description = (desc.getText() != null && !desc.getText().isEmpty()) ? desc.getText(): handleEmptyField("description");
-        String price = (priceTextField.getText() != null && !priceTextField.getText().isEmpty()) ? priceTextField.getText(): handleEmptyField("price");
-        String selectedType = (type.getValue() != null && !type.getValue().isEmpty()) ? type.getValue(): handleEmptyField("type");
-
-
-        if (!errorLabel.getText().isEmpty()){
-            return ;
-        }
+        this.selectedFile.directory = "offers/";
 
         ArrayList<String> themes = new ArrayList<>();
-        for (String theme : themeComboPanel.getSelectedThemes()) {
-            themes.add(theme);
-        }
 
-        BigFacade bigFacade = new BigFacade();
-        // image is not implemented yet so by default we put null for the path
-        Offer offer = bigFacade.createNewOffer(title, description, imageName, Integer.parseInt(price), selectedType, themes);
+        themeComboPanel.getSelectedThemes().forEach(theme -> themes.add(theme));
+
+        bf.createNewOffer(titleTextField.getText(), desc.getText(), selectedFile, Integer.parseInt(priceTextField.getText()), type.getValue(), themes);
+
+        changeScene.changeSameSceneButton("static/fxml/allOffers.fxml", newOfferButton);
 
     }
 
     @FXML
     private void goHome() throws IOException{
         changeScene.changeSameSceneButton("static/fxml/allOffers.fxml", newOfferToOffersButton);
-    }
-
-    private <T> T handleEmptyField(String fieldName) {
-        return handleEmptyField(fieldName, "String");
-    }
-
-    private <T> T handleEmptyField(String fieldName, String type) {
-        if (errorLabel.getText().isEmpty()) {
-            errorLabel.setText("Please fill all the fields, empty fields: " + fieldName);
-
-        } else {
-            errorLabel.setText(errorLabel.getText() + ", " + fieldName);
-        }
-        if (type.equals("String")) {
-            return (T) "";
-        } else if (type.equals("int")) {
-            return (T) (Integer) 0;
-        }
-        return null;
     }
 
     @FXML
@@ -137,19 +121,10 @@ public class NewOfferController {
 
         File selectedFile = fileChooser.showOpenDialog(addImageButton.getScene().getWindow());
 
-        if (selectedFile != null) {
+        this.selectedFile = new ImageFile(selectedFile.getPath(), "offers/");
+
+        if (this.selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toURL().toString());
-
-            String destinationDirectory = "src/main/resources/static/images/offers";
-
-            Path targetPath = Path.of(destinationDirectory, selectedFile.getName());
-            Files.copy(selectedFile.toPath(), targetPath, StandardCopyOption.REPLACE_EXISTING);
-
-            String relativeImagePath = "images/offers/" + selectedFile.getName();
-            this.relativeImagePath = relativeImagePath;
-            this.imageName = selectedFile.getName();
-
-            System.out.println("Nom de l'image : " + imageName);
 
             imageArea.setImage(image);
             background.setStyle("-fx-background-color: #f8edeb");
@@ -160,6 +135,7 @@ public class NewOfferController {
             crossImage.setFitHeight(imageArea.getFitHeight());
             rafraichirInterfaceUtilisateur();
         }
+
     }
 
     private void rafraichirInterfaceUtilisateur() {
@@ -172,12 +148,9 @@ public class NewOfferController {
         rafraichirInterfaceUtilisateur();
         background.setStyle("-fx-background-color: #ffffff");
         crossImage.setImage(null);
-        //supprimer l'image du répertoire des images des offres
-        Files.delete(Path.of("src/main/resources/static/" + relativeImagePath));
-
     }
 
-    private void handleEnterKeyPress(KeyEvent event) {
+    private void handleEnterKeyPress(KeyEvent event) throws Exception{
         if (event.getCode() == KeyCode.ENTER) {
             try {
                 submit();

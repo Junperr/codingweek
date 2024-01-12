@@ -22,7 +22,7 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
-      <Pane id="box" fx:id="box" layoutX="294.0" layoutY="44.0" prefHeight="631.0" prefWidth="491.0" style="-fx-border-color: #FFB5A7; -fx-border-radius: 3; -fx-border-width: 2;" stylesheets="@../css/newOffer.css">
+      <Pane id="box" fx:id="box" layoutX="294.0" layoutY="44.0" prefHeight="631.0" prefWidth="491.0" style="-fx-border-color: #f8edeb; -fx-border-radius: 3; -fx-border-width: 2;" stylesheets="@../css/newOffer.css">
          <children>
               <HBox id="hbox" layoutX="40.0" layoutY="64.0" prefHeight="467.0" prefWidth="411.0">
                   <children>
