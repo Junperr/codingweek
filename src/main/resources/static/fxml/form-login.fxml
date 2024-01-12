@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -13,59 +14,74 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.LogInController">
     <children>
-    <Pane fx:id="centeredPane" layoutY="84.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <children>
-                <VBox fx:id="centeredVBox" alignment="CENTER" layoutX="365.0" prefHeight="551.0" prefWidth="350.0">
+      <HBox fx:id="background" alignment="CENTER" prefHeight="720.0" prefWidth="1080.0" styleClass="background" stylesheets="@../css/login.css">
+         <children>
+                <VBox fx:id="centeredVBox" alignment="CENTER" prefHeight="510.0" prefWidth="344.0">
                     <children>
-                        <Pane prefHeight="99.0" prefWidth="350.0">
-                            <children>
-                                <Label fx:id="welcome" layoutX="122.0" layoutY="14.0" text="Welcome Back !">
-                                    <font>
-                                        <Font size="15.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </Pane>
-                        <VBox alignment="CENTER" fillWidth="false" prefHeight="111.0" prefWidth="218.0" spacing="10.0">
-                            <children>
-                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
-                             <children>
-                              <Pane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                            <TextField fx:id="userNameTextField" layoutX="16.0" layoutY="6.0" promptText="Username" />
-                                 </children>
-                              </Pane>
-                                <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
-                             </children>
-                          </HBox>
-                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
-                             <children>
-                                <Pane prefHeight="200.0" prefWidth="200.0">
-                                   <children>
-                                      <PasswordField fx:id="passwordTextField" layoutX="16.0" layoutY="6.0" promptText="Password" />
-                                      <TextField fx:id="visibleTextField" layoutX="16.0" layoutY="6.0" promptText="Password" />
-                                   </children>
-                                </Pane>
-                                <ImageView fx:id="eyeImageView" fitHeight="15.0" fitWidth="15.0" onMouseClicked="#togglePasswordVisibility" pickOnBounds="true" preserveRatio="true" />
-                             </children>
-                          </HBox>
-                          <Label fx:id="errorLabel" textFill="#ae0000" />
-                            </children>
+                  <VBox prefHeight="417.0" prefWidth="344.0" styleClass="container" stylesheets="@../css/login.css">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="129.0" prefWidth="344.0">
+                           <children>
+                                      <Label fx:id="welcome" alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0" prefWidth="218.0" stylesheets="@../css/login.css" text="Welcome Back !">
+                                          <font>
+                                              <Font size="15.0" />
+                                          </font>
+                                 <styleClass>
+                                    <String fx:value="welcome" />
+                                    <String fx:value="text" />
+                                 </styleClass>
+                                      </Label>
+                           </children>
                         </VBox>
-                        <Pane prefHeight="53.0" prefWidth="202.0">
-                            <children>
-                                <Button fx:id="loginButton" layoutX="147.0" layoutY="9.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="36.0" prefWidth="57.0" text="Login" />
-                            </children>
-                        </Pane>
-                        <HBox alignment="CENTER" prefHeight="116.0" prefWidth="350.0" spacing="15.0">
-                            <children>
-                                <Label text="New here ?" />
-                                <Button fx:id="registerButton" mnemonicParsing="false" onMouseClicked="#register" text="Register now" />
-                            </children>
-                        </HBox>
+                              <VBox alignment="CENTER" fillWidth="false" prefHeight="111.0" prefWidth="218.0" spacing="10.0">
+                                  <children>
+                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                   <children>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Pane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                                  <TextField fx:id="userNameTextField" layoutX="6.0" layoutY="6.0" promptText="Username" styleClass="textfield" stylesheets="@../css/login.css" />
+                                       </children>
+                                    </Pane>
+                                      <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
+                                   </children>
+                                </HBox>
+                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                   <children>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" />
+                                      <Pane prefHeight="36.0" prefWidth="200.0">
+                                         <children>
+                                            <PasswordField fx:id="passwordTextField" layoutX="6.0" layoutY="6.0" promptText="Password" styleClass="textfield" stylesheets="@../css/login.css"/>
+                                            <TextField fx:id="visibleTextField" layoutX="6.0" layoutY="6.0" promptText="Password" styleClass="textfield" stylesheets="@../css/login.css" />
+                                         </children>
+                                      </Pane>
+                                      <ImageView fx:id="eyeImageView" fitHeight="15.0" fitWidth="15.0" onMouseClicked="#togglePasswordVisibility" pickOnBounds="true" preserveRatio="true" />
+                                   </children>
+                                </HBox>
+                                <Label fx:id="errorLabel" textFill="#ae0000" />
+                                  </children>
+                              </VBox>
+                        <VBox alignment="CENTER" prefHeight="65.0" prefWidth="344.0">
+                           <children>
+                                      <Button id="loginButton" fx:id="loginButton" mnemonicParsing="false" onMouseClicked="#login" prefHeight="36.0" prefWidth="94.0" stylesheets="@../css/login.css" text="Login" />
+                           </children>
+                        </VBox>
+                              <HBox alignment="CENTER" prefHeight="116.0" prefWidth="350.0" spacing="15.0">
+                                  <children>
+                                      <Label stylesheets="@../css/login.css" text="New here ?">
+                                 <styleClass>
+                                    <String fx:value="newhere" />
+                                    <String fx:value="text" />
+                                 </styleClass>
+                              </Label>
+                                      <Button id="registerButton" fx:id="registerButton" mnemonicParsing="false" onMouseClicked="#register" stylesheets="@../css/login.css" text="Register now" />
+                                  </children>
+                              </HBox>
+                     </children>
+                  </VBox>
                     </children>
                 </VBox>
-            </children>
-        </Pane>
+         </children>
+      </HBox>
     </children>
 </AnchorPane>

@@ -92,7 +92,7 @@ public class NewOfferController {
     @FXML
     public void submit() throws Exception{
 
-        BigFacade bigFacade = new BigFacade();
+        BigFacade bf = new BigFacade();
 
         this.selectedFile.directory = "offers/";
 
@@ -100,7 +100,7 @@ public class NewOfferController {
 
         themeComboPanel.getSelectedThemes().forEach(theme -> themes.add(theme));
 
-        bigFacade.createNewOffer(titleTextField.getText(), desc.getText(), selectedFile, Integer.parseInt(priceTextField.getText()), type.getValue(), themes);
+        bf.createNewOffer(titleTextField.getText(), desc.getText(), selectedFile, Integer.parseInt(priceTextField.getText()), type.getValue(), themes);
 
         changeScene.changeSameSceneButton("static/fxml/allOffers.fxml", newOfferButton);
 

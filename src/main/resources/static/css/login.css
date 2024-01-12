@@ -9,39 +9,72 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
+
 *{
     -fx-font-family: "Poppins", sans-serif;
 }
 
-/*#fieldTest{
--fx-border: none;
-
--fx-background: bottom left linear-gradient(#a9a9a9, #a9a9a9) no-repeat, bottom center linear-gradient(#a9a9a9, #a9a9a9) repeat-x, bottom right linear-gradient(#a9a9a9, #a9a9a9) no-repeat;
+.background{
+    -fx-background-color: linear-gradient(to bottom, #FEC89A, #F9DCC4);
 }
 
-#welcome{
-    -fx-text-fill: #f600ff;
+.container{
+    -fx-background-color: #FDF4EC;
+    -fx-background-radius: 6;
+}
+
+.welcome{
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FEC89A;
 }
 
 #loginButton{
-    -fx-
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FDF4EC;
+    -fx-background-color: #FEC89A;
+
 }
 
-
-#imageArea {
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 10, 0, 0, 0);
-
+#loginButton:hover{
+    -fx-pref-width: 104;
     -fx-cursor: hand;
 }
 
-#imageArea:hover .overlay-cross {
-    -fx-background-color: rgba(255, 255, 255, 0.7);
-    -fx-shape: "M0,0 L10,10 M10,0 L0,10";
-    -fx-stroke: red;
-    -fx-stroke-width: 2;
-    -fx-stroke-line-cap: ROUND;
-}*/
-
-#addImageButton{
-    -font-size: 20 px;
+#loginButton:pressed{
+    -fx-pref-width: 100;
+    -fx-cursor: hand;
 }
+
+#registerButton{
+    -fx-font-size: 11px;
+    -fx-text-fill: #FDF4EC;
+    -fx-background-color: #FEC89A;
+}
+
+#registerButton:hover{
+    -fx-pref-width: 90;
+    -fx-cursor: hand;
+}
+
+#registerButton:pressed{
+    -fx-pref-width: 86;
+    -fx-cursor: hand;
+}
+
+#registerButton:focused{
+    -fx-border-color: #fec89a;
+}
+
+.textfield{
+   -fx-border-color: transparent;
+   -fx-background-color: #ffffff;
+}
+
+.textfield:focus, .textfield:focused{
+    -fx-border-color: #fec89a;
+    -fx-border-width: 2;
+    -fx-border-radius: 3;
+}
+

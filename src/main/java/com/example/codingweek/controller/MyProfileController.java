@@ -104,6 +104,7 @@ public class MyProfileController {
         Stage modification = new Stage();
         modification.setTitle("Change address");
         modification.setScene(new Scene(root));
+        modification.setResizable(false);
 
         ModifyAddressController modifyAddressController = loader.getController();
         modifyAddressController.initData();

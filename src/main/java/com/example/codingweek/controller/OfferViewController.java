@@ -62,8 +62,6 @@ public class OfferViewController extends VBox {
         this.zipCode.setText(bf.getUserByUsername(offer.getUser()).zipCode);
         this.offerCategory.setText(offer.categoryString());
 
-        System.out.println("image path : ");
-        System.out.println(offer.getImagePath());
         Image image = new Image(Main.class.getClassLoader().getResource("static/images/" + offer.getImagePath()).toExternalForm());
         this.imageOffer.setImage(image);
         illu.setImage(new Image("static/images/florain.png"));
@@ -80,6 +78,7 @@ public class OfferViewController extends VBox {
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
         Stage modification = (Stage) goToOffer.getScene().getWindow();
+        modification.setResizable(false);
 
         OfferController offerController = loader.getController();
         offerController.initOfferPage(offer);

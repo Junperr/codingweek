@@ -24,6 +24,7 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
         String css = Objects.requireNonNull(Main.class.getClassLoader().getResource("static/css/login.css")).toExternalForm();
         scene.getStylesheets().add(css);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
         DataBase dataBase = DataBase.getInstance();
