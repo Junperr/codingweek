@@ -1,26 +1,55 @@
 package com.example.codingweek.DAO;
 
 import com.example.codingweek.auth.CurrentUser;
+import com.example.codingweek.data.ImageFile;
 import com.example.codingweek.data.Offer;
 import com.example.codingweek.database.DataBase;
+import com.example.codingweek.error.ErrorManager;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 
 public class OfferDAO {
 
     private final DataBase db = DataBase.getInstance();
 
-    public Offer newOffer(String title, String description, String imagePath, Integer price, String type, ArrayList<String> Categories) {
-        Offer offer = new Offer(title, description, CurrentUser.getUser().userName, imagePath, price, type, true, Categories);
-        addOffer(offer);
+    public Offer newOffer(String title, String description, ImageFile image, Integer price, String type, ArrayList<String> Categories) throws Exception {
+        Offer offer = new Offer(title, description, CurrentUser.getUser().userName, getImageName(image), price, type, true, Categories);
+        addOffer(offer, image);
         return offer;
     }
 
-    public void addOffer(Offer offer) {
-        db.exec("INSERT INTO Offers (id,title, description, price, type, user, availability) VALUES (?, ?, ?, ?, ?, ?, 1)",
+    public void addOffer(Offer offer, ImageFile image) throws Exception {
+        ErrorManager errManager = new ErrorManager();
+
+        try {
+            errManager.handleEmptyFields(offer);
+            errManager.handleInvalidTitle(offer.getTitle());
+            errManager.handleInvalidDesc(offer.getDescription());
+            errManager.handleInvalidPrice(offer.getPrice());
+            errManager.handleInvalidType(offer.getType());
+            errManager.handleInvalidImage(image);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }
+
+        String imagePath = null;
+
+        if (image != null) {
+            ImageFile.saveImage(image);
+            imagePath = ImageFile.getImageName(image);
+        } else {
+            imagePath = "default.png";
+        }
+
+        db.exec("INSERT INTO Offers (id,title, description, imagePath, price, type, user, availability) VALUES (?, ?, ?, ?, ?, ?, ?, 'true')",
                 offer.getId(),
                 offer.getTitle(),
                 offer.getDescription(),
+                imagePath,
                 offer.getPrice(),
                 offer.getType(),
                 CurrentUser.getUser().userName);
@@ -30,7 +59,7 @@ public class OfferDAO {
         }
     }
 
-    public void updateAvailability(Offer offer){
+    public void updateAvailability(Offer offer) {
         db.exec("UPDATE Offers SET availability = ? WHERE id = ?", "false", offer.getId());
     }
 
@@ -47,8 +76,8 @@ public class OfferDAO {
                 getOfferCategories(offerMap));
     }
 
-    public ArrayList<Offer> getOwnOffers(String username){
-        ArrayList<HashMap<String, Object>> offerMap = db.fetchAllMap("SELECT * FROM Offers Where user = ?",username);
+    public ArrayList<Offer> getOwnOffers(String username) {
+        ArrayList<HashMap<String, Object>> offerMap = db.fetchAllMap("SELECT * FROM Offers Where user = ?", username);
 
         ArrayList<Offer> offers = new ArrayList<>();
 
@@ -118,7 +147,7 @@ public class OfferDAO {
         return offers;
     }
 
-    public ArrayList<String> getOfferCategories(Map<String,Object> offer) {
+    public ArrayList<String> getOfferCategories(Map<String, Object> offer) {
 
         ArrayList<HashMap<String, Object>> categoriesMap = db.fetchAllMap("SELECT Category FROM Categories Where offer = ?", offer.get("id").toString());
         ArrayList<String> categories = new ArrayList<>();
@@ -204,6 +233,11 @@ public class OfferDAO {
                     getOfferCategories(offer)));
         }
         return offers;
+    }
+
+    public String getImageName(File image) {
+        if (image == null) return "default.png";
+        else return image.getName();
     }
 
 }

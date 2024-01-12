@@ -77,7 +77,7 @@ public class OrderDAO {
             errManager.handleCheckPassWord(userDAO.getUserByPassword(user.userName, pwd));
 
             Offer offer = offerDAO.getOfferById(offerId);
-            errManager.handleInvalidCoins(user.coins - offer.getPrice());
+            errManager.handleInvalidCoinsOrder(user.coins - offer.getPrice());
             User seller = userDAO.getUserByUsername(offer.getUser());
             userDAO.updateCoins(user, user.coins - offer.getPrice());
             userDAO.updateCoins(seller, seller.coins + offer.getPrice());
