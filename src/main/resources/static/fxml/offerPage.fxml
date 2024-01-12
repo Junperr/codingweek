@@ -79,9 +79,9 @@
                </VBox>
                <HBox alignment="CENTER" prefHeight="58.0" prefWidth="630.0" spacing="15.0">
                   <children>
-                     <Button fx:id="goToProfile" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" stylesheets="@../css/offer.css" text="Profile" />
+                     <Button fx:id="goToProfile" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" stylesheets="@../css/offer.css" text="Profile" onMouseClicked="#goToUserProfile" />
                      <Button fx:id="order" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#passOrder" prefHeight="40.0" prefWidth="100.0" stylesheets="@../css/offer.css" text="Order" />
-                     <Button fx:id="messageButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" stylesheets="@../css/offer.css" text="Message" />
+                     <Button fx:id="messageButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" stylesheets="@../css/offer.css" text="Message" onMouseClicked="#sendMessage"/>
                   </children>
                </HBox>
             </children>
