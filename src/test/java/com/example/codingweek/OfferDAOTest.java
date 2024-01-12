@@ -100,8 +100,7 @@ public class OfferDAOTest {
 
     @Test
     public void getOwnOffersTest() throws Exception {
-        db.reset();
-        db.init();
+
         User joelD = getTestUser();
         OfferDAO offerDAO = new OfferDAO();
 
