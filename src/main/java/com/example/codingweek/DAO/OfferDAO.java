@@ -45,7 +45,7 @@ public class OfferDAO {
             imagePath = "default.png";
         }
 
-        db.exec("INSERT INTO Offers (id,title, description, imagePath, price, type, user, availability) VALUES (?, ?, ?, ?, ?, ?, ?, true)",
+        db.exec("INSERT INTO Offers (id,title, description, imagePath, price, type, user, availability) VALUES (?, ?, ?, ?, ?, ?, ?, 'true')",
                 offer.getId(),
                 offer.getTitle(),
                 offer.getDescription(),
