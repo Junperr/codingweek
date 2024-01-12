@@ -199,6 +199,8 @@ public class UserDAO {
         db.exec("UPDATE Orders SET buyer = ? WHERE buyer = ?", newValue, user.userName);
         db.exec("UPDATE Orders SET seller = ? WHERE seller = ?", newValue, user.userName);
         db.exec("UPDATE Users SET username = ? WHERE username = ?", newValue, user.userName);
+        db.exec("UPDATE Messages SET sender = ? WHERE sender = ?", newValue, user.userName);
+        db.exec("UPDATE Messages SET receiver = ? WHERE receiver = ?", newValue, user.userName);
         user.userName = newValue;
         CurrentUser.logUser(user);
     }

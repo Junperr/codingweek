@@ -93,8 +93,8 @@ public class DataBase {
         }
     }
 
-    public ArrayList<HashMap<String, Object>> fetchAllMap(String query, Object... args) {
-        ArrayList<HashMap<String, Object>> result = new ArrayList<>();
+    public ArrayList<HashMap<String,Object>> fetchAllMap(String query, Object... args) {
+        ArrayList<HashMap<String,Object>> result = new ArrayList<>();
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -161,6 +161,7 @@ public class DataBase {
                 exec("create table if not exists Orders (id UUID PRIMARY KEY, offer UUID, cost INTEGER, buyer TEXT, seller TEXT)");
                 //                exec("create table if not exists Reviews (id UUID PRIMARY KEY, eval INTEGER, writer TEXT, description TEXT, order UUID)");
                 exec("CREATE TABLE IF NOT EXISTS Reviews (orderId UUID, writer TEXT, eval INTEGER, description TEXT,FOREIGN KEY(orderId) REFERENCES Orders(id),UNIQUE(orderId, writer))");
+                exec("create table if not exists Messages (id UUID PRIMARY KEY, timestamp Integer, content TEXT, sender TEXT, receiver TEXT, seen TEXT)");
 
                 // Insert data into Users
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('', '', 'admin', '', '', '', '', '', '100000000', '5')");
@@ -199,8 +200,14 @@ public class DataBase {
                         "('fff862f5-dbd3-4c41-ac9a-b778fd2ed222', 1, 'annaG', 'Great service hahahaha...')," +
                         "('ec8f59cc-15df-4207-ab46-12789fc97e8d', 4, 'joelD', 'Had fun !')");
 
+                // Insert data into message
+                exec("insert into Messages (id, timestamp, content, sender, receiver, seen) values " +
+                        "('de6ea568-954e-43d7-9adc-33a44f6bdccc', 1705054674911, 'bonjour bonjour', 'joelD', 'ugoG', 'false')");
+                exec("insert into Messages (id, timestamp, content, sender, receiver, seen) values " +
+                        "('95b134bc-85b5-4e94-8bec-a0b7a5e8cfc2', 1705056187116, 'au revoir', 'julieZ', 'ugoG', 'false')");
 
-                // Fetch data from Users
+
+                        // Fetch data from Users
                 ArrayList<ArrayList<Object>> dataTable1 = fetchAll("SELECT * FROM Users");
                 System.out.println("Data from Users:");
                 printData(dataTable1);
