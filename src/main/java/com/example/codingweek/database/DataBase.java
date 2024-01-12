@@ -1,6 +1,8 @@
 package com.example.codingweek.database;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +15,7 @@ public class DataBase {
         this.dbName = "pixou.db";
         File dbFile = new File("pixou.db");
         if (!dbFile.exists()) {
-            this.createDatabaseFile();
+            this.createDatabaseFile(false);
         }
     }
 
@@ -148,15 +150,16 @@ public class DataBase {
         }
     }
 
-    private void createDatabaseFile() {
+    private void createDatabaseFile(Boolean force) {
         try {
+
             File dbFile = new File(dbName);
-            if (!dbFile.exists()) {
+            if (force || !dbFile.exists()) {
                 exec("CREATE TABLE IF NOT EXISTS Users (firstName TEXT, lastName TEXT, userName TEXT PRIMARY KEY, email TEXT, address TEXT, zipCode TEXT, city TEXT, password TEXT, coins TEXT, averageEval TEXT)");
                 exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, type TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, availability BOOL, FOREIGN KEY(user) REFERENCES Users(username))");
                 exec("CREATE TABLE IF NOT EXISTS Categories (offer UUID, category TEXT, FOREIGN KEY(offer) REFERENCES Offers(id),UNIQUE(offer, category))");
                 exec("create table if not exists Orders (id UUID PRIMARY KEY, offer UUID, cost INTEGER, buyer TEXT, seller TEXT)");
-//                exec("create table if not exists Reviews (id UUID PRIMARY KEY, eval INTEGER, writer TEXT, description TEXT, order UUID)");
+                //                exec("create table if not exists Reviews (id UUID PRIMARY KEY, eval INTEGER, writer TEXT, description TEXT, order UUID)");
                 exec("CREATE TABLE IF NOT EXISTS Reviews (orderId UUID, writer TEXT, eval INTEGER, description TEXT,FOREIGN KEY(orderId) REFERENCES Orders(id),UNIQUE(orderId, writer))");
 
                 // Insert data into Users
@@ -207,6 +210,7 @@ public class DataBase {
                 System.out.println("Data from Offers:");
                 printData(dataTable2);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -214,7 +218,6 @@ public class DataBase {
 
     public void reset() {
         try {
-            // Clear all data from relevant tables
             exec("DELETE FROM Categories");
             exec("DELETE FROM Offers");
             exec("DELETE FROM Users");
@@ -231,7 +234,8 @@ public class DataBase {
     }
 
     public void init() {
-        createDatabaseFile();
+        System.out.println("init");
+        createDatabaseFile(true);
     }
 
     public void printData(ArrayList<ArrayList<Object>> data) {
