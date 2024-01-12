@@ -230,6 +230,7 @@ public class DataBase {
             exec("DELETE FROM Users");
             exec("DELETE FROM Orders");
             exec("DELETE FROM Reviews");
+            exec("DELETE FROM Messages");
 
 //            // Insert default data
 //            createDatabaseFile(); // Assuming this method exists in your class

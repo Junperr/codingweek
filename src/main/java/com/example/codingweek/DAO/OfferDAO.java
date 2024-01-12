@@ -17,9 +17,9 @@ public class OfferDAO {
     private final DataBase db = DataBase.getInstance();
 
     public Offer newOffer(String title, String description, ImageFile image, Integer price, String type, ArrayList<String> Categories) throws Exception {
-        Offer offer = new Offer(title, description, CurrentUser.getUser().userName, getImageName(image), price, type, true, Categories);
+        Offer offer = new Offer(title, description, CurrentUser.getUser().userName, ImageFile.getImageName(image), price, type, true, Categories);
         System.out.println(image);
-        System.out.println(getImageName(image));
+        System.out.println(ImageFile.getImageName(image));
         addOffer(offer, image);
         return offer;
     }
@@ -115,8 +115,7 @@ public class OfferDAO {
                 categoriesString.add(category.get("category").toString());
             }
 
-            int availabilityInt = Integer.parseInt(offer.get("availability").toString());
-            String availabilityStatus = (availabilityInt == 1) ? "true" : "false";
+
 
             offers.add(new Offer(UUID.fromString(offer.get("id").toString()),
                     offer.get("title").toString(),
@@ -125,7 +124,7 @@ public class OfferDAO {
                     offer.get("description").toString(),
                     (offer.get("imagePath") != null) ? offer.get("imagePath").toString() : "default.png",
                     Integer.parseInt(offer.get("price").toString()),
-                    Boolean.parseBoolean(availabilityStatus),
+                    offer.get("availability").toString().equals("true"),
                     categoriesString));
         }
         return offers;
@@ -237,11 +236,6 @@ public class OfferDAO {
                     getOfferCategories(offer)));
         }
         return offers;
-    }
-
-    public String getImageName(File image) {
-        if (image == null) return "default.png";
-        else return image.getName();
     }
 
 }
