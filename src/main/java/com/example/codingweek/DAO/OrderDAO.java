@@ -60,7 +60,9 @@ public class OrderDAO {
 
     public Order getOrderById(UUID id) {
         HashMap<String, Object> orderMap = db.fetchOneMap("SELECT * FROM Orders WHERE id = ?", id);
+
         return new Order(id,
+                UUID.fromString(orderMap.get("offer").toString()),
                 (Integer) orderMap.get("cost"),
                 orderMap.get("buyer").toString(),
                 orderMap.get("seller").toString());

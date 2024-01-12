@@ -179,7 +179,6 @@ public class OfferDAOTest {
         assertEquals(1, ownOffers.size());
 
         CurrentUser.logoutUser();
-        db.printData(db.fetchAll("SELECT * FROM Users"));
         User admin = new UserDAO().getUserByUsername("joelD");
         CurrentUser.logUser(admin);
 
@@ -295,11 +294,6 @@ public class OfferDAOTest {
         assertEquals(1, offersOutilJardinAge.size());
         ArrayList<Offer> offers7 = offerDAO.getOffersWithFilters("Loan", "59000", "10", "50", categoryElec);
         assertEquals(1, offers7.size());
-
-
-
-
-
 
     }
 
