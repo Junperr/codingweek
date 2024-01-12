@@ -3,3 +3,26 @@
 *{
     -fx-font-family: "Poppins", sans-serif;
 }
+
+#button{
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fec89a;
+    -fx-background-color: #fdf4ec;
+}
+
+#button:hover{
+    -fx-cursor: hand;
+}
+
+#newAccountButton{
+    -fx-font-size: 15px;
+    -fx-text-fill: #FDF4EC;
+    -fx-background-color: #FEC89A;
+    -fx-font-weight: bold;
+}
+
+#newAccountButton:hover{
+    -fx-cursor: hand;
+    -fx-pref-width: 90;
+}
