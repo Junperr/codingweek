@@ -36,7 +36,10 @@ public class MiniConvController {
         this.content = message.getContent();
         this.timestamp = message.getTimestamp();
         lastMessage.setText(message.getContent());
-        time.setText(message.getTimestamp().toString());
+
+        Timestamp hours = new Timestamp(message.getTimestamp());
+        String s = new SimpleDateFormat("dd/MM/yyyy").format(hours);
+        time.setText(s);
     }
 
     @FXML
