@@ -4,6 +4,7 @@ import com.example.codingweek.data.Message;
 import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -41,6 +42,7 @@ public class ConvController {
     }
 
     public void initConv(String otherName) {
+        oneMess.getChildren().clear();
         BigFacade bf = new BigFacade();
         ArrayList<Message> conv = bf.getConv(otherName);
 
