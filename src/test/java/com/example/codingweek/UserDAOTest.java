@@ -224,8 +224,8 @@ public class UserDAOTest {
         ArrayList<String> categories = new ArrayList<>();
         categories.add("test");
         Offer offer = offerDAO.newOffer("test", "test", null, 50, "Loan", categories);
-        Order order = orderDAO.newOrder(offer.getId(), 50, "julieZ", "joelD");
-        evalDAO.createNewEval(idReview,5, order.getId(), "julieZ" , "test");
+        Order order = orderDAO.newOrder(offer.getId(), 50, "julieZ", "joelDTest");
+        evalDAO.createNewEval(5, order.getId(), "julieZ" , "test");
         userDAO.updateAvgEval(userTest);
         assertEquals(5.0, userTest.avgEval);
 
