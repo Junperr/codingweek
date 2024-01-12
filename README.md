@@ -38,14 +38,15 @@ And propose or request services. In exchange of a virtual money called Florin.
   4. Complex offer
 
 - Thursday : 
-  + Complex offer
+  + Complex offer ABANDONED
   1. Chat
-  2. Complex research
+  2. Complex research OK
 
 
 - Friday : 
-  1. Test
-  2. Validation
+  + Finish chat
+  1. Tests
+  2. Validation, fix bug
   3. Video
 
 ## How to use :

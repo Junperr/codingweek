@@ -17,7 +17,7 @@ public class OfferDAO {
     }
 
     public void addOffer(Offer offer) {
-        db.exec("INSERT INTO Offers (id,title, description, price, type, user, availability) VALUES (?, ?, ?, ?, ?, ?, 1)",
+        db.exec("INSERT INTO Offers (id,title, description, price, type, user, availability) VALUES (?, ?, ?, ?, ?, ?, 'true')",
                 offer.getId(),
                 offer.getTitle(),
                 offer.getDescription(),
@@ -186,11 +186,8 @@ public class OfferDAO {
                 query += "and o.user != '" + CurrentUser.getUser().userName + "' and o.availability = 'true' group by o.id";
             }
         } else query = "select * from offers";
-        System.out.println(query);
         ArrayList<HashMap<String, Object>> offerMap = db.fetchAllMap(query);
-        System.out.println(offerMap);
         ArrayList<Offer> offers = new ArrayList<>();
-        ArrayList<String> categoriesString = new ArrayList<>();
         for (HashMap<String, Object> offer : offerMap) {
             System.out.println(offer.get("id"));
 
