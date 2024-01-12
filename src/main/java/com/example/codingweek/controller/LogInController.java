@@ -31,8 +31,8 @@ public class LogInController {
     private Label errorLabel;
     @FXML
     private ImageView eyeImageView;
-    @FXML
-    private Pane centeredPane;
+//    @FXML
+//    private Pane centeredPane;
     @FXML
     private VBox centeredVBox;
 
@@ -49,8 +49,8 @@ public class LogInController {
         passwordTextField.setOnKeyPressed(this::handleEnterKeyPress);
         userNameTextField.setOnKeyPressed(this::handleEnterKeyPress);
 
-        centeredPane.widthProperty().addListener((obs, oldVal, newVal) -> centerVBox());
-        centerVBox();
+        //centeredPane.widthProperty().addListener((obs, oldVal, newVal) -> centerVBox());
+        //centerVBox();
     }
 
     public void login() throws IOException {
@@ -94,13 +94,13 @@ public class LogInController {
         eyeImageView.setImage(image);
     }
 
-    private void centerVBox() {
-        double xOffset = (centeredPane.getWidth() - centeredVBox.getWidth()) / 2;
-        double yOffset = (centeredPane.getHeight() - centeredVBox.getHeight()) / 2;
-
-        centeredVBox.setLayoutX(xOffset);
-        centeredVBox.setLayoutY(yOffset);
-    }
+//    private void centerVBox() {
+//        double xOffset = (centeredPane.getWidth() - centeredVBox.getWidth()) / 2;
+//        double yOffset = (centeredPane.getHeight() - centeredVBox.getHeight()) / 2;
+//
+//        centeredVBox.setLayoutX(xOffset);
+//        centeredVBox.setLayoutY(yOffset);
+//    }
 
     private void handleEnterKeyPress(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {

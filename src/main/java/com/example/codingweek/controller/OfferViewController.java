@@ -78,6 +78,7 @@ public class OfferViewController extends VBox {
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
         Stage modification = (Stage) goToOffer.getScene().getWindow();
+        modification.setResizable(false);
 
         OfferController offerController = loader.getController();
         offerController.initOfferPage(offer);

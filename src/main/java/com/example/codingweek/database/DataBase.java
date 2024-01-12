@@ -167,11 +167,11 @@ public class DataBase {
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Julie', 'Zhen', 'julieZ', 'julie.zhen@telecomnancy.net', 'address4', '75000', 'city1', '88888888', '5000', '-1')");
 
                 // Insert data into Offers
-                exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('6cc0106a-8d73-4ead-935e-971d00196e6f', 'Pelle à prêter', 'Loan', 'Une belle pelle à prêter', 'pelle.jpg', 10, 'joelD', 'true')");
-                exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('337bc42e-1a1a-4237-a45d-a66d3da4ed03', 'Machine à café à prêter', 'Loan', 'Une belle machine à café à prêter', 'pelle.jpg', 30, 'joelD', 'false')");
-                exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('cfe6e949-e07f-4b87-a0e6-0715db4da09a', 'Machine à thé à prêter', 'Loan', 'Une belle machine à thé à prêter', 'pelle.jpg', 50, 'joelD', 'true')");
-                exec("INSERT INTO Offers (id, title, type, description, price, user, availability) VALUES ('f3925355-d605-4f40-b012-829adb56738c', 'Cours particulier', 'Service', 'Donne cours de maths pas cher', 200,'annaG', 'true')");
-                exec("INSERT INTO Offers (id, title, type, description, price, user, availability) VALUES ('c307e79f-de27-4803-b3f4-48007300a43f', 'Cours de natation', 'Service', 'Donne cours de natation pas cher', 50,'ugoG', 'false')");
+                exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('6cc0106a-8d73-4ead-935e-971d00196e6f', 'Pelle à prêter', 'Loan', 'Une belle pelle à prêter', 'offers/pelle.jpg', 10, 'joelD', 'true')");
+                exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('337bc42e-1a1a-4237-a45d-a66d3da4ed03', 'Machine à café à prêter', 'Loan', 'Une belle machine à café à prêter', 'offers/pelle.jpg', 30, 'joelD', 'false')");
+                exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('cfe6e949-e07f-4b87-a0e6-0715db4da09a', 'Machine à thé à prêter', 'Loan', 'Une belle machine à thé à prêter', 'offers/pelle.jpg', 50, 'joelD', 'true')");
+                exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('f3925355-d605-4f40-b012-829adb56738c', 'Cours particulier', 'Service', 'Donne cours de maths pas cher', 'default.png', 200,'annaG', 'true')");
+                exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('c307e79f-de27-4803-b3f4-48007300a43f', 'Cours de natation', 'Service', 'Donne cours de natation pas cher', 'default.png', 50,'ugoG', 'false')");
 
                 // Insert data into Categories
                 exec("INSERT INTO Categories (offer, category) VALUES ('6cc0106a-8d73-4ead-935e-971d00196e6f', 'Jardinage')");

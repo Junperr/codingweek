@@ -3,3 +3,44 @@
 *{
     -fx-font-family: "Poppins", sans-serif;
 }
+
+
+
+.background{
+    -fx-background-color: linear-gradient(to bottom, #F9DCC4, #FFFFFF);
+}
+
+.textfield{
+   -fx-border-color: transparent;
+   -fx-background-color: #ffffff;
+}
+
+.textfield:focus, .textfield:focused{
+    -fx-border-color: #f9dcc4;
+    -fx-border-width: 2;
+    -fx-border-radius: 3;
+}
+
+.button{
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FDF4EC;
+    -fx-background-color: #FEC89A;
+}
+
+.button:hover{
+    -fx-cursor: hand;
+}
+
+.enter{
+    -fx-font-size: 11px;
+    /*-fx-font-weight: bold;*/
+    -fx-text-fill: #FEC89A;
+
+}
+
+.error{
+    -fx-font-size: 10px;
+    -fx-text-fill: red;
+}
+
