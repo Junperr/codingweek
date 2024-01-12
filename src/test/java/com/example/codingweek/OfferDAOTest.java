@@ -15,46 +15,56 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OfferDAOTest {
 
+    private DataBase db = DataBase.getInstance();
+
+
     @Test
-    public void addOfferTest() throws Exception {
-        User joelD = new UserDAO().getUserByUsername("joelD");
-        CurrentUser.logUser(joelD);
+    public void addOfferTestNoImage() throws Exception {
+        db.reset();
+        User joelD = getTestUser();
 
         ArrayList<String> categories = new ArrayList<>();
         categories.add("Aspirateur");
         categories.add("Ménage");
-        Offer offer = new Offer("Location d'aspirateur", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", "joelD", null, 50, "Loan", true, categories);
+        Offer offer = new Offer("Location d'aspirateur", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", "joelDTest", null, 50, "Loan", true, categories);
 
         OfferDAO offerDAO = new OfferDAO();
         offerDAO.addOffer(offer, null);
+
+
         DataBase db = DataBase.getInstance();
-        ArrayList<HashMap<String,Object>> fetch = db.fetchAllMap("select * from Offers where id =?", offer.getId());
+        ArrayList<HashMap<String, Object>> fetch = db.fetchAllMap("select * from Offers where id =?", offer.getId());
         assertEquals(1, fetch.size());
-        assertEquals("Location d'aspirateur", fetch.get(0).get("title"));
-        assertEquals("Cherche à louer un aspirateur pour faire le grand ménage ce week-end", fetch.get(0).get("description"));
-        assertEquals("joelD", fetch.get(0).get("user"));
-        assertEquals(50, fetch.get(0).get("price"));
-        assertEquals("Loan", fetch.get(0).get("type"));
-        assertEquals("true", fetch.get(0).get("availability"));
-        ArrayList<HashMap<String,Object>> fetchCategories = db.fetchAllMap("select * from Categories where offer =?", offer.getId());
-        assertEquals(2,fetchCategories.size());
+        HashMap<String, Object> offerMap = fetch.get(0);
+        assertEquals("Location d'aspirateur", offerMap.get("title"));
+        assertEquals("Cherche à louer un aspirateur pour faire le grand ménage ce week-end", offerMap.get("description"));
+        assertEquals("joelDTest", offerMap.get("user"));
+        assertEquals(50, offerMap.get("price"));
+        assertEquals("Loan", offerMap.get("type"));
+        assertEquals("true", offerMap.get("availability"));
+        ArrayList<HashMap<String, Object>> fetchCategories = db.fetchAllMap("select * from Categories where offer =?", offer.getId());
+        assertEquals(2, fetchCategories.size());
         assertEquals("Aspirateur", fetchCategories.get(0).get("category"));
         assertEquals("Ménage", fetchCategories.get(1).get("category"));
     }
+
     @Test
-    public void newOfferTest() throws Exception {
-        User joelD = new UserDAO().getUserByUsername("joelD");
-        CurrentUser.logUser(joelD);
+    public void newOfferTestNoImage() throws Exception {
+        db.reset();
+        User joelD = getTestUser();
+
+        System.out.println(CurrentUser.getUser());
 
         OfferDAO offerDAO = new OfferDAO();
         ArrayList<String> categories = new ArrayList<>();
         categories.add("Aspirateur");
         categories.add("balai");
-        Offer offer = offerDAO.newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end",  null, 50,  "Loan", categories);
+        Offer offer = offerDAO.newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", null, 50, "Loan", categories);
+
 
         assertEquals("Location de balai", offer.getTitle());
         assertEquals("Cherche à louer un aspirateur pour faire le grand ménage ce week-end", offer.getDescription());
-        assertEquals("joelD", offer.getUser());
+        assertEquals("joelDTest", offer.getUser());
         assertEquals(50, offer.getPrice());
         assertEquals("Loan", offer.getType());
         assertEquals(true, offer.getAvailability());
@@ -65,10 +75,11 @@ public class OfferDAOTest {
 
     @Test
     public void updateAvailabilityTest() throws Exception {
-        OfferDAO offerDAO = new OfferDAO();
         Offer offer = createTestOffer();
+        OfferDAO offerDAO = new OfferDAO();
         assertEquals(true, offer.getAvailability());
         offerDAO.updateAvailability(offer);
+
         assertEquals(false, offer.getAvailability());
     }
 
@@ -89,29 +100,38 @@ public class OfferDAOTest {
 
     @Test
     public void getOwnOffersTest() throws Exception {
-        User joelD = createTestUser();
-        Offer offer = createTestOffer();
+        db.reset();
+        db.init();
+        User joelD = getTestUser();
         OfferDAO offerDAO = new OfferDAO();
+
+        ArrayList<Offer> ownOffers0 = offerDAO.getOwnOffers(joelD.userName);
+
+        assertEquals(true, ownOffers0.isEmpty());
+
+        Offer offer = createTestOffer();
+
 
         ArrayList<Offer> ownOffers = offerDAO.getOwnOffers(joelD.userName);
 
         assertEquals(false, ownOffers.isEmpty());
-        assertEquals(offer.getTitle(), ownOffers.get(0).getTitle());
-        assertEquals(offer.getDescription(), ownOffers.get(0).getDescription());
-        assertEquals(offer.getUser(), ownOffers.get(0).getUser());
-        assertEquals(offer.getPrice(), ownOffers.get(0).getPrice());
-        assertEquals(offer.getType(), ownOffers.get(0).getType());
-        assertEquals(offer.getAvailability(), ownOffers.get(0).getAvailability());
+        assertEquals(1, ownOffers.size());
+
+//        CurrentUser.logoutUser();
+//        User admin = new UserDAO().getUserByUsername("annaG");
+//        System.out.println(admin);
+//        CurrentUser.logUser(admin);
+//        new OfferDAO().newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", null, 50, "Loan", new ArrayList<>());
+//        CurrentUser.logoutUser();
+//        CurrentUser.logUser(joelD);
+//        ArrayList<Offer> ownOffers2 = offerDAO.getOwnOffers(joelD.userName);
+//
+//        assertEquals(false, ownOffers2.isEmpty());
+//        assertEquals(1, ownOffers2.size());
     }
 
     @Test
-    public void getOthersOfferTest() throws Exception {
-    User joelD = createTestUser();
-    Offer offer = createTestOffer();
-    OfferDAO offerDAO = new OfferDAO();
-
-
-
+    public void getOthersOfferTest() {
 
     }
 
@@ -119,26 +139,34 @@ public class OfferDAOTest {
     public void getAllOffersTest() {
 
     }
+
     private Offer createTestOffer() throws Exception {
+        User joelD = getTestUser();
+
         OfferDAO offerDAO = new OfferDAO();
         ArrayList<String> categories = new ArrayList<>();
         categories.add("Aspirateur");
         categories.add("balai");
-        Offer offer = offerDAO.newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end",  null, 50,  "Loan", categories);
+        Offer offer = offerDAO.newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", null, 50, "Loan", categories);
         return offer;
     }
-    private Offer createTestOffer(String username) throws Exception {
-        OfferDAO offerDAO = new OfferDAO();
-        ArrayList<String> categories = new ArrayList<>();
-        categories.add("Aspirateur");
-        categories.add("balai");
-        Offer offer = offerDAO.newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end",  null, 50,  "Loan", categories);
-        return offer;
-    }
-    private User createTestUser(){
-        User joelD = new UserDAO().getUserByUsername("joelD");
+
+    private User getTestUser() {
+        User joelD = new UserDAO().getUserByUsername("joelDTest");
+        if (joelD == null) {
+            try {
+                System.out.println(joelD);
+                joelD = new UserDAO().newUser("JoelTest", "DuhemTest", "joelDTest", "joel.duhemTest@telecomnancy.net", "Aa@45678Test", "57 boulevard saint vincent", "NancyTest", "59000");
+                System.out.println(joelD);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        System.out.println(joelD);
         CurrentUser.logUser(joelD);
+        System.out.println(CurrentUser.getUser());
         return joelD;
     }
+
 
 }

@@ -33,6 +33,10 @@ public class Offer extends SerializedData {
         return description;
     }
 
+    public void setAvailability(Boolean availability) {
+        this.availability = availability;
+    }
+
     public String getImagePath() {
         return imagePath;
     }
