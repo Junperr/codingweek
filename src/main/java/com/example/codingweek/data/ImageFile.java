@@ -1,9 +1,6 @@
 package com.example.codingweek.data;
 
-import com.example.codingweek.Main;
-
 import java.io.File;
-import org.apache.commons.io.FileUtils;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -49,7 +46,9 @@ public class ImageFile extends File {
                 // Copy the file using Files.copy
                 //@todo make target path dynamic
                 File newImage =  new File(targetPath.toString());
+                System.out.println("yo");
                 Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("yoyo");
                 waitForFileCompletion(newImage,2000);
             } catch (Exception e) {
                 // Handle the exception

@@ -234,7 +234,8 @@ public class UserDAO {
     }
 
     public void updateAvgEval(User user){
-        HashMap<String, Object> map = db.fetchOneMap("select avg(eval) from Reviews r join Orders o on o.id = r.orderId where o.seller = ?", user.userName);
+
+        HashMap<String, Object> map = db.fetchOneMap("select avg(eval) from Reviews r join Orders o on o.id = r.orderId where o.seller = ?", user.userName);        System.out.println(map);
         if(map.get("avg(eval)") != null) user.avgEval = Double.parseDouble(map.get("avg(eval)").toString());
         else user.avgEval = -1.0;
     }

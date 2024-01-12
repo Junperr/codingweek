@@ -24,7 +24,6 @@ public class EvalDAO {
         UserDAO userDAO = new UserDAO();
         OrderDAO orderDAO = new OrderDAO();
 
-        System.out.println(eval.getOrderId());
         Order evalOrder = orderDAO.getOrderById(eval.getOrderId());
         User evalSeller = userDAO.getUserByUsername(evalOrder.getSeller());
         userDAO.updateAvgEval(evalSeller);
