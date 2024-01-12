@@ -116,8 +116,8 @@ public class BigFacade {
         Set<String> allUser = messageDAO.getAllUser(currentUser.userName);
 
         ArrayList<Message> allConvPreview = new ArrayList<>();
-
         for (String s : allUser) {
+
             HashMap<String, Object> lM = messageDAO.getLastMessageWith(currentUser.userName, s);
             Message lastMessage = new Message(UUID.fromString(lM.get("id").toString()),
                     (Long) lM.get("timestamp"),
@@ -130,6 +130,7 @@ public class BigFacade {
         }
 
         allConvPreview.sort(Comparator.comparing(Message::getTimestamp));
+
         Collections.reverse(allConvPreview);
 
         return allConvPreview;

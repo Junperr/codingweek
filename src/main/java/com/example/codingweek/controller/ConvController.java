@@ -4,7 +4,6 @@ import com.example.codingweek.data.Message;
 import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -16,8 +15,6 @@ import java.util.ArrayList;
 public class ConvController {
     @FXML
     private VBox oneMess;
-    @FXML
-    private Button sendMessage;
     @FXML
     private Label theirName;
     @FXML
@@ -51,11 +48,14 @@ public class ConvController {
             changeScene.loadConvFromDatabase(m, oneMess, "static/fxml/messageVIew.fxml");
         }
 
+        this.otherName = otherName;
+
         theirName.setText(otherName);
         scroll.setVvalue(1.0);
     }
 
     public void initConvOffer(String otherName) {
+        this.otherName = otherName;
         theirName.setText(otherName);
     }
 }

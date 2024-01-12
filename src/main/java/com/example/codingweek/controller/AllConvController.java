@@ -26,13 +26,13 @@ public class AllConvController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         BigFacade bf = new BigFacade();
+
         ArrayList<Message> convPreview = bf.getConvPreview();
 
         // mettre message si aucune conv
         for (Message message : convPreview) {
+            System.out.println(3);
             changeScene.loadConvPreviewFromDatabase(message, messages, "static/fxml/miniConv.fxml");
         }
     }
-
-
 }

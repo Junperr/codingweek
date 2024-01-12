@@ -77,7 +77,7 @@ public class ChangeScene {
         ConvController convController = loader.getController();
         convController.setStage(modification);
         convController.setMainController(miniConvController);
-        convController.initConvOffer(otherName);
+        convController.initConv(otherName);
         modification.showAndWait();
     }
 
@@ -91,7 +91,7 @@ public class ChangeScene {
         ConvController convController = loader.getController();
         convController.setStage(modification);
         convController.setMainControllerOffer(offerController);
-        convController.initConv(otherName);
+        convController.initConvOffer(otherName);
         modification.showAndWait();
     }
 
@@ -126,11 +126,11 @@ public class ChangeScene {
     public void loadConvPreviewFromDatabase(Message message, VBox messages, String pathToFXML) {
         try {
             FXMLLoader loader = loader(pathToFXML);
-            VBox orderVBox = loader.load();
+            VBox convVBox = loader.load();
 
             MiniConvController miniConvController = loader.getController();
             miniConvController.initMiniConv(message);
-            messages.getChildren().add(orderVBox);
+            messages.getChildren().add(convVBox);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
