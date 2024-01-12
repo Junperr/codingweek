@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class ChangeScene {
     private FXMLLoader loader(String ressourcePath) throws IOException {

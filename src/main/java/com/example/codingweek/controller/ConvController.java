@@ -51,6 +51,7 @@ public class ConvController {
     public void initConv(String otherName) {
         messageTextField.setText("");
         oneMess.getChildren().clear();
+        oneMess.setSpacing(10);
 
         BigFacade bf = new BigFacade();
         ArrayList<Message> conv = bf.getConv(otherName);

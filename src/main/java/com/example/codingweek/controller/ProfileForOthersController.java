@@ -16,8 +16,10 @@ import java.util.ArrayList;
 public class ProfileForOthersController {
     @FXML
     public Label userName, zip, city, marks, profileHeader;
+
     public VBox orderToAddOther;
     public VBox offerToAddOther;
+
 
     public void initUserPageForOthers(User user){
         this.profileHeader.setText(user.userName + "'s profile");

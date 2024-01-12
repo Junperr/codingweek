@@ -12,6 +12,7 @@ public class MessageViewController {
     private Label content;
 
     public void initMessage(Message message) {
-        content.setText(message.getContent());
+
+        content.setText( message.getSender() + " : " + message.getContent());
     }
 }

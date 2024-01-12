@@ -52,7 +52,7 @@ public class UserDAOTest {
         assertEquals("NancyTest", fetch.get(0).get("city"));
         assertEquals("59000", fetch.get(0).get("zipCode"));
         assertEquals("100", fetch.get(0).get("coins"));
-        assertEquals("-1", fetch.get(0).get("averageEval"));
+        assertEquals("-1.0", fetch.get(0).get("averageEval"));
     }
 
     @Test
@@ -217,14 +217,13 @@ public class UserDAOTest {
         assertEquals(-1, userTest.avgEval);
         userDAO.updateAvgEval(userTest);
 
-        UUID idReview = UUID.randomUUID();
         EvalDAO evalDAO = new EvalDAO();
         OrderDAO orderDAO = new OrderDAO();
         OfferDAO offerDAO = new OfferDAO();
         ArrayList<String> categories = new ArrayList<>();
         categories.add("test");
         Offer offer = offerDAO.newOffer("test", "test", null, 50, "Loan", categories);
-        Order order = orderDAO.newOrder(offer.getId(), 50, "julieZ", "joelDTest");
+        Order order = orderDAO.newOrder(offer.getId(), 50, "julieZ", offer.getUser());
         evalDAO.createNewEval(5, order.getId(), "julieZ" , "test");
         userDAO.updateAvgEval(userTest);
         assertEquals(5.0, userTest.avgEval);
