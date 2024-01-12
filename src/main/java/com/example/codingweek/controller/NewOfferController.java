@@ -64,7 +64,7 @@ public class NewOfferController {
 
     @FXML
     public void initialize(){
-        type.getItems().addAll("Offer", "Service");// Offer types
+        type.getItems().addAll("Loan", "Service");// Offer types
         florainImage.setImage(new Image("static/images/florain.png"));
         //changer la couleur de bord du combo panel
         themeComboPanel.setStyle("-fx-border-color: #f8edeb");
