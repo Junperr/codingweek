@@ -137,7 +137,9 @@ public class BigFacade {
         return messageDAO.getAllMessageWith(currentUser.userName, userName);
     }
 
-    public Message newMessage(String content, String sender, String receiver) {
-        return messageDAO.newMessage(content, sender, receiver);
+    public Message newMessage(String content, String receiver) {
+        User currentUser = CurrentUser.getUser();
+
+        return messageDAO.newMessage(content, currentUser.userName, receiver);
     }
 }

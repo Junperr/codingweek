@@ -15,7 +15,8 @@ import java.util.Collection;
 import java.util.UUID;
 
 public class OrderViewController {
-    public VBox order;
+    @FXML
+    private VBox order;
     @FXML
     private VBox feedback;
     @FXML

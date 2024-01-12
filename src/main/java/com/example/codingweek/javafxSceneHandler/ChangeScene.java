@@ -67,6 +67,20 @@ public class ChangeScene {
         modification.showAndWait();
     }
 
+    public void changeSceneToConv(MiniConvController miniConvController, String otherName) throws IOException {
+        FXMLLoader loader = loader("static/fxml/convo.fxml");
+        Parent root = loader.load();
+
+        Stage modification = new Stage();
+        modification.setScene(new Scene(root));
+
+        ConvController convController = loader.getController();
+        convController.setStage(modification);
+        convController.setMainController(miniConvController);
+        convController.initConv(otherName);
+        modification.showAndWait();
+    }
+
     // load from database
 
     public void loadOffersFromDatabase(Offer offer, VBox offers, String pathToFXML) {
@@ -113,8 +127,8 @@ public class ChangeScene {
             FXMLLoader loader = loader(pathToFXML);
             VBox messageVBox = loader.load();
 
-            MiniConvController miniConvController = loader.getController();
-            miniConvController.initMiniConv(conv);
+            MessageViewController messageController = loader.getController();
+            messageController.initMessage(conv);
             message.getChildren().add(messageVBox);
         } catch (IOException e) {
             throw new RuntimeException(e);

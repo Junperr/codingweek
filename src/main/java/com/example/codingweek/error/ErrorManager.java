@@ -50,7 +50,7 @@ public class ErrorManager {
     }
 
     public void handleInvalidEmail(String email) throws Exception {
-        Pattern emailPattern = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+        Pattern emailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
 
         if (!emailPattern.matcher(email).find()) {
             errorMessage = "Please enter a valid e-mail address";

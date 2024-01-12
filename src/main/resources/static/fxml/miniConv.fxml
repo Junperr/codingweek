@@ -11,9 +11,9 @@
    <children>
       <HBox layoutY="-1.0">
          <children>
-            <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="250.0">
+            <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="250.0" onMouseClicked="#goToConv">
                <children>
-                  <Label fx:id="nameSender" prefHeight="18.0" prefWidth="128.0" />
+                  <Label fx:id="otherName" prefHeight="18.0" prefWidth="128.0" />
                   <Label fx:id="lastMessage" prefHeight="18.0" prefWidth="243.0" />
                </children>
                <HBox.margin>

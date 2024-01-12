@@ -20,18 +20,15 @@ public class AllConvController implements Initializable {
 
     private final ChangeScene changeScene = new ChangeScene();
 
-    public void setStage(Stage stage) {
-    }
-
-    public void setMainController(LayoutController layoutController) {
-
-    }
+    public void setStage(Stage stage) {}
+    public void setMainController(LayoutController layoutController) {}
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         BigFacade bf = new BigFacade();
         ArrayList<Message> convPreview = bf.getConvPreview();
 
+        // mettre message si aucune conv
         for (Message message : convPreview) {
             changeScene.loadConvPreviewFromDatabase(message, messages, "static/fxml/miniConv.fxml");
         }
