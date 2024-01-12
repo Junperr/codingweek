@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -251,6 +252,54 @@ public class OfferDAOTest {
 
         assertEquals(false, allOffers1.isEmpty());
         assertEquals(6, allOffers1.size());
+
+    }
+
+    @Test
+    public void getOffersWithFiltersTest() throws Exception{
+        db.reset();
+        db.init();
+        User joelD = getTestUser();
+
+
+        OfferDAO offerDAO = new OfferDAO();
+
+
+        ArrayList<Offer> offersvoid = offerDAO.getOffersWithFilters(null, null,null,null,null);
+        assertEquals(3, offersvoid.size());
+        ArrayList<Offer> offersLoan = offerDAO.getOffersWithFilters("Loan", null,null,null,null);
+        assertEquals(2, offersLoan.size());
+        ArrayList<Offer> offersService = offerDAO.getOffersWithFilters("Service", null,null,null,null);
+        assertEquals(1, offersService.size());
+        ArrayList<Offer> offers59 = offerDAO.getOffersWithFilters(null, "59789",null,null,null);
+        assertEquals(2, offers59.size());
+        ArrayList<Offer> offers33 = offerDAO.getOffersWithFilters(null, "33789",null,null,null);
+        assertEquals(1, offers33.size());
+        ArrayList<Offer> offers02 = offerDAO.getOffersWithFilters(null, "02789",null,null,null);
+        assertEquals(0, offers02.size());
+        ArrayList<Offer> offersPriceMin100 = offerDAO.getOffersWithFilters(null, null,"100",null,null);
+        assertEquals(1, offersPriceMin100.size());
+        ArrayList<Offer> offersPriceMax100 = offerDAO.getOffersWithFilters(null, null,null,"100",null);
+        assertEquals(2, offersPriceMax100.size());
+        ArrayList<String> categoryElec = new ArrayList<String>() {{
+            add("Electroménager");
+        }};
+        ArrayList<Offer> offersElec = offerDAO.getOffersWithFilters(null, null,null,null,categoryElec);
+        assertEquals(1, offersElec.size());
+        ArrayList<String> categoryOutilJardinAge = new ArrayList<String>() {{
+            add("Jardinage");
+            add("Jardin");
+            add("Outils");
+        }};
+        ArrayList<Offer> offersOutilJardinAge = offerDAO.getOffersWithFilters(null, null,null,null,categoryOutilJardinAge);
+        assertEquals(1, offersOutilJardinAge.size());
+        ArrayList<Offer> offers7 = offerDAO.getOffersWithFilters("Loan", "59000", "10", "50", categoryElec);
+        assertEquals(1, offers7.size());
+
+
+
+
+
 
     }
 
