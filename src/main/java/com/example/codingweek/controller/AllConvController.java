@@ -34,6 +34,7 @@ public class AllConvController implements Initializable {
             System.out.println(3);
             changeScene.loadConvPreviewFromDatabase(message, messages, "static/fxml/miniConv.fxml");
         }
+
     }
 
     public void initialize() {
