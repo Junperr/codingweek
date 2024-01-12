@@ -39,6 +39,7 @@ public class MiniConvController {
 
         Timestamp hours = new Timestamp(message.getTimestamp());
         String s = new SimpleDateFormat("dd/MM/yyyy").format(hours);
+        time.setStyle("-fx-font-size: 10px");
         time.setText(s);
     }
 

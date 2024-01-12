@@ -1,8 +1,6 @@
 package com.example.codingweek.database;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -165,10 +163,10 @@ public class DataBase {
 
                 // Insert data into Users
                 exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('', '', 'admin', '', '', '', '', '', '100000000', '5')");
-                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Anna', 'Galkowski', 'annaG', 'anna.galkowski@telecomnancy.net', 'address1', '33000', 'city1', '', '1000', '-1')");
-                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Joel', 'Duhem', 'joelD', 'joel.duhem@telecomnancy.net', 'address2', '59000', 'city1', '', '0', '1')");
-                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Ugo', 'Gosso', 'ugoG', 'ugo.gosso@telecomnancy.net', 'address3', '25000', 'city1', '', '9000', '4')");
-                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Julie', 'Zhen', 'julieZ', 'julie.zhen@telecomnancy.net', 'address4', '75000', 'city1', '', '5000', '-1')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Anna', 'Galkowski', 'annaG', 'anna.galkowski@telecomnancy.net', 'address1', '33000', 'city1', '', '1000', '-1.0')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Joel', 'Duhem', 'joelD', 'joel.duhem@telecomnancy.net', 'address2', '59000', 'city1', '', '0', '1.0')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Ugo', 'Gosso', 'ugoG', 'ugo.gosso@telecomnancy.net', 'address3', '25000', 'city1', '', '9000', '4.0')");
+                exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES ('Julie', 'Zhen', 'julieZ', 'julie.zhen@telecomnancy.net', 'address4', '75000', 'city1', '', '5000', '-1.0')");
 
                 // Insert data into Offers
                 exec("INSERT INTO Offers (id, title, type, description, imagePath, price, user, availability) VALUES ('6cc0106a-8d73-4ead-935e-971d00196e6f', 'Pelle à prêter', 'Loan', 'Une belle pelle à prêter', 'offers/pelle.jpg', 10, 'joelD', 'true')");
@@ -207,7 +205,7 @@ public class DataBase {
                         "('95b134bc-85b5-4e94-8bec-a0b7a5e8cfc2', 1705056187116, 'au revoir', 'julieZ', 'ugoG', 'false')");
 
 
-                        // Fetch data from Users
+                // Fetch data from Users
                 ArrayList<ArrayList<Object>> dataTable1 = fetchAll("SELECT * FROM Users");
                 System.out.println("Data from Users:");
                 printData(dataTable1);
