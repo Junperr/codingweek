@@ -33,7 +33,6 @@ public class OfferDAOTest {
         offerDAO.addOffer(offer, null);
 
 
-        DataBase db = DataBase.getInstance();
         ArrayList<HashMap<String, Object>> fetch = db.fetchAllMap("select * from Offers where id =?", offer.getId());
         assertEquals(1, fetch.size());
         HashMap<String, Object> offerMap = fetch.get(0);
@@ -192,9 +191,37 @@ public class OfferDAOTest {
         assertEquals(1, ownOffers2.size());
     }
 
-    @Test
-    public void getOthersOfferTest() {
+    public void getOtherOffersTest() throws Exception {
+        db.reset();
+        db.init();
 
+        User joelD = getTestUser();
+        OfferDAO offerDAO = new OfferDAO();
+
+        ArrayList<Offer> ownOffers0 = offerDAO.getOwnOffers(joelD.userName);
+
+        assertEquals(true, ownOffers0.isEmpty());
+
+        Offer offer = createTestOffer();
+
+
+        ArrayList<Offer> ownOffers = offerDAO.getOwnOffers(joelD.userName);
+
+        assertEquals(false, ownOffers.isEmpty());
+        assertEquals(1, ownOffers.size());
+
+        CurrentUser.logoutUser();
+        db.printData(db.fetchAll("SELECT * FROM Users"));
+        User admin = new UserDAO().getUserByUsername("admin");
+        System.out.println(admin);
+        CurrentUser.logUser(admin);
+        new OfferDAO().newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", null, 50, "Loan", new ArrayList<>());
+        CurrentUser.logoutUser();
+        CurrentUser.logUser(joelD);
+        ArrayList<Offer> ownOffers2 = offerDAO.getOwnOffers(joelD.userName);
+
+        assertEquals(false, ownOffers2.isEmpty());
+        assertEquals(1, ownOffers2.size());
     }
 
     @Test
