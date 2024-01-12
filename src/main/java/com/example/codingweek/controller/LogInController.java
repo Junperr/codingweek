@@ -3,6 +3,7 @@ package com.example.codingweek.controller;
 import com.example.codingweek.Main;
 import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxSceneHandler.ChangeScene;
+import com.example.codingweek.javafxSceneHandler.KeyHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,8 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -38,6 +37,7 @@ public class LogInController {
 
     private boolean passwordVisible = false;
     private final ChangeScene changeScene = new ChangeScene();
+    private final KeyHandler keyHandler = new KeyHandler();
 
     @FXML
     private void initialize() {
@@ -45,10 +45,8 @@ public class LogInController {
         visibleTextField.setVisible(false);
 
         updateEyeImage();
-
         passwordTextField.setOnKeyPressed(this::handleEnterKeyPress);
         userNameTextField.setOnKeyPressed(this::handleEnterKeyPress);
-
         //centeredPane.widthProperty().addListener((obs, oldVal, newVal) -> centerVBox());
         //centerVBox();
     }
@@ -71,8 +69,9 @@ public class LogInController {
         changeScene.changeSameSceneButton("static/fxml/form-new-account.fxml", registerButton);
     }
 
+    // only login for now
     @FXML
-    public void togglePasswordVisibility(MouseEvent e) {
+    public void togglePasswordVisibility() {
         passwordVisible = !passwordVisible;
 
         if (passwordVisible) {

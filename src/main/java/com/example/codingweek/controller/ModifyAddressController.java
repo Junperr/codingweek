@@ -69,24 +69,6 @@ public class ModifyAddressController {
         }
     }
 
-    private <T> T handleEmptyField(String fieldName) {
-        return handleEmptyField(fieldName,"String");
-    }
-    
-    private <T> T handleEmptyField(String fieldName, String type) {
-        if (errorLabel.getText().isEmpty()){
-            errorLabel.setText("Please fill all the fields, empty fields: " + fieldName);
-        }else{
-            errorLabel.setText(errorLabel.getText() + ", " + fieldName);
-        }
-        if (type.equals("String")){
-            return (T) "";
-        }else if (type.equals("int")){
-            return (T)(Integer) 0;
-        }
-        return null;
-    }
-
     private void handleEnterKeyPress(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             try {

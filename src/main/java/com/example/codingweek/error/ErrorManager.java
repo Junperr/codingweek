@@ -52,8 +52,7 @@ public class ErrorManager {
     }
 
     public void handleInvalidEmail(String email) throws Exception {
-        Pattern emailPattern = Pattern.compile("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])\n");
-
+        Pattern emailPattern = Pattern.compile("^[\\w-.]+@([\\w-]+.)+[\\w-]{2,4}$");
         if (!emailPattern.matcher(email).find()) {
             errorMessage = "Please enter a valid e-mail address";
         }
@@ -73,7 +72,7 @@ public class ErrorManager {
         Pattern addressPattern = Pattern.compile("^([a-zA-Z\\u0080-\\u024F\\d]{1,50}(?:. |-| |')){0,3}[a-zA-Z\\u0080-\\u024F]{0,50}$");
 
         if (!addressPattern.matcher(address).find()) {
-            errorMessage = "Your address must be less than 200 character long";
+            errorMessage = "Please enter a valid address ";
         }
         raise();
     }
@@ -138,52 +137,53 @@ public class ErrorManager {
 
     }
 
-    public void handleInvalidCoinsOrder(Integer coins) throws Exception{
+    public void handleInvalidCoinsOrder(Integer coins) throws Exception {
         if (coins < 0) {
             errorMessage = "Not enough coins to order that,(try to put offers to gain coins)";
         }
         raise();
     }
 
-    public void handleInvalidDesc(String desc) throws Exception{
+    public void handleInvalidDesc(String desc) throws Exception {
         //todo regex et en dessous mon reuf (tt le serr ou ya pas d effort dans el msg)
-        if (desc == null){
+        if (desc == null) {
             errorMessage = "Desc";
         }
         raise();
     }
 
-    public void handleInvalidTitle(String title) throws Exception{
-        if (title == null){
+    public void handleInvalidTitle(String title) throws Exception {
+        if (title == null) {
             errorMessage = "title";
         }
         raise();
     }
 
     public void handleInvalidPrice(Integer price) throws Exception {
-        if (price == null || price < 0 ){
+        if (price == null || price < 0) {
             errorMessage = "prend ta tune mon reuf";
         }
         raise();
     }
 
-    public void handleInvalidType(String type) throws Exception{
-        if (type == null){
+    public void handleInvalidType(String type) throws Exception {
+        if (type == null) {
             errorMessage = "make a choice";
         }
         raise();
     }
 
-    public void handleInvalidImage(ImageFile image) throws Exception{
-        if (!(Objects.equals(image.getFileExtension(), "png") || Objects.equals(image.getFileExtension(), "jpg") || Objects.equals(image.getFileExtension(), "jpeg"))){
-            errorMessage = "Image must be png, jpg or jpeg";
-        }
-        if (image.getTotalSpace() >  1000000000000L ){// val mise au pif
-            errorMessage = "Image to heavy";
+    public void handleInvalidImage(ImageFile image) throws Exception {
+        if (image != null) {
+            if (!(Objects.equals(image.getFileExtension(), "png") || Objects.equals(image.getFileExtension(), "jpg") || Objects.equals(image.getFileExtension(), "jpeg"))) {
+                errorMessage = "Image must be png, jpg or jpeg";
+            }
+            if (image.getTotalSpace() > 1000000000000L) {// val mise au pif
+                errorMessage = "Image to heavy";
+            }
         }
         raise();
     }
-
 
 
 //    public void checkMail(Pattern, field)
