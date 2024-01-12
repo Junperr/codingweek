@@ -7,7 +7,7 @@
 
 <?import com.example.codingweek.javafxComponent.ComboPanel?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.AllOffersController">
+<AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.AllOffersController">
     <fx:include fx:id="menuBar" source="layout.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    <VBox alignment="CENTER_LEFT" layoutY="36.0" prefHeight="125.0" prefWidth="1080.0">
       <children>
