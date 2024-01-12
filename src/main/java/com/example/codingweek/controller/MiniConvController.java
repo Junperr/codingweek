@@ -1,6 +1,8 @@
 package com.example.codingweek.controller;
 
+import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.Message;
+import com.example.codingweek.data.User;
 import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
@@ -21,10 +23,18 @@ public class MiniConvController {
     private final ChangeScene changeScene = new ChangeScene();
 
     public void initMiniConv(Message message) {
-        this.userName = message.getSender();
+        User currentUser = CurrentUser.getUser();
+
+        if (currentUser.userName.equals(message.getReceiver())) {
+            this.userName = message.getSender();
+            otherName.setText(message.getSender());
+        } else {
+            this.userName = message.getReceiver();
+            otherName.setText(message.getReceiver());
+        }
+
         this.content = message.getContent();
         this.timestamp = message.getTimestamp();
-        otherName.setText(message.getSender());
         lastMessage.setText(message.getContent());
         time.setText(message.getTimestamp().toString());
     }

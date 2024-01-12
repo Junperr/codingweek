@@ -50,22 +50,17 @@ public class MessageDAO {
 
     public HashMap<String, Object> getLastMessageWith(String userNameCurrent, String userName) {
         DataBase db = DataBase.getInstance();
-        HashMap<String, Object> lastTimestamp = db.fetchOneMap("select max(timestamp) from Messages where (receiver=? and sender=?) or (receiver=? and sender=?)",userNameCurrent, userName, userName, userNameCurrent);
+        HashMap<String, Object> lastTimestamp = db.fetchOneMap("select max(timestamp) as timestamp from Messages where (receiver=? and sender=?) or (receiver=? and sender=?)",userNameCurrent, userName, userName, userNameCurrent);
 
-        return db.fetchOneMap("select * from Messages where timestamp=?", Integer.parseInt((((Long) lastTimestamp.get("timestamp")).toString())));
+        return db.fetchOneMap("select * from Messages where timestamp=?", lastTimestamp.get("timestamp"));
     }
 
     public ArrayList<Message> getAllMessageWith(String userNameCurrent, String userName) {
         DataBase db = DataBase.getInstance();
-        ArrayList<HashMap<String, Object>> request = db.fetchAllMap("select * from Messages where (receiver=? and sender=?) or (receiver=? and sender=?) order by timestamp asc)",userNameCurrent, userName, userName, userNameCurrent);
+        ArrayList<HashMap<String, Object>> request = db.fetchAllMap("select * from Messages where ((receiver=? and sender=?) or (receiver=? and sender=?)) order by timestamp",userNameCurrent, userName, userName, userNameCurrent);
         ArrayList<Message> messages = new ArrayList<>();
-        
-        for (HashMap<String, Object> stringObjectHashMap : request) {
-            if (stringObjectHashMap.get("seen").equals("false")) {
-                stringObjectHashMap.put("seen", "true");
-                db.exec("update Messages set seen=? where id=?", stringObjectHashMap.get("seen"), stringObjectHashMap.get("id"));
-            }
 
+        for (HashMap<String, Object> stringObjectHashMap : request) {
             Message message = new Message(UUID.fromString(stringObjectHashMap.get("id").toString()),
                     (Long) stringObjectHashMap.get("timestamp"),
                     stringObjectHashMap.get("content").toString(),
@@ -77,8 +72,9 @@ public class MessageDAO {
                 message.setSeen();
                 db.exec("update Messages set seen=? where id=?", message.getSeen(), message.getId());
             }
-        }
 
+            messages.add(message);
+        }
         return messages;
     }
 
