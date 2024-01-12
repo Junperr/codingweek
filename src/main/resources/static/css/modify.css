@@ -44,3 +44,8 @@
     -fx-text-fill: red;
 }
 
+.done{
+    -fx-text-fill: #FEC89A;
+    -fx-font-weight: bold;
+}
+
