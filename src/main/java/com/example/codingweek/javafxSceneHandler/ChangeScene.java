@@ -77,6 +77,20 @@ public class ChangeScene {
         ConvController convController = loader.getController();
         convController.setStage(modification);
         convController.setMainController(miniConvController);
+        convController.initConvOffer(otherName);
+        modification.showAndWait();
+    }
+
+    public void changeSceneToConvOffer(OfferController offerController, String otherName) throws IOException {
+        FXMLLoader loader = loader("static/fxml/convo.fxml");
+        Parent root = loader.load();
+
+        Stage modification = new Stage();
+        modification.setScene(new Scene(root));
+
+        ConvController convController = loader.getController();
+        convController.setStage(modification);
+        convController.setMainControllerOffer(offerController);
         convController.initConv(otherName);
         modification.showAndWait();
     }

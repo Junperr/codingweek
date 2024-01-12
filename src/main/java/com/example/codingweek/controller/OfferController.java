@@ -5,6 +5,7 @@ import com.example.codingweek.auth.CurrentUser;
 import com.example.codingweek.data.Offer;
 import com.example.codingweek.data.User;
 import com.example.codingweek.facade.BigFacade;
+import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,11 +34,16 @@ public class OfferController {
     private UUID offerId;
     private ArrayList<Object> data;
     private Integer cost;
+    private String seller;
+
+    private final ChangeScene changeScene = new ChangeScene();
 
     public void initOfferPage(Offer offer) throws Exception {
 
         String availibility = offer.getAvailability() ? "Available" : "Unavailable";
         System.out.println(offer.getAvailability().toString());
+
+        this.seller = offer.getUser();
 
         this.sellerId.setText(offer.getUser());
         this.offerPageAvailability.setText(availibility);
@@ -107,5 +113,9 @@ public class OfferController {
         ProfileForOthersController profileForOthersController = loader.getController();
         profileForOthersController.initUserPageForOthers(bf.getUserByUsername(sellerId.getText()));
         modification.getScene().setRoot(root);
+    }
+
+    public void sendMessage() throws IOException {
+        changeScene.changeSceneToConvOffer(this, this.seller);
     }
 }

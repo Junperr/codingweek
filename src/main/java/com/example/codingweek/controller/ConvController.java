@@ -31,6 +31,7 @@ public class ConvController {
 
     public void setStage(Stage stage) {}
     public void setMainController(MiniConvController miniConvController) {}
+    public void setMainControllerOffer(OfferController offerController) {}
 
     @FXML
     private void sendMess() {
@@ -52,5 +53,9 @@ public class ConvController {
 
         theirName.setText(otherName);
         scroll.setVvalue(1.0);
+    }
+
+    public void initConvOffer(String otherName) {
+        theirName.setText(otherName);
     }
 }

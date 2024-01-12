@@ -73,7 +73,7 @@
                                  <Button fx:id="order" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#passOrder" text="Order" BorderPane.alignment="CENTER" />
                               </center>
                               <right>
-                                 <Button fx:id="messageButton" mnemonicParsing="false" text="Message" BorderPane.alignment="CENTER" />
+                                 <Button fx:id="messageButton" mnemonicParsing="false" text="Message" BorderPane.alignment="CENTER" onMouseClicked="#sendMessage"/>
                               </right>
                               <left>
                                  <Button mnemonicParsing="false" text="Profile" BorderPane.alignment="CENTER" />
