@@ -7,8 +7,8 @@ import java.util.UUID;
 
 public class EvalDAO {
     private final DataBase db = DataBase.getInstance();
-    public Eval createNewEval(UUID idReview, int eval, UUID orderId, String writer, String reviewDescription){
-        Eval newEval = new Eval(idReview, eval, orderId, writer, reviewDescription);
+    public Eval createNewEval(int eval, UUID orderId, String writer, String reviewDescription){
+        Eval newEval = new Eval(eval, orderId, writer, reviewDescription);
         addEval(newEval);
         return newEval;
     }
