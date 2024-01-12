@@ -179,43 +179,18 @@ public class OfferDAOTest {
 
         CurrentUser.logoutUser();
         db.printData(db.fetchAll("SELECT * FROM Users"));
-        User admin = new UserDAO().getUserByUsername("admin");
-        System.out.println(admin);
+        User admin = new UserDAO().getUserByUsername("joelD");
         CurrentUser.logUser(admin);
+
+        ArrayList<Offer> ownOffers3 = offerDAO.getOwnOffers(admin.userName);
+        assertEquals(false, ownOffers3.isEmpty());
+        assertEquals(3, ownOffers3.size());
         new OfferDAO().newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", null, 50, "Loan", new ArrayList<>());
-        CurrentUser.logoutUser();
-        CurrentUser.logUser(joelD);
-        ArrayList<Offer> ownOffers2 = offerDAO.getOwnOffers(joelD.userName);
 
-        assertEquals(false, ownOffers2.isEmpty());
-        assertEquals(1, ownOffers2.size());
-    }
+        ArrayList<Offer> ownOffers4 = offerDAO.getOwnOffers(admin.userName);
+        assertEquals(false, ownOffers4.isEmpty());
+        assertEquals(4, ownOffers4.size());
 
-    public void getOtherOffersTest() throws Exception {
-        db.reset();
-        db.init();
-
-        User joelD = getTestUser();
-        OfferDAO offerDAO = new OfferDAO();
-
-        ArrayList<Offer> ownOffers0 = offerDAO.getOwnOffers(joelD.userName);
-
-        assertEquals(true, ownOffers0.isEmpty());
-
-        Offer offer = createTestOffer();
-
-
-        ArrayList<Offer> ownOffers = offerDAO.getOwnOffers(joelD.userName);
-
-        assertEquals(false, ownOffers.isEmpty());
-        assertEquals(1, ownOffers.size());
-
-        CurrentUser.logoutUser();
-        db.printData(db.fetchAll("SELECT * FROM Users"));
-        User admin = new UserDAO().getUserByUsername("admin");
-        System.out.println(admin);
-        CurrentUser.logUser(admin);
-        new OfferDAO().newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", null, 50, "Loan", new ArrayList<>());
         CurrentUser.logoutUser();
         CurrentUser.logUser(joelD);
         ArrayList<Offer> ownOffers2 = offerDAO.getOwnOffers(joelD.userName);
@@ -225,7 +200,57 @@ public class OfferDAOTest {
     }
 
     @Test
-    public void getAllOffersTest() {
+    public void getOtherOffersTest() throws Exception {
+        db.reset();
+        db.init();
+
+        User joelD = getTestUser();
+        OfferDAO offerDAO = new OfferDAO();
+
+        ArrayList<Offer> ownOffers0 = offerDAO.getOthersOffer(joelD.userName);
+
+        assertEquals(false, ownOffers0.isEmpty());
+        assertEquals(5, ownOffers0.size());
+
+
+        Offer offer = createTestOffer();
+
+
+        ArrayList<Offer> ownOffers = offerDAO.getOthersOffer(joelD.userName);
+
+        assertEquals(false, ownOffers.isEmpty());
+        assertEquals(5, ownOffers.size());
+
+        CurrentUser.logoutUser();
+        db.printData(db.fetchAll("SELECT * FROM Users"));
+        User admin = new UserDAO().getUserByUsername("admin");
+        System.out.println(admin);
+        CurrentUser.logUser(admin);
+        new OfferDAO().newOffer("Location de balai", "Cherche à louer un aspirateur pour faire le grand ménage ce week-end", null, 50, "Loan", new ArrayList<>());
+        CurrentUser.logoutUser();
+        CurrentUser.logUser(joelD);
+        ArrayList<Offer> ownOffers2 = offerDAO.getOthersOffer(joelD.userName);
+
+        assertEquals(false, ownOffers2.isEmpty());
+        assertEquals(6, ownOffers2.size());
+    }
+
+    @Test
+    public void getAllOffersTest() throws Exception{
+        db.reset();
+        db.init();
+
+        OfferDAO offerDAO = new OfferDAO();
+
+        ArrayList<Offer> allOffers = offerDAO.getAllOffers();
+
+        assertEquals(false, allOffers.isEmpty());
+        assertEquals(5, allOffers.size());
+        Offer offer = createTestOffer();
+        ArrayList<Offer> allOffers1 = offerDAO.getAllOffers();
+
+        assertEquals(false, allOffers1.isEmpty());
+        assertEquals(6, allOffers1.size());
 
     }
 
