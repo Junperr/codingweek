@@ -78,7 +78,7 @@
 }
 
 #anchorPane{
-    -fx-background-color: #f8edeb;
+    -fx-background-color: linear-gradient(to bottom, #f8edeb, #FFFFFF);
 }
 
 #hbox {
@@ -99,12 +99,14 @@
     -fx-text-fill: #FFB5A7;
     -fx-border-color:  #FFB5A7;
     -fx-border-radius: 3;
+    -fx-cursor: hand;
 
 }
 
 
 #image:hover {
     -fx-opacity: 0.6;
+    -fx-cursor: hand;
 }
 
 .cross{
