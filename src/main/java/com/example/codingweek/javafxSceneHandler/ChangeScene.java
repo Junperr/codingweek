@@ -1,19 +1,21 @@
 package com.example.codingweek.javafxSceneHandler;
 
 import com.example.codingweek.Main;
-import com.example.codingweek.controller.AllConvController;
-import com.example.codingweek.controller.LayoutController;
-import com.example.codingweek.controller.ModifyProfileController;
-import com.example.codingweek.controller.MyProfileController;
+import com.example.codingweek.controller.*;
+import com.example.codingweek.data.Message;
+import com.example.codingweek.data.Offer;
+import com.example.codingweek.data.Order;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ChangeScene {
     private FXMLLoader loader(String ressourcePath) throws IOException {
@@ -63,5 +65,59 @@ public class ChangeScene {
         allConvController.setStage(modification);
         allConvController.setMainController(layoutController);
         modification.showAndWait();
+    }
+
+    // load from database
+
+    public void loadOffersFromDatabase(Offer offer, VBox offers, String pathToFXML) {
+        try {
+            FXMLLoader loader = loader(pathToFXML);
+            VBox offerVBox = loader.load();
+
+            OfferViewController offerViewController = loader.getController();
+            offerViewController.initOfferView(offer);
+            offers.getChildren().add(offerVBox);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void loadOrdersFromDatabase(Order order, VBox orders, String pathToFXML) {
+        try {
+            FXMLLoader loader = loader(pathToFXML);
+            VBox orderVBox = loader.load();
+
+            OrderViewController orderViewController = loader.getController();
+            orderViewController.initOrderView(order);
+            orders.getChildren().add(orderVBox);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void loadConvPreviewFromDatabase(Message message, VBox messages, String pathToFXML) {
+        try {
+            FXMLLoader loader = loader(pathToFXML);
+            VBox orderVBox = loader.load();
+
+            MiniConvController miniConvController = loader.getController();
+            miniConvController.initMiniConv(message);
+            messages.getChildren().add(orderVBox);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void loadConvFromDatabase(Message conv, VBox message, String pathToFXML) {
+        try {
+            FXMLLoader loader = loader(pathToFXML);
+            VBox messageVBox = loader.load();
+
+            MiniConvController miniConvController = loader.getController();
+            miniConvController.initMiniConv(conv);
+            message.getChildren().add(messageVBox);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

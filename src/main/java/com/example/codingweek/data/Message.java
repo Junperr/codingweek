@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class Message {
     private final UUID id;
-    private final Timestamp timestamp;
+    private final Long timestamp;
     private final String content, sender, receiver;
     private String seen;
 
@@ -13,7 +13,7 @@ public class Message {
         return id;
     }
 
-    public Timestamp getTimestamp() {
+    public Long getTimestamp() {
         return timestamp;
     }
 
@@ -33,16 +33,20 @@ public class Message {
         return seen;
     }
 
+    public void setSeen() {
+        this.seen = "true";
+    }
+
     public Message(String content, String sender, String receiver) {
         this.id = UUID.randomUUID();
-        this.timestamp = new Timestamp(System.currentTimeMillis());
+        this.timestamp = System.currentTimeMillis();
         this.content = content;
         this.sender = sender;
         this.receiver = receiver;
         this.seen = "false";
     }
 
-    public Message(UUID id, Timestamp timestamp, String content, String sender, String receiver, String seen) {
+    public Message(UUID id, Long timestamp, String content, String sender, String receiver, String seen) {
         this.id = id;
         this.timestamp = timestamp;
         this.content = content;

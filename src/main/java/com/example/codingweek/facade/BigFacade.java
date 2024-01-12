@@ -12,10 +12,8 @@ import com.example.codingweek.data.Offer;
 import com.example.codingweek.data.Order;
 import com.example.codingweek.data.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.UUID;
+import java.sql.Timestamp;
+import java.util.*;
 
 public class BigFacade {
 
@@ -109,28 +107,31 @@ public class BigFacade {
         return messageDAO.getUnreadNumber(currentUser.userName);
     }
 
-    public ArrayList<HashMap<String, HashMap<String, Object>>> getConvPreview() {
+    public ArrayList<Message> getConvPreview() {
         User currentUser = CurrentUser.getUser();
         Set<String> allUser = messageDAO.getAllUser(currentUser.userName);
 
-        ArrayList<HashMap<String, HashMap<String, Object>>> lastMessages = new ArrayList<>();
+        ArrayList<Message> allConvPreview = new ArrayList<>();
 
         for (String s : allUser) {
-            HashMap<String, HashMap<String, Object>> toAdd = new HashMap<>();
             HashMap<String, Object> lM = messageDAO.getLastMessageWith(currentUser.userName, s);
-            HashMap<String, Object> m = new HashMap<>();
+            Message lastMessage = new Message(UUID.fromString(lM.get("id").toString()),
+                    (Long) lM.get("timestamp"),
+                    lM.get("content").toString(),
+                    lM.get("sender").toString(),
+                    lM.get("receiver").toString(),
+                    lM.get("seen").toString());
 
-            m.put("timestamp", lM.get("timestamp"));
-            m.put("content", lM.get("content"));
-
-            toAdd.put(s, m);
-            lastMessages.add(toAdd);
+            allConvPreview.add(lastMessage);
         }
 
-        return lastMessages;
+        allConvPreview.sort(Comparator.comparing(Message::getTimestamp));
+        Collections.reverse(allConvPreview);
+
+        return allConvPreview;
     }
 
-    public ArrayList<HashMap<String, Object>> getConv(String userName) {
+    public ArrayList<Message> getConv(String userName) {
         User currentUser = CurrentUser.getUser();
 
         return messageDAO.getAllMessageWith(currentUser.userName, userName);

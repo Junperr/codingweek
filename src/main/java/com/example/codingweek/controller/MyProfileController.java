@@ -61,11 +61,11 @@ public class MyProfileController {
         ArrayList<Order> listOrder = bf.getOwnOrders(CurrentUser.getUser().userName);
 
         for (Offer offer : listOffer) {
-            loadOffersFromDatabase(offer);
+            changeScene.loadOffersFromDatabase(offer, offers, "static/fxml/offerView.fxml");
         }
 
         for (Order order : listOrder) {
-            loadOrdersFromDatabase(order);
+            changeScene.loadOrdersFromDatabase(order, orders, "static/fxml/orderView.fxml");
         }
     }
 
@@ -111,39 +111,6 @@ public class MyProfileController {
         modifyAddressController.setStage(modification);
         modifyAddressController.setMainController(this);
         modification.showAndWait();
-    }
-
-    public void loadOffersFromDatabase(Offer offer) {
-        try {
-            URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/offerView.fxml");
-            FXMLLoader loader = new FXMLLoader(xmlUrl);
-            loader.setLocation(xmlUrl);
-            VBox offerVBox = loader.load();
-
-
-            OfferViewController offerViewController = loader.getController();
-            offerViewController.initOfferView(offer);
-            offers.getChildren().add(offerVBox);
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void loadOrdersFromDatabase(Order order) {
-        try {
-            URL xmlUrl = Main.class.getClassLoader().getResource("static/fxml/orderView.fxml");
-            FXMLLoader loader = new FXMLLoader(xmlUrl);
-            loader.setLocation(xmlUrl);
-            VBox orderVBox = loader.load();
-
-
-            OrderViewController orderViewController = loader.getController();
-            orderViewController.initOrderView(order);
-            orders.getChildren().add(orderVBox);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
 

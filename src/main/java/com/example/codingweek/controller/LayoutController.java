@@ -13,6 +13,8 @@ import java.io.IOException;
 
 public class LayoutController {
     @FXML
+    private Label createOffer;
+    @FXML
     private Label goToProfile, goToOffers, logOut, toMessage;
 
     @FXML
@@ -30,13 +32,14 @@ public class LayoutController {
 
         BigFacade bf = new BigFacade();
         Integer unread = bf.getUnreadNumberLoggedInUser();
+
         if (unread > 0) {
             toMessage.setText("Message (" + unread + ")");
         }
     }
 
     @FXML
-    public void hoverHandler(){
+    public void hoverHandlerL(){
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(0.1);
         logout.setEffect(colorAdjust);
@@ -44,7 +47,7 @@ public class LayoutController {
     }
 
     @FXML
-    public void hoverExitHandler(){
+    public void hoverExitHandlerL(){
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(1.0);
         logout.setEffect(colorAdjust);
