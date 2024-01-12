@@ -164,8 +164,8 @@ public class OfferDAO {
         Map<String, Object> filters = new HashMap<>();
         if (type != null) filters.put("type", type);
         if (!(zipCode == null || zipCode.equals(""))) filters.put("zipCode", zipCode);
-        filters.put("priceMin", (priceMin == null || priceMin.equals("")) ? "0" : priceMin);
-        filters.put("priceMax", (priceMax == null || priceMax.equals("")) ? "10000000" : priceMax);
+        filters.put("priceMin", (priceMin == null || priceMin.equals("")) ? "-1" : priceMin);
+        filters.put("priceMax", (priceMax == null || priceMax.equals("")) ? "-1" : priceMax);
         if (categories != null) filters.put("category", categories);
         return filters;
 
@@ -178,6 +178,7 @@ public class OfferDAO {
         if (!args.isEmpty()) {
             query += "where";
             String queryEnd = "";
+            Boolean addFilter = false;
             for (Map.Entry<String, Object> entry : args.entrySet()) {
                 if (entry.getKey().equals("category") && entry.getValue() != null) {
                     queryEnd += " (";
@@ -189,24 +190,22 @@ public class OfferDAO {
                     }
                 } else if (entry.getKey().equals("zipCode") && entry.getValue() != "") {
                     query += " u.";
-                    query += entry.getKey() + "= '";
-                    query += entry.getValue();
-                    query += "' and";
-                } else if (entry.getKey().equals("priceMax")) {
+                    query += entry.getKey() + " like '";
+                    query += entry.getValue().toString().substring(0,2);
+                    query += "%' and";
+                } else if (entry.getKey().equals("priceMax") && entry.getValue() != "-1") {
                     query += " o.price <=";
                     query += entry.getValue();
                     query += " and";
-                } else if (entry.getKey().equals("priceMin")) {
+                } else if (entry.getKey().equals("priceMin") && entry.getValue() != "-1") {
                     query += " o.price >=";
                     query += entry.getValue();
                     query += " and";
-                } else {
-                    if (entry.getValue() != null) {
-                        query += " o.";
-                        query += entry.getKey() + "= '";
-                        query += entry.getValue();
-                        query += "' and";
-                    }
+                } else if (entry.getKey().equals("type")){
+                    query += " o.";
+                    query += entry.getKey() + "= '";
+                    query += entry.getValue();
+                    query += "' and";
                 }
             }
             if (queryEnd.length() >= 3) {
@@ -214,10 +213,13 @@ public class OfferDAO {
                 query += queryEnd;
                 query += ") and o.user != '" + CurrentUser.getUser().userName + "' and o.availability = 'true' group by o.id";
             } else {
-                query = query.substring(0, query.length() - 3);
-                query += "and o.user != '" + CurrentUser.getUser().userName + "' and o.availability = 'true' group by o.id";
+
+                query += " o.user != '" + CurrentUser.getUser().userName + "' and o.availability = 'true' group by o.id";
+
             }
         } else query = "select * from offers";
+
+        System.out.println(query);
 
         ArrayList<HashMap<String, Object>> offerMap = db.fetchAllMap(query);
 
