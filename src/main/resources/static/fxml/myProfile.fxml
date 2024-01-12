@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.MyProfileController">
+<AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codingweek.controller.MyProfileController">
     <fx:include fx:id="menuBar" source="layout.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    <VBox layoutY="37.0" prefHeight="683.0" prefWidth="1080.0">
       <children>
@@ -37,108 +37,121 @@
                               <children>
                                  <Pane prefHeight="30.0" prefWidth="165.0">
                                     <children>
-                                       <Label layoutX="166.0" layoutY="8.0" stylesheets="@../css/myProfile.css" text="Username :">
+                                       <Label id="labelUser" alignment="CENTER_RIGHT" layoutX="137.0" prefHeight="30.0" prefWidth="90.0" stylesheets="@../css/myProfile.css" text="Username :">
                                           <styleClass>
                                              <String fx:value="text" />
                                              <String fx:value="left" />
+                                             <String fx:value="line" />
                                           </styleClass></Label>
                                     </children></Pane>
                                  <Pane prefHeight="30.0" prefWidth="165.0">
                                     <children>
-                                       <Label layoutX="170.0" layoutY="8.0" stylesheets="@../css/myProfile.css" text="Password :">
+                                       <Label id="labelPW" alignment="CENTER_RIGHT" layoutX="137.0" prefHeight="30.0" prefWidth="90.0" stylesheets="@../css/myProfile.css" text="Password :">
                                           <styleClass>
                                              <String fx:value="text" />
                                              <String fx:value="left" />
-                                          </styleClass></Label>
-                                    </children></Pane>
-                                 <Pane prefHeight="31.0" prefWidth="165.0">
-                                    <children>
-                                       <Label layoutX="166.0" layoutY="6.0" stylesheets="@../css/myProfile.css" text="Last name :">
-                                          <styleClass>
-                                             <String fx:value="text" />
-                                             <String fx:value="left" />
+                                             <String fx:value="line" />
                                           </styleClass></Label>
                                     </children></Pane>
                                  <Pane prefHeight="30.0" prefWidth="165.0">
                                     <children>
-                                       <Label layoutX="165.0" layoutY="6.0" stylesheets="@../css/myProfile.css" text="First name :">
+                                       <Label id="labelLast" alignment="CENTER_RIGHT" layoutX="137.0" prefHeight="30.0" prefWidth="90.0" stylesheets="@../css/myProfile.css" text="Last name :">
                                           <styleClass>
                                              <String fx:value="text" />
                                              <String fx:value="left" />
+                                             <String fx:value="line" />
                                           </styleClass></Label>
                                     </children></Pane>
                                  <Pane prefHeight="30.0" prefWidth="165.0">
                                     <children>
-                                       <Label layoutX="191.0" layoutY="5.0" stylesheets="@../css/myProfile.css" text="Email :">
+                                       <Label id="labelFirst" alignment="CENTER_RIGHT" layoutX="137.0" prefHeight="30.0" prefWidth="90.0" stylesheets="@../css/myProfile.css" text="First name :">
                                           <styleClass>
                                              <String fx:value="text" />
                                              <String fx:value="left" />
+                                             <String fx:value="line" />
                                           </styleClass></Label>
                                     </children></Pane>
                                  <Pane prefHeight="30.0" prefWidth="165.0">
                                     <children>
-                                       <Label layoutX="177.0" layoutY="6.0" stylesheets="@../css/myProfile.css" text="Address :">
+                                       <Label id="labelMail" alignment="CENTER_RIGHT" layoutX="137.0" prefHeight="30.0" prefWidth="90.0" stylesheets="@../css/myProfile.css" text="Email :">
                                           <styleClass>
                                              <String fx:value="text" />
+                                             <String fx:value="emailLeft" />
                                              <String fx:value="left" />
+                                             <String fx:value="line" />
                                           </styleClass></Label>
                                     </children></Pane>
                                  <Pane prefHeight="30.0" prefWidth="165.0">
                                     <children>
-                                       <Label layoutX="172.0" layoutY="8.0" stylesheets="@../css/myProfile.css" text="ZIP Code :">
+                                       <Label id="labelAddress" alignment="CENTER_RIGHT" layoutX="137.0" prefHeight="30.0" prefWidth="90.0" stylesheets="@../css/myProfile.css" text="Address :">
                                           <styleClass>
                                              <String fx:value="text" />
                                              <String fx:value="left" />
+                                             <String fx:value="line" />
                                           </styleClass></Label>
                                     </children></Pane>
                                  <Pane prefHeight="30.0" prefWidth="165.0">
                                     <children>
-                                       <Label layoutX="199.0" layoutY="8.0" stylesheets="@../css/myProfile.css" text="City :">
+                                       <Label id="labelAddress" alignment="CENTER_RIGHT" layoutX="137.0" prefHeight="30.0" prefWidth="90.0" stylesheets="@../css/myProfile.css" text="ZIP Code :">
                                           <styleClass>
                                              <String fx:value="text" />
                                              <String fx:value="left" />
+                                             <String fx:value="line" />
+                                          </styleClass></Label>
+                                    </children></Pane>
+                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                    <children>
+                                       <Label id="labelAddress" alignment="CENTER_RIGHT" layoutX="137.0" prefHeight="30.0" prefWidth="90.0" stylesheets="@../css/myProfile.css" text="City :">
+                                          <styleClass>
+                                             <String fx:value="text" />
+                                             <String fx:value="left" />
+                                             <String fx:value="line" />
                                           </styleClass></Label>
                                     </children></Pane>
                               </children>
                            </VBox>
                            <VBox prefHeight="542.0" prefWidth="350.0">
                               <children>
-                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                 <Pane id="labelUser" prefHeight="30.0" prefWidth="178.0" styleClass="line" stylesheets="@../css/myProfile.css">
                                     <children>
                                        <Label fx:id="userName" layoutX="77.0" layoutY="6.0" prefHeight="17.0" prefWidth="264.0" styleClass="text" stylesheets="@../css/myProfile.css" text="Label" />
                                     </children>
                                  </Pane>
-                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                 <Pane id="labelPW" prefHeight="30.0" prefWidth="178.0" styleClass="line" stylesheets="@../css/myProfile.css">
                                     <children>
                                        <Label fx:id="password" layoutX="77.0" layoutY="6.0" prefHeight="17.0" prefWidth="254.0" styleClass="text" stylesheets="@../css/myProfile.css" text="Label" />
                                     </children>
                                  </Pane>
-                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                 <Pane id="labelLast" prefHeight="30.0" prefWidth="178.0" styleClass="line" stylesheets="@../css/myProfile.css">
                                     <children>
                                        <Label fx:id="lastName" layoutX="77.0" layoutY="6.0" prefHeight="17.0" prefWidth="259.0" styleClass="text" stylesheets="@../css/myProfile.css" text="Label" />
                                     </children>
                                  </Pane>
-                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                 <Pane id="labelFirst" prefHeight="30.0" prefWidth="178.0" styleClass="line" stylesheets="@../css/myProfile.css">
                                     <children>
                                        <Label fx:id="firstName" layoutX="77.0" layoutY="6.0" prefHeight="17.0" prefWidth="266.0" styleClass="text" stylesheets="@../css/myProfile.css" text="Label" />
                                     </children>
                                  </Pane>
-                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                 <Pane id="labelMail" prefHeight="30.0" prefWidth="178.0" stylesheets="@../css/myProfile.css">
                                     <children>
                                        <Label fx:id="email" layoutX="77.0" layoutY="6.0" prefHeight="17.0" prefWidth="266.0" styleClass="text" stylesheets="@../css/myProfile.css" text="Label" />
                                     </children>
+                                    <styleClass>
+                                       <String fx:value="line" />
+                                       <String fx:value="emailMiddle" />
+                                    </styleClass>
                                  </Pane>
-                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                 <Pane id="labelAddress" prefHeight="30.0" prefWidth="178.0" styleClass="line" stylesheets="@../css/myProfile.css">
                                     <children>
                                        <Label fx:id="address" layoutX="77.0" layoutY="6.0" prefHeight="17.0" prefWidth="262.0" styleClass="text" stylesheets="@../css/myProfile.css" text="Label" />
                                     </children>
                                  </Pane>
-                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                 <Pane id="labelAddress" prefHeight="30.0" prefWidth="178.0" styleClass="line" stylesheets="@../css/myProfile.css">
                                     <children>
                                        <Label fx:id="zip" layoutX="77.0" layoutY="5.0" prefHeight="17.0" prefWidth="266.0" styleClass="text" stylesheets="@../css/myProfile.css" text="Label" />
                                     </children>
                                  </Pane>
-                                 <Pane prefHeight="30.0" prefWidth="178.0">
+                                 <Pane id="labelAddress" prefHeight="30.0" prefWidth="178.0" styleClass="line" stylesheets="@../css/myProfile.css">
                                     <children>
                                        <Label fx:id="city" layoutX="77.0" layoutY="6.0" prefHeight="17.0" prefWidth="264.0" styleClass="text" stylesheets="@../css/myProfile.css" text="Label" />
                                     </children>
@@ -147,38 +160,42 @@
                            </VBox>
                            <VBox prefHeight="229.0" prefWidth="177.0">
                               <children>
-                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                 <Pane id="labelUser" prefHeight="30.0" prefWidth="165.0" styleClass="label" stylesheets="@../css/myProfile.css">
                                     <children>
-                                       <Button id="button" fx:id="modifyUserName" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setUserName" stylesheets="@../css/myProfile.css" text="Edit" />
+                                       <Button id="button" fx:id="modifyUserName" layoutX="50.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setUserName" stylesheets="@../css/myProfile.css" text="Edit" />
                                     </children>
                                  </Pane>
-                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                 <Pane id="labelPW" prefHeight="30.0" prefWidth="165.0" styleClass="label" stylesheets="@../css/myProfile.css">
                                     <children>
-                                       <Button id="button" fx:id="modifyPassword" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setPassword" stylesheets="@../css/myProfile.css" text="Edit" />
+                                       <Button id="button" fx:id="modifyPassword" layoutX="50.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setPassword" stylesheets="@../css/myProfile.css" text="Edit" />
                                     </children>
                                  </Pane>
-                                 <Pane prefHeight="31.0" prefWidth="165.0">
+                                 <Pane id="labelLast" prefHeight="31.0" prefWidth="165.0" styleClass="label" stylesheets="@../css/myProfile.css">
                                     <children>
-                                       <Button id="button" fx:id="modifyLastName" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setLastName" stylesheets="@../css/myProfile.css" text="Edit" />
+                                       <Button id="button" fx:id="modifyLastName" layoutX="50.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setLastName" stylesheets="@../css/myProfile.css" text="Edit" />
                                     </children>
                                  </Pane>
-                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                 <Pane id="labelFirst" prefHeight="30.0" prefWidth="165.0" styleClass="label" stylesheets="@../css/myProfile.css">
                                     <children>
-                                       <Button id="button" fx:id="modifyFirstName" layoutX="58.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setFirstName" stylesheets="@../css/myProfile.css" text="Edit" />
+                                       <Button id="button" fx:id="modifyFirstName" layoutX="50.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setFirstName" stylesheets="@../css/myProfile.css" text="Edit" />
                                     </children>
                                  </Pane>
-                                 <Pane prefHeight="30.0" prefWidth="165.0">
+                                 <Pane id="labelMail" prefHeight="30.0" prefWidth="165.0" stylesheets="@../css/myProfile.css">
                                     <children>
-                                       <Button id="button" fx:id="modifyEmail" layoutX="58.0" layoutY="4.0" mnemonicParsing="false" onMouseClicked="#setEmail" stylesheets="@../css/myProfile.css" text="Edit" />
+                                       <Button id="button" fx:id="modifyEmail" layoutX="50.0" layoutY="4.0" mnemonicParsing="false" onMouseClicked="#setEmail" stylesheets="@../css/myProfile.css" text="Edit" />
+                                    </children>
+                                    <styleClass>
+                                       <String fx:value="label" />
+                                       <String fx:value="emailRight" />
+                                    </styleClass>
+                                 </Pane>
+                                 <Pane id="labelAddress" prefHeight="30.0" prefWidth="165.0" styleClass="label" stylesheets="@../css/myProfile.css" />
+                                 <Pane id="labelAddress" prefHeight="30.0" prefWidth="165.0" styleClass="label" stylesheets="@../css/myProfile.css">
+                                    <children>
+                                       <Button id="button" fx:id="modifyAddress" layoutX="50.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#setAddress" stylesheets="@../css/myProfile.css" text="Edit" />
                                     </children>
                                  </Pane>
-                                 <Pane prefHeight="30.0" prefWidth="165.0" />
-                                 <Pane prefHeight="30.0" prefWidth="165.0">
-                                    <children>
-                                       <Button id="button" fx:id="modifyAddress" layoutX="59.0" layoutY="3.0" mnemonicParsing="false" onMouseClicked="#setAddress" stylesheets="@../css/myProfile.css" text="Edit" />
-                                    </children>
-                                 </Pane>
-                                 <Pane prefHeight="30.0" prefWidth="165.0" />
+                                 <Pane id="labelAddress" prefHeight="30.0" prefWidth="165.0" styleClass="label" stylesheets="@../css/myProfile.css" />
                               </children>
                            </VBox>
                         </children>

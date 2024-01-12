@@ -1,22 +1,19 @@
 package com.example.codingweek.controller;
 
-import com.example.codingweek.Main;
 import com.example.codingweek.auth.CurrentUser;
+import com.example.codingweek.facade.BigFacade;
 import com.example.codingweek.javafxSceneHandler.ChangeScene;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class LayoutController {
+    @FXML
+    private Label createOffer;
     @FXML
     private Label goToProfile, goToOffers, logOut, toMessage;
 
@@ -32,9 +29,10 @@ public class LayoutController {
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(1.0);
         logout.setEffect(colorAdjust);
+
+        toMessage.setText("Messages");
         message.setImage(new Image("static/images/message.png"));
         message.setEffect(colorAdjust);
-
     }
 
     @FXML
@@ -90,5 +88,10 @@ public class LayoutController {
     @FXML
     public void goToOffers() throws IOException{
         changeScene.changeSameSceneLabel("static/fxml/form-new-offer.fxml", goToOffers);
+    }
+
+    @FXML
+    public void goToMessages() throws IOException {
+        changeScene.changeSceneToMessage(this);
     }
 }

@@ -1,6 +1,8 @@
 package com.example.codingweek.database;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +15,7 @@ public class DataBase {
         this.dbName = "pixou.db";
         File dbFile = new File("pixou.db");
         if (!dbFile.exists()) {
-            this.createDatabaseFile();
+            this.createDatabaseFile(false);
         }
     }
 
@@ -91,8 +93,8 @@ public class DataBase {
         }
     }
 
-    public ArrayList<HashMap<String, Object>> fetchAllMap(String query, Object... args) {
-        ArrayList<HashMap<String, Object>> result = new ArrayList<>();
+    public ArrayList<HashMap<String,Object>> fetchAllMap(String query, Object... args) {
+        ArrayList<HashMap<String,Object>> result = new ArrayList<>();
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -148,10 +150,11 @@ public class DataBase {
         }
     }
 
-    private void createDatabaseFile() {
+    private void createDatabaseFile(Boolean force) {
         try {
-            File dbFile = new File(dbName);
 
+            File dbFile = new File(dbName);
+            if (force || !dbFile.exists()) {
             exec("CREATE TABLE IF NOT EXISTS Users (firstName TEXT, lastName TEXT, userName TEXT PRIMARY KEY, email TEXT, address TEXT, zipCode TEXT, city TEXT, password TEXT, coins TEXT, averageEval TEXT)");
             exec("CREATE TABLE IF NOT EXISTS Offers (id UUID PRIMARY KEY, title TEXT, type TEXT, user TEXT, description TEXT, imagePath TEXT, price INTEGER, availability BOOL, FOREIGN KEY(user) REFERENCES Users(username))");
             exec("CREATE TABLE IF NOT EXISTS Categories (offer UUID, category TEXT, FOREIGN KEY(offer) REFERENCES Offers(id),UNIQUE(offer, category))");
@@ -196,16 +199,23 @@ public class DataBase {
                     "('fff862f5-dbd3-4c41-ac9a-b778fd2ed222', 1, 'annaG', 'Great service hahahaha...')," +
                     "('ec8f59cc-15df-4207-ab46-12789fc97e8d', 4, 'joelD', 'Had fun !')");
 
+                // Insert data into message
+                exec("insert into Messages (id, timestamp, content, sender, receiver, seen) values " +
+                        "('de6ea568-954e-43d7-9adc-33a44f6bdccc', 1705054674911, 'bonjour bonjour', 'joelD', 'ugoG', 'false')");
+                exec("insert into Messages (id, timestamp, content, sender, receiver, seen) values " +
+                        "('95b134bc-85b5-4e94-8bec-a0b7a5e8cfc2', 1705056187116, 'au revoir', 'julieZ', 'ugoG', 'false')");
 
-            // Fetch data from Users
-            ArrayList<ArrayList<Object>> dataTable1 = fetchAll("SELECT * FROM Users");
-            System.out.println("Data from Users:");
-            printData(dataTable1);
 
-            // Fetch data from Offers
-            ArrayList<ArrayList<Object>> dataTable2 = fetchAll("SELECT * FROM Offers");
-            System.out.println("Data from Offers:");
-            printData(dataTable2);
+                        // Fetch data from Users
+                ArrayList<ArrayList<Object>> dataTable1 = fetchAll("SELECT * FROM Users");
+                System.out.println("Data from Users:");
+                printData(dataTable1);
+
+                // Fetch data from Offers
+                ArrayList<ArrayList<Object>> dataTable2 = fetchAll("SELECT * FROM Offers");
+                System.out.println("Data from Offers:");
+                printData(dataTable2);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -219,6 +229,7 @@ public class DataBase {
             exec("DELETE FROM Users");
             exec("DELETE FROM Orders");
             exec("DELETE FROM Reviews");
+            exec("DELETE FROM Messages");
 
 //            // Insert default data
 //            createDatabaseFile(); // Assuming this method exists in your class
@@ -231,7 +242,7 @@ public class DataBase {
 
     public void init() {
         System.out.println("init");
-        createDatabaseFile();
+        createDatabaseFile(true);
     }
 
     public void printData(ArrayList<ArrayList<Object>> data) {
