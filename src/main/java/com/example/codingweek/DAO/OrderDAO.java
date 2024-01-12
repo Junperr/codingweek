@@ -21,6 +21,7 @@ public class OrderDAO {
         return order;
     }
 
+
     public void addOrder(Order order) {
         db.exec("insert into Orders (id, offer, cost, buyer, seller) values (?,?,?,?,?)",
                 order.getId(),

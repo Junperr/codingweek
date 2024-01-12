@@ -1,14 +1,16 @@
 package com.example.codingweek.DAO;
 
 import com.example.codingweek.data.Eval;
+import com.example.codingweek.data.Order;
+import com.example.codingweek.data.User;
 import com.example.codingweek.database.DataBase;
 
 import java.util.UUID;
 
 public class EvalDAO {
     private final DataBase db = DataBase.getInstance();
-    public Eval createNewEval(UUID idReview, int eval, UUID orderId, String writer, String reviewDescription){
-        Eval newEval = new Eval(idReview, eval, orderId, writer, reviewDescription);
+    public Eval createNewEval(int eval, UUID orderId, String writer, String reviewDescription){
+        Eval newEval = new Eval(eval, orderId, writer, reviewDescription);
         addEval(newEval);
         return newEval;
     }
@@ -21,6 +23,10 @@ public class EvalDAO {
                 eval.getReviewDescription());
         UserDAO userDAO = new UserDAO();
         OrderDAO orderDAO = new OrderDAO();
-        userDAO.getUserAvgEval(userDAO.getUserByUsername(orderDAO.getOrderById(eval.getOrderId()).getSeller()));
+
+        System.out.println(eval.getOrderId());
+        Order evalOrder = orderDAO.getOrderById(eval.getOrderId());
+        User evalSeller = userDAO.getUserByUsername(evalOrder.getSeller());
+        userDAO.updateAvgEval(evalSeller);
     }
 }

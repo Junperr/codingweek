@@ -14,7 +14,7 @@ public class UserDAO {
     DataBase db = DataBase.getInstance();
 
     public User newUser(String firstName, String lastName, String userName, String email, String password, String address, String city, String zipCode) throws Exception {
-        User user = new User(firstName, lastName, userName, email, password, address, city, zipCode, 100, -1);
+        User user = new User(firstName, lastName, userName, email, password, address, city, zipCode, 100, -1.0);
         addUser(user);
         return user;
     }
@@ -26,7 +26,6 @@ public class UserDAO {
         try {
             errManager.handleEmptyFields(user);
             errManager.handleInvalidEmail(user.email);
-            errManager.handleInvalidPassword(user.password);
             errManager.handleInvalidAddress(user.address);
             errManager.handleInvalidCity(user.city);
             errManager.handleInvalidZipCode(user.zipCode);
@@ -39,7 +38,7 @@ public class UserDAO {
         }
 
         DataBase db = DataBase.getInstance();
-        db.exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, -1)",
+        db.exec("INSERT INTO Users (firstName, lastName, userName, email, address , zipCode , city, password, coins, averageEval) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, '-1.0')",
                 user.firstName,
                 user.lastName,
                 user.userName,
@@ -85,7 +84,7 @@ public class UserDAO {
                 userMap.get("city").toString(),
                 userMap.get("zipCode").toString(),
                 Integer.parseInt(userMap.get("coins").toString()),
-                Integer.parseInt(userMap.get("averageEval").toString()));
+                Double.parseDouble(userMap.get("averageEval").toString()));
     }
 
 
@@ -106,7 +105,7 @@ public class UserDAO {
                 userMap.get("city").toString(),
                 userMap.get("zipCode").toString(),
                 Integer.parseInt(userMap.get("coins").toString()),
-                Integer.parseInt(userMap.get("averageEval").toString()));
+                Double.parseDouble(userMap.get("averageEval").toString()));
     }
 
     public ArrayList<User> getAllUsers() {
@@ -124,7 +123,7 @@ public class UserDAO {
                     user.get("city").toString(),
                     user.get("password").toString(),
                     Integer.parseInt(user.get("coins").toString()),
-                    Integer.parseInt(user.get("averageEval").toString())));
+                    Double.parseDouble(user.get("averageEval").toString())));
         }
         return users;
     }
@@ -191,6 +190,8 @@ public class UserDAO {
 
     public void updateCoins(User user, Integer newValue){
         db.exec("UPDATE Users SET coins = ? WHERE username = ?", newValue, user.userName);
+        user.coins = newValue;
+        CurrentUser.logUser(user);
     }
 
     public void updateUsername(User user, String newValue) {
@@ -228,12 +229,14 @@ public class UserDAO {
         CurrentUser.logUser(user);
     }
 
-    public int getUserAvgEval(User user){
+    public Double getUserAvgEval(User user){
         return user.avgEval;
     }
 
     public void updateAvgEval(User user){
-        user.avgEval = Integer.parseInt(db.fetchOneMap("select avg(eval) from Reviews r join Orders o on o.id = r.orderId where o.seller = ?", user.userName).get("avg(eval)").toString());
+        HashMap<String, Object> map = db.fetchOneMap("select avg(eval) from Reviews r join Orders o on o.id = r.orderId where o.seller = ?", user.userName);
+        if(map.get("avg(eval)") != null) user.avgEval = Double.parseDouble(map.get("avg(eval)").toString());
+        else user.avgEval = -1.0;
     }
 
 

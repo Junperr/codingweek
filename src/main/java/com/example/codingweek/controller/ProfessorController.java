@@ -55,7 +55,6 @@ public class ProfessorController {
         Integer mark = (markTextField.getText() != null && !markTextField.getText().isEmpty()) ? Integer.valueOf(markTextField.getText()) : handleEmptyField("mark", "int");
         String pw = (PW.getText() != null && !PW.getText().isEmpty()) ? PW.getText(): handleEmptyField("password");
         String description = descriptionTextArea.getText();
-        UUID id = UUID.randomUUID();
         String writer = CurrentUser.getUser().userName;
 
         if (!errorLabel.getText().isEmpty()) {
@@ -77,7 +76,7 @@ public class ProfessorController {
         if (currentUser.password.equals(pw)) {
             //create new Review
             BigFacade bigFacade = new BigFacade();
-            Eval eval = bigFacade.createNewEval(id, mark, order_id, writer, description);
+            Eval eval = bigFacade.createNewEval(mark, order_id, writer, description);
             changeScene.changeSameSceneButton("static/fxml/valid.fxml", saveButton);
         } else {
             errorLabel.setText("Wrong current password");
