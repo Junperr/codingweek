@@ -16,3 +16,16 @@
 .titledpane > .title{
     -fx-background-color: #FCD5CE;
 }
+
+.button{
+    -fx-font-size: 12px;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #FCD5CE;
+    -fx-background-radius: 6;
+
+}
+
+.button:hover{
+    -fx-cursor: hand;
+    -fx-background-color: #FFB5A7;
+}

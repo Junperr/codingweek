@@ -8,3 +8,8 @@
    -fx-border-color: transparent transparent #FEC89A transparent;
    -fx-background-color: #ffffff;
 }
+
+#commandTitle{
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
